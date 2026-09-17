@@ -8,6 +8,6 @@ class_name CameraController extends Node3D
 @onready var target := $".."
 @onready var camera := $Camera3D
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	position = lerp(position, target.global_position, position_smoothing)
 	rotation.y = lerp_angle(rotation.y, target.global_rotation.y, rotation_smoothing)
