@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://qf1sj7vuq7b3"]
 
 [ext_resource type="Script" uid="uid://ccmyuvvgnljlr" path="res://Entities/PlayerKart3D/player_kart_3d.gd" id="1_q6jvo"]
+[ext_resource type="PackedScene" uid="uid://bhlsfq2t0ug4i" path="res://Assets/3D/Models/BasicCar/SM_Basic_Car.fbx" id="2_aplrp"]
 [ext_resource type="PackedScene" uid="uid://bpt5weu81habv" path="res://Components/CameraController/camera_controller.tscn" id="2_q6jvo"]
 [ext_resource type="Script" uid="uid://t1pg06mo513h" path="res://Components/StateMachine/state_machine.gd" id="3_25wvy"]
 [ext_resource type="Script" uid="uid://b3yj5o2tso00m" path="res://Components/StateMachine/States/idle_state.gd" id="4_ps7yl"]
@@ -23,6 +24,9 @@ acceleration = 20.0
 boost_speed = 30.0
 boost_acceleration = 50.0
 
+[node name="SM_Basic_Car" parent="." unique_id=1870174154 instance=ExtResource("2_aplrp")]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 0, 0, 0.5)
+
 [node name="CameraController" parent="." unique_id=587770499 instance=ExtResource("2_q6jvo")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2, 1.5, 30)
 
@@ -30,6 +34,7 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2, 1
 shape = SubResource("CylinderShape3D_xvvda")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=529812103]
+visible = false
 mesh = SubResource("BoxMesh_t4f5k")
 
 [node name="DebugLabel3D" type="Label3D" parent="." unique_id=2145134111]
