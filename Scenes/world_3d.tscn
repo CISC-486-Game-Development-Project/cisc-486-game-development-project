@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://igg6cd4fnkgj"]
 
-[ext_resource type="Script" uid="uid://ccmyuvvgnljlr" path="res://player_kart_3d.gd" id="1_irhi4"]
-[ext_resource type="Script" uid="uid://cwhwc01fr11dl" path="res://camera_controller.gd" id="2_irhi4"]
+[ext_resource type="PackedScene" uid="uid://qf1sj7vuq7b3" path="res://Entities/PlayerKart3D/player_kart_3d.tscn" id="1_f718j"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7abii"]
 sky_top_color = Color(0.22520554, 0.47659743, 0.6379899, 1)
@@ -44,12 +43,6 @@ size = Vector3(15, 1, 15)
 size = Vector3(15, 1, 15)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_if3av"]
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_xvvda"]
-height = 0.5
-
-[sub_resource type="BoxMesh" id="BoxMesh_t4f5k"]
-size = Vector3(0.7, 0.5, 1)
 
 [node name="World3D" type="Node3D" unique_id=1648609827]
 
@@ -144,31 +137,5 @@ operation = 2
 size = Vector3(2, 1, 15)
 material = SubResource("StandardMaterial3D_if3av")
 
-[node name="PlayerKart3D" type="CharacterBody3D" parent="." unique_id=1025106631]
+[node name="PlayerKart3D" parent="." unique_id=32768770 instance=ExtResource("1_f718j")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2, 1.5, 30)
-script = ExtResource("1_irhi4")
-top_speed = 20.0
-top_reverse_speed = 8.0
-acceleration = 20.0
-boost_speed = 30.0
-boost_acceleration = 50.0
-
-[node name="CameraController" type="Node3D" parent="PlayerKart3D" unique_id=742902831]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2, 1.5, 30)
-top_level = true
-script = ExtResource("2_irhi4")
-
-[node name="Camera3D" type="Camera3D" parent="PlayerKart3D/CameraController" unique_id=683185752]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerKart3D" unique_id=2112147562]
-shape = SubResource("CylinderShape3D_xvvda")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerKart3D" unique_id=912471512]
-mesh = SubResource("BoxMesh_t4f5k")
-
-[node name="DebugLabel3D" type="Label3D" parent="PlayerKart3D" unique_id=5826556]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-billboard = 1
-text = "Speed: 0
-Drifting: false"

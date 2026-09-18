@@ -13,7 +13,7 @@ config_version=5
 config/name="CISC 486 Game Development Project"
 run/main_scene="uid://igg6cd4fnkgj"
 config/features=PackedStringArray("4.7", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Assets/2D/Sprites/icon.svg"
 
 [display]
 

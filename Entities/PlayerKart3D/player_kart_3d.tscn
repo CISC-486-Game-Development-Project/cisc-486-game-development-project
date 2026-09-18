@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://qf1sj7vuq7b3"]
+
+[ext_resource type="Script" uid="uid://ccmyuvvgnljlr" path="res://Entities/PlayerKart3D/player_kart_3d.gd" id="1_q6jvo"]
+[ext_resource type="PackedScene" uid="uid://bpt5weu81habv" path="res://Components/CameraController/camera_controller.tscn" id="2_q6jvo"]
+[ext_resource type="Script" uid="uid://t1pg06mo513h" path="res://Components/StateMachine/state_machine.gd" id="3_25wvy"]
+[ext_resource type="Script" uid="uid://b3yj5o2tso00m" path="res://Components/StateMachine/States/idle_state.gd" id="4_ps7yl"]
+[ext_resource type="Script" uid="uid://doqfnn32ciliy" path="res://Components/StateMachine/States/drive_state.gd" id="5_aplrp"]
+[ext_resource type="Script" uid="uid://bbrw2uverowic" path="res://Components/StateMachine/States/jump_state.gd" id="6_4kpiy"]
+[ext_resource type="Script" uid="uid://b2lqg5xhq7se0" path="res://Components/StateMachine/States/drift_state.gd" id="7_7wlea"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_xvvda"]
+height = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_t4f5k"]
+size = Vector3(0.7, 0.5, 1)
+
+[node name="PlayerKart3D" type="CharacterBody3D" unique_id=32768770]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+script = ExtResource("1_q6jvo")
+top_speed = 20.0
+top_reverse_speed = 8.0
+acceleration = 20.0
+boost_speed = 30.0
+boost_acceleration = 50.0
+
+[node name="CameraController" parent="." unique_id=587770499 instance=ExtResource("2_q6jvo")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2, 1.5, 30)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=562479446]
+shape = SubResource("CylinderShape3D_xvvda")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=529812103]
+mesh = SubResource("BoxMesh_t4f5k")
+
+[node name="DebugLabel3D" type="Label3D" parent="." unique_id=2145134111]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+billboard = 1
+text = "Speed: 0
+Drifting: false"
+
+[node name="MovementStateMachine" type="Node" parent="." unique_id=547351009 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_25wvy")
+initial_state = NodePath("IdleState")
+metadata/_custom_type_script = "uid://t1pg06mo513h"
+
+[node name="IdleState" type="Node" parent="MovementStateMachine" unique_id=73060959]
+script = ExtResource("4_ps7yl")
+metadata/_custom_type_script = "uid://b3yj5o2tso00m"
+
+[node name="DriveState" type="Node" parent="MovementStateMachine" unique_id=1022176010]
+script = ExtResource("5_aplrp")
+metadata/_custom_type_script = "uid://doqfnn32ciliy"
+
+[node name="JumpState" type="Node" parent="MovementStateMachine" unique_id=1575335693]
+script = ExtResource("6_4kpiy")
+metadata/_custom_type_script = "uid://bbrw2uverowic"
+
+[node name="DriftState" type="Node" parent="MovementStateMachine" unique_id=788034490]
+script = ExtResource("7_7wlea")
+metadata/_custom_type_script = "uid://b2lqg5xhq7se0"
