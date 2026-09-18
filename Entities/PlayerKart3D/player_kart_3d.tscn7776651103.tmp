@@ -1,0 +1,173 @@
+[gd_scene format=3 uid="uid://qf1sj7vuq7b3"]
+
+[ext_resource type="Script" uid="uid://ccmyuvvgnljlr" path="res://Entities/PlayerKart3D/player_kart_3d.gd" id="1_q6jvo"]
+[ext_resource type="PackedScene" uid="uid://bhlsfq2t0ug4i" path="res://Assets/3D/Models/BasicCar/SM_Basic_Car.fbx" id="2_aplrp"]
+[ext_resource type="PackedScene" uid="uid://bpt5weu81habv" path="res://Components/CameraController/camera_controller.tscn" id="2_q6jvo"]
+[ext_resource type="Script" uid="uid://t1pg06mo513h" path="res://Components/StateMachine/state_machine.gd" id="3_25wvy"]
+[ext_resource type="Script" uid="uid://b3yj5o2tso00m" path="res://Components/StateMachine/States/idle_state.gd" id="4_ps7yl"]
+[ext_resource type="Script" uid="uid://doqfnn32ciliy" path="res://Components/StateMachine/States/drive_state.gd" id="5_aplrp"]
+[ext_resource type="Script" uid="uid://bbrw2uverowic" path="res://Components/StateMachine/States/hop_state.gd" id="6_4kpiy"]
+[ext_resource type="Script" uid="uid://l1hrvfthq543" path="res://Components/StateMachine/state_transition.gd" id="6_7wlea"]
+[ext_resource type="Script" uid="uid://b2lqg5xhq7se0" path="res://Components/StateMachine/States/drift_state.gd" id="7_7wlea"]
+[ext_resource type="Script" uid="uid://c8xfvksbxr3eg" path="res://Components/StateMachine/States/reverse_state.gd" id="8_7wlea"]
+[ext_resource type="Script" uid="uid://t3ju34iymdl0" path="res://Components/StateMachine/States/fall_state.gd" id="9_r41fb"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_xvvda"]
+height = 0.5
+
+[node name="PlayerKart3D" type="CharacterBody3D" unique_id=32768770]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+script = ExtResource("1_q6jvo")
+top_speed = 20.0
+top_reverse_speed = 8.0
+acceleration = 20.0
+boost_speed = 30.0
+boost_acceleration = 50.0
+
+[node name="KartModel" type="Node3D" parent="." unique_id=510578739]
+
+[node name="SM_Basic_Car" parent="KartModel" unique_id=1870174154 instance=ExtResource("2_aplrp")]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 0, 0, 0.5)
+
+[node name="CameraController" parent="." unique_id=587770499 instance=ExtResource("2_q6jvo")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2, 1.5, 30)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=562479446]
+shape = SubResource("CylinderShape3D_xvvda")
+
+[node name="DebugLabel3D" type="Label3D" parent="." unique_id=2145134111]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+billboard = 1
+text = "Speed: 0
+Drifting: false"
+
+[node name="MovementStateMachine" type="Node" parent="." unique_id=547351009 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_25wvy")
+initial_state = NodePath("IdleState")
+metadata/_custom_type_script = "uid://t1pg06mo513h"
+
+[node name="IdleState" type="Node" parent="MovementStateMachine" unique_id=73060959]
+script = ExtResource("4_ps7yl")
+metadata/_custom_type_script = "uid://b3yj5o2tso00m"
+
+[node name="ToDrive" type="Node" parent="MovementStateMachine/IdleState" unique_id=710779934 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../DriveState")
+advance_expression = "entity.move_input.y > 0"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
+[node name="ToReverse" type="Node" parent="MovementStateMachine/IdleState" unique_id=1883959023 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../ReverseState")
+advance_expression = "entity.move_input.y < 0"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
+[node name="ToFall" type="Node" parent="MovementStateMachine/IdleState" unique_id=1885645421 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../FallState")
+advance_expression = "not entity.is_on_floor()"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
+[node name="ToHop" type="Node" parent="MovementStateMachine/IdleState" unique_id=58778121 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../HopState")
+advance_expression = "entity.hop_request"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
+[node name="DriveState" type="Node" parent="MovementStateMachine" unique_id=1022176010]
+script = ExtResource("5_aplrp")
+metadata/_custom_type_script = "uid://doqfnn32ciliy"
+
+[node name="ToIdle" type="Node" parent="MovementStateMachine/DriveState" unique_id=1345647024 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../IdleState")
+advance_expression = "entity.move_input.y < 0.2"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
+[node name="ToReverse" type="Node" parent="MovementStateMachine/DriveState" unique_id=172421059 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../ReverseState")
+advance_expression = "entity.move_input.y < 0"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
+[node name="ToFall" type="Node" parent="MovementStateMachine/DriveState" unique_id=1955009788 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../FallState")
+advance_expression = "not entity.is_on_floor()"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
+[node name="ToHop" type="Node" parent="MovementStateMachine/DriveState" unique_id=1876435733 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../HopState")
+advance_expression = "entity.hop_request"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
+[node name="ReverseState" type="Node" parent="MovementStateMachine" unique_id=1611560369]
+script = ExtResource("8_7wlea")
+metadata/_custom_type_script = "uid://c8xfvksbxr3eg"
+
+[node name="ToIdle" type="Node" parent="MovementStateMachine/ReverseState" unique_id=1123791105 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../IdleState")
+advance_expression = "entity.move_input.y > -0.2"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
+[node name="ToDrive" type="Node" parent="MovementStateMachine/ReverseState" unique_id=566544809 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../DriveState")
+advance_expression = "entity.move_input.y > 0"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
+[node name="ToFall" type="Node" parent="MovementStateMachine/ReverseState" unique_id=757413217 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../FallState")
+advance_expression = "not entity.is_on_floor()"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
+[node name="ToHop" type="Node" parent="MovementStateMachine/ReverseState" unique_id=1999332881 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../HopState")
+advance_expression = "entity.hop_request"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
+[node name="FallState" type="Node" parent="MovementStateMachine" unique_id=608168031]
+script = ExtResource("9_r41fb")
+metadata/_custom_type_script = "uid://t3ju34iymdl0"
+
+[node name="ToDrift" type="Node" parent="MovementStateMachine/FallState" unique_id=1269919806 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../DriftState")
+advance_expression = "entity.is_on_floor() and drift_request"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
+[node name="ToIdle" type="Node" parent="MovementStateMachine/FallState" unique_id=406735254 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../IdleState")
+advance_expression = "entity.is_on_floor()"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
+[node name="HopState" type="Node" parent="MovementStateMachine" unique_id=1575335693]
+script = ExtResource("6_4kpiy")
+metadata/_custom_type_script = "uid://bbrw2uverowic"
+
+[node name="ToFall" type="Node" parent="MovementStateMachine/HopState" unique_id=343563875 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../FallState")
+advance_expression = "entity.velocity.y <= 0"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
+[node name="DriftState" type="Node" parent="MovementStateMachine" unique_id=788034490]
+script = ExtResource("7_7wlea")
+metadata/_custom_type_script = "uid://b2lqg5xhq7se0"
+
+[node name="ToFall" type="Node" parent="MovementStateMachine/DriftState" unique_id=1187573351 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../FallState")
+advance_expression = "not entity.is_on_floor()"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
+[node name="ToIdle" type="Node" parent="MovementStateMachine/DriftState" unique_id=1526947133 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../IdleState")
+advance_expression = "entity.get_horizontal_velocity().length() <= 5"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
