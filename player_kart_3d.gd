@@ -8,7 +8,7 @@ class_name PlayerKart3D extends CharacterBody3D
 @export_custom(PROPERTY_HINT_NONE, "suffix:m/s/s") var acceleration: float ## Defines the rate of acceleration.
 @export_custom(PROPERTY_HINT_NONE, "suffix:m/s") var boost_speed: float  ## Defines the top speed when boosting.
 @export_custom(PROPERTY_HINT_NONE, "suffix:m/s/s") var boost_acceleration: float ## Defines the rate of acceleration when boosting.
-@export var roll_friction: float = 0.4 ## Defines the intensity of the friction acting against the forward momentum.
+@export var roll_friction: float = 0.8 ## Defines the intensity of the friction acting against the forward momentum.
 
 @export_group("Steering")
 @export_custom(PROPERTY_HINT_NONE, "suffix:degrees") var max_steering_angle_slow: float = 16.0
@@ -59,7 +59,7 @@ func _handle_input() -> void:
 	accel_request = move_input.y
 	break_request = Input.is_action_pressed("Backward")
 	
-	if steer_request != 0: # Prevents neutral drifting
+	if steer_request != 0: # Prevents neutral drifting (TODO: no it doesn't)
 		drift_request = Input.is_action_pressed("Drift")
 	
 	# Set drift direction on press, reset on release

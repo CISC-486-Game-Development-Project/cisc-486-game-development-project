@@ -1,7 +1,7 @@
 class_name CameraController extends Node3D
 
 # Export Vars
-@export var position_smoothing: float = 0.2 ## Percent of player movement camera position catches up to per frame.
+@export var position_smoothing: float = 0.4 ## Percent of player movement camera position catches up to per frame.
 @export var rotation_smoothing: float = 0.2 ## Percent of player rotation camera rotation catches up to per frame.
 
 # Onready Vars
