@@ -66,6 +66,13 @@ alpha_curve = SubResource("CurveTexture_i8lfl")
 material = SubResource("StandardMaterial3D_klxp6")
 size = Vector2(0.1, 0.1)
 
+[sub_resource type="Gradient" id="Gradient_iwjoc"]
+offsets = PackedFloat32Array(0, 0.6886792)
+colors = PackedColorArray(1, 0, 1, 1, 0.28627452, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_iwjoc"]
+gradient = SubResource("Gradient_iwjoc")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r41fb"]
 direction = Vector3(0, 0, 0)
 spread = 180.0
@@ -74,7 +81,7 @@ initial_velocity_max = 5.0
 gravity = Vector3(0, 0, 0)
 damping_min = 5.0
 damping_max = 5.0
-color = Color(0.28627452, 1, 1, 1)
+color_ramp = SubResource("GradientTexture1D_iwjoc")
 alpha_curve = SubResource("CurveTexture_i8lfl")
 
 [sub_resource type="QuadMesh" id="QuadMesh_iwjoc"]

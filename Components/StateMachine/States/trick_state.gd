@@ -32,4 +32,4 @@ func physics_update(delta: float) -> void:
 	check_transitions()
 
 func _play_trick_effect():
-	entity.trick_particles.emitting = true
+	entity.trick_particles.restart()
