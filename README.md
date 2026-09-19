@@ -1,7 +1,7 @@
 # Group TODO
 - Hold meeting before Sept. 21st to decide on project workflow and submit a project proposal
 
-- Assign broad tasks:
+Assign broad tasks:
 - Destructible objects
 - Wipe out state (taking "damage")
 - Track design (create tools for making it easier to design tracks)
