@@ -115,7 +115,7 @@ text = "Speed: 0
 Drifting: false"
 
 [node name="TrickRayCast3D" type="RayCast3D" parent="." unique_id=1264776242]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -3)
 target_position = Vector3(0, -2, 0)
 
 [node name="BoostParticles" type="GPUParticles3D" parent="." unique_id=783731887]
@@ -140,6 +140,10 @@ explosiveness = 1.0
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_r41fb")
 draw_pass_1 = SubResource("QuadMesh_iwjoc")
+
+[node name="TrickCoyoteTimer" type="Timer" parent="." unique_id=1157052154]
+wait_time = 0.1
+one_shot = true
 
 [node name="MovementStateMachine" type="Node" parent="." unique_id=547351009 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_25wvy")
@@ -202,10 +206,10 @@ to_state = NodePath("../../HopState")
 advance_expression = "entity.hop_request and entity.trick_ray_cast_3d.is_colliding()"
 metadata/_custom_type_script = "uid://l1hrvfthq543"
 
-[node name="ToTrick" type="Node" parent="MovementStateMachine/DriveState" unique_id=390208720 node_paths=PackedStringArray("to_state")]
+[node name="ToTrick" type="Node" parent="MovementStateMachine/DriveState" unique_id=1419553499 node_paths=PackedStringArray("to_state")]
 script = ExtResource("6_7wlea")
 to_state = NodePath("../../TrickState")
-advance_expression = "entity.hop_request and not entity.trick_ray_cast_3d.is_colliding()"
+advance_expression = "entity.can_trick()"
 metadata/_custom_type_script = "uid://l1hrvfthq543"
 
 [node name="ReverseState" type="Node" parent="MovementStateMachine" unique_id=1611560369]
@@ -250,6 +254,12 @@ metadata/_custom_type_script = "uid://l1hrvfthq543"
 script = ExtResource("6_7wlea")
 to_state = NodePath("../../DriftState")
 advance_expression = "entity.is_on_floor() and entity.drift_request and entity.get_horizontal_velocity().length() >= 5"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
+[node name="ToTrick" type="Node" parent="MovementStateMachine/FallState" unique_id=1224282618 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../TrickState")
+advance_expression = "entity.can_trick()"
 metadata/_custom_type_script = "uid://l1hrvfthq543"
 
 [node name="HopState" type="Node" parent="MovementStateMachine" unique_id=1575335693]

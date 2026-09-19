@@ -21,17 +21,17 @@ class_name PlayerKart3D extends CharacterBody3D
 # Onready Vars
 @onready var kart_model: Node3D = $KartModel
 @onready var camera_controller: CameraController = $CameraController
+@onready var state_machine: StateMachine = $MovementStateMachine
+@onready var trick_ray_cast_3d: RayCast3D = $TrickRayCast3D
+
 @onready var boost_particles: GPUParticles3D = $BoostParticles
 @onready var drift_particles: GPUParticles3D = $DriftParticles
 @onready var trick_particles: GPUParticles3D = $TrickParticles
-@onready var trick_ray_cast_3d: RayCast3D = $TrickRayCast3D
-
-@onready var state_machine: StateMachine = $MovementStateMachine
+@onready var trick_coyote_timer: Timer = $TrickCoyoteTimer
 
 @onready var debug_label_3d: Label3D = $DebugLabel3D
 
 # Internal Vars
-#var move_input: Vector2
 var steer_request: float
 var accel_request: float
 var break_request: bool
@@ -64,12 +64,10 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	# Debug label above kart
-	debug_label_3d.text = "Velocity: " + str(roundf(velocity.length() * 10) / 10) + "\nState: " + state_machine.current_state.name + "\nDir: " + str(drift_dir) + "\nFast Charge: " + str(abs(steer_request) >= 0.8 and sign(steer_request) == drift_dir) + "\nRaycast: " + str(trick_ray_cast_3d.is_colliding())
+	debug_label_3d.text = "Velocity: " + str(roundf(velocity.length() * 10) / 10) + "\nState: " + state_machine.current_state.name + "\nDir: " + str(drift_dir) + "\nFast Charge: " + str(abs(steer_request) >= 0.8 and sign(steer_request) == drift_dir) + "\nTrick Raycast: " + str(trick_ray_cast_3d.is_colliding()) + "\nTrick Coyote Timer: " + str(trick_coyote_timer.time_left)
 
 ## Called every physics frame to collect input data.
 func _handle_input() -> void:
-	#move_input = Input.get_vector("Left", "Right", "Backward", "Forward")
-	
 	# Set movement requests based on input
 	steer_request = Input.get_axis("Left", "Right")
 	accel_request = Input.get_axis("Backward", "Forward")
@@ -95,12 +93,14 @@ func _handle_driving(delta: float) -> void:
 	var speed = horizontal_velocity.length()
 	horizontal_velocity = forward * forward.dot(horizontal_velocity)
 	
+	# Apply boost acceleration while boost is active
 	if boost_timer > 0 && speed < boost_speed:
 		horizontal_velocity += forward * delta * boost_acceleration
 	
-	if accel_request > 0 and speed < top_speed: # Handle acceleration
+	# Handle acceleration for forwards and backwards movement
+	if accel_request > 0 and speed < top_speed:
 		horizontal_velocity += accel_request * forward * delta * acceleration
-	elif accel_request < 0 and speed < top_reverse_speed: # Handle backwards acceleration
+	elif accel_request < 0 and speed < top_reverse_speed:
 		horizontal_velocity += accel_request * forward * delta * acceleration
 	
 	velocity = horizontal_velocity + Vector3.UP * velocity.y # Apply horizontal and vertical velocity
@@ -151,3 +151,13 @@ func queue_ground_boost(time: float):
 ## Returns the horizontal velocity of the player as a Vector3 with y always set to 0.
 func get_horizontal_velocity() -> Vector3:
 	return Vector3(velocity.x, 0, velocity.z)
+
+## Returns if a trick is able to occur.
+func can_trick() -> bool:
+	if state_machine.current_state is DriveState:
+		if hop_request and not trick_ray_cast_3d.is_colliding():
+			return true
+	elif state_machine.current_state is FallState:
+		if hop_request and trick_coyote_timer.time_left > 0:
+			return true
+	return false
