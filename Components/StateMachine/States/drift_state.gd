@@ -2,8 +2,6 @@ class_name DriftState
 extends State
 
 # Export Vars
-@export var drift_particles: GPUParticles3D ## The particles used for the drift effect.
-
 @export_category("Charge Times")
 @export var short_turbo_charge_time: float = 2.0 ## The time in seconds it takes to charge a short turbo.
 @export var mid_turbo_charge_time: float = 4.0 ## The time in seconds it takes to charge a medium turbo.
@@ -31,7 +29,7 @@ func enter(_prev_state: State) -> void:
 	entity.drift_dir = sign(entity.steer_request)
 	drift_time = 0
 	drift_level = 0
-	drift_particles.emitting = true
+	entity.drift_particles.emitting = true
 	
 	# Begin state's unique animation here
 
@@ -46,7 +44,7 @@ func exit(_next_state: State) -> void:
 	entity.drift_dir = 0
 	drift_time = 0
 	drift_level = 0
-	drift_particles.emitting = false
+	entity.drift_particles.emitting = false
 
 func update(delta: float) -> void:
 	# Fast charge if holding above threshold in drift direction
@@ -57,16 +55,16 @@ func update(delta: float) -> void:
 	
 	if drift_time < short_turbo_charge_time:
 		drift_level = 0
-		drift_particles.process_material.color = Color(0.3, 0.3, 0.3, 1.0)
+		entity.drift_particles.process_material.color = Color(0.3, 0.3, 0.3, 1.0)
 	elif drift_time >= short_turbo_charge_time and drift_time < mid_turbo_charge_time:
 		drift_level = 1
-		drift_particles.process_material.color = Color(1.0, 1.0, 0.0, 1.0)
+		entity.drift_particles.process_material.color = Color(1.0, 1.0, 0.0, 1.0)
 	elif drift_time >= mid_turbo_charge_time and drift_time < long_turbo_charge_time:
 		drift_level = 2
-		drift_particles.process_material.color = Color(1.0, 0.45, 0.0, 1.0)
+		entity.drift_particles.process_material.color = Color(1.0, 0.45, 0.0, 1.0)
 	elif drift_time >= long_turbo_charge_time:
 		drift_level = 3
-		drift_particles.process_material.color = Color(1.0, 0.0, 0.0, 1.0)
+		entity.drift_particles.process_material.color = Color(1.0, 0.0, 0.0, 1.0)
 
 func physics_update(delta: float) -> void:
 	# Handle fall movement

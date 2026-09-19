@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://b2lqg5xhq7se0" path="res://Components/StateMachine/States/drift_state.gd" id="7_7wlea"]
 [ext_resource type="Script" uid="uid://c8xfvksbxr3eg" path="res://Components/StateMachine/States/reverse_state.gd" id="8_7wlea"]
 [ext_resource type="Script" uid="uid://t3ju34iymdl0" path="res://Components/StateMachine/States/fall_state.gd" id="9_r41fb"]
+[ext_resource type="Script" uid="uid://bmua4qbuf0vev" path="res://Components/StateMachine/States/trick_state.gd" id="12_iwjoc"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_xvvda"]
 height = 0.5
@@ -65,6 +66,21 @@ alpha_curve = SubResource("CurveTexture_i8lfl")
 material = SubResource("StandardMaterial3D_klxp6")
 size = Vector2(0.1, 0.1)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r41fb"]
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+damping_min = 5.0
+damping_max = 5.0
+color = Color(0.28627452, 1, 1, 1)
+alpha_curve = SubResource("CurveTexture_i8lfl")
+
+[sub_resource type="QuadMesh" id="QuadMesh_iwjoc"]
+material = SubResource("StandardMaterial3D_klxp6")
+size = Vector2(0.1, 0.1)
+
 [node name="PlayerKart3D" type="CharacterBody3D" unique_id=32768770]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 script = ExtResource("1_q6jvo")
@@ -91,6 +107,10 @@ billboard = 1
 text = "Speed: 0
 Drifting: false"
 
+[node name="TrickRayCast3D" type="RayCast3D" parent="." unique_id=1264776242]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2)
+target_position = Vector3(0, -2, 0)
+
 [node name="BoostParticles" type="GPUParticles3D" parent="." unique_id=783731887]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 emitting = false
@@ -104,6 +124,15 @@ emitting = false
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_wo5un")
 draw_pass_1 = SubResource("QuadMesh_7dnbs")
+
+[node name="TrickParticles" type="GPUParticles3D" parent="." unique_id=674311255]
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_r41fb")
+draw_pass_1 = SubResource("QuadMesh_iwjoc")
 
 [node name="MovementStateMachine" type="Node" parent="." unique_id=547351009 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_25wvy")
@@ -163,7 +192,13 @@ metadata/_custom_type_script = "uid://l1hrvfthq543"
 [node name="ToHop" type="Node" parent="MovementStateMachine/DriveState" unique_id=1876435733 node_paths=PackedStringArray("to_state")]
 script = ExtResource("6_7wlea")
 to_state = NodePath("../../HopState")
-advance_expression = "entity.hop_request"
+advance_expression = "entity.hop_request and entity.trick_ray_cast_3d.is_colliding()"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
+[node name="ToTrick" type="Node" parent="MovementStateMachine/DriveState" unique_id=390208720 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../TrickState")
+advance_expression = "entity.hop_request and not entity.trick_ray_cast_3d.is_colliding()"
 metadata/_custom_type_script = "uid://l1hrvfthq543"
 
 [node name="ReverseState" type="Node" parent="MovementStateMachine" unique_id=1611560369]
@@ -207,7 +242,7 @@ metadata/_custom_type_script = "uid://l1hrvfthq543"
 [node name="ToDrift" type="Node" parent="MovementStateMachine/FallState" unique_id=1269919806 node_paths=PackedStringArray("to_state")]
 script = ExtResource("6_7wlea")
 to_state = NodePath("../../DriftState")
-advance_expression = "entity.is_on_floor() and entity.drift_request"
+advance_expression = "entity.is_on_floor() and entity.drift_request and entity.get_horizontal_velocity().length() >= 5"
 metadata/_custom_type_script = "uid://l1hrvfthq543"
 
 [node name="HopState" type="Node" parent="MovementStateMachine" unique_id=1575335693]
@@ -220,13 +255,22 @@ to_state = NodePath("../../FallState")
 advance_expression = "entity.velocity.y <= 0"
 metadata/_custom_type_script = "uid://l1hrvfthq543"
 
-[node name="DriftState" type="Node" parent="MovementStateMachine" unique_id=788034490 node_paths=PackedStringArray("drift_particles")]
+[node name="DriftState" type="Node" parent="MovementStateMachine" unique_id=788034490]
 script = ExtResource("7_7wlea")
-drift_particles = NodePath("../../DriftParticles")
 metadata/_custom_type_script = "uid://b2lqg5xhq7se0"
 
 [node name="ToIdle" type="Node" parent="MovementStateMachine/DriftState" unique_id=1526947133 node_paths=PackedStringArray("to_state")]
 script = ExtResource("6_7wlea")
 to_state = NodePath("../../IdleState")
 advance_expression = "not entity.drift_request or entity.get_horizontal_velocity().length() <= 5 or entity.drift_dir == 0"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
+[node name="TrickState" type="Node" parent="MovementStateMachine" unique_id=162074873]
+script = ExtResource("12_iwjoc")
+metadata/_custom_type_script = "uid://bmua4qbuf0vev"
+
+[node name="ToFall" type="Node" parent="MovementStateMachine/TrickState" unique_id=622605065 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../FallState")
+advance_expression = "entity.velocity.y <= 0"
 metadata/_custom_type_script = "uid://l1hrvfthq543"

@@ -11,8 +11,8 @@ class_name PlayerKart3D extends CharacterBody3D
 @export var roll_friction: float = 0.8 ## Defines the intensity of the friction acting against the forward momentum.
 
 @export_group("Steering")
-@export_custom(PROPERTY_HINT_NONE, "suffix:degrees") var max_steering_angle_slow: float = 8.0 ## Defines the maximum steering angle, should be higher when going slow.
-@export_custom(PROPERTY_HINT_NONE, "suffix:degrees") var max_steering_angle_fast: float = 4.0 ## Defines the maximum steering angle, should be lower when going fast.
+@export_custom(PROPERTY_HINT_NONE, "suffix:degrees") var max_steering_angle_slow: float = 10.0 ## Defines the maximum steering angle, should be higher when going slow.
+@export_custom(PROPERTY_HINT_NONE, "suffix:degrees") var max_steering_angle_fast: float = 5.0 ## Defines the maximum steering angle, should be lower when going fast.
 @export_custom(PROPERTY_HINT_NONE, "suffix:degrees/s") var handbrake_steering_velocity: float = 45.0 ## Defines the speed of handbreak steering (turning while very slow).
 @export_custom(PROPERTY_HINT_NONE, "suffix:degrees/s") var air_steering_velocity: float = 40.0 ## Defines the speed of mid-air steering.
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var wheel_base: float = 1.5
@@ -23,6 +23,8 @@ class_name PlayerKart3D extends CharacterBody3D
 @onready var camera_controller: CameraController = $CameraController
 @onready var boost_particles: GPUParticles3D = $BoostParticles
 @onready var drift_particles: GPUParticles3D = $DriftParticles
+@onready var trick_particles: GPUParticles3D = $TrickParticles
+@onready var trick_ray_cast_3d: RayCast3D = $TrickRayCast3D
 
 @onready var state_machine: StateMachine = $MovementStateMachine
 
@@ -40,6 +42,7 @@ var drift_dir: int
 var steering: float
 
 var boost_timer: float
+var boost_queue: Array[float]
 
 func _process(delta: float) -> void:
 	# Decrement boost timer when active
@@ -61,7 +64,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	# Debug label above kart
-	debug_label_3d.text = "Velocity: " + str(roundf(velocity.length() * 10) / 10) + "\nState: " + state_machine.current_state.name + "\nDir: " + str(drift_dir) + "\nFast Charge: " + str(abs(steer_request) >= 0.8 and sign(steer_request) == drift_dir)
+	debug_label_3d.text = "Velocity: " + str(roundf(velocity.length() * 10) / 10) + "\nState: " + state_machine.current_state.name + "\nDir: " + str(drift_dir) + "\nFast Charge: " + str(abs(steer_request) >= 0.8 and sign(steer_request) == drift_dir) + "\nRaycast: " + str(trick_ray_cast_3d.is_colliding())
 
 ## Called every physics frame to collect input data.
 func _handle_input() -> void:
@@ -79,7 +82,14 @@ func _handle_driving(delta: float) -> void:
 	var forward: Vector3 = -global_transform.basis.z;
 	var horizontal_velocity: Vector3 = get_horizontal_velocity()
 	
-	# Apply Drag
+	# Apply queued boosts if on ground
+	if is_on_floor():
+		if len(boost_queue) >= 1:
+			for boost in boost_queue:
+				set_boost(boost)
+			boost_queue.clear()
+	
+	# Apply drag
 	horizontal_velocity = horizontal_velocity.lerp(Vector3.ZERO, 1 - pow(0.5, roll_friction * delta))
 	
 	var speed = horizontal_velocity.length()
@@ -133,6 +143,10 @@ func set_boost(time: float):
 	boost_timer = max(boost_timer, time)
 	if boost_timer >= 0:
 		boost_particles.emitting = true
+
+## Queues a boost to be set once the ground is hit.
+func queue_ground_boost(time: float):
+	boost_queue.append(time)
 
 ## Returns the horizontal velocity of the player as a Vector3 with y always set to 0.
 func get_horizontal_velocity() -> Vector3:
