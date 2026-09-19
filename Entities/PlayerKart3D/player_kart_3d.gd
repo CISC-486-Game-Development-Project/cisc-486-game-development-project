@@ -11,9 +11,10 @@ class_name PlayerKart3D extends CharacterBody3D
 @export var roll_friction: float = 0.8 ## Defines the intensity of the friction acting against the forward momentum.
 
 @export_group("Steering")
-@export_custom(PROPERTY_HINT_NONE, "suffix:degrees") var max_steering_angle_slow: float = 16.0 ## Defines the maximum steering angle, should be higher when going slow
-@export_custom(PROPERTY_HINT_NONE, "suffix:degrees") var max_steering_angle_fast: float = 8.0 ## Defines the maximum steering angle, should be lower when going fast
-@export_custom(PROPERTY_HINT_NONE, "suffix:degrees/s") var air_steering_velocity: float = 50.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:degrees") var max_steering_angle_slow: float = 8.0 ## Defines the maximum steering angle, should be higher when going slow.
+@export_custom(PROPERTY_HINT_NONE, "suffix:degrees") var max_steering_angle_fast: float = 4.0 ## Defines the maximum steering angle, should be lower when going fast.
+@export_custom(PROPERTY_HINT_NONE, "suffix:degrees/s") var handbrake_steering_velocity: float = 45.0 ## Defines the speed of handbreak steering (turning while very slow).
+@export_custom(PROPERTY_HINT_NONE, "suffix:degrees/s") var air_steering_velocity: float = 40.0 ## Defines the speed of mid-air steering.
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var wheel_base: float = 1.5
 @export var drift_steering_multiplier: float = 1.2
 
@@ -28,7 +29,7 @@ class_name PlayerKart3D extends CharacterBody3D
 @onready var debug_label_3d: Label3D = $DebugLabel3D
 
 # Internal Vars
-var move_input: Vector2
+#var move_input: Vector2
 var steer_request: float
 var accel_request: float
 var break_request: bool
@@ -44,7 +45,7 @@ func _process(delta: float) -> void:
 	# Decrement boost timer when active
 	if boost_timer > 0:
 		boost_timer -= delta
-		if boost_timer <= 0:
+		if boost_timer <= 0: # Stop particles if boost is over
 			boost_particles.emitting = false
 
 func _physics_process(delta: float) -> void:
@@ -60,15 +61,15 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	# Debug label above kart
-	debug_label_3d.text = "Velocity: " + str(roundf(velocity.length() * 10) / 10) + "\nState: " + state_machine.current_state.name + " Dir: " + str(drift_dir)
+	debug_label_3d.text = "Velocity: " + str(roundf(velocity.length() * 10) / 10) + "\nState: " + state_machine.current_state.name + "\nDir: " + str(drift_dir) + "\nFast Charge: " + str(abs(steer_request) >= 0.8 and sign(steer_request) == drift_dir)
 
 ## Called every physics frame to collect input data.
 func _handle_input() -> void:
-	move_input = Input.get_vector("Left", "Right", "Backward", "Forward")
+	#move_input = Input.get_vector("Left", "Right", "Backward", "Forward")
 	
 	# Set movement requests based on input
-	steer_request = move_input.x
-	accel_request = move_input.y
+	steer_request = Input.get_axis("Left", "Right")
+	accel_request = Input.get_axis("Backward", "Forward")
 	break_request = Input.is_action_pressed("Backward")
 	hop_request = Input.is_action_just_pressed("Drift")
 	drift_request = Input.is_action_pressed("Drift")
@@ -100,17 +101,23 @@ func _handle_steering(delta: float) -> void:
 	var horizonal_speed: float = v.length() * sign(v.dot(-global_transform.basis.z))
 	steering = lerp(steering, steer_request, 1.0 - pow(0.5, 60.0 * delta))
 	
-	var angular_velocity: float = 0.0
+	# Default angle to when in mid-air
+	var angular_velocity: float = deg_to_rad(air_steering_velocity * steering)
 	
 	var max_steering_angle = lerp(max_steering_angle_slow, max_steering_angle_fast, clamp(horizonal_speed / top_speed, 0.0, 1.0))
 	var avg_steering_angle = lerp(max_steering_angle_slow, max_steering_angle_fast, 1.0)
-
-	var steering_angle: float
-	if state_machine.current_state is DriftState:
-		steering_angle = drift_steering_multiplier * max_steering_angle * (drift_dir * 0.6 + 0.4 * steering)
-	elif abs(horizonal_speed) > 0.01:
-		steering_angle = max_steering_angle * steering
-	angular_velocity = (horizonal_speed * tan(deg_to_rad(steering_angle))) / wheel_base
+	
+	# Calculate angular_velocity when not mid-air
+	if is_on_floor():
+		if break_request && abs(horizonal_speed) < 1:
+			angular_velocity = deg_to_rad(handbrake_steering_velocity * steering)
+		else:
+			var steering_angle: float
+			if state_machine.current_state is DriftState:
+				steering_angle = drift_steering_multiplier * max_steering_angle * (drift_dir * 0.6 + 0.4 * steering)
+			elif abs(horizonal_speed) > 0.01:
+				steering_angle = max_steering_angle * steering
+			angular_velocity = (horizonal_speed * tan(deg_to_rad(steering_angle))) / wheel_base
 	
 	rotate_y(-delta * angular_velocity)
 	
