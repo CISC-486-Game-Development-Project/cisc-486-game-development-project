@@ -15,11 +15,13 @@ class_name PlayerKart3D extends CharacterBody3D
 @export_custom(PROPERTY_HINT_NONE, "suffix:degrees") var max_steering_angle_fast: float = 8.0 ## Defines the maximum steering angle, should be lower when going fast
 @export_custom(PROPERTY_HINT_NONE, "suffix:degrees/s") var air_steering_velocity: float = 50.0
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var wheel_base: float = 1.5
-@export var drift_steering_multiplier: float = 1.5
+@export var drift_steering_multiplier: float = 1.2
 
 # Onready Vars
 @onready var kart_model: Node3D = $KartModel
 @onready var camera_controller: CameraController = $CameraController
+@onready var boost_particles: GPUParticles3D = $BoostParticles
+@onready var drift_particles: GPUParticles3D = $DriftParticles
 
 @onready var state_machine: StateMachine = $MovementStateMachine
 
@@ -36,6 +38,15 @@ var drift_dir: int
 
 var steering: float
 
+var boost_timer: float
+
+func _process(delta: float) -> void:
+	# Decrement boost timer when active
+	if boost_timer > 0:
+		boost_timer -= delta
+		if boost_timer <= 0:
+			boost_particles.emitting = false
+
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit() # Debug Exit Game
@@ -49,7 +60,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	# Debug label above kart
-	debug_label_3d.text = "Velocity: " + str(roundf(velocity.length() * 10) / 10) + "\nState: " + state_machine.current_state.name
+	debug_label_3d.text = "Velocity: " + str(roundf(velocity.length() * 10) / 10) + "\nState: " + state_machine.current_state.name + " Dir: " + str(drift_dir)
 
 ## Called every physics frame to collect input data.
 func _handle_input() -> void:
@@ -73,6 +84,9 @@ func _handle_driving(delta: float) -> void:
 	var speed = horizontal_velocity.length()
 	horizontal_velocity = forward * forward.dot(horizontal_velocity)
 	
+	if boost_timer > 0 && speed < boost_speed:
+		horizontal_velocity += forward * delta * boost_acceleration
+	
 	if accel_request > 0 and speed < top_speed: # Handle acceleration
 		horizontal_velocity += accel_request * forward * delta * acceleration
 	elif accel_request < 0 and speed < top_reverse_speed: # Handle backwards acceleration
@@ -90,7 +104,6 @@ func _handle_steering(delta: float) -> void:
 	
 	var max_steering_angle = lerp(max_steering_angle_slow, max_steering_angle_fast, clamp(horizonal_speed / top_speed, 0.0, 1.0))
 	var avg_steering_angle = lerp(max_steering_angle_slow, max_steering_angle_fast, 1.0)
-	
 
 	var steering_angle: float
 	if state_machine.current_state is DriftState:
@@ -103,6 +116,16 @@ func _handle_steering(delta: float) -> void:
 	
 	# Visual movement
 	kart_model.rotation.z = steering * 0.5 * deg_to_rad(avg_steering_angle)
+	if state_machine.current_state is DriftState:
+		kart_model.rotation.y = lerp(kart_model.rotation.y, -drift_dir * PI/6, 0.1)
+	else:
+		kart_model.rotation.y = lerp(kart_model.rotation.y, 0.0, 0.1)
+
+## Sets the boost to be active for a set amount of time.
+func set_boost(time: float):
+	boost_timer = max(boost_timer, time)
+	if boost_timer >= 0:
+		boost_particles.emitting = true
 
 ## Returns the horizontal velocity of the player as a Vector3 with y always set to 0.
 func get_horizontal_velocity() -> Vector3:

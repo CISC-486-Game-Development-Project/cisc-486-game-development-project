@@ -15,6 +15,56 @@
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_xvvda"]
 height = 0.5
 
+[sub_resource type="Curve" id="Curve_iwjoc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_r41fb"]
+curve = SubResource("Curve_iwjoc")
+
+[sub_resource type="Gradient" id="Gradient_r41fb"]
+offsets = PackedFloat32Array(0, 0.290625, 0.546875)
+colors = PackedColorArray(1, 1, 0, 1, 1, 0.5137255, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wo5un"]
+gradient = SubResource("Gradient_r41fb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i8lfl"]
+direction = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 1, 0)
+linear_accel_min = 0.99999774
+linear_accel_max = 1.9999977
+color_ramp = SubResource("GradientTexture1D_wo5un")
+alpha_curve = SubResource("CurveTexture_r41fb")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_klxp6"]
+transparency = 1
+vertex_color_use_as_albedo = true
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_r80q4"]
+material = SubResource("StandardMaterial3D_klxp6")
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="Curve" id="Curve_u7k8n"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_i8lfl"]
+curve = SubResource("Curve_u7k8n")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wo5un"]
+direction = Vector3(0, 0, 0)
+initial_velocity_max = 0.5
+gravity = Vector3(0, 1, 0)
+alpha_curve = SubResource("CurveTexture_i8lfl")
+
+[sub_resource type="QuadMesh" id="QuadMesh_7dnbs"]
+material = SubResource("StandardMaterial3D_klxp6")
+size = Vector2(0.1, 0.1)
+
 [node name="PlayerKart3D" type="CharacterBody3D" unique_id=32768770]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 script = ExtResource("1_q6jvo")
@@ -40,6 +90,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 billboard = 1
 text = "Speed: 0
 Drifting: false"
+
+[node name="BoostParticles" type="GPUParticles3D" parent="." unique_id=783731887]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+emitting = false
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_i8lfl")
+draw_pass_1 = SubResource("QuadMesh_r80q4")
+
+[node name="DriftParticles" type="GPUParticles3D" parent="." unique_id=1774343865]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+emitting = false
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_wo5un")
+draw_pass_1 = SubResource("QuadMesh_7dnbs")
 
 [node name="MovementStateMachine" type="Node" parent="." unique_id=547351009 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_25wvy")
@@ -156,8 +220,9 @@ to_state = NodePath("../../FallState")
 advance_expression = "entity.velocity.y <= 0"
 metadata/_custom_type_script = "uid://l1hrvfthq543"
 
-[node name="DriftState" type="Node" parent="MovementStateMachine" unique_id=788034490]
+[node name="DriftState" type="Node" parent="MovementStateMachine" unique_id=788034490 node_paths=PackedStringArray("drift_particles")]
 script = ExtResource("7_7wlea")
+drift_particles = NodePath("../../DriftParticles")
 metadata/_custom_type_script = "uid://b2lqg5xhq7se0"
 
 [node name="ToFall" type="Node" parent="MovementStateMachine/DriftState" unique_id=1187573351 node_paths=PackedStringArray("to_state")]
