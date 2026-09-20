@@ -13,7 +13,7 @@ var _big_code_edit: CodeEdit
 func _init() -> void:
 	_code_edit = CodeEdit.new()
 	_code_edit.syntax_highlighter = _get_highlighter()
-	_code_edit.gutters_draw_line_numbers = true
+	_code_edit.gutters_draw_line_numbers = false
 	_code_edit.draw_tabs = true
 	_code_edit.custom_minimum_size.y = 128.0
 	_code_edit.size_flags_horizontal = SIZE_EXPAND_FILL
