@@ -40,3 +40,13 @@ func create_sound_with_parent(sound: AudioStream, parent: Node3D) -> void:
 	# Add to parent node and play sound
 	parent.add_child(new_sound)
 	new_sound.play()
+
+## Changes the background music to a specified track.
+func change_bgm(sound: AudioStream) -> void:
+	# Create new AudioStreamPlayer based on input AudioStream
+	var new_sound: AudioStreamPlayer = AudioStreamPlayer.new()
+	new_sound.stream = sound
+	
+	# Add to scene and play sound
+	add_child(new_sound)
+	new_sound.play()

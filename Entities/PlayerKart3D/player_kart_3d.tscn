@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ceoygxwx1ngye" path="res://Assets/3D/Models/BasicCar/SM_Basic_Car_Body.fbx" id="2_wo5un"]
 [ext_resource type="PackedScene" uid="uid://vp2ox0cie7xw" path="res://Assets/3D/Models/BasicCar/SM_Basic_Car_Wheel.fbx" id="3_7dnbs"]
 [ext_resource type="Script" uid="uid://t1pg06mo513h" path="res://Components/StateMachine/state_machine.gd" id="3_25wvy"]
-[ext_resource type="Script" uid="uid://c3wfj3uwwdahi" path="res://Assets/3D/Models/BasicCar/wheel.gd" id="4_7dnbs"]
+[ext_resource type="Script" uid="uid://c3wfj3uwwdahi" path="res://Components/Wheel/wheel.gd" id="4_7dnbs"]
 [ext_resource type="Script" uid="uid://b3yj5o2tso00m" path="res://Components/StateMachine/States/idle_state.gd" id="4_ps7yl"]
 [ext_resource type="Script" uid="uid://doqfnn32ciliy" path="res://Components/StateMachine/States/drive_state.gd" id="5_aplrp"]
 [ext_resource type="Script" uid="uid://bbrw2uverowic" path="res://Components/StateMachine/States/hop_state.gd" id="6_4kpiy"]
