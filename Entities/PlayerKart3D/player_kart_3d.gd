@@ -16,10 +16,12 @@ class_name PlayerKart3D extends CharacterBody3D
 @export_custom(PROPERTY_HINT_NONE, "suffix:degrees/s") var handbrake_steering_velocity: float = 45.0 ## Defines the speed of handbreak steering (turning while very slow).
 @export_custom(PROPERTY_HINT_NONE, "suffix:degrees/s") var air_steering_velocity: float = 40.0 ## Defines the speed of mid-air steering.
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var wheel_base: float = 1.5
+@export var wheels: Array[Wheel]
 @export var drift_steering_multiplier: float = 1.2
 
 # Onready Vars
 @onready var kart_model: Node3D = $KartModel
+
 @onready var camera_controller: CameraController = $CameraController
 @onready var state_machine: StateMachine = $MovementStateMachine
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -148,6 +150,9 @@ func _handle_steering(delta: float) -> void:
 	rotate_y(-delta * angular_velocity)
 	
 	# Visual movement
+	for wheel in wheels:
+		wheel.set_steering(-steering * 2.0 * deg_to_rad(avg_steering_angle))
+		wheel.speed = horizonal_speed
 	kart_model.rotation.z = steering * 0.5 * deg_to_rad(avg_steering_angle)
 	if state_machine.current_state is DriftState:
 		kart_model.rotation.y = lerp(kart_model.rotation.y, -drift_dir * PI/6, 0.1)

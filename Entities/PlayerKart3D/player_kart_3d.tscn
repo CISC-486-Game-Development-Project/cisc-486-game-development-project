@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://qf1sj7vuq7b3"]
 
 [ext_resource type="Script" uid="uid://ccmyuvvgnljlr" path="res://Entities/PlayerKart3D/player_kart_3d.gd" id="1_q6jvo"]
-[ext_resource type="PackedScene" uid="uid://bhlsfq2t0ug4i" path="res://Assets/3D/Models/BasicCar/SM_Basic_Car.fbx" id="2_aplrp"]
 [ext_resource type="PackedScene" uid="uid://bpt5weu81habv" path="res://Components/CameraController/camera_controller.tscn" id="2_q6jvo"]
+[ext_resource type="PackedScene" uid="uid://ceoygxwx1ngye" path="res://Assets/3D/Models/BasicCar/SM_Basic_Car_Body.fbx" id="2_wo5un"]
+[ext_resource type="PackedScene" uid="uid://vp2ox0cie7xw" path="res://Assets/3D/Models/BasicCar/SM_Basic_Car_Wheel.fbx" id="3_7dnbs"]
 [ext_resource type="Script" uid="uid://t1pg06mo513h" path="res://Components/StateMachine/state_machine.gd" id="3_25wvy"]
+[ext_resource type="Script" uid="uid://c3wfj3uwwdahi" path="res://Assets/3D/Models/BasicCar/wheel.gd" id="4_7dnbs"]
 [ext_resource type="Script" uid="uid://b3yj5o2tso00m" path="res://Components/StateMachine/States/idle_state.gd" id="4_ps7yl"]
 [ext_resource type="Script" uid="uid://doqfnn32ciliy" path="res://Components/StateMachine/States/drive_state.gd" id="5_aplrp"]
 [ext_resource type="Script" uid="uid://bbrw2uverowic" path="res://Components/StateMachine/States/hop_state.gd" id="6_4kpiy"]
@@ -14,7 +16,7 @@
 [ext_resource type="Script" uid="uid://bmua4qbuf0vev" path="res://Components/StateMachine/States/trick_state.gd" id="12_iwjoc"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_xvvda"]
-height = 0.5
+height = 0.8
 
 [sub_resource type="Curve" id="Curve_iwjoc"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -159,7 +161,7 @@ _data = {
 &"trick_anim_3": SubResource("Animation_5yhnq")
 }
 
-[node name="PlayerKart3D" type="CharacterBody3D" unique_id=32768770]
+[node name="PlayerKart3D" type="CharacterBody3D" unique_id=32768770 node_paths=PackedStringArray("wheels")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 script = ExtResource("1_q6jvo")
 top_speed = 20.0
@@ -167,13 +169,65 @@ top_reverse_speed = 8.0
 acceleration = 20.0
 boost_speed = 30.0
 boost_acceleration = 50.0
+wheels = [NodePath("KartModel/AnimationPivot/BackWheelR"), NodePath("KartModel/AnimationPivot/BackWheelL"), NodePath("KartModel/AnimationPivot/FrontWheelR"), NodePath("KartModel/AnimationPivot/FrontWheelL")]
 
 [node name="KartModel" type="Node3D" parent="." unique_id=510578739]
 
 [node name="AnimationPivot" type="Node3D" parent="KartModel" unique_id=640171345]
 
-[node name="SM_Basic_Car" parent="KartModel/AnimationPivot" unique_id=1870174154 instance=ExtResource("2_aplrp")]
+[node name="BasicCarBody" parent="KartModel/AnimationPivot" unique_id=708138836 instance=ExtResource("2_wo5un")]
 transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 0, 0, 0.5)
+
+[node name="BackWheelR" type="Node3D" parent="KartModel/AnimationPivot" unique_id=249214018]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 0.43, -0.13, 0.5)
+script = ExtResource("4_7dnbs")
+
+[node name="WheelVisual" parent="KartModel/AnimationPivot/BackWheelR" unique_id=951832383 instance=ExtResource("3_7dnbs")]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="KartModel/AnimationPivot/BackWheelR" unique_id=2139301624]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+spring_length = 0.5
+
+[node name="WheelPivot" type="Node3D" parent="KartModel/AnimationPivot/BackWheelR/SpringArm3D" unique_id=296804233]
+
+[node name="BackWheelL" type="Node3D" parent="KartModel/AnimationPivot" unique_id=1420895694]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, -0.43, -0.13, 0.5)
+script = ExtResource("4_7dnbs")
+
+[node name="WheelVisual" parent="KartModel/AnimationPivot/BackWheelL" unique_id=202332177 instance=ExtResource("3_7dnbs")]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="KartModel/AnimationPivot/BackWheelL" unique_id=1737070450]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+spring_length = 0.5
+
+[node name="WheelPivot" type="Node3D" parent="KartModel/AnimationPivot/BackWheelL/SpringArm3D" unique_id=759669819]
+
+[node name="FrontWheelR" type="Node3D" parent="KartModel/AnimationPivot" unique_id=1793784453]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 0.43000033, -0.13, -0.9486294)
+script = ExtResource("4_7dnbs")
+steering_enabled = true
+
+[node name="WheelVisual" parent="KartModel/AnimationPivot/FrontWheelR" unique_id=90951561 instance=ExtResource("3_7dnbs")]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="KartModel/AnimationPivot/FrontWheelR" unique_id=1101946928]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+spring_length = 0.5
+
+[node name="WheelPivot" type="Node3D" parent="KartModel/AnimationPivot/FrontWheelR/SpringArm3D" unique_id=739160385]
+
+[node name="FrontWheelL" type="Node3D" parent="KartModel/AnimationPivot" unique_id=98444951]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, -0.43, -0.12, -0.949)
+script = ExtResource("4_7dnbs")
+steering_enabled = true
+
+[node name="WheelVisual" parent="KartModel/AnimationPivot/FrontWheelL" unique_id=528600855 instance=ExtResource("3_7dnbs")]
+transform = Transform3D(1, 0, 0, 0, 1, -5.6961745e-22, 0, -5.6961745e-22, 1, 0, 0, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="KartModel/AnimationPivot/FrontWheelL" unique_id=2002210945]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+spring_length = 0.5
+
+[node name="WheelPivot" type="Node3D" parent="KartModel/AnimationPivot/FrontWheelL/SpringArm3D" unique_id=663766647]
 
 [node name="CameraController" parent="." unique_id=587770499 instance=ExtResource("2_q6jvo")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2, 1.5, 30)
