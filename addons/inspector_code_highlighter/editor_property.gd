@@ -33,7 +33,7 @@ func _init() -> void:
 func _init_big_window() -> void:
 	_big_code_edit = CodeEdit.new()
 	_big_code_edit.syntax_highlighter = _get_highlighter()
-	_big_code_edit.gutters_draw_line_numbers = true
+	_big_code_edit.gutters_draw_line_numbers = false
 	_big_code_edit.draw_tabs = true
 	@warning_ignore("return_value_discarded")
 	_big_code_edit.text_changed.connect(_on_big_code_edit_text_changed)
