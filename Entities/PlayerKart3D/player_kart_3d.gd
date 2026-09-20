@@ -22,6 +22,7 @@ class_name PlayerKart3D extends CharacterBody3D
 @onready var kart_model: Node3D = $KartModel
 @onready var camera_controller: CameraController = $CameraController
 @onready var state_machine: StateMachine = $MovementStateMachine
+@onready var ground_ray_cast_3d: RayCast3D = $GroundRayCast3D
 @onready var trick_ray_cast_3d: RayCast3D = $TrickRayCast3D
 
 @onready var boost_particles: GPUParticles3D = $BoostParticles
@@ -44,6 +45,10 @@ var steering: float
 var boost_timer: float
 var boost_queue: Array[float]
 
+#######################
+## Process Functions ##
+#######################
+
 func _process(delta: float) -> void:
 	# Decrement boost timer when active
 	if boost_timer > 0:
@@ -61,6 +66,7 @@ func _physics_process(delta: float) -> void:
 	## Step 2: Handle Movement
 	_handle_driving(delta)
 	_handle_steering(delta)
+	_align_to_ground(delta)
 	move_and_slide()
 	
 	# Debug label above kart
@@ -74,6 +80,10 @@ func _handle_input() -> void:
 	break_request = Input.is_action_pressed("Backward")
 	hop_request = Input.is_action_just_pressed("Drift")
 	drift_request = Input.is_action_pressed("Drift")
+
+#######################
+## Physics Functions ##
+#######################
 
 ## Called every physics frame to apply driving forces.
 func _handle_driving(delta: float) -> void:
@@ -138,6 +148,24 @@ func _handle_steering(delta: float) -> void:
 	else:
 		kart_model.rotation.y = lerp(kart_model.rotation.y, 0.0, 0.1)
 
+## Called every physics frame to align the kart with the angle of the ground.
+func _align_to_ground(delta: float) -> void:
+	if is_on_floor():
+		var n = ground_ray_cast_3d.get_collision_normal()
+		var xform = align_with_y(kart_model.global_transform, n)
+		kart_model.global_transform = kart_model.global_transform.interpolate_with(xform, 12 * delta)
+
+## Helper function for aligning a transform with the y of a normal vector.
+func align_with_y(xform: Transform3D, new_y: Vector3) -> Transform3D:
+	xform.basis.y = new_y
+	xform.basis.x = -xform.basis.z.cross(new_y)
+	xform.basis = xform.basis.orthonormalized()
+	return xform
+
+#####################
+## Boost Functions ##
+#####################
+
 ## Sets the boost to be active for a set amount of time.
 func set_boost(time: float):
 	boost_timer = max(boost_timer, time)
@@ -147,6 +175,10 @@ func set_boost(time: float):
 ## Queues a boost to be set once the ground is hit.
 func queue_ground_boost(time: float):
 	boost_queue.append(time)
+
+######################
+## Getter Functions ##
+######################
 
 ## Returns the horizontal velocity of the player as a Vector3 with y always set to 0.
 func get_horizontal_velocity() -> Vector3:

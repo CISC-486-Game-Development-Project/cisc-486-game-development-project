@@ -118,6 +118,8 @@ Drifting: false"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -3)
 target_position = Vector3(0, -2, 0)
 
+[node name="GroundRayCast3D" type="RayCast3D" parent="." unique_id=131992353]
+
 [node name="BoostParticles" type="GPUParticles3D" parent="." unique_id=783731887]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 emitting = false
