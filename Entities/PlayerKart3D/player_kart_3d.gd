@@ -22,6 +22,7 @@ class_name PlayerKart3D extends CharacterBody3D
 @onready var kart_model: Node3D = $KartModel
 @onready var camera_controller: CameraController = $CameraController
 @onready var state_machine: StateMachine = $MovementStateMachine
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var ground_ray_cast_3d: RayCast3D = $GroundRayCast3D
 @onready var trick_ray_cast_3d: RayCast3D = $TrickRayCast3D
 
@@ -29,6 +30,7 @@ class_name PlayerKart3D extends CharacterBody3D
 @onready var drift_particles: GPUParticles3D = $DriftParticles
 @onready var trick_particles: GPUParticles3D = $TrickParticles
 @onready var trick_coyote_timer: Timer = $TrickCoyoteTimer
+@onready var trick_buffer_timer: Timer = $TrickBufferTimer
 
 @onready var debug_label_3d: Label3D = $DebugLabel3D
 
@@ -70,7 +72,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	# Debug label above kart
-	debug_label_3d.text = "Velocity: " + str(roundf(velocity.length() * 10) / 10) + "\nState: " + state_machine.current_state.name + "\nDir: " + str(drift_dir) + "\nFast Charge: " + str(abs(steer_request) >= 0.8 and sign(steer_request) == drift_dir) + "\nTrick Raycast: " + str(trick_ray_cast_3d.is_colliding()) + "\nTrick Coyote Timer: " + str(trick_coyote_timer.time_left)
+	debug_label_3d.text = "Velocity: " + str(roundf(velocity.length() * 10) / 10) + "   |   State: " + state_machine.current_state.name + "\nDrift Direction: " + str(drift_dir) + "   |   Fast Charge: " + str(abs(steer_request) >= 0.8 and sign(steer_request) == drift_dir) + "\nTrick Raycast: " + str(trick_ray_cast_3d.is_colliding()) + "   |   Coyote Timer: " + str(trick_coyote_timer.time_left > 0)+ "   |   Buffer Timer: " + str(trick_buffer_timer.time_left > 0)
 
 ## Called every physics frame to collect input data.
 func _handle_input() -> void:
@@ -106,6 +108,10 @@ func _handle_driving(delta: float) -> void:
 	# Apply boost acceleration while boost is active
 	if boost_timer > 0 && speed < boost_speed:
 		horizontal_velocity += forward * delta * boost_acceleration
+	
+	# Start trick buffer if can't trick yet
+	if hop_request and trick_ray_cast_3d.is_colliding():
+		trick_buffer_timer.start()
 	
 	# Handle acceleration for forwards and backwards movement
 	if accel_request > 0 and speed < top_speed:
@@ -191,5 +197,8 @@ func can_trick() -> bool:
 			return true
 	elif state_machine.current_state is FallState:
 		if hop_request and trick_coyote_timer.time_left > 0:
+			return true
+	elif state_machine.current_state is HopState:
+		if trick_buffer_timer.time_left > 0 and not trick_ray_cast_3d.is_colliding():
 			return true
 	return false

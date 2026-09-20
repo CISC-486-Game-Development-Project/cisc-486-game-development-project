@@ -33,3 +33,9 @@ func physics_update(delta: float) -> void:
 
 func _play_trick_effect():
 	entity.trick_particles.restart()
+	
+	# Play random trick animation
+	match randi_range(0, 2):
+		0: entity.animation_player.play("trick_anim_1")
+		1: entity.animation_player.play("trick_anim_2")
+		2: entity.animation_player.play("trick_anim_3")
