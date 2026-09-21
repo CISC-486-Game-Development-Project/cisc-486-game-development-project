@@ -14,9 +14,10 @@
 [ext_resource type="Script" uid="uid://c8xfvksbxr3eg" path="res://Components/StateMachine/States/reverse_state.gd" id="8_7wlea"]
 [ext_resource type="Script" uid="uid://t3ju34iymdl0" path="res://Components/StateMachine/States/fall_state.gd" id="9_r41fb"]
 [ext_resource type="Script" uid="uid://bmua4qbuf0vev" path="res://Components/StateMachine/States/trick_state.gd" id="12_iwjoc"]
+[ext_resource type="Script" uid="uid://b3ataw1etlka7" path="res://Components/StateMachine/States/hit_state.gd" id="15_5yhnq"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_xvvda"]
-height = 0.8
+[sub_resource type="BoxShape3D" id="BoxShape3D_wgl67"]
+size = Vector3(1, 0.8, 2)
 
 [sub_resource type="Curve" id="Curve_iwjoc"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -172,6 +173,7 @@ boost_acceleration = 50.0
 wheels = [NodePath("KartModel/AnimationPivot/BackWheelR"), NodePath("KartModel/AnimationPivot/BackWheelL"), NodePath("KartModel/AnimationPivot/FrontWheelR"), NodePath("KartModel/AnimationPivot/FrontWheelL")]
 
 [node name="KartModel" type="Node3D" parent="." unique_id=510578739]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2)
 
 [node name="AnimationPivot" type="Node3D" parent="KartModel" unique_id=640171345]
 
@@ -233,13 +235,13 @@ spring_length = 0.5
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2, 1.5, 30)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=562479446]
-shape = SubResource("CylinderShape3D_xvvda")
+shape = SubResource("BoxShape3D_wgl67")
 
 [node name="DebugLabel3D" type="Label3D" parent="." unique_id=2145134111]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 billboard = 1
-text = "Speed: 0
-Drifting: false"
+text = "Debug Label: Visible"
+vertical_alignment = 2
 
 [node name="TrickRayCast3D" type="RayCast3D" parent="." unique_id=1264776242]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -3)
@@ -432,4 +434,13 @@ metadata/_custom_type_script = "uid://bmua4qbuf0vev"
 script = ExtResource("6_7wlea")
 to_state = NodePath("../../FallState")
 advance_expression = "entity.velocity.y <= 0"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
+[node name="HitState" type="Node" parent="MovementStateMachine" unique_id=1653879341]
+script = ExtResource("15_5yhnq")
+metadata/_custom_type_script = "uid://b3ataw1etlka7"
+
+[node name="ToIdle" type="Node" parent="MovementStateMachine/HitState" unique_id=2016148862 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../IdleState")
 metadata/_custom_type_script = "uid://l1hrvfthq543"

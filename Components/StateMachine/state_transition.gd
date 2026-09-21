@@ -3,7 +3,7 @@ class_name StateTransition
 extends Node
 
 @export var to_state: State ## [State] to transition to when [member advance_expression] evaluates to true.
-@export_multiline var advance_expression: String ## When true, this transition will occur.
+@export_custom(PROPERTY_HINT_MULTILINE_TEXT, "lang=gdscript") var advance_expression: String ## When true, this transition will occur.
 
 @onready var state: State = get_parent() ## The [State] this transition is a child of.
 

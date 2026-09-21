@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://rdwha1wrjten" path="res://Scenes/Tracks/debug_track.gd" id="1_q5xdn"]
 [ext_resource type="PackedScene" uid="uid://qf1sj7vuq7b3" path="res://Entities/PlayerKart3D/player_kart_3d.tscn" id="1_wqmp7"]
 [ext_resource type="AudioStream" uid="uid://cgpun0hsxpw5o" path="res://Assets/Audio/Music/KartTheme.wav" id="2_4tdiq"]
+[ext_resource type="Script" uid="uid://bv71qsqein0kx" path="res://Entities/DestructibleObject/destructible_object.gd" id="4_bcedo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7abii"]
 sky_top_color = Color(0.22520554, 0.47659743, 0.6379899, 1)
@@ -45,6 +46,13 @@ size = Vector3(15, 1, 15)
 size = Vector3(15, 1, 15)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_if3av"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bcedo"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_t5fsa"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t5fsa"]
+size = Vector3(2, 2, 2)
 
 [node name="DebugTrack" type="Node3D" unique_id=1648609827]
 script = ExtResource("1_q5xdn")
@@ -143,3 +151,20 @@ material = SubResource("StandardMaterial3D_if3av")
 
 [node name="PlayerKart3D" parent="." unique_id=32768770 instance=ExtResource("1_wqmp7")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2, 1.5, 30)
+
+[node name="DestructibleObject" type="RigidBody3D" parent="." unique_id=280148179]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3330574, 1.2537726, 30.05519)
+script = ExtResource("4_bcedo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DestructibleObject" unique_id=1817309755]
+shape = SubResource("BoxShape3D_bcedo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DestructibleObject" unique_id=1173809332]
+mesh = SubResource("BoxMesh_t5fsa")
+
+[node name="Area3D" type="Area3D" parent="DestructibleObject" unique_id=1012518009]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DestructibleObject/Area3D" unique_id=130091451]
+shape = SubResource("BoxShape3D_t5fsa")
+
+[connection signal="body_entered" from="DestructibleObject/Area3D" to="DestructibleObject" method="_on_area_3d_body_entered"]

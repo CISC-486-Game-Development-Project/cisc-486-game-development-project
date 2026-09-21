@@ -28,6 +28,10 @@ window/hdr/request_hdr_output=true
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/inspector_code_highlighter/plugin.cfg")
+
 [input]
 
 Forward={

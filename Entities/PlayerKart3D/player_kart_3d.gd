@@ -73,8 +73,8 @@ func _physics_process(delta: float) -> void:
 	_align_to_ground(delta)
 	move_and_slide()
 	
-	# Debug label above kart
-	debug_label_3d.text = "Velocity: " + str(roundf(velocity.length() * 10) / 10) + "   |   State: " + state_machine.current_state.name + "\nDrift Direction: " + str(drift_dir) + "   |   Fast Charge: " + str(abs(steer_request) >= 0.8 and sign(steer_request) == drift_dir) + "\nTrick Raycast: " + str(trick_ray_cast_3d.is_colliding()) + "   |   Coyote Timer: " + str(trick_coyote_timer.time_left > 0)+ "   |   Buffer Timer: " + str(trick_buffer_timer.time_left > 0)
+	# Update Debug Label
+	_update_debug_label()
 
 ## Called every physics frame to collect input data.
 func _handle_input() -> void:
@@ -207,3 +207,26 @@ func can_trick() -> bool:
 		if trick_buffer_timer.time_left > 0 and not trick_ray_cast_3d.is_colliding():
 			return true
 	return false
+
+#####################
+## Debug Functions ##
+#####################
+
+## Updates the debug label's text with accurate information.
+## Should be called every physics frame.
+func _update_debug_label():
+	# Define debug texts to display
+	var debugs: Array[String] = [
+		"Velocity: " + str(roundf(velocity.length() * 10) / 10),
+		"State: " + state_machine.current_state.name,
+		"Drift Direction: " + str(drift_dir),
+		"Fast Charge: " + str(abs(steer_request) >= 0.8 and sign(steer_request) == drift_dir),
+		"Trick Raycast: " + str(trick_ray_cast_3d.is_colliding()),
+		"Coyote Timer: " + str(trick_coyote_timer.time_left > 0),
+		"Buffer Timer: " + str(trick_buffer_timer.time_left > 0),
+	]
+	
+	# Apply debug texts to label
+	debug_label_3d.text = ""
+	for t in debugs:
+		debug_label_3d.text += t + "\n"
