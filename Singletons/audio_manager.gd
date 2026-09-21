@@ -58,3 +58,8 @@ func change_bgm(music: AudioStream) -> void:
 	# Add to scene and play music
 	add_child(new_music)
 	new_music.play()
+
+## Stops currently playing backrgound music.
+func stop_bgm() -> void:
+	if current_music:
+		current_music.queue_free()
