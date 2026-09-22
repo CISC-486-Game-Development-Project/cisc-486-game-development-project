@@ -14,15 +14,15 @@
 [ext_resource type="Script" uid="uid://c8xfvksbxr3eg" path="res://Components/StateMachine/States/reverse_state.gd" id="8_7wlea"]
 [ext_resource type="Script" uid="uid://t3ju34iymdl0" path="res://Components/StateMachine/States/fall_state.gd" id="9_r41fb"]
 [ext_resource type="Script" uid="uid://bmua4qbuf0vev" path="res://Components/StateMachine/States/trick_state.gd" id="12_iwjoc"]
-[ext_resource type="AudioStream" uid="uid://dypbhjhba2x60" path="res://Assets/Audio/SFX/tricksfx - segment 7.mp3" id="15_2oryy"]
 [ext_resource type="Script" uid="uid://b3ataw1etlka7" path="res://Components/StateMachine/States/hit_state.gd" id="15_5yhnq"]
-[ext_resource type="AudioStream" uid="uid://ca1cqr6i2aft5" path="res://Assets/Audio/SFX/tricksfx - segment 1.mp3" id="15_ri2dj"]
-[ext_resource type="AudioStream" uid="uid://dvvuo6fg4ujdg" path="res://Assets/Audio/SFX/tricksfx - segment 2.mp3" id="16_s0wt8"]
-[ext_resource type="AudioStream" uid="uid://bvlejffp85e2j" path="res://Assets/Audio/SFX/tricksfx - segment 3.mp3" id="17_wb45y"]
-[ext_resource type="AudioStream" uid="uid://cg5enuow4xybb" path="res://Assets/Audio/SFX/tricksfx - segment 4.mp3" id="18_b3yaw"]
-[ext_resource type="AudioStream" uid="uid://b6xg77fp08pbw" path="res://Assets/Audio/SFX/tricksfx - segment 5.mp3" id="19_kvr30"]
-[ext_resource type="AudioStream" uid="uid://bmbnm3am0wu7c" path="res://Assets/Audio/SFX/tricksfx - segment 6.mp3" id="20_o4elr"]
-[ext_resource type="AudioStream" uid="uid://ciahq7jr2fmuy" path="res://Assets/Audio/SFX/tricksfx - segment 8.mp3" id="22_bwccv"]
+[ext_resource type="AudioStream" uid="uid://ca1cqr6i2aft5" path="res://Assets/Audio/SFX/Trick/tricksfx - segment 1.mp3" id="15_ri2dj"]
+[ext_resource type="AudioStream" uid="uid://dvvuo6fg4ujdg" path="res://Assets/Audio/SFX/Trick/tricksfx - segment 2.mp3" id="16_s0wt8"]
+[ext_resource type="AudioStream" uid="uid://bvlejffp85e2j" path="res://Assets/Audio/SFX/Trick/tricksfx - segment 3.mp3" id="17_wb45y"]
+[ext_resource type="AudioStream" uid="uid://cg5enuow4xybb" path="res://Assets/Audio/SFX/Trick/tricksfx - segment 4.mp3" id="18_b3yaw"]
+[ext_resource type="AudioStream" uid="uid://b6xg77fp08pbw" path="res://Assets/Audio/SFX/Trick/tricksfx - segment 5.mp3" id="19_kvr30"]
+[ext_resource type="AudioStream" uid="uid://bmbnm3am0wu7c" path="res://Assets/Audio/SFX/Trick/tricksfx - segment 6.mp3" id="20_o4elr"]
+[ext_resource type="AudioStream" uid="uid://dypbhjhba2x60" path="res://Assets/Audio/SFX/Trick/tricksfx - segment 7.mp3" id="21_bwccv"]
+[ext_resource type="AudioStream" uid="uid://ciahq7jr2fmuy" path="res://Assets/Audio/SFX/Trick/tricksfx - segment 8.mp3" id="22_y33qa"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wgl67"]
 size = Vector3(1, 0.8, 2)
@@ -288,6 +288,10 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
+[node name="TrickCooldownTimer" type="Timer" parent="." unique_id=2067441193]
+wait_time = 0.3
+one_shot = true
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=858611665]
 libraries/ = SubResource("AnimationLibrary_7dnbs")
 
@@ -436,7 +440,7 @@ metadata/_custom_type_script = "uid://l1hrvfthq543"
 
 [node name="TrickState" type="Node" parent="MovementStateMachine" unique_id=162074873]
 script = ExtResource("12_iwjoc")
-trick_sfx = Array[AudioStream]([ExtResource("15_ri2dj"), ExtResource("16_s0wt8"), ExtResource("17_wb45y"), ExtResource("18_b3yaw"), ExtResource("19_kvr30"), ExtResource("20_o4elr"), ExtResource("15_2oryy"), ExtResource("22_bwccv")])
+trick_sfx = Array[AudioStream]([ExtResource("15_ri2dj"), ExtResource("16_s0wt8"), ExtResource("17_wb45y"), ExtResource("18_b3yaw"), ExtResource("19_kvr30"), ExtResource("20_o4elr"), ExtResource("21_bwccv"), ExtResource("22_y33qa")])
 metadata/_custom_type_script = "uid://bmua4qbuf0vev"
 
 [node name="ToFall" type="Node" parent="MovementStateMachine/TrickState" unique_id=622605065 node_paths=PackedStringArray("to_state")]

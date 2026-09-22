@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://chopbamug8408"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7by3x"]
+bg_color = Color(2.3102762e-06, 0.6323629, 0.9693813, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6iikp"]
+font_size = 128
+shadow_size = 16
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(8, 8)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jghd8"]
+font_size = 64
+shadow_size = 16
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(4, 4)
+
+[node name="OptionsMenu" type="Control" unique_id=1902320479]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=1833479035]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7by3x")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1285267470]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 128
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=675931777]
+layout_mode = 2
+theme_override_constants/separation = 512
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1506308783]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 32
+
+[node name="OptionsLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=381383623]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Options"
+label_settings = SubResource("LabelSettings_6iikp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=447220346]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer" unique_id=73070776]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="StartButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=574861180]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/StartButton" unique_id=686437126]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start"
+label_settings = SubResource("LabelSettings_jghd8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OptionsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=150147872]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/OptionsButton" unique_id=1514942044]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Options"
+label_settings = SubResource("LabelSettings_jghd8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=2118910656]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/QuitButton" unique_id=729772018]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit"
+label_settings = SubResource("LabelSettings_jghd8")
+horizontal_alignment = 1
+vertical_alignment = 1

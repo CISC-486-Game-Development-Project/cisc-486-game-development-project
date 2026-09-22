@@ -1,0 +1,205 @@
+[gd_scene format=3 uid="uid://dujko6vu4ilbf"]
+
+[ext_resource type="PackedScene" uid="uid://bhlsfq2t0ug4i" path="res://Assets/3D/Models/BasicCar/SM_Basic_Car.fbx" id="1_56w7i"]
+[ext_resource type="Script" uid="uid://cy83tt76elj41" path="res://Scenes/Menus/CharacterSelectMenu/character_select_menu.gd" id="1_hk7je"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hk7je"]
+bg_color = Color(2.3102762e-06, 0.6323629, 0.9693813, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bj6qg"]
+font_size = 64
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(8, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4f5k"]
+bg_color = Color(0, 0.46924525, 0.7268376, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_q3uil"]
+font_size = 64
+shadow_size = 16
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(4, 4)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hk7je"]
+font_size = 64
+shadow_size = 16
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(4, 4)
+
+[node name="CharacterSelectMenu" type="Control" unique_id=2040534807 node_paths=PackedStringArray("temp_next_button", "prev_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hk7je")
+next_scene = &"uid://dpjhad5swcika"
+prev_scene = &"uid://b4byg6rmq7m24"
+temp_next_button = NodePath("MarginContainer/HBoxContainer/PanelContainer/MarginContainer/GridContainer/KartButton1")
+prev_button = NodePath("TempBackButton")
+
+[node name="Panel" type="Panel" parent="." unique_id=1216297583]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hk7je")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=840379834]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 128
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=2065621192]
+layout_mode = 2
+theme_override_constants/separation = 256
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1261625257]
+layout_mode = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1554255989]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportContainer" unique_id=1334760120]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="SM_Basic_Car" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=1870174154 instance=ExtResource("1_56w7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=1091578064]
+transform = Transform3D(0.70710677, -0.1227878, 0.6963642, 0, 0.9848077, 0.17364818, -0.70710677, -0.1227878, 0.6963642, 3, 1, 3)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=998655387]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 5)
+
+[node name="NameLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=651109801]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Character Name
+in the
+Kart Name"
+label_settings = SubResource("LabelSettings_bj6qg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer" unique_id=1829156650]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_t4f5k")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/PanelContainer" unique_id=1601216186]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer" unique_id=808808900]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+columns = 2
+
+[node name="KartButton1" type="Button" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=1252721644]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/GridContainer/KartButton1" unique_id=295226917]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Kart 1"
+label_settings = SubResource("LabelSettings_q3uil")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KartButton2" type="Button" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=215186271]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+disabled = true
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/GridContainer/KartButton2" unique_id=913899162]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Kart 2"
+label_settings = SubResource("LabelSettings_q3uil")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KartButton3" type="Button" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=367249693]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+disabled = true
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/GridContainer/KartButton3" unique_id=324699998]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Kart 3"
+label_settings = SubResource("LabelSettings_q3uil")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KartButton4" type="Button" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=1057624333]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+disabled = true
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/GridContainer/KartButton4" unique_id=449151812]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Kart 4"
+label_settings = SubResource("LabelSettings_q3uil")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TempBackButton" type="Button" parent="." unique_id=1142948134]
+custom_minimum_size = Vector2(256, 128)
+layout_mode = 1
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Label" type="Label" parent="TempBackButton" unique_id=2078310953]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+label_settings = SubResource("LabelSettings_hk7je")
+horizontal_alignment = 1
+vertical_alignment = 1

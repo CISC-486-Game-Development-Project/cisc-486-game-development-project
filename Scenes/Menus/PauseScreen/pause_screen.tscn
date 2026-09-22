@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://htd17y0efmde"]
+
+[ext_resource type="Script" uid="uid://b0s7bnsoqfjge" path="res://Scenes/Menus/PauseScreen/pause_screen.gd" id="1_qkxxw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qkxxw"]
+bg_color = Color(0, 0, 0, 0.8)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qkxxw"]
+font_size = 128
+shadow_size = 16
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(8, 8)
+
+[sub_resource type="LabelSettings" id="LabelSettings_25jlc"]
+font_size = 64
+shadow_size = 16
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(4, 4)
+
+[node name="PauseScreen" type="CanvasLayer" unique_id=608802068 node_paths=PackedStringArray("resume_button", "options_button", "exit_button")]
+script = ExtResource("1_qkxxw")
+options_scene = &"uid://chopbamug8408"
+exit_scene = &"uid://b4byg6rmq7m24"
+resume_button = NodePath("MarginContainer/HBoxContainer/VBoxContainer/ResumeButton")
+options_button = NodePath("MarginContainer/HBoxContainer/VBoxContainer/OptionsButton")
+exit_button = NodePath("MarginContainer/HBoxContainer/VBoxContainer/ExitButton")
+
+[node name="Panel" type="Panel" parent="." unique_id=354774374]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qkxxw")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=219714590]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 512
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_right = 512
+theme_override_constants/margin_bottom = 128
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1499132691]
+layout_mode = 2
+theme_override_constants/separation = 512
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=193842716]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 32
+
+[node name="PauseLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=296110509]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Game Paused"
+label_settings = SubResource("LabelSettings_qkxxw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1949869008]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/ResumeButton" unique_id=715565941]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Resume"
+label_settings = SubResource("LabelSettings_25jlc")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OptionsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=228962346]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/OptionsButton" unique_id=1086917578]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Options"
+label_settings = SubResource("LabelSettings_25jlc")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=428903951]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/ExitButton" unique_id=1654684746]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit Race"
+label_settings = SubResource("LabelSettings_25jlc")
+horizontal_alignment = 1
+vertical_alignment = 1

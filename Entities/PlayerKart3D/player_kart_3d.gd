@@ -33,6 +33,7 @@ class_name PlayerKart3D extends CharacterBody3D
 @onready var trick_particles: GPUParticles3D = $TrickParticles
 @onready var trick_coyote_timer: Timer = $TrickCoyoteTimer
 @onready var trick_buffer_timer: Timer = $TrickBufferTimer
+@onready var trick_cooldown_timer: Timer = $TrickCooldownTimer
 
 @onready var debug_label_3d: Label3D = $DebugLabel3D
 
@@ -61,9 +62,6 @@ func _process(delta: float) -> void:
 			boost_particles.emitting = false
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_cancel"):
-		get_tree().quit() # Debug Exit Game
-	
 	## Step 1: Handle Input
 	_handle_input()
 	
@@ -197,6 +195,11 @@ func get_horizontal_velocity() -> Vector3:
 
 ## Returns if a trick is able to occur.
 func can_trick() -> bool:
+	# Immediate false if cooldown since last trick isn't over
+	if trick_cooldown_timer.time_left > 0:
+		return false
+	
+	# Check logic for tricking depending on current state
 	if state_machine.current_state is DriveState:
 		if hop_request and not trick_ray_cast_3d.is_colliding():
 			return true
@@ -224,6 +227,7 @@ func _update_debug_label():
 		"Trick Raycast: " + str(trick_ray_cast_3d.is_colliding()),
 		"Coyote Timer: " + str(trick_coyote_timer.time_left > 0),
 		"Buffer Timer: " + str(trick_buffer_timer.time_left > 0),
+		"Cooldown Timer: " + str(trick_cooldown_timer.time_left > 0)
 	]
 	
 	# Apply debug texts to label

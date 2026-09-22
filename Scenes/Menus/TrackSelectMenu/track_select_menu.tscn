@@ -1,0 +1,183 @@
+[gd_scene format=3 uid="uid://dpjhad5swcika"]
+
+[ext_resource type="Script" uid="uid://b8w0n5pd41173" path="res://Scenes/Menus/TrackSelectMenu/track_select_menu.gd" id="1_cpjce"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rixt3"]
+bg_color = Color(2.3102762e-06, 0.6323629, 0.9693813, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cpjce"]
+bg_color = Color(0, 0.46924525, 0.7268376, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_cpjce"]
+font_size = 64
+shadow_size = 16
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(4, 4)
+
+[sub_resource type="LabelSettings" id="LabelSettings_08aid"]
+font_size = 128
+shadow_size = 16
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(8, 8)
+
+[sub_resource type="LabelSettings" id="LabelSettings_cc374"]
+font_size = 64
+shadow_size = 16
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(4, 4)
+
+[node name="TrackSelectMenu" type="Control" unique_id=1328814950 node_paths=PackedStringArray("temp_next_button", "prev_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cpjce")
+next_scene = &"uid://igg6cd4fnkgj"
+prev_scene = &"uid://dujko6vu4ilbf"
+temp_next_button = NodePath("MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton1")
+prev_button = NodePath("TempBackButton")
+
+[node name="Panel" type="Panel" parent="." unique_id=104158427]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rixt3")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=444095342]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 128
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1031511449]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 32
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=1104165726]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_cpjce")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer" unique_id=1163452903]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer" unique_id=600990054]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 64
+
+[node name="TrackButton1" type="Button" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=1974582772]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton1" unique_id=1407616613]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Track 1"
+label_settings = SubResource("LabelSettings_cpjce")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TrackButton2" type="Button" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=528244172]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+disabled = true
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton2" unique_id=1599605396]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Track 2"
+label_settings = SubResource("LabelSettings_cpjce")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TrackButton3" type="Button" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=1321162569]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+disabled = true
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton3" unique_id=145594916]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Track 3"
+label_settings = SubResource("LabelSettings_cpjce")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TrackButton4" type="Button" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=1853172854]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+disabled = true
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton4" unique_id=1278985327]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Track 4"
+label_settings = SubResource("LabelSettings_cpjce")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TrackLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=437648674]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Track Name"
+label_settings = SubResource("LabelSettings_08aid")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TempBackButton" type="Button" parent="." unique_id=1185787318]
+custom_minimum_size = Vector2(256, 128)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Label" type="Label" parent="TempBackButton" unique_id=1518608882]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+label_settings = SubResource("LabelSettings_cc374")
+horizontal_alignment = 1
+vertical_alignment = 1

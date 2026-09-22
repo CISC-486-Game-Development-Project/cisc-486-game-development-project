@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://qf1sj7vuq7b3" path="res://Entities/PlayerKart3D/player_kart_3d.tscn" id="1_wqmp7"]
 [ext_resource type="AudioStream" uid="uid://cgpun0hsxpw5o" path="res://Assets/Audio/Music/KartTheme.wav" id="2_4tdiq"]
 [ext_resource type="Script" uid="uid://bv71qsqein0kx" path="res://Entities/DestructibleObject/destructible_object.gd" id="4_bcedo"]
+[ext_resource type="PackedScene" uid="uid://htd17y0efmde" path="res://Scenes/Menus/PauseScreen/pause_screen.tscn" id="5_wgl67"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7abii"]
 sky_top_color = Color(0.22520554, 0.47659743, 0.6379899, 1)
@@ -166,5 +167,7 @@ mesh = SubResource("BoxMesh_t5fsa")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DestructibleObject/Area3D" unique_id=130091451]
 shape = SubResource("BoxShape3D_t5fsa")
+
+[node name="PauseScreen" parent="." unique_id=608802068 instance=ExtResource("5_wgl67")]
 
 [connection signal="body_entered" from="DestructibleObject/Area3D" to="DestructibleObject" method="_on_area_3d_body_entered"]

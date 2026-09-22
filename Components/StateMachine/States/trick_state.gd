@@ -16,6 +16,9 @@ func enter(_prev_state: State) -> void:
 	# Add impulse velocity when hop begins
 	entity.velocity.y = trick_hop_velocity
 	
+	# Start trick cooldown
+	entity.trick_cooldown_timer.start()
+	
 	# Begin state's unique animation here
 	_play_trick_effect()
 

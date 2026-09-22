@@ -7,6 +7,7 @@
 - Item Behaviour (implementing how items work when used)
 - Menus (main menu, character select, track select, in game HUD, UI tween animations, creating reusable menu themes)
 - SFX & Music (new song for each track? menu music? unique sounds for each character's kart? unique voice lines per character for interactions?)
+- Known bugs to fix (pausing while race loads causes pause menu to be unclickable, loading into the main menu causes the music to play twice)
 
 ## Maia
 - Item system (inventory, item boxes, usable items, random item distribution)

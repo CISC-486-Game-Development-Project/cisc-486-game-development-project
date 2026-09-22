@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://vv680s1adm4y"]
+
+[ext_resource type="Script" uid="uid://bpmv76f1ceqv4" path="res://Scenes/Menus/TitleScreen/title_screen.gd" id="1_s2kds"]
+[ext_resource type="AudioStream" uid="uid://cgpun0hsxpw5o" path="res://Assets/Audio/Music/KartTheme.wav" id="2_bs8mv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bs8mv"]
+bg_color = Color(2.3102762e-06, 0.6323629, 0.9693813, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2v5bn"]
+font_size = 256
+shadow_size = 32
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(8, 8)
+
+[sub_resource type="LabelSettings" id="LabelSettings_whrq5"]
+font_size = 128
+shadow_size = 16
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(8, 8)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bs8mv"]
+font_size = 64
+shadow_size = 16
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(8, 8)
+
+[node name="TitleScreen" type="Control" unique_id=735640347]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s2kds")
+play_scene = &"uid://b4byg6rmq7m24"
+title_music = ExtResource("2_bs8mv")
+
+[node name="Panel" type="Panel" parent="." unique_id=2000484202]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bs8mv")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=389258077]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 128
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1344545769]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer" unique_id=495874356]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Title"
+label_settings = SubResource("LabelSettings_2v5bn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Subtitle" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1401487257]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Subtitle"
+label_settings = SubResource("LabelSettings_whrq5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PressLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=445665137]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Press any button"
+label_settings = SubResource("LabelSettings_bs8mv")
+horizontal_alignment = 1
+vertical_alignment = 1
