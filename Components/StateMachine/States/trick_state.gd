@@ -3,6 +3,7 @@ extends State
 
 # Export Vars
 @export var trick_boost_time: float = 1.0
+@export var trick_sfx: Array[AudioStream]
 
 @export_group("Physics Parameters")
 @export var trick_hop_velocity: float = 10.0 ## Velocity impulse when hopping.
@@ -33,6 +34,7 @@ func physics_update(delta: float) -> void:
 
 func _play_trick_effect():
 	entity.trick_particles.restart()
+	AudioManager.create_sound(trick_sfx[randi_range(0, len(trick_sfx) - 1)])
 	
 	# Play random trick animation
 	match randi_range(0, 2):

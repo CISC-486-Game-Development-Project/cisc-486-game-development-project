@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ciahq7jr2fmuy"
+path="res://.godot/imported/tricksfx - segment 8.mp3-3ece4b7749202d19a531b02d47a789a1.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX/tricksfx - segment 8.mp3"
+dest_files=["res://.godot/imported/tricksfx - segment 8.mp3-3ece4b7749202d19a531b02d47a789a1.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
