@@ -97,7 +97,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Track 1"
+text = "Debug
+Track"
 label_settings = SubResource("LabelSettings_cpjce")
 horizontal_alignment = 1
 vertical_alignment = 1
