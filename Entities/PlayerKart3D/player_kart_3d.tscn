@@ -114,6 +114,21 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_ri2dj"]
+resource_name = "hit_anim_1"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KartModel/AnimationPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.23333333, 0.36666667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.5707964, 0), Vector3(0, 3.1415927, 0), Vector3(0, 4.712389, 0), Vector3(0, 6.2831855, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_wo5un"]
 resource_name = "trick_anim_1"
 length = 0.5
@@ -165,6 +180,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7dnbs"]
 _data = {
 &"RESET": SubResource("Animation_iwjoc"),
+&"hit_anim_1": SubResource("Animation_ri2dj"),
 &"trick_anim_1": SubResource("Animation_wo5un"),
 &"trick_anim_2": SubResource("Animation_7dnbs"),
 &"trick_anim_3": SubResource("Animation_5yhnq")
@@ -456,4 +472,5 @@ metadata/_custom_type_script = "uid://b3ataw1etlka7"
 [node name="ToIdle" type="Node" parent="MovementStateMachine/HitState" unique_id=2016148862 node_paths=PackedStringArray("to_state")]
 script = ExtResource("6_7wlea")
 to_state = NodePath("../../IdleState")
+advance_expression = "hit_timer.time_left <= 0"
 metadata/_custom_type_script = "uid://l1hrvfthq543"

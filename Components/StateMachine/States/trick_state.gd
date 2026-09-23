@@ -35,7 +35,7 @@ func physics_update(delta: float) -> void:
 	
 	check_transitions()
 
-func _play_trick_effect():
+func _play_trick_effect() -> void:
 	entity.trick_particles.restart()
 	AudioManager.create_sound(trick_sfx[randi_range(0, len(trick_sfx) - 1)])
 	
