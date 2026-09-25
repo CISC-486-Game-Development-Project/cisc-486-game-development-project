@@ -2,12 +2,15 @@
 - Hold meeting before Sept. 21st to decide on project workflow and submit a project proposal
 
 ## Lillie
-- Destructible objects
-- Wipe out state (taking "damage")
 - Item Behaviour (implementing how items work when used)
 - Menus (main menu, character select, track select, in game HUD, UI tween animations, creating reusable menu themes)
 - SFX & Music (new song for each track? menu music? unique sounds for each character's kart? unique voice lines per character for interactions?)
 - Known bugs to fix (pausing while race loads causes pause menu to be unclickable, loading into the main menu causes the music to play twice)
+Current Tasks:
+- Destructible objects [LOGIC DONE, DESTROY EFFECT NOT IMPLEMENTED]
+- Wipe out state (taking "damage") [DONE]
+- Kart stats system
+- Making kart script more general so it can be used for AI
 
 ## Maia
 - Item system (inventory, item boxes, usable items, random item distribution)

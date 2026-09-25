@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://doqfnn32ciliy" path="res://Components/StateMachine/States/drive_state.gd" id="5_aplrp"]
 [ext_resource type="Script" uid="uid://bbrw2uverowic" path="res://Components/StateMachine/States/hop_state.gd" id="6_4kpiy"]
 [ext_resource type="Script" uid="uid://l1hrvfthq543" path="res://Components/StateMachine/state_transition.gd" id="6_7wlea"]
+[ext_resource type="Script" uid="uid://bjgot7okketbh" path="res://Components/Hitbox/hurtbox.gd" id="6_s0wt8"]
 [ext_resource type="Script" uid="uid://b2lqg5xhq7se0" path="res://Components/StateMachine/States/drift_state.gd" id="7_7wlea"]
 [ext_resource type="Script" uid="uid://c8xfvksbxr3eg" path="res://Components/StateMachine/States/reverse_state.gd" id="8_7wlea"]
 [ext_resource type="Script" uid="uid://t3ju34iymdl0" path="res://Components/StateMachine/States/fall_state.gd" id="9_r41fb"]
@@ -116,6 +117,8 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_ri2dj"]
 resource_name = "hit_anim_1"
+length = 0.5
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -261,6 +264,13 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2, 1
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=562479446]
 shape = SubResource("BoxShape3D_wgl67")
 
+[node name="Hurtbox" type="Area3D" parent="." unique_id=38046323]
+script = ExtResource("6_s0wt8")
+metadata/_custom_type_script = "uid://bjgot7okketbh"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox" unique_id=269420987]
+shape = SubResource("BoxShape3D_wgl67")
+
 [node name="DebugLabel3D" type="Label3D" parent="." unique_id=2145134111]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 billboard = 1
@@ -344,6 +354,12 @@ to_state = NodePath("../../HopState")
 advance_expression = "entity.hop_request"
 metadata/_custom_type_script = "uid://l1hrvfthq543"
 
+[node name="ToHit" type="Node" parent="MovementStateMachine/IdleState" unique_id=1722630534 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../HitState")
+advance_expression = "entity.is_hit"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
 [node name="DriveState" type="Node" parent="MovementStateMachine" unique_id=1022176010]
 script = ExtResource("5_aplrp")
 metadata/_custom_type_script = "uid://doqfnn32ciliy"
@@ -378,6 +394,12 @@ to_state = NodePath("../../TrickState")
 advance_expression = "entity.can_trick()"
 metadata/_custom_type_script = "uid://l1hrvfthq543"
 
+[node name="ToHit" type="Node" parent="MovementStateMachine/DriveState" unique_id=1738569825 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../HitState")
+advance_expression = "entity.is_hit"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
 [node name="ReverseState" type="Node" parent="MovementStateMachine" unique_id=1611560369]
 script = ExtResource("8_7wlea")
 metadata/_custom_type_script = "uid://c8xfvksbxr3eg"
@@ -406,6 +428,12 @@ to_state = NodePath("../../HopState")
 advance_expression = "entity.hop_request"
 metadata/_custom_type_script = "uid://l1hrvfthq543"
 
+[node name="ToHit" type="Node" parent="MovementStateMachine/ReverseState" unique_id=1962917867 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../HitState")
+advance_expression = "entity.is_hit"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
 [node name="FallState" type="Node" parent="MovementStateMachine" unique_id=608168031]
 script = ExtResource("9_r41fb")
 metadata/_custom_type_script = "uid://t3ju34iymdl0"
@@ -428,6 +456,12 @@ to_state = NodePath("../../TrickState")
 advance_expression = "entity.can_trick()"
 metadata/_custom_type_script = "uid://l1hrvfthq543"
 
+[node name="ToHit" type="Node" parent="MovementStateMachine/FallState" unique_id=1570548956 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../HitState")
+advance_expression = "entity.is_hit"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
 [node name="HopState" type="Node" parent="MovementStateMachine" unique_id=1575335693]
 script = ExtResource("6_4kpiy")
 metadata/_custom_type_script = "uid://bbrw2uverowic"
@@ -444,6 +478,12 @@ to_state = NodePath("../../TrickState")
 advance_expression = "entity.can_trick()"
 metadata/_custom_type_script = "uid://l1hrvfthq543"
 
+[node name="ToHit" type="Node" parent="MovementStateMachine/HopState" unique_id=497544275 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../HitState")
+advance_expression = "entity.is_hit"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
 [node name="DriftState" type="Node" parent="MovementStateMachine" unique_id=788034490]
 script = ExtResource("7_7wlea")
 metadata/_custom_type_script = "uid://b2lqg5xhq7se0"
@@ -452,6 +492,12 @@ metadata/_custom_type_script = "uid://b2lqg5xhq7se0"
 script = ExtResource("6_7wlea")
 to_state = NodePath("../../IdleState")
 advance_expression = "not entity.drift_request or entity.get_horizontal_velocity().length() <= 5 or entity.drift_dir == 0"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
+[node name="ToHit" type="Node" parent="MovementStateMachine/DriftState" unique_id=562125298 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../HitState")
+advance_expression = "entity.is_hit"
 metadata/_custom_type_script = "uid://l1hrvfthq543"
 
 [node name="TrickState" type="Node" parent="MovementStateMachine" unique_id=162074873]
@@ -463,6 +509,12 @@ metadata/_custom_type_script = "uid://bmua4qbuf0vev"
 script = ExtResource("6_7wlea")
 to_state = NodePath("../../FallState")
 advance_expression = "entity.velocity.y <= 0"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
+[node name="ToHit" type="Node" parent="MovementStateMachine/TrickState" unique_id=933844737 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_7wlea")
+to_state = NodePath("../../HitState")
+advance_expression = "entity.is_hit"
 metadata/_custom_type_script = "uid://l1hrvfthq543"
 
 [node name="HitState" type="Node" parent="MovementStateMachine" unique_id=1653879341]

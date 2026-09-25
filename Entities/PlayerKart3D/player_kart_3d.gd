@@ -27,6 +27,7 @@ class_name PlayerKart3D extends CharacterBody3D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var ground_ray_cast_3d: RayCast3D = $GroundRayCast3D
 @onready var trick_ray_cast_3d: RayCast3D = $TrickRayCast3D
+@onready var hurtbox: Hurtbox = $Hurtbox
 
 @onready var boost_particles: GPUParticles3D = $BoostParticles
 @onready var drift_particles: GPUParticles3D = $DriftParticles
@@ -50,9 +51,15 @@ var steering: float
 var boost_timer: float
 var boost_queue: Array[float]
 
+var is_hit: bool
+
 #######################
 ## Process Functions ##
 #######################
+
+func _ready() -> void:
+	# Connect signals
+	hurtbox.on_hit.connect(hit)
 
 func _process(delta: float) -> void:
 	# Decrement boost timer when active
@@ -66,8 +73,9 @@ func _physics_process(delta: float) -> void:
 	_handle_input()
 	
 	## Step 2: Handle Movement
-	_handle_driving(delta)
-	_handle_steering(delta)
+	if state_machine.current_state is not HitState:
+		_handle_driving(delta)
+		_handle_steering(delta)
 	_align_to_ground(delta)
 	move_and_slide()
 	
@@ -171,9 +179,9 @@ func align_with_y(xform: Transform3D, new_y: Vector3) -> Transform3D:
 	xform.basis = xform.basis.orthonormalized()
 	return xform
 
-#####################
-## Boost Functions ##
-#####################
+###########################
+## Boost & Hit Functions ##
+###########################
 
 ## Sets the boost to be active for a set amount of time.
 func set_boost(time: float):
@@ -184,6 +192,13 @@ func set_boost(time: float):
 ## Queues a boost to be set once the ground is hit.
 func queue_ground_boost(time: float):
 	boost_queue.append(time)
+
+## Called when the kart is hit. Sets is_hit variable in order to transition to the HitState.
+func hit(velocity_reduction_factor: float = 0.2, vertical_velocity_impulse: float = 3.0) -> void:
+	if not is_hit: # Apply velocity effects if just hit
+		velocity *= velocity_reduction_factor
+		velocity.y += vertical_velocity_impulse
+	is_hit = true
 
 ######################
 ## Getter Functions ##

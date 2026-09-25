@@ -34,11 +34,12 @@ func enter(_prev_state: State) -> void:
 	# Begin state's unique animation here
 
 func exit(_next_state: State) -> void:
-	# Apply turbo boost
-	match drift_level:
-		1: entity.set_boost(short_turbo_boost_time)
-		2: entity.set_boost(mid_turbo_boost_time)
-		3: entity.set_boost(long_turbo_boost_time)
+	if entity.get_horizontal_velocity().length() > 5: # No boost if too slow
+		# Apply turbo boost
+		match drift_level:
+			1: entity.set_boost(short_turbo_boost_time)
+			2: entity.set_boost(mid_turbo_boost_time)
+			3: entity.set_boost(long_turbo_boost_time)
 	
 	# Reset vars
 	entity.drift_dir = 0
