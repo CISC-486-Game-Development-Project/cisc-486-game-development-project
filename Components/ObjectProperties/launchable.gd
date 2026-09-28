@@ -11,5 +11,5 @@ func _ready() -> void:
 
 func _on_hit(area: Area3D) -> void:
 	var hitter = area.owner
-	if hitter is PlayerKart3D:
+	if hitter is Kart3D:
 		rigid_body_3d.apply_central_impulse(hitter.velocity * 2 + Vector3(0, hitter.velocity.length() / 2, 0))

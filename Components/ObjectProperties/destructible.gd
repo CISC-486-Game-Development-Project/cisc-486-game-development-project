@@ -12,5 +12,5 @@ func _ready() -> void:
 
 func _on_hit(area: Area3D) -> void:
 	var hitter = area.owner
-	if hitter is PlayerKart3D:
+	if hitter is Kart3D:
 		get_tree().create_timer(breaking_time).timeout.connect(to_break.queue_free)

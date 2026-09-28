@@ -1,7 +1,10 @@
-class_name PlayerKart3D extends CharacterBody3D
+class_name Kart3D
+extends CharacterBody3D
 
 # Export Vars
 @export_category("Stats")
+@export var kart_stats: KartStats
+
 @export_group("Driving")
 @export_custom(PROPERTY_HINT_NONE, "suffix:m/s") var top_speed: float ## Defines the top speed.
 @export_custom(PROPERTY_HINT_NONE, "suffix:m/s") var top_reverse_speed: float ## Defines the top speed when reversing.
@@ -15,15 +18,17 @@ class_name PlayerKart3D extends CharacterBody3D
 @export_custom(PROPERTY_HINT_NONE, "suffix:degrees") var max_steering_angle_fast: float = 5.0 ## Defines the maximum steering angle, should be lower when going fast.
 @export_custom(PROPERTY_HINT_NONE, "suffix:degrees/s") var handbrake_steering_velocity: float = 45.0 ## Defines the speed of handbreak steering (turning while very slow).
 @export_custom(PROPERTY_HINT_NONE, "suffix:degrees/s") var air_steering_velocity: float = 40.0 ## Defines the speed of mid-air steering.
-@export_custom(PROPERTY_HINT_NONE, "suffix:m") var wheel_base: float = 1.5
-@export var wheels: Array[Wheel]
-@export var drift_steering_multiplier: float = 1.2
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var wheel_base: float = 1.5 ## The diameter of the wheels.
+@export var wheels: Array[Wheel] ## The array of Wheel objects attaced to this kart.
+@export var drift_steering_multiplier: float = 1.2 ## The factor by which steer direction is multiplied while drifting.
 
 # Onready Vars
 @onready var kart_model: Node3D = $KartModel
 
 @onready var camera_controller: CameraController = $CameraController
 @onready var state_machine: StateMachine = $MovementStateMachine
+@onready var input_handler: InputHandler = $InputHandler
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var ground_ray_cast_3d: RayCast3D = $GroundRayCast3D
 @onready var trick_ray_cast_3d: RayCast3D = $TrickRayCast3D
@@ -39,19 +44,19 @@ class_name PlayerKart3D extends CharacterBody3D
 @onready var debug_label_3d: Label3D = $DebugLabel3D
 
 # Internal Vars
-var steer_request: float
-var accel_request: float
-var break_request: bool
-var hop_request: bool
-var drift_request: bool
-var drift_dir: int
+var steer_request: float ## Steering intensity request to be set by an input_manager.
+var accel_request: float ## Acceleration intensity request to be set by an input_manager.
+var break_request: bool ## Break request to be set by an input_manager.
+var hop_request: bool ## Hop request to be set by an input_manager.
+var drift_request: bool ## Drift request to be set by an input_manager.
+var drift_dir: int ## The direction of a currently active drift. 1 = right, 0 = none, -1 = left.
 
-var steering: float
+var steering: float ## The intensity of the current steering.
 
-var boost_timer: float
-var boost_queue: Array[float]
+var boost_timer: float ## The time left in the current boost.
+var boost_queue: Array[float] ## The queue of boosts to be applied once the ground is hit.
 
-var is_hit: bool
+var is_hit: bool ## True when the kart is hit.
 
 #######################
 ## Process Functions ##
@@ -60,6 +65,25 @@ var is_hit: bool
 func _ready() -> void:
 	# Connect signals
 	hurtbox.on_hit.connect(hit)
+	
+	# Apply KartStats
+	if kart_stats:
+		## Stat Formulae
+		# Speed
+		top_speed = 20.0 + (kart_stats.base_speed / 2)
+		top_reverse_speed = 8.0 + (kart_stats.base_speed / 2)
+		
+		# Acceleration
+		acceleration = 12.0 + (kart_stats.base_acceleration * 2)
+		
+		# Boost
+		boost_speed = (top_speed * 1.5) + (kart_stats.base_boost * 1.5)
+		
+		# Handling
+		max_steering_angle_slow = 8.0 + (kart_stats.base_handling / 2)
+		max_steering_angle_fast = 3.0 + (kart_stats.base_handling / 2)
+		handbrake_steering_velocity = 45.0 + kart_stats.base_handling
+		air_steering_velocity = 40.0 + kart_stats.base_handling
 
 func _process(delta: float) -> void:
 	# Decrement boost timer when active
@@ -70,7 +94,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	## Step 1: Handle Input
-	_handle_input()
+	input_handler.handle_input()
 	
 	## Step 2: Handle Movement
 	if state_machine.current_state is not HitState:

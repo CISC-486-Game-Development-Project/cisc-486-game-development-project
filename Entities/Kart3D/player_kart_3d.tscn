@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://qf1sj7vuq7b3"]
 
-[ext_resource type="Script" uid="uid://ccmyuvvgnljlr" path="res://Entities/PlayerKart3D/player_kart_3d.gd" id="1_q6jvo"]
+[ext_resource type="Script" uid="uid://ccmyuvvgnljlr" path="res://Entities/Kart3D/kart_3d.gd" id="1_q6jvo"]
 [ext_resource type="PackedScene" uid="uid://bpt5weu81habv" path="res://Components/CameraController/camera_controller.tscn" id="2_q6jvo"]
 [ext_resource type="PackedScene" uid="uid://ceoygxwx1ngye" path="res://Assets/3D/Models/BasicCar/SM_Basic_Car_Body.fbx" id="2_wo5un"]
 [ext_resource type="PackedScene" uid="uid://vp2ox0cie7xw" path="res://Assets/3D/Models/BasicCar/SM_Basic_Car_Wheel.fbx" id="3_7dnbs"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://l1hrvfthq543" path="res://Components/StateMachine/state_transition.gd" id="6_7wlea"]
 [ext_resource type="Script" uid="uid://bjgot7okketbh" path="res://Components/Hitbox/hurtbox.gd" id="6_s0wt8"]
 [ext_resource type="Script" uid="uid://b2lqg5xhq7se0" path="res://Components/StateMachine/States/drift_state.gd" id="7_7wlea"]
+[ext_resource type="Script" uid="uid://cfomyfhx7nhn3" path="res://Components/InputHandler/input_handler.gd" id="7_wb45y"]
 [ext_resource type="Script" uid="uid://c8xfvksbxr3eg" path="res://Components/StateMachine/States/reverse_state.gd" id="8_7wlea"]
 [ext_resource type="Script" uid="uid://t3ju34iymdl0" path="res://Components/StateMachine/States/fall_state.gd" id="9_r41fb"]
 [ext_resource type="Script" uid="uid://bmua4qbuf0vev" path="res://Components/StateMachine/States/trick_state.gd" id="12_iwjoc"]
@@ -320,6 +321,11 @@ one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=858611665]
 libraries/ = SubResource("AnimationLibrary_7dnbs")
+
+[node name="InputHandler" type="Node" parent="." unique_id=755466376 node_paths=PackedStringArray("kart")]
+script = ExtResource("7_wb45y")
+kart = NodePath("..")
+metadata/_custom_type_script = "uid://cfomyfhx7nhn3"
 
 [node name="MovementStateMachine" type="Node" parent="." unique_id=547351009 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_25wvy")
