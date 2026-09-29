@@ -2,8 +2,9 @@ class_name Kart3D
 extends CharacterBody3D
 
 # Export Vars
-@export_category("Stats")
-@export var kart_stats: KartStats
+@export_category("Functionality")
+@export var kart_stats: KartStats ## The stats that define the kart.
+@export var input_handler: InputHandler ## The input handler for controlling the kart.
 
 @export_group("Driving")
 @export_custom(PROPERTY_HINT_NONE, "suffix:m/s") var top_speed: float ## Defines the top speed.
@@ -19,20 +20,18 @@ extends CharacterBody3D
 @export_custom(PROPERTY_HINT_NONE, "suffix:degrees/s") var handbrake_steering_velocity: float = 45.0 ## Defines the speed of handbreak steering (turning while very slow).
 @export_custom(PROPERTY_HINT_NONE, "suffix:degrees/s") var air_steering_velocity: float = 40.0 ## Defines the speed of mid-air steering.
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var wheel_base: float = 1.5 ## The diameter of the wheels.
-@export var wheels: Array[Wheel] ## The array of Wheel objects attaced to this kart.
 @export var drift_steering_multiplier: float = 1.2 ## The factor by which steer direction is multiplied while drifting.
 
 # Onready Vars
 @onready var kart_model: Node3D = $KartModel
+@onready var animation_pivot: Node3D = $KartModel/AnimationPivot
+@onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
 
-@onready var camera_controller: CameraController = $CameraController
 @onready var state_machine: StateMachine = $MovementStateMachine
-@onready var input_handler: InputHandler = $InputHandler
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var ground_ray_cast_3d: RayCast3D = $GroundRayCast3D
 @onready var trick_ray_cast_3d: RayCast3D = $TrickRayCast3D
-@onready var hurtbox: Hurtbox = $Hurtbox
 
 @onready var boost_particles: GPUParticles3D = $BoostParticles
 @onready var drift_particles: GPUParticles3D = $DriftParticles
@@ -41,9 +40,13 @@ extends CharacterBody3D
 @onready var trick_buffer_timer: Timer = $TrickBufferTimer
 @onready var trick_cooldown_timer: Timer = $TrickCooldownTimer
 
+@onready var debug_kart: KartModel = $KartModel/AnimationPivot/DebugKart
 @onready var debug_label_3d: Label3D = $DebugLabel3D
 
 # Internal Vars
+var wheels: Array[Wheel] ## The array of Wheel objects attaced to this kart.
+var hurtbox: Hurtbox ## The hurtbox of this kart.
+
 var steer_request: float ## Steering intensity request to be set by an input_manager.
 var accel_request: float ## Acceleration intensity request to be set by an input_manager.
 var break_request: bool ## Break request to be set by an input_manager.
@@ -63,11 +66,19 @@ var is_hit: bool ## True when the kart is hit.
 #######################
 
 func _ready() -> void:
-	# Connect signals
-	hurtbox.on_hit.connect(hit)
-	
 	# Apply KartStats
 	if kart_stats:
+		## Kart Model
+		# Remove debug model
+		debug_kart.queue_free()
+		
+		# Set up new kart model
+		var kart: KartModel = kart_stats.kart_model.instantiate()
+		animation_pivot.add_child(kart)
+		wheels = kart.wheels
+		hurtbox = kart.hurtbox
+		collision_shape_3d.shape = kart.collision_shape_3d.shape
+		
 		## Stat Formulae
 		# Speed
 		top_speed = 20.0 + (kart_stats.base_speed / 2)
@@ -84,6 +95,12 @@ func _ready() -> void:
 		max_steering_angle_fast = 3.0 + (kart_stats.base_handling / 2)
 		handbrake_steering_velocity = 45.0 + kart_stats.base_handling
 		air_steering_velocity = 40.0 + kart_stats.base_handling
+	
+	# Set up input handler
+	input_handler.kart = self
+	
+	# Connect signals
+	hurtbox.on_hit.connect(hit)
 
 func _process(delta: float) -> void:
 	# Decrement boost timer when active

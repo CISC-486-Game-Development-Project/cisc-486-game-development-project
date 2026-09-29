@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://d06ii74wx6vgl"]
+
+[ext_resource type="Script" uid="uid://t6a574qi7en4" path="res://Scenes/KartModels/kart_model.gd" id="1_6cl8y"]
+[ext_resource type="PackedScene" uid="uid://ceoygxwx1ngye" path="res://Assets/3D/Models/BasicCar/SM_Basic_Car_Body.fbx" id="1_ahyi0"]
+[ext_resource type="Script" uid="uid://c3wfj3uwwdahi" path="res://Components/Wheel/wheel.gd" id="2_6cl8y"]
+[ext_resource type="PackedScene" uid="uid://vp2ox0cie7xw" path="res://Assets/3D/Models/BasicCar/SM_Basic_Car_Wheel.fbx" id="3_5y48b"]
+[ext_resource type="Script" uid="uid://bjgot7okketbh" path="res://Components/Hitbox/hurtbox.gd" id="5_hqag7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3bsr3"]
+size = Vector3(1, 0.8, 2)
+
+[node name="BasicKart" type="Node3D" unique_id=142078105 node_paths=PackedStringArray("body", "wheels", "hurtbox", "collision_shape_3d")]
+script = ExtResource("1_6cl8y")
+body = NodePath("BasicCarBody")
+wheels = [NodePath("BackWheelR"), NodePath("BackWheelL"), NodePath("FrontWheelR"), NodePath("FrontWheelL")]
+hurtbox = NodePath("Hurtbox")
+collision_shape_3d = NodePath("Hurtbox/CollisionShape3D")
+
+[node name="BasicCarBody" parent="." unique_id=1890857387 instance=ExtResource("1_ahyi0")]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 3.5527137e-15, 0, 0.5)
+
+[node name="BackWheelR" type="Node3D" parent="." unique_id=1061689985]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 0.43, -0.13, 0.5)
+script = ExtResource("2_6cl8y")
+
+[node name="WheelVisual" parent="BackWheelR" unique_id=1604969692 instance=ExtResource("3_5y48b")]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="BackWheelR" unique_id=226253977]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+spring_length = 0.5
+
+[node name="WheelPivot" type="Node3D" parent="BackWheelR/SpringArm3D" unique_id=1902229391]
+
+[node name="BackWheelL" type="Node3D" parent="." unique_id=1746578828]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, -0.43, -0.13, 0.5)
+script = ExtResource("2_6cl8y")
+
+[node name="WheelVisual" parent="BackWheelL" unique_id=822170127 instance=ExtResource("3_5y48b")]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="BackWheelL" unique_id=1625755121]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+spring_length = 0.5
+
+[node name="WheelPivot" type="Node3D" parent="BackWheelL/SpringArm3D" unique_id=104059617]
+
+[node name="FrontWheelR" type="Node3D" parent="." unique_id=1339333422]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 0.43000033, -0.13, -0.9486294)
+script = ExtResource("2_6cl8y")
+steering_enabled = true
+
+[node name="WheelVisual" parent="FrontWheelR" unique_id=1028684973 instance=ExtResource("3_5y48b")]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="FrontWheelR" unique_id=1469634716]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+spring_length = 0.5
+
+[node name="WheelPivot" type="Node3D" parent="FrontWheelR/SpringArm3D" unique_id=1645695469]
+
+[node name="FrontWheelL" type="Node3D" parent="." unique_id=923021165]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, -0.43, -0.12, -0.949)
+script = ExtResource("2_6cl8y")
+steering_enabled = true
+
+[node name="WheelVisual" parent="FrontWheelL" unique_id=1240202743 instance=ExtResource("3_5y48b")]
+transform = Transform3D(1, 0, 0, 0, 1, -5.6961745e-22, 0, -5.6961745e-22, 1, 0, 0, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="FrontWheelL" unique_id=2011614713]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+spring_length = 0.5
+
+[node name="WheelPivot" type="Node3D" parent="FrontWheelL/SpringArm3D" unique_id=901839516]
+
+[node name="Hurtbox" type="Area3D" parent="." unique_id=606813685]
+script = ExtResource("5_hqag7")
+metadata/_custom_type_script = "uid://bjgot7okketbh"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox" unique_id=1460621626]
+shape = SubResource("BoxShape3D_3bsr3")
