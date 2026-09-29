@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dujko6vu4ilbf"]
 
-[ext_resource type="PackedScene" uid="uid://bhlsfq2t0ug4i" path="res://Assets/3D/Models/BasicCar/SM_Basic_Car.fbx" id="1_56w7i"]
+[ext_resource type="PackedScene" uid="uid://bhlsfq2t0ug4i" path="res://Assets/3D/Models/Vehicles/BasicCar/SM_Basic_Car.fbx" id="1_56w7i"]
 [ext_resource type="Script" uid="uid://cy83tt76elj41" path="res://Scenes/Menus/CharacterSelectMenu/character_select_menu.gd" id="1_hk7je"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hk7je"]

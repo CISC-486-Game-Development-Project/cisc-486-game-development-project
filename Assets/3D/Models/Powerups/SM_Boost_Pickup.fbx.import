@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bhlsfq2t0ug4i"
-path="res://.godot/imported/SM_Basic_Car.fbx-6d1c1d974f2c3d49e789daf70fb281c5.scn"
+uid="uid://djxjd5j6v4k05"
+path="res://.godot/imported/SM_Boost_Pickup.fbx-fb7885d8ffc3b72480c2410ecdcf1da7.scn"
 
 [deps]
 
-source_file="res://Assets/3D/Models/BasicCar/SM_Basic_Car.fbx"
-dest_files=["res://.godot/imported/SM_Basic_Car.fbx-6d1c1d974f2c3d49e789daf70fb281c5.scn"]
+source_file="res://Assets/3D/Models/Powerups/SM_Boost_Pickup.fbx"
+dest_files=["res://.godot/imported/SM_Boost_Pickup.fbx-fb7885d8ffc3b72480c2410ecdcf1da7.scn"]
 
 [params]
 
