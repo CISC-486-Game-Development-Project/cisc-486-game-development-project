@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://vp2ox0cie7xw"
-path="res://.godot/imported/SM_Basic_Car_Wheel.fbx-65decbb179e095741257af6bdb2e6abe.scn"
+uid="uid://ceoygxwx1ngye"
+path="res://.godot/imported/SM_Basic_Car_Body.fbx-0422bfffedbeb510a64ec5ee18e4374c.scn"
 
 [deps]
 
-source_file="res://Assets/3D/Models/BasicCar/SM_Basic_Car_Wheel.fbx"
-dest_files=["res://.godot/imported/SM_Basic_Car_Wheel.fbx-65decbb179e095741257af6bdb2e6abe.scn"]
+source_file="res://Assets/3D/Models/Vehicles/BasicCar/SM_Basic_Car_Body.fbx"
+dest_files=["res://.godot/imported/SM_Basic_Car_Body.fbx-0422bfffedbeb510a64ec5ee18e4374c.scn"]
 
 [params]
 
