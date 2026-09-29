@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://cd2cwfschwv3h"]
+
+[node name="SplitscreenRoot" type="Control" unique_id=945732261]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=56264711]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="Player1" type="SubViewportContainer" parent="GridContainer" unique_id=1200551527]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SubViewport" type="SubViewport" parent="GridContainer/Player1" unique_id=878595824]
+size = Vector2i(1920, 1080)
+
+[node name="Player2" type="SubViewportContainer" parent="GridContainer" unique_id=1717226799]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SubViewport" type="SubViewport" parent="GridContainer/Player2" unique_id=728756845]
+size = Vector2i(1920, 1080)
+
+[node name="Player3" type="SubViewportContainer" parent="GridContainer" unique_id=303487371]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SubViewport" type="SubViewport" parent="GridContainer/Player3" unique_id=1147231188]
+size = Vector2i(1920, 1080)
+
+[node name="Player4" type="SubViewportContainer" parent="GridContainer" unique_id=1388061331]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SubViewport" type="SubViewport" parent="GridContainer/Player4" unique_id=528720432]
+size = Vector2i(1920, 1080)
