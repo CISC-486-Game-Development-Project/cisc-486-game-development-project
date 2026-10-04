@@ -13,3 +13,6 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2, 1
 [node name="PlayerInputHandler" type="Node" parent="." index="13" unique_id=943662880]
 script = ExtResource("3_u0n23")
 metadata/_custom_type_script = "uid://8saf5fuicdvx"
+
+[node name="ToIdle" parent="MovementStateMachine/DriftState" parent_id_path=PackedInt32Array(788034490) index="0" unique_id=1526947133]
+advance_expression = "not entity.drift_request or entity.get_horizontal_velocity().length() <= drift_speed_threshold or entity.drift_dir == 0"

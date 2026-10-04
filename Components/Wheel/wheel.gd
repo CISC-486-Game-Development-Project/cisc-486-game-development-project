@@ -13,6 +13,7 @@ const RADIAL_SPEED_FACTOR: float = (2 * 0.21 * PI) / 2 * PI
 @onready var wheel_visual: Node3D = $WheelVisual
 @onready var spring_arm_3d: SpringArm3D = $SpringArm3D
 @onready var wheel_pivot: Node3D = $SpringArm3D/WheelPivot
+@onready var ray_cast_3d: RayCast3D = $RayCast3D
 
 # Internal Vars
 var speed: float = 0.0 ## The current kart speed, set by this wheel's kart parent.
@@ -34,3 +35,10 @@ func set_steering(steering: float) -> void:
 ## Returns the global position of the visual wheel.
 func get_wheel_position() -> Vector3:
 	return wheel_visual.global_position
+
+## Returns the terrain this wheel is colliding with.
+func get_wheel_terrain() -> Node3D:
+	if ray_cast_3d.is_colliding():
+		return ray_cast_3d.get_collider()
+	else:
+		return null

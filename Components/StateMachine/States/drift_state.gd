@@ -17,6 +17,7 @@ extends State
 @export_group("Physics Parameters")
 @export var fall_velocity: float = -100.0 ## Speed of falling.
 @export var fall_gravity: float = 20.0 ## Intensity of gravitational force.
+@export var drift_speed_threshold: float = 12.0 ## Speed that must be exceeded for drifting.
 
 # Onready Vars
 @onready var entity: CharacterBody3D = state_machine.get_parent()
@@ -34,7 +35,7 @@ func enter(_prev_state: State) -> void:
 	# Begin state's unique animation here
 
 func exit(_next_state: State) -> void:
-	if entity.get_horizontal_velocity().length() > 5: # No boost if too slow
+	if entity.get_horizontal_velocity().length() > drift_speed_threshold: # No boost if too slow or in offroad
 		# Apply turbo boost
 		match drift_level:
 			1: entity.set_boost(short_turbo_boost_time)

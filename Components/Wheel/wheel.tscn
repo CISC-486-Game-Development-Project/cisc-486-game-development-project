@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dtcyal4perrkp"]
+
+[ext_resource type="Script" uid="uid://c3wfj3uwwdahi" path="res://Components/Wheel/wheel.gd" id="1_fjxvo"]
+[ext_resource type="PackedScene" uid="uid://vp2ox0cie7xw" path="res://Assets/3D/Models/Vehicles/BasicCar/SM_Basic_Car_Wheel.fbx" id="2_g7ls8"]
+
+[node name="Wheel" type="Node3D" unique_id=950822510]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 0, 0, 0)
+script = ExtResource("1_fjxvo")
+
+[node name="WheelVisual" parent="." unique_id=2090125690 instance=ExtResource("2_g7ls8")]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="." unique_id=1651722771]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+spring_length = 0.5
+
+[node name="WheelPivot" type="Node3D" parent="SpringArm3D" unique_id=2084720874]
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=1232310142]

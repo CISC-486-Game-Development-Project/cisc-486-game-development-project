@@ -1,3 +1,4 @@
+## A class that stores information regarding a kart's model.
 class_name KartModel
 extends Node3D
 

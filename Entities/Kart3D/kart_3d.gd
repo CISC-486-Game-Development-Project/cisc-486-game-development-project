@@ -13,6 +13,7 @@ extends CharacterBody3D
 @export_custom(PROPERTY_HINT_NONE, "suffix:m/s") var boost_speed: float  ## Defines the top speed when boosting.
 @export_custom(PROPERTY_HINT_NONE, "suffix:m/s/s") var boost_acceleration: float ## Defines the rate of acceleration when boosting.
 @export var roll_friction: float = 0.8 ## Defines the intensity of the friction acting against the forward momentum.
+@export var trick_speed_threshold: float = 10.0 ## Defines the minimum speed required to trick while driving.
 
 @export_group("Steering")
 @export_custom(PROPERTY_HINT_NONE, "suffix:degrees") var max_steering_angle_slow: float = 10.0 ## Defines the maximum steering angle, should be higher when going slow.
@@ -23,9 +24,9 @@ extends CharacterBody3D
 @export var drift_steering_multiplier: float = 1.2 ## The factor by which steer direction is multiplied while drifting.
 
 @export_group("Road Factors") # How much the kart will be affected by the terrain (top speed and accel.)
-@export var paved: float = 1.0  
-@export var off_road: float = 0.75
-@export var harsh_offroad: float = 0.5    
+@export var road_factor_paved: float = 0.0  
+@export var road_factor_offroad: float = 0.6
+@export var road_factor_harsh_offroad: float = 0.8    
 
 # Onready Vars
 @onready var kart_model: Node3D = $KartModel
@@ -60,6 +61,7 @@ var drift_request: bool ## Drift request to be set by an input_manager.
 var drift_dir: int ## The direction of a currently active drift. 1 = right, 0 = none, -1 = left.
 
 var steering: float ## The intensity of the current steering.
+var road_factor: float ## The intensity of the current road factor.
 
 var boost_timer: float ## The time left in the current boost.
 var boost_queue: Array[float] ## The queue of boosts to be applied once the ground is hit.
@@ -84,22 +86,8 @@ func _ready() -> void:
 		hurtbox = kart.hurtbox
 		collision_shape_3d.shape = kart.collision_shape_3d.shape
 		
-		## Stat Formulae
-		# Speed
-		top_speed = 20.0 + (kart_stats.base_speed / 2)
-		top_reverse_speed = 8.0 + (kart_stats.base_speed / 2)
-		
-		# Acceleration
-		acceleration = 12.0 + (kart_stats.base_acceleration * 2)
-		
-		# Boost
-		boost_speed = (top_speed * 1.5) + (kart_stats.base_boost * 1.5)
-		
-		# Handling
-		max_steering_angle_slow = 8.0 + (kart_stats.base_handling / 2)
-		max_steering_angle_fast = 3.0 + (kart_stats.base_handling / 2)
-		handbrake_steering_velocity = 45.0 + kart_stats.base_handling
-		air_steering_velocity = 40.0 + kart_stats.base_handling
+		# Set kart's stats
+		set_stats()
 	
 	# Set up input handler
 	input_handler.kart = self
@@ -113,6 +101,8 @@ func _process(delta: float) -> void:
 		boost_timer -= delta
 		if boost_timer <= 0: # Stop particles if boost is over
 			boost_particles.emitting = false
+	
+	recalculate_road_factor()
 
 func _physics_process(delta: float) -> void:
 	## Step 1: Handle Input
@@ -225,6 +215,29 @@ func align_with_y(xform: Transform3D, new_y: Vector3) -> Transform3D:
 	xform.basis = xform.basis.orthonormalized()
 	return xform
 
+## Calculates the current road_factor based on terrain conditions.
+func recalculate_road_factor() -> void:
+	var total_road_factor: float = 0.0
+	var wheels_on_ground: int = 0
+	
+	# Check all wheels
+	for wheel in wheels:
+		var wheel_terrain = wheel.get_wheel_terrain()
+		if wheel_terrain:
+			wheels_on_ground += 1
+			if wheel_terrain.is_in_group("Paved"):
+				total_road_factor += road_factor_paved
+			elif wheel_terrain.is_in_group("Offroad"):
+				total_road_factor += road_factor_offroad
+			elif wheel_terrain.is_in_group("Harsh Offroad"):
+				total_road_factor += road_factor_harsh_offroad
+	
+	# Set road_factor if different
+	var new_road_factor = total_road_factor / wheels_on_ground if wheels_on_ground > 0 else 0.0
+	if new_road_factor != road_factor:
+		road_factor = new_road_factor
+		set_stats()
+
 ###########################
 ## Boost & Hit Functions ##
 ###########################
@@ -246,18 +259,41 @@ func hit(velocity_reduction_factor: float = 0.2, vertical_velocity_impulse: floa
 		velocity.y += vertical_velocity_impulse
 	is_hit = true
 
-######################
-## Getter Functions ##
-######################
+###########################################
+## Getter, Setter, and Checker Functions ##
+###########################################
 
 ## Returns the horizontal velocity of the player as a Vector3 with y always set to 0.
 func get_horizontal_velocity() -> Vector3:
 	return Vector3(velocity.x, 0, velocity.z)
 
+## Sets the stats of the kart based on kart stats and current terrain conditions.
+func set_stats() -> void:
+	## Stat Formulae
+	# Speed
+	top_speed = (20.0 + (kart_stats.base_speed / 2)) * (1 - road_factor)
+	top_reverse_speed = (8.0 + (kart_stats.base_speed / 2)) * (1 - road_factor)
+	
+	# Acceleration
+	acceleration = (12.0 + (kart_stats.base_acceleration * 2)) * (1 - road_factor)
+	
+	# Boost
+	boost_speed = (top_speed * 1.5) + (kart_stats.base_boost * 1.5)
+	
+	# Handling
+	max_steering_angle_slow = 8.0 + (kart_stats.base_handling / 2)
+	max_steering_angle_fast = 3.0 + (kart_stats.base_handling / 2)
+	handbrake_steering_velocity = 45.0 + kart_stats.base_handling
+	air_steering_velocity = 40.0 + kart_stats.base_handling
+
 ## Returns if a trick is able to occur.
 func can_trick() -> bool:
 	# Immediate false if cooldown since last trick isn't over
 	if trick_cooldown_timer.time_left > 0:
+		return false
+	
+	# False if not above threshold
+	if get_horizontal_velocity().length() < trick_speed_threshold:
 		return false
 	
 	# Check logic for tricking depending on current state
@@ -288,7 +324,8 @@ func _update_debug_label():
 		"Trick Raycast: " + str(trick_ray_cast_3d.is_colliding()),
 		"Coyote Timer: " + str(trick_coyote_timer.time_left > 0),
 		"Buffer Timer: " + str(trick_buffer_timer.time_left > 0),
-		"Cooldown Timer: " + str(trick_cooldown_timer.time_left > 0)
+		"Cooldown Timer: " + str(trick_cooldown_timer.time_left > 0),
+		"Road Factor: " + str(road_factor),
 	]
 	
 	# Apply debug texts to label
