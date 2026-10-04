@@ -77,7 +77,7 @@ environment = SubResource("Environment_t4f5k")
 
 [node name="Terrain" type="Node3D" parent="." unique_id=361690583]
 
-[node name="Ground" type="StaticBody3D" parent="Terrain" unique_id=1575098640]
+[node name="Ground" type="StaticBody3D" parent="Terrain" unique_id=1575098640 groups=["Offroad"]]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Ground" unique_id=1661721477]
 mesh = SubResource("BoxMesh_fsgd3")
@@ -85,7 +85,7 @@ mesh = SubResource("BoxMesh_fsgd3")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Ground" unique_id=1404893242]
 shape = SubResource("BoxShape3D_2jtd5")
 
-[node name="Road1" type="StaticBody3D" parent="Terrain" unique_id=1288578605]
+[node name="Road1" type="StaticBody3D" parent="Terrain" unique_id=1288578605 groups=["Paved"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 30)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Road1" unique_id=1578484523]
@@ -94,7 +94,7 @@ mesh = SubResource("BoxMesh_w7ecq")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Road1" unique_id=35440213]
 shape = SubResource("BoxShape3D_d7dg0")
 
-[node name="Road2" type="StaticBody3D" parent="Terrain" unique_id=1435535121]
+[node name="Road2" type="StaticBody3D" parent="Terrain" unique_id=1435535121 groups=["Paved"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -30)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Road2" unique_id=281713090]
@@ -103,7 +103,7 @@ mesh = SubResource("BoxMesh_w7ecq")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Road2" unique_id=643969468]
 shape = SubResource("BoxShape3D_d7dg0")
 
-[node name="Road3" type="StaticBody3D" parent="Terrain" unique_id=655805376]
+[node name="Road3" type="StaticBody3D" parent="Terrain" unique_id=655805376 groups=["Paved"]]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 30, 0.01, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Road3" unique_id=1525379971]
@@ -112,7 +112,7 @@ mesh = SubResource("BoxMesh_w7ecq")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Road3" unique_id=190373006]
 shape = SubResource("BoxShape3D_d7dg0")
 
-[node name="Road4" type="StaticBody3D" parent="Terrain" unique_id=1559675576]
+[node name="Road4" type="StaticBody3D" parent="Terrain" unique_id=1559675576 groups=["Paved"]]
 transform = Transform3D(-4.1075268e-08, 1.4950174e-08, 1, 0.34202012, 0.9396926, 0, -0.9396926, 0.34202012, -4.371139e-08, -30, 7.725, 1.21)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Road4" unique_id=787643687]
@@ -121,7 +121,7 @@ mesh = SubResource("BoxMesh_w7ecq")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Road4" unique_id=91554563]
 shape = SubResource("BoxShape3D_d7dg0")
 
-[node name="Corner1" type="StaticBody3D" parent="Terrain" unique_id=323946978]
+[node name="Corner1" type="StaticBody3D" parent="Terrain" unique_id=323946978 groups=["Paved"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0.01, 30)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Corner1" unique_id=490143775]
@@ -130,7 +130,7 @@ mesh = SubResource("BoxMesh_irhi4")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Corner1" unique_id=1732903861]
 shape = SubResource("BoxShape3D_infoe")
 
-[node name="Corner2" type="StaticBody3D" parent="Terrain" unique_id=1181710947]
+[node name="Corner2" type="StaticBody3D" parent="Terrain" unique_id=1181710947 groups=["Paved"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0.01, 30)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Corner2" unique_id=1761131953]
@@ -139,7 +139,7 @@ mesh = SubResource("BoxMesh_irhi4")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Corner2" unique_id=1170813156]
 shape = SubResource("BoxShape3D_infoe")
 
-[node name="Corner3" type="StaticBody3D" parent="Terrain" unique_id=980521751]
+[node name="Corner3" type="StaticBody3D" parent="Terrain" unique_id=980521751 groups=["Paved"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0.01, -30)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Corner3" unique_id=1123244651]
@@ -148,7 +148,7 @@ mesh = SubResource("BoxMesh_irhi4")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Corner3" unique_id=1141174409]
 shape = SubResource("BoxShape3D_infoe")
 
-[node name="Corner4" type="StaticBody3D" parent="Terrain" unique_id=1417532795]
+[node name="Corner4" type="StaticBody3D" parent="Terrain" unique_id=1417532795 groups=["Paved"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0.01, -30)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Corner4" unique_id=331549069]
