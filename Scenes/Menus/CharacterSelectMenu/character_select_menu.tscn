@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://bhlsfq2t0ug4i" path="res://Assets/3D/Models/Vehicles/BasicCar/SM_Basic_Car.fbx" id="1_56w7i"]
 [ext_resource type="Script" uid="uid://cy83tt76elj41" path="res://Scenes/Menus/CharacterSelectMenu/character_select_menu.gd" id="1_hk7je"]
+[ext_resource type="PackedScene" uid="uid://dpjhad5swcika" path="res://Scenes/Menus/TrackSelectMenu/track_select_menu.tscn" id="2_q3uil"]
+[ext_resource type="PackedScene" uid="uid://b4byg6rmq7m24" path="res://Scenes/Menus/MainMenu/main_menu.tscn" id="3_2k24t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hk7je"]
 bg_color = Color(2.3102762e-06, 0.6323629, 0.9693813, 1)
@@ -14,6 +16,10 @@ shadow_offset = Vector2(8, 8)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4f5k"]
 bg_color = Color(0, 0.46924525, 0.7268376, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_q3uil"]
 font_size = 64
@@ -27,7 +33,7 @@ shadow_size = 16
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(4, 4)
 
-[node name="CharacterSelectMenu" type="Control" unique_id=2040534807 node_paths=PackedStringArray("temp_next_button", "prev_button")]
+[node name="CharacterSelectMenu" type="Control" unique_id=2040534807 node_paths=PackedStringArray("temp_next_button", "prev_button", "kart_button_1", "kart_button_2", "kart_button_3", "kart_button_4")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,10 +41,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hk7je")
-next_scene = &"uid://dpjhad5swcika"
-prev_scene = &"uid://b4byg6rmq7m24"
+next_scene = ExtResource("2_q3uil")
+prev_scene = ExtResource("3_2k24t")
 temp_next_button = NodePath("MarginContainer/HBoxContainer/PanelContainer/MarginContainer/GridContainer/KartButton1")
 prev_button = NodePath("TempBackButton")
+kart_button_1 = NodePath("MarginContainer/HBoxContainer/PanelContainer/MarginContainer/GridContainer/KartButton1")
+kart_button_2 = NodePath("MarginContainer/HBoxContainer/PanelContainer/MarginContainer/GridContainer/KartButton2")
+kart_button_3 = NodePath("MarginContainer/HBoxContainer/PanelContainer/MarginContainer/GridContainer/KartButton3")
+kart_button_4 = NodePath("MarginContainer/HBoxContainer/PanelContainer/MarginContainer/GridContainer/KartButton4")
 
 [node name="Panel" type="Panel" parent="." unique_id=1216297583]
 layout_mode = 1
@@ -83,9 +93,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=1091578064]
 transform = Transform3D(0.70710677, -0.1227878, 0.6963642, 0, 0.9848077, 0.17364818, -0.70710677, -0.1227878, 0.6963642, 3, 1, 3)
-
-[node name="OmniLight3D" type="OmniLight3D" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=998655387]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 5)
 
 [node name="NameLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=651109801]
 layout_mode = 2

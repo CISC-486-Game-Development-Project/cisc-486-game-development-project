@@ -197,3 +197,4 @@ breaking_time = 0.5
 metadata/_custom_type_script = "uid://xlj78h55nuao"
 
 [node name="PauseScreen" parent="." unique_id=608802068 instance=ExtResource("5_wgl67")]
+layer = 999

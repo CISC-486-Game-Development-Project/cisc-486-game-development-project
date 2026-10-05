@@ -1,6 +1,6 @@
 extends Control
 
-@export var play_scene: StringName = &""
+@export var play_scene: PackedScene
 @export var title_music: AudioStream
 
 func _ready() -> void:

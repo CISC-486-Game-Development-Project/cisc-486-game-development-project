@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://b4byg6rmq7m24"]
 
 [ext_resource type="Script" uid="uid://33nyi808crfd" path="res://Scenes/Menus/MainMenu/main_menu.gd" id="1_yo6co"]
+[ext_resource type="PackedScene" uid="uid://dujko6vu4ilbf" path="res://Scenes/Menus/CharacterSelectMenu/character_select_menu.tscn" id="2_gphap"]
 [ext_resource type="AudioStream" uid="uid://cgpun0hsxpw5o" path="res://Assets/Audio/Music/KartTheme.wav" id="2_tb3ri"]
+[ext_resource type="PackedScene" uid="uid://chopbamug8408" path="res://Scenes/Menus/OptionsMenu/options_menu.tscn" id="3_yobja"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t5fsa"]
 bg_color = Color(2.3102762e-06, 0.6323629, 0.9693813, 1)
@@ -32,9 +34,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yo6co")
-start_scene = &"uid://dujko6vu4ilbf"
-options_scene = &"uid://chopbamug8408"
-start_button = NodePath("MarginContainer/HBoxContainer/VBoxContainer/StartButton")
+start_scene = ExtResource("2_gphap")
+start_button = NodePath("MarginContainer/HBoxContainer/VBoxContainer/SingleplayerButton")
 options_button = NodePath("MarginContainer/HBoxContainer/VBoxContainer/OptionsButton")
 quit_button = NodePath("MarginContainer/HBoxContainer/VBoxContainer/QuitButton")
 menu_music = ExtResource("2_tb3ri")
@@ -68,20 +69,36 @@ theme_override_constants/separation = 512
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1008553731]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 128
+theme_override_constants/separation = 64
 
-[node name="StartButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=856623567]
+[node name="SingleplayerButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=856623567]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/StartButton" unique_id=1827638713]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/SingleplayerButton" unique_id=1827638713]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Start"
+text = "Singleplayer"
+label_settings = SubResource("LabelSettings_t5fsa")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MultiplayerButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1746182648]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/MultiplayerButton" unique_id=196637470]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Multiplayer"
 label_settings = SubResource("LabelSettings_t5fsa")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -136,3 +153,6 @@ text = "Subtitle"
 label_settings = SubResource("LabelSettings_u7k8n")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="OptionsMenu" parent="." unique_id=693100041 instance=ExtResource("3_yobja")]
+visible = false

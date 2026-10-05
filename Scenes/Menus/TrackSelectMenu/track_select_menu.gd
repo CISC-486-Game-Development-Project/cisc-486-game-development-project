@@ -1,14 +1,23 @@
 extends Control
 
-@export var next_scene: StringName = &""
-@export var prev_scene: StringName = &""
+@export var next_scene: PackedScene
+@export var prev_scene: PackedScene
 @export var temp_next_button: Button ## Replace this with some kind of check if player has selected a track.
 @export var prev_button: Button
+
+@export_group("Track Buttons")
+@export var track_button_1: Button
+@export var track_button_2: Button
+@export var track_button_3: Button
+@export var track_button_4: Button
 
 func _ready() -> void:
 	# Connect button signals
 	temp_next_button.pressed.connect(_on_next_pressed)
 	prev_button.pressed.connect(_on_prev_pressed)
+	
+	# Focus first button
+	track_button_1.grab_focus()
 
 ## Called when a track is selected.
 func _on_next_pressed() -> void:

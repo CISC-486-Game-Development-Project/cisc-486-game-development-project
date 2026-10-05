@@ -13,8 +13,8 @@ var use_sub_threads: bool = true
 func _ready() -> void:
 	set_process(false)
 
-func load_scene(_scene_path: String) -> void:
-	scene_path = _scene_path
+func load_scene(scene: PackedScene) -> void:
+	scene_path = scene.resource_path
 	
 	var new_load_screen = loading_screen.instantiate()
 	add_child(new_load_screen)
@@ -23,9 +23,6 @@ func load_scene(_scene_path: String) -> void:
 	
 	await new_load_screen.loading_screen_ready
 	
-	start_load()
-
-func start_load() -> void:
 	var state = ResourceLoader.load_threaded_request(scene_path, "", use_sub_threads)
 	if state == OK:
 		set_process(true)
