@@ -59,6 +59,7 @@ var break_request: bool ## Break request to be set by an input_manager.
 var hop_request: bool ## Hop request to be set by an input_manager.
 var drift_request: bool ## Drift request to be set by an input_manager.
 var drift_dir: int ## The direction of a currently active drift. 1 = right, 0 = none, -1 = left.
+var item_request: bool ## Call to use stored item set by an input manager.
 
 var steering: float ## The intensity of the current steering.
 var road_factor: float ## The intensity of the current road factor.
@@ -115,6 +116,7 @@ func _physics_process(delta: float) -> void:
 	_align_to_ground(delta)
 	move_and_slide()
 	
+	
 	# Update Debug Label
 	_update_debug_label()
 
@@ -126,6 +128,7 @@ func _handle_input() -> void:
 	break_request = Input.is_action_pressed("Backward")
 	hop_request = Input.is_action_just_pressed("Drift")
 	drift_request = Input.is_action_pressed("Drift")
+	item_request = Input.is_action_just_pressed("Item")
 
 #######################
 ## Physics Functions ##
@@ -142,6 +145,9 @@ func _handle_driving(delta: float) -> void:
 			for boost in boost_queue:
 				set_boost(boost)
 			boost_queue.clear()
+	
+	if drift_request:
+		pass  ## Block of code will be used to process item if request is passed
 	
 	# Apply drag
 	horizontal_velocity = horizontal_velocity.lerp(Vector3.ZERO, 1 - pow(0.5, roll_friction * delta))
