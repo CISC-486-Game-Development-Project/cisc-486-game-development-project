@@ -7,6 +7,14 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t5fsa"]
 bg_color = Color(2.3102762e-06, 0.6323629, 0.9693813, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xvvda"]
+bg_color = Color(0, 0.35686275, 0.5764706, 1)
+skew = Vector2(0.5, 0)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
 [sub_resource type="LabelSettings" id="LabelSettings_t5fsa"]
 font_size = 64
 shadow_size = 16
@@ -73,6 +81,17 @@ theme_override_constants/separation = 64
 [node name="SingleplayerButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=856623567]
 layout_mode = 2
 size_flags_vertical = 3
+flat = true
+
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/SingleplayerButton" unique_id=1537802614]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xvvda")
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/SingleplayerButton" unique_id=1827638713]
 layout_mode = 1
@@ -89,6 +108,17 @@ vertical_alignment = 1
 [node name="MultiplayerButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1746182648]
 layout_mode = 2
 size_flags_vertical = 3
+flat = true
+
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MultiplayerButton" unique_id=1220239168]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xvvda")
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/MultiplayerButton" unique_id=196637470]
 layout_mode = 1
@@ -105,6 +135,17 @@ vertical_alignment = 1
 [node name="OptionsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=2117550020]
 layout_mode = 2
 size_flags_vertical = 3
+flat = true
+
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/OptionsButton" unique_id=550062518]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xvvda")
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/OptionsButton" unique_id=501615731]
 layout_mode = 1
@@ -121,6 +162,17 @@ vertical_alignment = 1
 [node name="QuitButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1379466379]
 layout_mode = 2
 size_flags_vertical = 3
+flat = true
+
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/QuitButton" unique_id=660540438]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xvvda")
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/QuitButton" unique_id=570228899]
 layout_mode = 1

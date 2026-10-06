@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://cy83tt76elj41" path="res://Scenes/Menus/CharacterSelectMenu/character_select_menu.gd" id="1_hk7je"]
 [ext_resource type="PackedScene" uid="uid://d06ii74wx6vgl" path="res://Scenes/KartModels/basic_kart.tscn" id="4_0fmip"]
 [ext_resource type="PackedScene" uid="uid://bjoxa6ritw47n" path="res://Scenes/Menus/CharacterSelectMenu/character_button.tscn" id="5_2k24t"]
-[ext_resource type="PackedScene" uid="uid://b03s02mj3lvcw" path="res://Scenes/KartModels/pawn.tscn" id="5_p6l55"]
 [ext_resource type="Resource" uid="uid://ulcs3tytsjl0" path="res://Resources/Character/pawn_character.tres" id="7_7tf73"]
 [ext_resource type="Resource" uid="uid://k5txr2vfhnjr" path="res://Resources/Character/default_character.tres" id="7_d15w1"]
 
@@ -103,9 +102,6 @@ transform = Transform3D(-0.70710677, -0.1227878, 0.6963642, 0, 0.9848077, 0.1736
 current = true
 
 [node name="BasicKart" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=142078105 instance=ExtResource("4_0fmip")]
-visible = false
-
-[node name="Pawn" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=2109640715 instance=ExtResource("5_p6l55")]
 
 [node name="NameLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=651109801]
 layout_mode = 2
