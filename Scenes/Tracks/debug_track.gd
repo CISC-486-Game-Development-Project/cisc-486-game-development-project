@@ -12,6 +12,5 @@ func _ready() -> void:
 		var new_player = player_kart.instantiate()
 		if Globals.selected_characters[i]:
 			new_player.kart_stats = Globals.selected_characters[i].stats
-		new_player.global_position = Vector3(5,1,30)
-		new_player.rotate_y(PI/2)
 		add_child(new_player)
+		new_player.global_position = Vector3(5,1,30)
