@@ -1,8 +1,8 @@
 extends Control
 
 # Export Vars
-@export var next_scene: PackedScene
-@export var prev_scene: PackedScene
+@export_file("*.tscn") var next_scene: String = "res://Scenes/"
+@export_file("*.tscn") var prev_scene: String = "res://Scenes/"
 @export var temp_next_button: Button ## Replace this with some kind of check if player has selected a kart.
 @export var prev_button: Button
 @export var character_buttons: Array[Button]
@@ -32,6 +32,10 @@ func _ready() -> void:
 	
 	# Focus first button
 	character_buttons[0].grab_focus()
+
+	# Load scenes
+	SceneManager.load_scene(next_scene)
+	SceneManager.load_scene(prev_scene)
 
 func _process(delta: float) -> void:
 	if hover_kart:
@@ -65,8 +69,8 @@ func hover_character(button: CharacterButton):
 
 ## Called when all characters are selected.
 func _next_scene() -> void:
-	SceneManager.load_scene(next_scene)
+	SceneManager.change_scene(next_scene, SceneManager.SLIDE_FORWARD)
 
 ## Called when going backwards in the menu order.
 func _prev_scene() -> void:
-	SceneManager.load_scene(prev_scene)
+	SceneManager.change_scene(prev_scene, SceneManager.SLIDE_BACKWARD)

@@ -1,8 +1,6 @@
 [gd_scene format=3 uid="uid://dpjhad5swcika"]
 
 [ext_resource type="Script" uid="uid://b8w0n5pd41173" path="res://Scenes/Menus/TrackSelectMenu/track_select_menu.gd" id="1_cpjce"]
-[ext_resource type="PackedScene" uid="uid://igg6cd4fnkgj" path="res://Scenes/Tracks/debug_track.tscn" id="2_08aid"]
-[ext_resource type="PackedScene" uid="uid://dujko6vu4ilbf" path="res://Scenes/Menus/CharacterSelectMenu/character_select_menu.tscn" id="3_nxhmo"]
 [ext_resource type="Texture2D" uid="uid://bl0bty04gbwjg" path="res://Assets/2D/Sprites/TrackIcons/DebugTrackIcon.png" id="4_nxhmo"]
 [ext_resource type="Texture2D" uid="uid://be457kbv51483" path="res://Assets/2D/Sprites/icon.svg" id="5_xkk6d"]
 
@@ -38,8 +36,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cpjce")
-next_scene = ExtResource("2_08aid")
-prev_scene = ExtResource("3_nxhmo")
+next_scene = "uid://igg6cd4fnkgj"
+prev_scene = "uid://dujko6vu4ilbf"
 temp_next_button = NodePath("MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton1")
 prev_button = NodePath("TempBackButton")
 track_button_1 = NodePath("MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton1")

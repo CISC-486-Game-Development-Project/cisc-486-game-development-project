@@ -1,7 +1,7 @@
 extends Control
 
 # Export Vars
-@export var start_scene: PackedScene
+@export_file("*.tscn") var start_scene: String = "res://Scenes/"
 @export var start_button: Button
 @export var options_button: Button
 @export var quit_button: Button
@@ -21,10 +21,13 @@ func _ready() -> void:
 	
 	# Play menu music
 	AudioManager.change_bgm(menu_music)
+	
+	# Load scenes
+	SceneManager.load_scene(start_scene)
 
 ## Called when the start button is pressed.
 func _on_start_pressed() -> void:
-	SceneManager.load_scene(start_scene)
+	SceneManager.change_scene(start_scene, SceneManager.SLIDE_FORWARD)
 
 ## Called when the options button is pressed.
 func _on_options_pressed() -> void:

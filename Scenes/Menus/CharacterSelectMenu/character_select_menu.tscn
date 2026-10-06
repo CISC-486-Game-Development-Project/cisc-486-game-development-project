@@ -1,8 +1,6 @@
 [gd_scene format=3 uid="uid://dujko6vu4ilbf"]
 
 [ext_resource type="Script" uid="uid://cy83tt76elj41" path="res://Scenes/Menus/CharacterSelectMenu/character_select_menu.gd" id="1_hk7je"]
-[ext_resource type="PackedScene" uid="uid://dpjhad5swcika" path="res://Scenes/Menus/TrackSelectMenu/track_select_menu.tscn" id="2_q3uil"]
-[ext_resource type="PackedScene" uid="uid://b4byg6rmq7m24" path="res://Scenes/Menus/MainMenu/main_menu.tscn" id="3_2k24t"]
 [ext_resource type="PackedScene" uid="uid://d06ii74wx6vgl" path="res://Scenes/KartModels/basic_kart.tscn" id="4_0fmip"]
 [ext_resource type="PackedScene" uid="uid://bjoxa6ritw47n" path="res://Scenes/Menus/CharacterSelectMenu/character_button.tscn" id="5_2k24t"]
 [ext_resource type="PackedScene" uid="uid://b03s02mj3lvcw" path="res://Scenes/KartModels/pawn.tscn" id="5_p6l55"]
@@ -49,8 +47,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hk7je")
-next_scene = ExtResource("2_q3uil")
-prev_scene = ExtResource("3_2k24t")
+next_scene = "uid://dpjhad5swcika"
+prev_scene = "uid://b4byg6rmq7m24"
 temp_next_button = NodePath("TempBackButton")
 prev_button = NodePath("TempBackButton")
 

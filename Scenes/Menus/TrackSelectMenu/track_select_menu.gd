@@ -1,7 +1,7 @@
 extends Control
 
-@export var next_scene: PackedScene
-@export var prev_scene: PackedScene
+@export_file("*.tscn") var next_scene: String = "res://Scenes/"
+@export_file("*.tscn") var prev_scene: String = "res://Scenes/"
 @export var temp_next_button: Button ## Replace this with some kind of check if player has selected a track.
 @export var prev_button: Button
 
@@ -18,11 +18,15 @@ func _ready() -> void:
 	
 	# Focus first button
 	track_button_1.grab_focus()
+	
+	# Load scenes
+	SceneManager.load_scene(next_scene)
+	SceneManager.load_scene(prev_scene)
 
 ## Called when a track is selected.
 func _on_next_pressed() -> void:
-	SceneManager.load_scene(next_scene)
+	SceneManager.change_scene(next_scene)
 
 ## Called when going backwards in the menu order.
 func _on_prev_pressed() -> void:
-	SceneManager.load_scene(prev_scene)
+	SceneManager.change_scene(prev_scene, SceneManager.SLIDE_BACKWARD)
