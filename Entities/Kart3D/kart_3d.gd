@@ -85,6 +85,7 @@ func _ready() -> void:
 		animation_pivot.add_child(kart)
 		wheels = kart.wheels
 		hurtbox = kart.hurtbox
+		hurtbox.on_hit.connect(hit)
 		collision_shape_3d.shape = kart.collision_shape_3d.shape
 		
 		# Set kart's stats
@@ -92,9 +93,6 @@ func _ready() -> void:
 	
 	# Set up input handler
 	input_handler.kart = self
-	
-	# Connect signals
-	hurtbox.on_hit.connect(hit)
 
 func _process(delta: float) -> void:
 	# Decrement boost timer when active

@@ -2,4 +2,4 @@
 extends Node
 
 var player_count: int = 1
-var selected_characters: Array[KartStats]
+var selected_characters: Array[Character] = [null, null, null, null]

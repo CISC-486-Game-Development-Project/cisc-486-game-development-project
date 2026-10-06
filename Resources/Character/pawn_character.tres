@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Character" format=3 uid="uid://ulcs3tytsjl0"]
+
+[ext_resource type="Texture2D" uid="uid://chu7hsk5m2y25" path="res://Assets/2D/Sprites/CharacterIcons/PawnIcon.png" id="1_laee5"]
+[ext_resource type="Script" uid="uid://cqk2f7i3x8obw" path="res://Resources/Character/character.gd" id="2_laee5"]
+[ext_resource type="Resource" uid="uid://b53wb25unwkip" path="res://Resources/KartStats/pawn_stats.tres" id="3_laee5"]
+
+[resource]
+script = ExtResource("2_laee5")
+char_name = "Pawn"
+char_icon = ExtResource("1_laee5")
+stats = ExtResource("3_laee5")
+metadata/_custom_type_script = "uid://cqk2f7i3x8obw"

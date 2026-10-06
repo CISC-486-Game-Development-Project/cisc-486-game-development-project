@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Character" format=3 uid="uid://k5txr2vfhnjr"]
+
+[ext_resource type="Texture2D" uid="uid://c1lxdn14k7ogk" path="res://Assets/2D/Sprites/CharacterIcons/DefaultKartIcon.png" id="1_akl31"]
+[ext_resource type="Script" uid="uid://cqk2f7i3x8obw" path="res://Resources/Character/character.gd" id="1_e0d63"]
+[ext_resource type="Resource" uid="uid://d2lgutyflh3o3" path="res://Resources/KartStats/default_kart.tres" id="3_1fs0w"]
+
+[resource]
+script = ExtResource("1_e0d63")
+char_name = "Default Character"
+kart_name = "Default Kart"
+char_icon = ExtResource("1_akl31")
+stats = ExtResource("3_1fs0w")
+metadata/_custom_type_script = "uid://cqk2f7i3x8obw"

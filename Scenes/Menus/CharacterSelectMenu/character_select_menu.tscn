@@ -1,18 +1,32 @@
 [gd_scene format=3 uid="uid://dujko6vu4ilbf"]
 
-[ext_resource type="PackedScene" uid="uid://bhlsfq2t0ug4i" path="res://Assets/3D/Models/Vehicles/BasicCar/SM_Basic_Car.fbx" id="1_56w7i"]
 [ext_resource type="Script" uid="uid://cy83tt76elj41" path="res://Scenes/Menus/CharacterSelectMenu/character_select_menu.gd" id="1_hk7je"]
 [ext_resource type="PackedScene" uid="uid://dpjhad5swcika" path="res://Scenes/Menus/TrackSelectMenu/track_select_menu.tscn" id="2_q3uil"]
 [ext_resource type="PackedScene" uid="uid://b4byg6rmq7m24" path="res://Scenes/Menus/MainMenu/main_menu.tscn" id="3_2k24t"]
+[ext_resource type="PackedScene" uid="uid://d06ii74wx6vgl" path="res://Scenes/KartModels/basic_kart.tscn" id="4_0fmip"]
+[ext_resource type="PackedScene" uid="uid://bjoxa6ritw47n" path="res://Scenes/Menus/CharacterSelectMenu/character_button.tscn" id="5_2k24t"]
+[ext_resource type="PackedScene" uid="uid://b03s02mj3lvcw" path="res://Scenes/KartModels/pawn.tscn" id="5_p6l55"]
+[ext_resource type="Resource" uid="uid://ulcs3tytsjl0" path="res://Resources/Character/pawn_character.tres" id="7_7tf73"]
+[ext_resource type="Resource" uid="uid://k5txr2vfhnjr" path="res://Resources/Character/default_character.tres" id="7_d15w1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hk7je"]
 bg_color = Color(2.3102762e-06, 0.6323629, 0.9693813, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_bj6qg"]
-font_size = 64
-shadow_size = 8
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7tf73"]
+
+[sub_resource type="Sky" id="Sky_0fmip"]
+sky_material = SubResource("ProceduralSkyMaterial_7tf73")
+
+[sub_resource type="Environment" id="Environment_0fmip"]
+background_mode = 2
+background_energy_multiplier = 2.5
+sky = SubResource("Sky_0fmip")
+
+[sub_resource type="LabelSettings" id="LabelSettings_7tf73"]
+font_size = 48
+shadow_size = 16
 shadow_color = Color(0, 0, 0, 1)
-shadow_offset = Vector2(8, 8)
+shadow_offset = Vector2(4, 4)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4f5k"]
 bg_color = Color(0, 0.46924525, 0.7268376, 1)
@@ -21,19 +35,13 @@ corner_radius_top_right = 32
 corner_radius_bottom_right = 32
 corner_radius_bottom_left = 32
 
-[sub_resource type="LabelSettings" id="LabelSettings_q3uil"]
-font_size = 64
-shadow_size = 16
-shadow_color = Color(0, 0, 0, 1)
-shadow_offset = Vector2(4, 4)
-
 [sub_resource type="LabelSettings" id="LabelSettings_hk7je"]
 font_size = 64
 shadow_size = 16
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(4, 4)
 
-[node name="CharacterSelectMenu" type="Control" unique_id=2040534807 node_paths=PackedStringArray("temp_next_button", "prev_button", "kart_button_1", "kart_button_2", "kart_button_3", "kart_button_4")]
+[node name="CharacterSelectMenu" type="Control" unique_id=2040534807 node_paths=PackedStringArray("temp_next_button", "prev_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,12 +51,8 @@ grow_vertical = 2
 script = ExtResource("1_hk7je")
 next_scene = ExtResource("2_q3uil")
 prev_scene = ExtResource("3_2k24t")
-temp_next_button = NodePath("MarginContainer/HBoxContainer/PanelContainer/MarginContainer/GridContainer/KartButton1")
+temp_next_button = NodePath("TempBackButton")
 prev_button = NodePath("TempBackButton")
-kart_button_1 = NodePath("MarginContainer/HBoxContainer/PanelContainer/MarginContainer/GridContainer/KartButton1")
-kart_button_2 = NodePath("MarginContainer/HBoxContainer/PanelContainer/MarginContainer/GridContainer/KartButton2")
-kart_button_3 = NodePath("MarginContainer/HBoxContainer/PanelContainer/MarginContainer/GridContainer/KartButton3")
-kart_button_4 = NodePath("MarginContainer/HBoxContainer/PanelContainer/MarginContainer/GridContainer/KartButton4")
 
 [node name="Panel" type="Panel" parent="." unique_id=1216297583]
 layout_mode = 1
@@ -77,22 +81,33 @@ layout_mode = 2
 theme_override_constants/separation = 256
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1261625257]
+custom_minimum_size = Vector2(512, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1554255989]
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 2.5
+stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportContainer" unique_id=1334760120]
 transparent_bg = true
 handle_input_locally = false
+size = Vector2i(512, 585)
 render_target_update_mode = 4
 
-[node name="SM_Basic_Car" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=1870174154 instance=ExtResource("1_56w7i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+[node name="WorldEnvironment" type="WorldEnvironment" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=1917114042]
+environment = SubResource("Environment_0fmip")
 
 [node name="Camera3D" type="Camera3D" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=1091578064]
-transform = Transform3D(0.70710677, -0.1227878, 0.6963642, 0, 0.9848077, 0.17364818, -0.70710677, -0.1227878, 0.6963642, 3, 1, 3)
+transform = Transform3D(-0.70710677, -0.1227878, 0.6963642, 0, 0.9848077, 0.17364818, -0.70710677, 0.1227878, -0.6963642, 2, 0.5, -2)
+current = true
+
+[node name="BasicKart" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=142078105 instance=ExtResource("4_0fmip")]
+visible = false
+
+[node name="Pawn" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=2109640715 instance=ExtResource("5_p6l55")]
 
 [node name="NameLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=651109801]
 layout_mode = 2
@@ -100,13 +115,14 @@ size_flags_vertical = 3
 text = "Character Name
 in the
 Kart Name"
-label_settings = SubResource("LabelSettings_bj6qg")
+label_settings = SubResource("LabelSettings_7tf73")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer" unique_id=1829156650]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_t4f5k")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/PanelContainer" unique_id=1601216186]
@@ -116,83 +132,27 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer" unique_id=808808900]
+[node name="CharacterButtonContainer" type="GridContainer" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer" unique_id=808808900]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 columns = 2
 
-[node name="KartButton1" type="Button" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=1252721644]
+[node name="CharacterButton" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/CharacterButtonContainer" unique_id=655394739 instance=ExtResource("5_2k24t")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+character = ExtResource("7_d15w1")
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/GridContainer/KartButton1" unique_id=295226917]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Default
-Kart"
-label_settings = SubResource("LabelSettings_q3uil")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="KartButton2" type="Button" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=215186271]
+[node name="CharacterButton2" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/CharacterButtonContainer" unique_id=1930832544 instance=ExtResource("5_2k24t")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-disabled = true
+character = ExtResource("7_7tf73")
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/GridContainer/KartButton2" unique_id=913899162]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Kart 2"
-label_settings = SubResource("LabelSettings_q3uil")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="KartButton3" type="Button" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=367249693]
+[node name="CharacterButton3" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/CharacterButtonContainer" unique_id=1591130101 instance=ExtResource("5_2k24t")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-disabled = true
+character = ExtResource("7_d15w1")
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/GridContainer/KartButton3" unique_id=324699998]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Kart 3"
-label_settings = SubResource("LabelSettings_q3uil")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="KartButton4" type="Button" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=1057624333]
+[node name="CharacterButton4" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/CharacterButtonContainer" unique_id=1738604612 instance=ExtResource("5_2k24t")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-disabled = true
-
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/GridContainer/KartButton4" unique_id=449151812]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Kart 4"
-label_settings = SubResource("LabelSettings_q3uil")
-horizontal_alignment = 1
-vertical_alignment = 1
+character = ExtResource("7_d15w1")
 
 [node name="TempBackButton" type="Button" parent="." unique_id=1142948134]
 custom_minimum_size = Vector2(256, 128)
