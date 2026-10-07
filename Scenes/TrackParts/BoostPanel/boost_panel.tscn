@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bfdd58efg72wk"]
+
+[ext_resource type="Script" uid="uid://khxqjcx6ysn0" path="res://Scenes/TrackParts/BoostPanel/boost_panel.gd" id="1_jbnex"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fmsym"]
+albedo_color = Color(0.5411765, 0.38431373, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7kucd"]
+material = SubResource("StandardMaterial3D_fmsym")
+size = Vector3(5, 0.2, 15)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fmsym"]
+size = Vector3(5, 0.2, 15)
+
+[node name="BoostPanel" type="StaticBody3D" unique_id=630485332]
+script = ExtResource("1_jbnex")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2117809053]
+mesh = SubResource("BoxMesh_7kucd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=305961167]
+shape = SubResource("BoxShape3D_fmsym")

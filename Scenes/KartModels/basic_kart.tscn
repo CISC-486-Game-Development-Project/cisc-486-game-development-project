@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://bjgot7okketbh" path="res://Components/Hitbox/hurtbox.gd" id="5_hqag7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3bsr3"]
-size = Vector3(1, 0.8, 2)
+size = Vector3(1, 0.65, 2.25)
 
 [node name="BasicKart" type="Node3D" unique_id=142078105 node_paths=PackedStringArray("body", "wheels", "hurtbox", "collision_shape_3d")]
 script = ExtResource("1_6cl8y")
@@ -14,6 +14,7 @@ body = NodePath("BasicCarBody")
 wheels = [NodePath("BackWheelR"), NodePath("BackWheelL"), NodePath("FrontWheelR"), NodePath("FrontWheelL")]
 hurtbox = NodePath("Hurtbox")
 collision_shape_3d = NodePath("Hurtbox/CollisionShape3D")
+model_height = 0.65
 
 [node name="BasicCarBody" parent="." unique_id=1890857387 instance=ExtResource("1_ahyi0")]
 transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 0, 0, 0.717)

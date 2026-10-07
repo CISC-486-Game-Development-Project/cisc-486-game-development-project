@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://rdwha1wrjten" path="res://Scenes/Tracks/debug_track.gd" id="1_q5xdn"]
 [ext_resource type="PackedScene" uid="uid://dhqspbj6a6bij" path="res://Entities/PlayerKart3D/player_kart_3d.tscn" id="1_wqmp7"]
 [ext_resource type="AudioStream" uid="uid://cgpun0hsxpw5o" path="res://Assets/Audio/Music/KartTheme.wav" id="2_4tdiq"]
+[ext_resource type="PackedScene" uid="uid://bfdd58efg72wk" path="res://Scenes/TrackParts/BoostPanel/boost_panel.tscn" id="4_7kucd"]
 [ext_resource type="Script" uid="uid://d3u5ktr5nhr2x" path="res://Components/ObjectProperties/launchable.gd" id="5_fmsym"]
 [ext_resource type="Script" uid="uid://bcubef2xy50jd" path="res://Components/Hitbox/hitbox.gd" id="5_vmk27"]
 [ext_resource type="PackedScene" uid="uid://htd17y0efmde" path="res://Scenes/Menus/PauseScreen/pause_screen.tscn" id="5_wgl67"]
@@ -54,14 +55,13 @@ material = SubResource("StandardMaterial3D_infoe")
 size = Vector3(15, 1, 15)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_infoe"]
-size = Vector3(5, 0.2, 15)
+size = Vector3(15, 1, 15)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fmsym"]
-albedo_color = Color(0.5411765, 0.38431373, 0, 1)
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g43dg"]
+height = 10.0
 
-[sub_resource type="BoxMesh" id="BoxMesh_7kucd"]
-material = SubResource("StandardMaterial3D_fmsym")
-size = Vector3(5, 0.2, 15)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7kucd"]
+height = 10.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_if3av"]
 
@@ -83,12 +83,12 @@ environment = SubResource("Environment_t4f5k")
 [node name="Terrain" type="Node3D" parent="." unique_id=361690583]
 
 [node name="Path3D" type="Path3D" parent="Terrain" unique_id=999992233]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0894814, 0)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.0894814, 0)
 curve = SubResource("Curve3D_fmsym")
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="Terrain/Path3D" unique_id=321750741]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0894814, 0)
+use_collision = true
 polygon = PackedVector2Array(-7, 0, -5, 2, 5, 2, 7, 0.8)
 mode = 2
 path_node = NodePath("..")
@@ -183,20 +183,23 @@ mesh = SubResource("BoxMesh_irhi4")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Corner4" unique_id=1356669871]
 shape = SubResource("BoxShape3D_infoe")
 
-[node name="BoostPanel" type="StaticBody3D" parent="Terrain" unique_id=2065974377 groups=["Boost"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.411, -30)
+[node name="Bump" type="StaticBody3D" parent="Terrain" unique_id=495069692 groups=["Paved"]]
+transform = Transform3D(1.9106855e-15, 4.371139e-08, -1, 1, -4.371139e-08, 0, -4.371139e-08, -1, -4.371139e-08, -16.173656, 0.1522665, 26.781313)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/BoostPanel" unique_id=69504843]
-mesh = SubResource("BoxMesh_7kucd")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Bump" unique_id=1185554408]
+mesh = SubResource("CapsuleMesh_g43dg")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/BoostPanel" unique_id=235771575]
-shape = SubResource("BoxShape3D_infoe")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Bump" unique_id=1900440841]
+shape = SubResource("CapsuleShape3D_7kucd")
 
 [node name="StartLine" type="CSGBox3D" parent="Terrain" unique_id=872318613]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 30)
 operation = 2
 size = Vector3(2, 1, 15)
 material = SubResource("StandardMaterial3D_if3av")
+
+[node name="BoostPanel" parent="Terrain" unique_id=630485332 instance=ExtResource("4_7kucd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.421, -30)
 
 [node name="Object" type="RigidBody3D" parent="." unique_id=280148179]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3330574, 1.2537726, 30.05519)

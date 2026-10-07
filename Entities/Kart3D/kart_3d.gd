@@ -83,6 +83,8 @@ func _ready() -> void:
 		# Set up new kart model
 		var kart: KartModel = kart_stats.kart_model.instantiate()
 		animation_pivot.add_child(kart)
+		kart_model.position.y = kart.model_height / 2
+		collision_shape_3d.position.y = kart.model_height / 2
 		wheels = kart.wheels
 		hurtbox = kart.hurtbox
 		hurtbox.on_hit.connect(hit)
@@ -143,6 +145,11 @@ func _handle_driving(delta: float) -> void:
 			for boost in boost_queue:
 				set_boost(boost)
 			boost_queue.clear()
+	
+	# Apply boost if on boost panel
+	if ground_ray_cast_3d.get_collider() is BoostPanel:
+		var boost_panel: BoostPanel = ground_ray_cast_3d.get_collider()
+		set_boost(boost_panel.boost_time)
 	
 	if drift_request:
 		pass  ## Block of code will be used to process item if request is passed
@@ -224,19 +231,28 @@ func recalculate_road_factor() -> void:
 	var total_road_factor: float = 0.0
 	var wheels_on_ground: int = 0
 	
-	# Check all wheels
-	for wheel in wheels:
-		var wheel_terrain = wheel.get_wheel_terrain()
-		if wheel_terrain:
-			wheels_on_ground += 1
-			if wheel_terrain.is_in_group("Boost"):
+	if len(wheels) > 0:
+		# Check all wheels
+		for wheel in wheels:
+			var wheel_terrain = wheel.get_wheel_terrain()
+			if wheel_terrain:
+				wheels_on_ground += 1
+				if wheel_terrain.is_in_group("Paved"):
+					total_road_factor += road_factor_paved
+				elif wheel_terrain.is_in_group("Offroad"):
+					total_road_factor += road_factor_offroad
+				elif wheel_terrain.is_in_group("Harsh Offroad"):
+					total_road_factor += road_factor_harsh_offroad
+	else:
+		# Check ground raycast if no wheels
+		if ground_ray_cast_3d.is_colliding():
+			wheels_on_ground = 1
+			var ground_terrain = ground_ray_cast_3d.get_collider()
+			if ground_terrain.is_in_group("Paved"):
 				total_road_factor += road_factor_paved
-				set_boost(1.5)
-			elif wheel_terrain.is_in_group("Paved"):
-				total_road_factor += road_factor_paved
-			elif wheel_terrain.is_in_group("Offroad"):
+			elif ground_terrain.is_in_group("Offroad"):
 				total_road_factor += road_factor_offroad
-			elif wheel_terrain.is_in_group("Harsh Offroad"):
+			elif ground_terrain.is_in_group("Harsh Offroad"):
 				total_road_factor += road_factor_harsh_offroad
 	
 	# Set road_factor if different
@@ -306,12 +322,18 @@ func can_trick() -> bool:
 	# Check logic for tricking depending on current state
 	if state_machine.current_state is DriveState:
 		if hop_request and not trick_ray_cast_3d.is_colliding():
+			print("Trick Case 1")
 			return true
 	elif state_machine.current_state is FallState:
 		if hop_request and trick_coyote_timer.time_left > 0:
+			print("Trick Case 2")
 			return true
 	elif state_machine.current_state is HopState:
 		if trick_buffer_timer.time_left > 0 and not trick_ray_cast_3d.is_colliding():
+			print("Trick Case 3")
+			return true
+		if trick_buffer_timer.time_left > 0 and not ground_ray_cast_3d.is_colliding():
+			print("Trick Case 4")
 			return true
 	return false
 
@@ -329,6 +351,7 @@ func _update_debug_label():
 		"Drift Direction: " + str(drift_dir),
 		"Fast Charge: " + str(abs(steer_request) >= 0.8 and sign(steer_request) == drift_dir),
 		"Trick Raycast: " + str(trick_ray_cast_3d.is_colliding()),
+		"Ground Raycast: " + str(ground_ray_cast_3d.is_colliding()),
 		"Coyote Timer: " + str(trick_coyote_timer.time_left > 0),
 		"Buffer Timer: " + str(trick_buffer_timer.time_left > 0),
 		"Cooldown Timer: " + str(trick_cooldown_timer.time_left > 0),

@@ -12,10 +12,11 @@ script = ExtResource("1_dbw00")
 body = NodePath("PawnBody")
 hurtbox = NodePath("Hurtbox")
 collision_shape_3d = NodePath("Hurtbox/CollisionShape3D")
+model_height = 1.5
 metadata/_custom_type_script = "uid://t6a574qi7en4"
 
 [node name="PawnBody" parent="." unique_id=323876086 instance=ExtResource("2_kbcvn")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.25, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.3, 0)
 
 [node name="Hurtbox" type="Area3D" parent="." unique_id=258126628]
 script = ExtResource("3_kbcvn")

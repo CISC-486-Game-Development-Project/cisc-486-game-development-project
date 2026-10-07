@@ -1,0 +1,246 @@
+[gd_scene format=3 uid="uid://igg6cd4fnkgj"]
+
+[ext_resource type="Script" uid="uid://rdwha1wrjten" path="res://Scenes/Tracks/debug_track.gd" id="1_q5xdn"]
+[ext_resource type="PackedScene" uid="uid://dhqspbj6a6bij" path="res://Entities/PlayerKart3D/player_kart_3d.tscn" id="1_wqmp7"]
+[ext_resource type="AudioStream" uid="uid://cgpun0hsxpw5o" path="res://Assets/Audio/Music/KartTheme.wav" id="2_4tdiq"]
+[ext_resource type="Script" uid="uid://d3u5ktr5nhr2x" path="res://Components/ObjectProperties/launchable.gd" id="5_fmsym"]
+[ext_resource type="Script" uid="uid://bcubef2xy50jd" path="res://Components/Hitbox/hitbox.gd" id="5_vmk27"]
+[ext_resource type="PackedScene" uid="uid://htd17y0efmde" path="res://Scenes/Menus/PauseScreen/pause_screen.tscn" id="5_wgl67"]
+[ext_resource type="Script" uid="uid://xlj78h55nuao" path="res://Components/ObjectProperties/destructible.gd" id="6_fmsym"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7abii"]
+sky_top_color = Color(0.22520554, 0.47659743, 0.6379899, 1)
+sky_horizon_color = Color(0.7268391, 0.6262282, 0.6253966, 1)
+sky_curve = 0.18467161
+sky_energy_multiplier = 1.5
+
+[sub_resource type="Sky" id="Sky_xvvda"]
+sky_material = SubResource("ProceduralSkyMaterial_7abii")
+
+[sub_resource type="Environment" id="Environment_t4f5k"]
+background_mode = 2
+sky = SubResource("Sky_xvvda")
+
+[sub_resource type="Curve3D" id="Curve3D_fmsym"]
+closed = true
+_data = {
+"points": PackedVector3Array(-24.749622, -3.8146973e-06, -20.401445, 24.749622, 3.8146973e-06, 20.401445, 35.64517, 0.51013184, -36.956112, 16.687956, -3.8146973e-06, -15.0460205, -16.687956, 3.8146973e-06, 15.0460205, 34.65126, 0.51013184, 32.66449, 4.975712, 3.8146973e-06, 6.394932, -4.975712, -3.8146973e-06, -6.394932, -37.271076, 0.51013184, 36.57808, 0, 0, 0, 0, 0, 0, -42.214558, 1.0068359, 20.054195, 0, 0, 0, 0, 0, 0, -42.841125, 10.146301, 1.7054479, -15.048008, 3.8146973e-06, 16.70283, 15.048008, -3.8146973e-06, -16.70283, -33.519627, 0.5, -38.406948),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+}
+point_count = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_infoe"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_irhi4"]
+albedo_color = Color(0, 0.30980393, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fsgd3"]
+material = SubResource("StandardMaterial3D_irhi4")
+size = Vector3(500, 1, 500)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2jtd5"]
+size = Vector3(500, 1, 500)
+
+[sub_resource type="BoxMesh" id="BoxMesh_w7ecq"]
+material = SubResource("StandardMaterial3D_infoe")
+size = Vector3(45, 1, 15)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d7dg0"]
+size = Vector3(45, 1, 15)
+
+[sub_resource type="BoxMesh" id="BoxMesh_irhi4"]
+material = SubResource("StandardMaterial3D_infoe")
+size = Vector3(15, 1, 15)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_infoe"]
+size = Vector3(5, 0.2, 15)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g43dg"]
+height = 10.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7kucd"]
+height = 10.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fmsym"]
+albedo_color = Color(0.5411765, 0.38431373, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7kucd"]
+material = SubResource("StandardMaterial3D_fmsym")
+size = Vector3(5, 0.2, 15)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_if3av"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bcedo"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_t5fsa"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wgl67"]
+size = Vector3(2, 2, 2)
+
+[node name="DebugTrack" type="Node3D" unique_id=1648609827]
+script = ExtResource("1_q5xdn")
+track_music = ExtResource("2_4tdiq")
+player_kart = ExtResource("1_wqmp7")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1110344304]
+environment = SubResource("Environment_t4f5k")
+
+[node name="Terrain" type="Node3D" parent="." unique_id=361690583]
+
+[node name="Path3D" type="Path3D" parent="Terrain" unique_id=999992233]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.0894814, 0)
+curve = SubResource("Curve3D_fmsym")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Terrain/Path3D" unique_id=321750741]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0894814, 0)
+use_collision = true
+polygon = PackedVector2Array(-7, 0, -5, 2, 5, 2, 7, 0.8)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 0.5
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
+material = SubResource("StandardMaterial3D_infoe")
+
+[node name="Ground" type="StaticBody3D" parent="Terrain" unique_id=1575098640 groups=["Offroad"]]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Ground" unique_id=1661721477]
+mesh = SubResource("BoxMesh_fsgd3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Ground" unique_id=1404893242]
+shape = SubResource("BoxShape3D_2jtd5")
+
+[node name="Road1" type="StaticBody3D" parent="Terrain" unique_id=1288578605 groups=["Paved"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 30)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Road1" unique_id=1578484523]
+mesh = SubResource("BoxMesh_w7ecq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Road1" unique_id=35440213]
+shape = SubResource("BoxShape3D_d7dg0")
+
+[node name="Road2" type="StaticBody3D" parent="Terrain" unique_id=1435535121 groups=["Paved"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -30)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Road2" unique_id=281713090]
+mesh = SubResource("BoxMesh_w7ecq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Road2" unique_id=643969468]
+shape = SubResource("BoxShape3D_d7dg0")
+
+[node name="Road3" type="StaticBody3D" parent="Terrain" unique_id=655805376 groups=["Paved"]]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 30, 0.01, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Road3" unique_id=1525379971]
+mesh = SubResource("BoxMesh_w7ecq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Road3" unique_id=190373006]
+shape = SubResource("BoxShape3D_d7dg0")
+
+[node name="Road4" type="StaticBody3D" parent="Terrain" unique_id=1559675576 groups=["Paved"]]
+transform = Transform3D(-4.1075268e-08, 1.4950174e-08, 1, 0.34202012, 0.9396926, 0, -0.9396926, 0.34202012, -4.371139e-08, -30, 7.725, 1.21)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Road4" unique_id=787643687]
+mesh = SubResource("BoxMesh_w7ecq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Road4" unique_id=91554563]
+shape = SubResource("BoxShape3D_d7dg0")
+
+[node name="Corner1" type="StaticBody3D" parent="Terrain" unique_id=323946978 groups=["Paved"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0.01, 30)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Corner1" unique_id=490143775]
+mesh = SubResource("BoxMesh_irhi4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Corner1" unique_id=1732903861]
+shape = SubResource("BoxShape3D_infoe")
+
+[node name="Corner2" type="StaticBody3D" parent="Terrain" unique_id=1181710947 groups=["Paved"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0.01, 30)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Corner2" unique_id=1761131953]
+mesh = SubResource("BoxMesh_irhi4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Corner2" unique_id=1170813156]
+shape = SubResource("BoxShape3D_infoe")
+
+[node name="Corner3" type="StaticBody3D" parent="Terrain" unique_id=980521751 groups=["Paved"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0.01, -30)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Corner3" unique_id=1123244651]
+mesh = SubResource("BoxMesh_irhi4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Corner3" unique_id=1141174409]
+shape = SubResource("BoxShape3D_infoe")
+
+[node name="Corner4" type="StaticBody3D" parent="Terrain" unique_id=1417532795 groups=["Paved"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0.01, -30)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Corner4" unique_id=331549069]
+mesh = SubResource("BoxMesh_irhi4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Corner4" unique_id=1356669871]
+shape = SubResource("BoxShape3D_infoe")
+
+[node name="Bump" type="StaticBody3D" parent="Terrain" unique_id=495069692 groups=["Paved"]]
+transform = Transform3D(1.9106855e-15, 4.371139e-08, -1, 1, -4.371139e-08, 0, -4.371139e-08, -1, -4.371139e-08, -16.173656, 0.1522665, 26.781313)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Bump" unique_id=1185554408]
+mesh = SubResource("CapsuleMesh_g43dg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Bump" unique_id=1900440841]
+shape = SubResource("CapsuleShape3D_7kucd")
+
+[node name="BoostPanel" type="StaticBody3D" parent="Terrain" unique_id=2065974377 groups=["Boost"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.411, -30)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/BoostPanel" unique_id=69504843]
+mesh = SubResource("BoxMesh_7kucd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/BoostPanel" unique_id=235771575]
+shape = SubResource("BoxShape3D_infoe")
+
+[node name="StartLine" type="CSGBox3D" parent="Terrain" unique_id=872318613]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 30)
+operation = 2
+size = Vector3(2, 1, 15)
+material = SubResource("StandardMaterial3D_if3av")
+
+[node name="Object" type="RigidBody3D" parent="." unique_id=280148179]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3330574, 1.2537726, 30.05519)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Object" unique_id=1817309755]
+shape = SubResource("BoxShape3D_bcedo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Object" unique_id=1173809332]
+mesh = SubResource("BoxMesh_t5fsa")
+
+[node name="Hitbox" type="Area3D" parent="Object" unique_id=1291255827]
+script = ExtResource("5_vmk27")
+metadata/_custom_type_script = "uid://bcubef2xy50jd"
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Object/Hitbox" unique_id=944620876]
+shape = SubResource("BoxShape3D_wgl67")
+
+[node name="Launchable" type="Node" parent="Object" unique_id=660532447 node_paths=PackedStringArray("hitbox", "rigid_body_3d")]
+script = ExtResource("5_fmsym")
+hitbox = NodePath("../Hitbox")
+rigid_body_3d = NodePath("..")
+metadata/_custom_type_script = "uid://d3u5ktr5nhr2x"
+
+[node name="Destructible" type="Node" parent="Object" unique_id=1510201931 node_paths=PackedStringArray("hitbox", "to_break")]
+script = ExtResource("6_fmsym")
+hitbox = NodePath("../Hitbox")
+to_break = NodePath("..")
+breaking_time = 0.5
+metadata/_custom_type_script = "uid://xlj78h55nuao"
+
+[node name="PauseScreen" parent="." unique_id=608802068 instance=ExtResource("5_wgl67")]
+layer = 999
