@@ -2,18 +2,11 @@
 
 [ext_resource type="Script" uid="uid://33nyi808crfd" path="res://Scenes/Menus/MainMenu/main_menu.gd" id="1_yo6co"]
 [ext_resource type="AudioStream" uid="uid://cgpun0hsxpw5o" path="res://Assets/Audio/Music/KartTheme.wav" id="2_tb3ri"]
+[ext_resource type="Theme" uid="uid://ca0itqn64c6ls" path="res://Resources/MenuThemes/main_menu_theme.tres" id="3_gphap"]
 [ext_resource type="PackedScene" uid="uid://chopbamug8408" path="res://Scenes/Menus/OptionsMenu/options_menu.tscn" id="3_yobja"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t5fsa"]
 bg_color = Color(2.3102762e-06, 0.6323629, 0.9693813, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xvvda"]
-bg_color = Color(0, 0.35686275, 0.5764706, 1)
-skew = Vector2(0.5, 0)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
 
 [sub_resource type="LabelSettings" id="LabelSettings_t5fsa"]
 font_size = 64
@@ -40,11 +33,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_gphap")
 script = ExtResource("1_yo6co")
 start_scene = "uid://dujko6vu4ilbf"
-start_button = NodePath("MarginContainer/HBoxContainer/VBoxContainer/SingleplayerButton")
-options_button = NodePath("MarginContainer/HBoxContainer/VBoxContainer/OptionsButton")
-quit_button = NodePath("MarginContainer/HBoxContainer/VBoxContainer/QuitButton")
+start_button = NodePath("MarginContainer/HBoxContainer/ButtonContainer/SingleplayerButton")
+options_button = NodePath("MarginContainer/HBoxContainer/ButtonContainer/OptionsButton")
+quit_button = NodePath("MarginContainer/HBoxContainer/ButtonContainer/QuitButton")
 menu_music = ExtResource("2_tb3ri")
 
 [node name="Panel" type="Panel" parent="." unique_id=1246378781]
@@ -73,27 +67,16 @@ theme_override_constants/margin_bottom = 128
 layout_mode = 2
 theme_override_constants/separation = 512
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1008553731]
+[node name="ButtonContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1008553731]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 64
 
-[node name="SingleplayerButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=856623567]
+[node name="SingleplayerButton" type="Button" parent="MarginContainer/HBoxContainer/ButtonContainer" unique_id=856623567]
 layout_mode = 2
 size_flags_vertical = 3
-flat = true
 
-[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/SingleplayerButton" unique_id=1537802614]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_xvvda")
-
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/SingleplayerButton" unique_id=1827638713]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/ButtonContainer/SingleplayerButton" unique_id=1827638713]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -105,22 +88,11 @@ label_settings = SubResource("LabelSettings_t5fsa")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MultiplayerButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1746182648]
+[node name="MultiplayerButton" type="Button" parent="MarginContainer/HBoxContainer/ButtonContainer" unique_id=1746182648]
 layout_mode = 2
 size_flags_vertical = 3
-flat = true
 
-[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MultiplayerButton" unique_id=1220239168]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_xvvda")
-
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/MultiplayerButton" unique_id=196637470]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/ButtonContainer/MultiplayerButton" unique_id=196637470]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -132,22 +104,11 @@ label_settings = SubResource("LabelSettings_t5fsa")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="OptionsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=2117550020]
+[node name="OptionsButton" type="Button" parent="MarginContainer/HBoxContainer/ButtonContainer" unique_id=2117550020]
 layout_mode = 2
 size_flags_vertical = 3
-flat = true
 
-[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/OptionsButton" unique_id=550062518]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_xvvda")
-
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/OptionsButton" unique_id=501615731]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/ButtonContainer/OptionsButton" unique_id=501615731]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -159,22 +120,11 @@ label_settings = SubResource("LabelSettings_t5fsa")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="QuitButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1379466379]
+[node name="QuitButton" type="Button" parent="MarginContainer/HBoxContainer/ButtonContainer" unique_id=1379466379]
 layout_mode = 2
 size_flags_vertical = 3
-flat = true
 
-[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/QuitButton" unique_id=660540438]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_xvvda")
-
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/QuitButton" unique_id=570228899]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/ButtonContainer/QuitButton" unique_id=570228899]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
