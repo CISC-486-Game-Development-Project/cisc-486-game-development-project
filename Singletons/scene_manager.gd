@@ -13,7 +13,7 @@ var errored_loads: Array[String]
 
 var waiting_for_scene: String
 
-enum {INSTANT, SLIDE_FORWARD, SLIDE_BACK, FADE}
+enum {INSTANT, SLIDE_FORWARD, SLIDE_BACKWARD, FADE}
 const FORWARD_FROM_DIR := Vector2.RIGHT
 
 func _process(_delta: float) -> void:
@@ -78,7 +78,7 @@ func change_scene(scene_path: String, animation := FADE):
 			get_tree().change_scene_to_node(scene_node)
 			load_finished.emit()
 			await loading_screen.wait_until_ready()
-		SLIDE_FORWARD, SLIDE_BACK:
+		SLIDE_FORWARD, SLIDE_BACKWARD:
 			var vp := get_viewport().get_visible_rect().size
 			var FROM_DIR = FORWARD_FROM_DIR if animation == SLIDE_FORWARD else -FORWARD_FROM_DIR
 			scene_node.position = FROM_DIR * vp
