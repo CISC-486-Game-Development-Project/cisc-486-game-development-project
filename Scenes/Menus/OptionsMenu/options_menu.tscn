@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://chopbamug8408"]
 
+[ext_resource type="Script" uid="uid://dgsod5ahxppab" path="res://Scenes/Menus/OptionsMenu/options_menu.gd" id="1_6iikp"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7by3x"]
 bg_color = Color(0, 0, 0, 0.8)
 
@@ -23,8 +25,9 @@ shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(4, 4)
 
 [node name="OptionsMenu" type="CanvasLayer" unique_id=693100041]
+script = ExtResource("1_6iikp")
 
-[node name="Panel" type="Panel" parent="." unique_id=1204713798]
+[node name="BackgroundPanel" type="Panel" parent="." unique_id=1204713798]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -33,7 +36,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7by3x")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1285267470]
+[node name="OptionsContainer" type="MarginContainer" parent="." unique_id=1285267470]
 offset_right = 1920.0
 offset_bottom = 1080.0
 grow_horizontal = 2
@@ -43,27 +46,27 @@ theme_override_constants/margin_top = 128
 theme_override_constants/margin_right = 128
 theme_override_constants/margin_bottom = 128
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=811147483]
+[node name="PanelContainer" type="PanelContainer" parent="OptionsContainer" unique_id=811147483]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_t4f5k")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer" unique_id=2023133090]
+[node name="MarginContainer" type="MarginContainer" parent="OptionsContainer/PanelContainer" unique_id=2023133090]
 layout_mode = 2
 theme_override_constants/margin_left = 64
 theme_override_constants/margin_top = 64
 theme_override_constants/margin_right = 64
 theme_override_constants/margin_bottom = 64
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer" unique_id=675931777]
+[node name="HBoxContainer" type="HBoxContainer" parent="OptionsContainer/PanelContainer/MarginContainer" unique_id=675931777]
 layout_mode = 2
 theme_override_constants/separation = 512
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=1506308783]
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=1506308783]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 32
 
-[node name="OptionsLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=381383623]
+[node name="OptionsLabel" type="Label" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=381383623]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Options"
@@ -71,28 +74,28 @@ label_settings = SubResource("LabelSettings_6iikp")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=447220346]
+[node name="ScrollContainer" type="ScrollContainer" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=447220346]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 5.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer" unique_id=73070776]
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer" unique_id=73070776]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Volume" type="MarginContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1420751960]
+[node name="Volume" type="MarginContainer" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1420751960]
 layout_mode = 2
 theme_override_constants/margin_left = 64
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 64
 theme_override_constants/margin_bottom = 32
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume" unique_id=554908009]
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume" unique_id=554908009]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer" unique_id=496418230]
+[node name="Label" type="Label" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer" unique_id=496418230]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -101,12 +104,12 @@ label_settings = SubResource("LabelSettings_jghd8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Master" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer" unique_id=488831342]
+[node name="Master" type="HBoxContainer" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer" unique_id=488831342]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 16
 
-[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer/Master" unique_id=1134126026]
+[node name="Label" type="Label" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer/Master" unique_id=1134126026]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -114,7 +117,7 @@ text = "Master"
 label_settings = SubResource("LabelSettings_jghd8")
 vertical_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer/Master" unique_id=1346589488]
+[node name="HSlider" type="HSlider" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer/Master" unique_id=1346589488]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -124,12 +127,12 @@ rounded = true
 tick_count = 100
 ticks_position = 2
 
-[node name="Music" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer" unique_id=1278897561]
+[node name="Music" type="HBoxContainer" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer" unique_id=1278897561]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 16
 
-[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer/Music" unique_id=92083546]
+[node name="Label" type="Label" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer/Music" unique_id=92083546]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -137,7 +140,7 @@ text = "Music"
 label_settings = SubResource("LabelSettings_jghd8")
 vertical_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer/Music" unique_id=310589668]
+[node name="HSlider" type="HSlider" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer/Music" unique_id=310589668]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -147,12 +150,12 @@ rounded = true
 tick_count = 100
 ticks_position = 2
 
-[node name="SFX" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer" unique_id=518904121]
+[node name="SFX" type="HBoxContainer" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer" unique_id=518904121]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 16
 
-[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer/SFX" unique_id=1068512052]
+[node name="Label" type="Label" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer/SFX" unique_id=1068512052]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -160,7 +163,7 @@ text = "SFX"
 label_settings = SubResource("LabelSettings_jghd8")
 vertical_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer/SFX" unique_id=2018043656]
+[node name="HSlider" type="HSlider" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer/SFX" unique_id=2018043656]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -170,12 +173,12 @@ rounded = true
 tick_count = 100
 ticks_position = 2
 
-[node name="Voices" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer" unique_id=45080221]
+[node name="Voices" type="HBoxContainer" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer" unique_id=45080221]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 16
 
-[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer/Voices" unique_id=295428517]
+[node name="Label" type="Label" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer/Voices" unique_id=295428517]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -183,7 +186,7 @@ text = "Voices"
 label_settings = SubResource("LabelSettings_jghd8")
 vertical_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer/Voices" unique_id=289663566]
+[node name="HSlider" type="HSlider" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer/Voices" unique_id=289663566]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -193,18 +196,18 @@ rounded = true
 tick_count = 100
 ticks_position = 2
 
-[node name="Miscellaneous" type="MarginContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1697458373]
+[node name="Miscellaneous" type="MarginContainer" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1697458373]
 layout_mode = 2
 theme_override_constants/margin_left = 64
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 64
 theme_override_constants/margin_bottom = 32
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Miscellaneous" unique_id=576004777]
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Miscellaneous" unique_id=576004777]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Miscellaneous/VBoxContainer" unique_id=1681522666]
+[node name="Label" type="Label" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Miscellaneous/VBoxContainer" unique_id=1681522666]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -213,12 +216,12 @@ label_settings = SubResource("LabelSettings_jghd8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PawnSounds" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Miscellaneous/VBoxContainer" unique_id=1796282879]
+[node name="PawnSounds" type="HBoxContainer" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Miscellaneous/VBoxContainer" unique_id=1796282879]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 16
 
-[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Miscellaneous/VBoxContainer/PawnSounds" unique_id=1737159291]
+[node name="Label" type="Label" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Miscellaneous/VBoxContainer/PawnSounds" unique_id=1737159291]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -226,6 +229,13 @@ text = "Realistic Pawn Sounds"
 label_settings = SubResource("LabelSettings_jghd8")
 vertical_alignment = 1
 
-[node name="CheckButton" type="CheckButton" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Miscellaneous/VBoxContainer/PawnSounds" unique_id=1025495336]
+[node name="CheckButton" type="CheckButton" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Miscellaneous/VBoxContainer/PawnSounds" unique_id=1025495336]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="TempBackButton" type="Button" parent="OptionsContainer" unique_id=485200191]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Back"
