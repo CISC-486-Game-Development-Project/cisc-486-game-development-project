@@ -25,7 +25,7 @@ func _ready() -> void:
 
 ## Called when a track is selected.
 func _on_next_pressed() -> void:
-	SceneManager.change_scene(next_scene)
+	SceneManager.change_scene(next_scene, SceneManager.FADE, false)
 
 ## Called when going backwards in the menu order.
 func _on_prev_pressed() -> void:

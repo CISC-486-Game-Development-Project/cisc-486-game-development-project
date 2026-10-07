@@ -46,7 +46,7 @@ func load_scene(scene_path: String, use_sub_threads: bool = false):
 		printerr(state)
 		errored_loads.append(scene_path)
 
-func change_scene(scene_path: String, animation := FADE):
+func change_scene(scene_path: String, animation := FADE, disable_until_ready := true):
 	if scene_path in errored_loads:
 		printerr("Trying to change to scene which has already failed to load")
 	if scene_path not in loaded_scenes.keys() and scene_path not in in_process_loads.keys():
@@ -69,7 +69,8 @@ func change_scene(scene_path: String, animation := FADE):
 	# Transition to the scene
 	var scene_node = loaded_scenes[scene_path].instantiate()
 	var prev_process_mode: ProcessMode = scene_node.process_mode
-	scene_node.process_mode = Node.PROCESS_MODE_DISABLED # Pause the scene until the transition is done
+	if disable_until_ready:
+		scene_node.process_mode = Node.PROCESS_MODE_DISABLED # Pause the scene until the transition is done
 	match animation:
 		INSTANT:
 			get_tree().change_scene_to_node(scene_node)
@@ -89,4 +90,5 @@ func change_scene(scene_path: String, animation := FADE):
 			await t.finished
 			get_tree().unload_current_scene()
 			get_tree().current_scene = scene_node
-	scene_node.process_mode = prev_process_mode # Return the scene to its previous process
+	if disable_until_ready:
+		scene_node.process_mode = prev_process_mode # Return the scene to its previous process
