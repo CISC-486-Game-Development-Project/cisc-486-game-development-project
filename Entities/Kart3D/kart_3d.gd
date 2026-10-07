@@ -229,7 +229,10 @@ func recalculate_road_factor() -> void:
 		var wheel_terrain = wheel.get_wheel_terrain()
 		if wheel_terrain:
 			wheels_on_ground += 1
-			if wheel_terrain.is_in_group("Paved"):
+			if wheel_terrain.is_in_group("Boost"):
+				total_road_factor += road_factor_paved
+				set_boost(1.5)
+			elif wheel_terrain.is_in_group("Paved"):
 				total_road_factor += road_factor_paved
 			elif wheel_terrain.is_in_group("Offroad"):
 				total_road_factor += road_factor_offroad

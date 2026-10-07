@@ -21,18 +21,26 @@ sky_material = SubResource("ProceduralSkyMaterial_7abii")
 background_mode = 2
 sky = SubResource("Sky_xvvda")
 
+[sub_resource type="Curve3D" id="Curve3D_fmsym"]
+closed = true
+_data = {
+"points": PackedVector3Array(-24.749622, -3.8146973e-06, -20.401445, 24.749622, 3.8146973e-06, 20.401445, 35.64517, 0.51013184, -36.956112, 16.687956, -3.8146973e-06, -15.0460205, -16.687956, 3.8146973e-06, 15.0460205, 34.65126, 0.51013184, 32.66449, 4.975712, 3.8146973e-06, 6.394932, -4.975712, -3.8146973e-06, -6.394932, -37.271076, 0.51013184, 36.57808, 0, 0, 0, 0, 0, 0, -42.214558, 1.0068359, 20.054195, 0, 0, 0, 0, 0, 0, -42.841125, 10.146301, 1.7054479, -15.048008, 3.8146973e-06, 16.70283, 15.048008, -3.8146973e-06, -16.70283, -33.519627, 0.5, -38.406948),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+}
+point_count = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_infoe"]
+albedo_color = Color(0, 0, 0, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_irhi4"]
 albedo_color = Color(0, 0.30980393, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_fsgd3"]
 material = SubResource("StandardMaterial3D_irhi4")
-size = Vector3(100, 1, 100)
+size = Vector3(500, 1, 500)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2jtd5"]
-size = Vector3(100, 1, 100)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_infoe"]
-albedo_color = Color(0, 0, 0, 1)
+size = Vector3(500, 1, 500)
 
 [sub_resource type="BoxMesh" id="BoxMesh_w7ecq"]
 material = SubResource("StandardMaterial3D_infoe")
@@ -46,7 +54,14 @@ material = SubResource("StandardMaterial3D_infoe")
 size = Vector3(15, 1, 15)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_infoe"]
-size = Vector3(15, 1, 15)
+size = Vector3(5, 0.2, 15)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fmsym"]
+albedo_color = Color(0.5411765, 0.38431373, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7kucd"]
+material = SubResource("StandardMaterial3D_fmsym")
+size = Vector3(5, 0.2, 15)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_if3av"]
 
@@ -66,6 +81,27 @@ player_kart = ExtResource("1_wqmp7")
 environment = SubResource("Environment_t4f5k")
 
 [node name="Terrain" type="Node3D" parent="." unique_id=361690583]
+
+[node name="Path3D" type="Path3D" parent="Terrain" unique_id=999992233]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0894814, 0)
+visible = false
+curve = SubResource("Curve3D_fmsym")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Terrain/Path3D" unique_id=321750741]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0894814, 0)
+polygon = PackedVector2Array(-7, 0, -5, 2, 5, 2, 7, 0.8)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 0.5
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
+material = SubResource("StandardMaterial3D_infoe")
 
 [node name="Ground" type="StaticBody3D" parent="Terrain" unique_id=1575098640 groups=["Offroad"]]
 
@@ -145,6 +181,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0.01, -30)
 mesh = SubResource("BoxMesh_irhi4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Corner4" unique_id=1356669871]
+shape = SubResource("BoxShape3D_infoe")
+
+[node name="BoostPanel" type="StaticBody3D" parent="Terrain" unique_id=2065974377 groups=["Boost"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.411, -30)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/BoostPanel" unique_id=69504843]
+mesh = SubResource("BoxMesh_7kucd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/BoostPanel" unique_id=235771575]
 shape = SubResource("BoxShape3D_infoe")
 
 [node name="StartLine" type="CSGBox3D" parent="Terrain" unique_id=872318613]

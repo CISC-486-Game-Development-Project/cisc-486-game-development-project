@@ -39,6 +39,7 @@ enabled=PackedStringArray("res://addons/inspector_code_highlighter/plugin.cfg")
 Paved="Terrain type ideal for driving"
 Offroad="Terrain type that doesn't allow full speed"
 "Harsh Offroad"="Terrain type that strongly affects kart performance"
+Boost=""
 
 [input]
 
