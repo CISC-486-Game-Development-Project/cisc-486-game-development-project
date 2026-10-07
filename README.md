@@ -9,9 +9,11 @@
 
 Current Tasks:
 - Destructible objects [LOGIC DONE, DESTROY EFFECT NOT IMPLEMENTED]
-- Wipe out state (taking "damage") [DONE]
-- Kart stats system
-- Making kart script more general so it can be used for AI
+- Air Trick State? (optional, but could be fun)
+- Menu functionality, animations & stylization (pause menu, options menu, main menu, etc.)
+- Splitscreen functionality (multiplayer in game, menu to handle which controller controls which part of the screen before character select, make character select also splitscreen)
+- Spline based track prototyping system
+- Fix how handling stat effects drifting so it's more intuitive (also fix: boosts make turning way faster for some reason)
 
 ## Maia
 - Item system (inventory, item boxes, usable items, random item distribution)
