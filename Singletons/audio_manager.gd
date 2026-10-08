@@ -22,12 +22,6 @@ var music_volume: float = 0.5
 var sfx_volume: float = 0.5
 var voice_volume: float = 0.5
 
-func _process(_delta: float) -> void:
-	if current_music.stream is AudioStreamSynchronized:
-		#for i in range(current_music.stream.get_stream_count()):
-			#print(current_music.stream.get_sync_stream_volume(i))
-		print(current_music.stream.get_sync_stream_volume(1))
-
 ###################
 ## SFX Functions ##
 ###################
