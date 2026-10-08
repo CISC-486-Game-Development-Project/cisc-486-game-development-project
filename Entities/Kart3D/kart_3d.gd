@@ -322,18 +322,18 @@ func can_trick() -> bool:
 	# Check logic for tricking depending on current state
 	if state_machine.current_state is DriveState:
 		if hop_request and not trick_ray_cast_3d.is_colliding():
-			print("Trick Case 1")
+			#print("Trick Case 1")
 			return true
 	elif state_machine.current_state is FallState:
 		if hop_request and trick_coyote_timer.time_left > 0:
-			print("Trick Case 2")
+			#print("Trick Case 2")
 			return true
 	elif state_machine.current_state is HopState:
 		if trick_buffer_timer.time_left > 0 and not trick_ray_cast_3d.is_colliding():
-			print("Trick Case 3")
+			#print("Trick Case 3")
 			return true
 		if trick_buffer_timer.time_left > 0 and not ground_ray_cast_3d.is_colliding():
-			print("Trick Case 4")
+			#print("Trick Case 4")
 			return true
 	return false
 

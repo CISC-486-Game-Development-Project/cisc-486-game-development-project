@@ -34,8 +34,9 @@ func _ready() -> void:
 	options_menu.hiding.connect(_claim_focus)
 	_claim_focus()
 	
-	# Play menu music
+	# Play menu music and/or set sync stream
 	AudioManager.change_bgm(menu_music)
+	AudioManager.change_sync_track()
 	
 	# Load scenes
 	SceneManager.load_scene(start_scene)

@@ -1,9 +1,20 @@
 [gd_scene format=3 uid="uid://b4byg6rmq7m24"]
 
 [ext_resource type="Script" uid="uid://33nyi808crfd" path="res://Scenes/Menus/MainMenu/main_menu.gd" id="1_yo6co"]
-[ext_resource type="AudioStream" uid="uid://cgpun0hsxpw5o" path="res://Assets/Audio/Music/KartTheme.wav" id="2_tb3ri"]
 [ext_resource type="Theme" uid="uid://ca0itqn64c6ls" path="res://Resources/MenuThemes/main_menu_theme.tres" id="3_gphap"]
+[ext_resource type="AudioStream" uid="uid://bdeh8pcjdofjl" path="res://Assets/Audio/Music/KartMenuPhase1.wav" id="3_kw60b"]
 [ext_resource type="PackedScene" uid="uid://chopbamug8408" path="res://Scenes/Menus/OptionsMenu/options_menu.tscn" id="3_yobja"]
+[ext_resource type="AudioStream" uid="uid://5iedummhc3e6" path="res://Assets/Audio/Music/KartMenuPhase2.wav" id="4_rbcii"]
+[ext_resource type="AudioStream" uid="uid://bi0eloy60w58n" path="res://Assets/Audio/Music/KartMenuPhase3.wav" id="5_eols4"]
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_2v5bn"]
+stream_count = 3
+stream_0/stream = ExtResource("3_kw60b")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("4_rbcii")
+stream_1/volume = 0.0
+stream_2/stream = ExtResource("5_eols4")
+stream_2/volume = 0.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t5fsa"]
 bg_color = Color(2.3102762e-06, 0.6323629, 0.9693813, 1)
@@ -39,7 +50,7 @@ start_scene = "uid://dujko6vu4ilbf"
 start_button = NodePath("MarginContainer/HBoxContainer/ButtonContainer/SingleplayerButton")
 options_button = NodePath("MarginContainer/HBoxContainer/ButtonContainer/OptionsButton")
 quit_button = NodePath("MarginContainer/HBoxContainer/ButtonContainer/QuitButton")
-menu_music = ExtResource("2_tb3ri")
+menu_music = SubResource("AudioStreamSynchronized_2v5bn")
 
 [node name="Panel" type="Panel" parent="." unique_id=1246378781]
 layout_mode = 1

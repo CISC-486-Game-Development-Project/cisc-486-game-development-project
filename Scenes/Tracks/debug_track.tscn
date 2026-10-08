@@ -25,10 +25,10 @@ sky = SubResource("Sky_xvvda")
 [sub_resource type="Curve3D" id="Curve3D_fmsym"]
 closed = true
 _data = {
-"points": PackedVector3Array(-24.749622, -3.8146973e-06, -20.401445, 24.749622, 3.8146973e-06, 20.401445, 35.64517, 0.51013184, -36.956112, 16.687956, -3.8146973e-06, -15.0460205, -16.687956, 3.8146973e-06, 15.0460205, 34.65126, 0.51013184, 32.66449, 4.975712, 3.8146973e-06, 6.394932, -4.975712, -3.8146973e-06, -6.394932, -37.271076, 0.51013184, 36.57808, 0, 0, 0, 0, 0, 0, -42.214558, 1.0068359, 20.054195, 0, 0, 0, 0, 0, 0, -42.841125, 10.146301, 1.7054479, -15.048008, 3.8146973e-06, 16.70283, 15.048008, -3.8146973e-06, -16.70283, -33.519627, 0.5, -38.406948),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(-24.749622, -3.8146973e-06, -20.401445, 24.749622, 3.8146973e-06, 20.401445, 35.64517, 0.51013184, -36.956112, 16.687956, -3.8146973e-06, -15.0460205, -16.687956, 3.8146973e-06, 15.0460205, 34.65126, 0.51013184, 32.66449, 4.975712, 3.8146973e-06, 6.394932, -4.975712, -3.8146973e-06, -6.394932, -37.271076, 0.51013184, 36.57808, 0, 0, 0, 0, 0, 0, -42.214558, 1.0068359, 20.054195, 0, 0, 0, 0, 0, 0, -42.841125, 10.146301, 1.7054479, 0, 0, 0, 0, 0, 0, -42.865402, 0, 1.3878851, -15.048008, 3.8146973e-06, 16.70283, 15.048008, -3.8146973e-06, -16.70283, -33.519627, 0.5, -38.406948),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
 }
-point_count = 6
+point_count = 7
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_infoe"]
 albedo_color = Color(0, 0, 0, 1)
@@ -83,7 +83,7 @@ environment = SubResource("Environment_t4f5k")
 [node name="Terrain" type="Node3D" parent="." unique_id=361690583]
 
 [node name="Path3D" type="Path3D" parent="Terrain" unique_id=999992233]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.0894814, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2761402, 0)
 curve = SubResource("Curve3D_fmsym")
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="Terrain/Path3D" unique_id=321750741]
@@ -95,7 +95,7 @@ path_node = NodePath("..")
 path_interval_type = 0
 path_interval = 0.5
 path_simplify_angle = 0.0
-path_rotation = 2
+path_rotation = 1
 path_rotation_accurate = false
 path_local = false
 path_continuous_u = true

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://vv680s1adm4y"]
 
 [ext_resource type="Script" uid="uid://bpmv76f1ceqv4" path="res://Scenes/Menus/TitleScreen/title_screen.gd" id="1_s2kds"]
-[ext_resource type="AudioStream" uid="uid://cgpun0hsxpw5o" path="res://Assets/Audio/Music/KartTheme.wav" id="2_bs8mv"]
+[ext_resource type="AudioStream" uid="uid://s45hpgk6jctc" path="res://Assets/Audio/Music/KartTheme_Intro.wav" id="2_bs8mv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bs8mv"]
 bg_color = Color(2.3102762e-06, 0.6323629, 0.9693813, 1)

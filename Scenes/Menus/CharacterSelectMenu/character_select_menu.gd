@@ -32,6 +32,9 @@ func _ready() -> void:
 	
 	# Focus first button
 	character_buttons[0].grab_focus()
+	
+	# Play sync stream
+	AudioManager.change_sync_track(1)
 
 	# Load scenes
 	SceneManager.load_scene(next_scene)

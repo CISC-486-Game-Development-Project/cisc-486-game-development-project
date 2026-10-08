@@ -19,6 +19,9 @@ func _ready() -> void:
 	# Focus first button
 	track_button_1.grab_focus()
 	
+	# Play sync stream
+	AudioManager.change_sync_track(2)
+	
 	# Load scenes
 	SceneManager.load_scene(next_scene)
 	SceneManager.load_scene(prev_scene)

@@ -1,6 +1,11 @@
 ## Singleton for managing music, sfx and voice lines.
 extends Node3D
 
+# Constants
+const SYNC_ZERO_VOLUME: float = -60.0 ## The muted volume for when a sync track is not playing.
+const SYNC_BASE_VOLUME: float = 0.0 ## The normal volume for when a sync track is playing.
+const SYNC_FADE_TIME: float = 0.1 ## The time it takes to crossfade between sync tracks.
+
 # Enums
 enum SoundType {
 	SFX, ## Used when creating a new sound effect.
@@ -16,6 +21,16 @@ var master_volume: float = 0.5
 var music_volume: float = 0.5
 var sfx_volume: float = 0.5
 var voice_volume: float = 0.5
+
+func _process(_delta: float) -> void:
+	if current_music.stream is AudioStreamSynchronized:
+		#for i in range(current_music.stream.get_stream_count()):
+			#print(current_music.stream.get_sync_stream_volume(i))
+		print(current_music.stream.get_sync_stream_volume(1))
+
+###################
+## SFX Functions ##
+###################
 
 ## Plays a sound.
 func create_sound(sound: AudioStream, type: SoundType = SoundType.SFX) -> void:
@@ -81,6 +96,10 @@ func create_sound_with_parent(sound: AudioStream, parent: Node3D, type: SoundTyp
 	parent.add_child(new_sound)
 	new_sound.play()
 
+#####################
+## Music Functions ##
+#####################
+
 ## Changes the background music to a specified track.
 func change_bgm(music: AudioStream, force_restart: bool = false) -> void:
 	# Don't change bgm if music is the same as current_music unless force_restart is true
@@ -103,6 +122,12 @@ func change_bgm(music: AudioStream, force_restart: bool = false) -> void:
 		current_music.queue_free()
 	current_music = new_music
 	
+	# Initialize first sync stream if applicable
+	if current_music.stream is AudioStreamSynchronized:
+		for i in range(current_music.stream.get_stream_count()):
+			current_music.stream.set_sync_stream_volume(i, SYNC_ZERO_VOLUME)
+		current_music.stream.set_sync_stream_volume(0, SYNC_BASE_VOLUME)
+	
 	# Add to scene and play music
 	add_child(new_music)
 	new_music.play()
@@ -111,6 +136,38 @@ func change_bgm(music: AudioStream, force_restart: bool = false) -> void:
 func stop_bgm() -> void:
 	if current_music:
 		current_music.queue_free()
+
+## Changes the sync track if music is an AudioStreamSynchronized.
+func change_sync_track(track_index: int = 0) -> void:
+	if not current_music.stream is AudioStreamSynchronized:
+		return # Only operate on AudioStreamSyncronized
+	
+	# Initialize variables
+	var sync := current_music.stream as AudioStreamSynchronized
+	var start_gains: Array[float] = []
+	var target_gain := db_to_linear(SYNC_BASE_VOLUME)
+	
+	# Get start_gains from sync
+	for i in range(sync.get_stream_count()):
+		start_gains.append(db_to_linear(sync.get_sync_stream_volume(i)))
+	
+	# Tween the crossfade between tracks
+	var tween := create_tween()
+	tween.tween_method(
+		func(time: float) -> void: # Lambda function for crossfading between sync stream tracks over time in a tween.
+			for i in range(sync.get_stream_count()):
+				var gain: float
+				
+				# Smoothly fade in with sin() and out with cos() depedning on which track is now active.
+				if i == track_index:
+					gain = target_gain * sin(time * PI * 0.5)
+				else:
+					gain = start_gains[i] * cos(time * PI * 0.5)
+				
+				# Avoid converting zero to -INF dB.
+				sync.set_sync_stream_volume(i, linear_to_db(maxf(gain, 0.0001))),
+		0.0, 1.0, SYNC_FADE_TIME
+	)
 
 ####################
 ## Volume Setters ##
