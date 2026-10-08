@@ -2,12 +2,28 @@
 
 [ext_resource type="Script" uid="uid://rdwha1wrjten" path="res://Scenes/Tracks/debug_track.gd" id="1_q5xdn"]
 [ext_resource type="PackedScene" uid="uid://dhqspbj6a6bij" path="res://Entities/PlayerKart3D/player_kart_3d.tscn" id="1_wqmp7"]
-[ext_resource type="AudioStream" uid="uid://cgpun0hsxpw5o" path="res://Assets/Audio/Music/KartTheme.wav" id="2_4tdiq"]
+[ext_resource type="AudioStream" uid="uid://bnupymtpaocgh" path="res://Assets/Audio/Music/Track1/KartThemeIntro.wav" id="2_g43dg"]
+[ext_resource type="AudioStream" uid="uid://c66k30ehvrg64" path="res://Assets/Audio/Music/Track1/KartThemeLoop.wav" id="3_56bb8"]
+[ext_resource type="AudioStream" uid="uid://6k42b3njbbv1" path="res://Assets/Audio/Music/Track1/KartThemeFirstLoop.wav" id="3_xc45i"]
 [ext_resource type="PackedScene" uid="uid://bfdd58efg72wk" path="res://Scenes/TrackParts/BoostPanel/boost_panel.tscn" id="4_7kucd"]
 [ext_resource type="Script" uid="uid://d3u5ktr5nhr2x" path="res://Components/ObjectProperties/launchable.gd" id="5_fmsym"]
 [ext_resource type="Script" uid="uid://bcubef2xy50jd" path="res://Components/Hitbox/hitbox.gd" id="5_vmk27"]
 [ext_resource type="PackedScene" uid="uid://htd17y0efmde" path="res://Scenes/Menus/PauseScreen/pause_screen.tscn" id="5_wgl67"]
 [ext_resource type="Script" uid="uid://xlj78h55nuao" path="res://Components/ObjectProperties/destructible.gd" id="6_fmsym"]
+
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_g43dg"]
+clip_count = 3
+clip_0/name = &"Kart Theme Intro"
+clip_0/stream = ExtResource("2_g43dg")
+clip_0/auto_advance = 1
+clip_0/next_clip = 1
+clip_1/name = &"Kart Theme First Loop"
+clip_1/stream = ExtResource("3_xc45i")
+clip_1/auto_advance = 1
+clip_1/next_clip = 2
+clip_2/name = &"Kart Theme Intro"
+clip_2/stream = ExtResource("3_56bb8")
+clip_2/auto_advance = 0
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7abii"]
 sky_top_color = Color(0.22520554, 0.47659743, 0.6379899, 1)
@@ -74,7 +90,7 @@ size = Vector3(2, 2, 2)
 
 [node name="DebugTrack" type="Node3D" unique_id=1648609827]
 script = ExtResource("1_q5xdn")
-track_music = ExtResource("2_4tdiq")
+track_music = SubResource("AudioStreamInteractive_g43dg")
 player_kart = ExtResource("1_wqmp7")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1110344304]

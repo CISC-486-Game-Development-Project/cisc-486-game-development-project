@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bi0eloy60w58n"
-path="res://.godot/imported/KartMenuPhase3.wav-d314d00c1baea815f29d0d4817cf6255.sample"
+path="res://.godot/imported/KartMenuPhase3.wav-ad1d4704450608fea787fcf6dac2975f.sample"
 
 [deps]
 
-source_file="res://Assets/Audio/Music/KartMenuPhase3.wav"
-dest_files=["res://.godot/imported/KartMenuPhase3.wav-d314d00c1baea815f29d0d4817cf6255.sample"]
+source_file="res://Assets/Audio/Music/MainMenu/KartMenuPhase3.wav"
+dest_files=["res://.godot/imported/KartMenuPhase3.wav-ad1d4704450608fea787fcf6dac2975f.sample"]
 
 [params]
 

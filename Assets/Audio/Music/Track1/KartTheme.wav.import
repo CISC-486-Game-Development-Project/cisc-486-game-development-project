@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cgpun0hsxpw5o"
-path="res://.godot/imported/KartTheme.wav-22665442a539080693da636cce5224ce.sample"
+path="res://.godot/imported/KartTheme.wav-d4508f46f8facc80755fb7c959f70617.sample"
 
 [deps]
 
-source_file="res://Assets/Audio/Music/KartTheme.wav"
-dest_files=["res://.godot/imported/KartTheme.wav-22665442a539080693da636cce5224ce.sample"]
+source_file="res://Assets/Audio/Music/Track1/KartTheme.wav"
+dest_files=["res://.godot/imported/KartTheme.wav-d4508f46f8facc80755fb7c959f70617.sample"]
 
 [params]
 
