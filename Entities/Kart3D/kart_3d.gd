@@ -61,6 +61,7 @@ var wheels: Array[Wheel] ## The array of Wheel objects attaced to this kart.
 var hurtbox: Hurtbox ## The hurtbox of this kart.
 
 var steer_request: float ## Steering intensity request to be set by an input_manager.
+var pitch_request: float ## Pitch intensity request to be set by an input_manager. (Entirely aesthetic)
 var accel_request: float ## Acceleration intensity request to be set by an input_manager.
 var break_request: bool ## Break request to be set by an input_manager.
 var hop_request: bool ## Hop request to be set by an input_manager.

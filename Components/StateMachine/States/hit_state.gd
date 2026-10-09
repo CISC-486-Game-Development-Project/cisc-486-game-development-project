@@ -33,5 +33,7 @@ func physics_update(delta: float) -> void:
 	check_transitions()
 
 func _play_hit_effect() -> void:
-	# Play hit anim
-	entity.animation_player.play("hit_anim_1")
+	# Play hit anim (TODO: make the direction of the anim depend on where you got hit)
+	match randi_range(0, 1):
+			0: entity.animation_player.play("hit_anim_right")
+			1: entity.animation_player.play("hit_anim_left")
