@@ -2,8 +2,8 @@ class_name TrickState
 extends State
 
 # Export Vars
-@export var trick_boost_time: float = 1.0
-@export var trick_sfx: Array[AudioStream]
+@export var trick_boost_time: float = 1.0 ## Duration of boost gained from this trick.
+@export var trick_boost_combo_multiplier: float = 0.1 ## Added to boost multiplier for each trick in the combo beyond the first.
 
 @export_group("Physics Parameters")
 @export var trick_hop_velocity: float = 10.0 ## Velocity impulse when hopping.
@@ -26,8 +26,11 @@ func exit(_next_state: State) -> void:
 	# Ensure end of hop has 0 velocity
 	entity.velocity.y = 0
 	
+	# Start combo timer
+	entity.trick_combo_timer.start()
+	
 	# Queue boost for when the ground is hit
-	entity.queue_ground_boost(trick_boost_time)
+	entity.queue_ground_boost(trick_boost_time * (1 + ((entity.trick_combo_level - 1) * trick_boost_combo_multiplier)))
 
 func physics_update(delta: float) -> void:
 	# Handle hop movement and deceleration
@@ -36,8 +39,15 @@ func physics_update(delta: float) -> void:
 	check_transitions()
 
 func _play_trick_effect() -> void:
+	# Play one shot trick particles
 	entity.trick_particles.restart()
-	AudioManager.create_sound(trick_sfx[randi_range(0, len(trick_sfx) - 1)])
+	
+	# Handle SFX based on combo
+	if entity.trick_combo_level == 0:
+		entity.trick_combo_level += 1
+	elif entity.trick_combo_timer.time_left > 0:
+		entity.trick_combo_level += 1
+	AudioManager.create_sound(entity.trick_sfx[clampi(entity.trick_combo_level, 0, len(entity.trick_sfx) - 1)])
 	
 	# Play random trick animation
 	match randi_range(0, 2):

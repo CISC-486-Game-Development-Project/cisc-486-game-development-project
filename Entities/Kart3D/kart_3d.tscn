@@ -12,14 +12,13 @@
 [ext_resource type="Script" uid="uid://bbrw2uverowic" path="res://Components/StateMachine/States/hop_state.gd" id="10_4muo4"]
 [ext_resource type="Script" uid="uid://b2lqg5xhq7se0" path="res://Components/StateMachine/States/drift_state.gd" id="11_y2xwn"]
 [ext_resource type="Script" uid="uid://bmua4qbuf0vev" path="res://Components/StateMachine/States/trick_state.gd" id="12_kwn18"]
-[ext_resource type="AudioStream" uid="uid://ca1cqr6i2aft5" path="res://Assets/Audio/SFX/Trick/tricksfx - segment 1.mp3" id="13_e57bt"]
-[ext_resource type="AudioStream" uid="uid://dvvuo6fg4ujdg" path="res://Assets/Audio/SFX/Trick/tricksfx - segment 2.mp3" id="14_c2iub"]
-[ext_resource type="AudioStream" uid="uid://bvlejffp85e2j" path="res://Assets/Audio/SFX/Trick/tricksfx - segment 3.mp3" id="15_1jkhd"]
-[ext_resource type="AudioStream" uid="uid://cg5enuow4xybb" path="res://Assets/Audio/SFX/Trick/tricksfx - segment 4.mp3" id="16_m8rhl"]
-[ext_resource type="AudioStream" uid="uid://b6xg77fp08pbw" path="res://Assets/Audio/SFX/Trick/tricksfx - segment 5.mp3" id="17_e7kw2"]
-[ext_resource type="AudioStream" uid="uid://bmbnm3am0wu7c" path="res://Assets/Audio/SFX/Trick/tricksfx - segment 6.mp3" id="18_65mr5"]
-[ext_resource type="AudioStream" uid="uid://dypbhjhba2x60" path="res://Assets/Audio/SFX/Trick/tricksfx - segment 7.mp3" id="19_50yyu"]
-[ext_resource type="AudioStream" uid="uid://ciahq7jr2fmuy" path="res://Assets/Audio/SFX/Trick/tricksfx - segment 8.mp3" id="20_h3q4x"]
+[ext_resource type="AudioStream" uid="uid://bgic4q08x7rqj" path="res://Assets/Audio/SFX/Trick/TrickSFX1.wav" id="13_6ht8j"]
+[ext_resource type="AudioStream" uid="uid://b57qx7yuin5yw" path="res://Assets/Audio/SFX/Trick/TrickSFX2.wav" id="14_7apc5"]
+[ext_resource type="AudioStream" uid="uid://brx30q7a51gd0" path="res://Assets/Audio/SFX/Trick/TrickSFX3.wav" id="15_q7q2k"]
+[ext_resource type="AudioStream" uid="uid://55us1ihneb0f" path="res://Assets/Audio/SFX/Trick/TrickSFX4.wav" id="16_3khwq"]
+[ext_resource type="AudioStream" uid="uid://cmirgmr4e1fqj" path="res://Assets/Audio/SFX/Trick/TrickSFX5.wav" id="17_0767e"]
+[ext_resource type="AudioStream" uid="uid://b7wtxjpq430yw" path="res://Assets/Audio/SFX/Trick/TrickSFX6.wav" id="18_mehc1"]
+[ext_resource type="Script" uid="uid://cwmiqdt31xlsm" path="res://Components/StateMachine/States/air_trick_state.gd" id="19_7apc5"]
 [ext_resource type="Script" uid="uid://b3ataw1etlka7" path="res://Components/StateMachine/States/hit_state.gd" id="21_1byyu"]
 
 [sub_resource type="Curve" id="Curve_iwjoc"]
@@ -193,6 +192,7 @@ top_reverse_speed = 8.0
 acceleration = 20.0
 boost_speed = 30.0
 boost_acceleration = 50.0
+trick_sfx = Array[AudioStream]([ExtResource("13_6ht8j"), ExtResource("14_7apc5"), ExtResource("15_q7q2k"), ExtResource("16_3khwq"), ExtResource("17_0767e"), ExtResource("18_mehc1")])
 
 [node name="KartModel" type="Node3D" parent="." unique_id=510578739]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.325, 0)
@@ -248,7 +248,10 @@ wait_time = 0.1
 one_shot = true
 
 [node name="TrickCooldownTimer" type="Timer" parent="." unique_id=2067441193]
-wait_time = 0.3
+wait_time = 0.5
+one_shot = true
+
+[node name="TrickComboTimer" type="Timer" parent="." unique_id=406482767]
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=858611665]
@@ -389,6 +392,12 @@ to_state = NodePath("../../TrickState")
 advance_expression = "entity.can_trick()"
 metadata/_custom_type_script = "uid://l1hrvfthq543"
 
+[node name="ToAirTrick" type="Node" parent="MovementStateMachine/FallState" unique_id=1731979594 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_2kwd7")
+to_state = NodePath("../../AirTrickState")
+advance_expression = "entity.can_air_trick()"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
 [node name="ToHit" type="Node" parent="MovementStateMachine/FallState" unique_id=1570548956 node_paths=PackedStringArray("to_state")]
 script = ExtResource("6_2kwd7")
 to_state = NodePath("../../HitState")
@@ -435,7 +444,6 @@ metadata/_custom_type_script = "uid://l1hrvfthq543"
 
 [node name="TrickState" type="Node" parent="MovementStateMachine" unique_id=162074873]
 script = ExtResource("12_kwn18")
-trick_sfx = Array[AudioStream]([ExtResource("13_e57bt"), ExtResource("14_c2iub"), ExtResource("15_1jkhd"), ExtResource("16_m8rhl"), ExtResource("17_e7kw2"), ExtResource("18_65mr5"), ExtResource("19_50yyu"), ExtResource("20_h3q4x")])
 metadata/_custom_type_script = "uid://bmua4qbuf0vev"
 
 [node name="ToFall" type="Node" parent="MovementStateMachine/TrickState" unique_id=622605065 node_paths=PackedStringArray("to_state")]
@@ -450,6 +458,22 @@ to_state = NodePath("../../HitState")
 advance_expression = "entity.is_hit"
 metadata/_custom_type_script = "uid://l1hrvfthq543"
 
+[node name="AirTrickState" type="Node" parent="MovementStateMachine" unique_id=1099142632]
+script = ExtResource("19_7apc5")
+metadata/_custom_type_script = "uid://cwmiqdt31xlsm"
+
+[node name="ToFall" type="Node" parent="MovementStateMachine/AirTrickState" unique_id=1389068502 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_2kwd7")
+to_state = NodePath("../../FallState")
+advance_expression = "entity.velocity.y <= 0"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
+[node name="ToHit" type="Node" parent="MovementStateMachine/AirTrickState" unique_id=1050877174 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_2kwd7")
+to_state = NodePath("../../HitState")
+advance_expression = "entity.is_hit"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
+
 [node name="HitState" type="Node" parent="MovementStateMachine" unique_id=1653879341]
 script = ExtResource("21_1byyu")
 metadata/_custom_type_script = "uid://b3ataw1etlka7"
@@ -459,3 +483,5 @@ script = ExtResource("6_2kwd7")
 to_state = NodePath("../../IdleState")
 advance_expression = "hit_timer.time_left <= 0"
 metadata/_custom_type_script = "uid://l1hrvfthq543"
+
+[connection signal="timeout" from="TrickComboTimer" to="." method="_on_trick_combo_timer_timeout"]

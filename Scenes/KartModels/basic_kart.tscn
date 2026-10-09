@@ -17,7 +17,7 @@ collision_shape_3d = NodePath("Hurtbox/CollisionShape3D")
 model_height = 0.65
 
 [node name="BasicCarBody" parent="." unique_id=1890857387 instance=ExtResource("1_ahyi0")]
-transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 0, 0, 0.717)
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 0, 0.05, 0.717)
 
 [node name="BackWheelR" parent="." unique_id=950822510 instance=ExtResource("3_8hucp")]
 transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 0.43, -0.1, 0.7174673)

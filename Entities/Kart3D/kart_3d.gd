@@ -1,6 +1,9 @@
 class_name Kart3D
 extends CharacterBody3D
 
+# Enums
+enum TrickType { TRICK, AIR_TRICK }
+
 # Export Vars
 @export_category("Functionality")
 @export var kart_stats: KartStats ## The stats that define the kart.
@@ -28,6 +31,9 @@ extends CharacterBody3D
 @export var road_factor_offroad: float = 0.6
 @export var road_factor_harsh_offroad: float = 0.8    
 
+@export_group("Sound Effects")
+@export var trick_sfx: Array[AudioStream] ## SFX that will be played during sequentially comboed tricks.
+
 # Onready Vars
 @onready var kart_model: Node3D = $KartModel
 @onready var animation_pivot: Node3D = $KartModel/AnimationPivot
@@ -45,6 +51,7 @@ extends CharacterBody3D
 @onready var trick_coyote_timer: Timer = $TrickCoyoteTimer
 @onready var trick_buffer_timer: Timer = $TrickBufferTimer
 @onready var trick_cooldown_timer: Timer = $TrickCooldownTimer
+@onready var trick_combo_timer: Timer = $TrickComboTimer
 
 @onready var debug_kart: KartModel = $KartModel/AnimationPivot/DebugKart
 @onready var debug_label_3d: Label3D = $DebugLabel3D
@@ -68,6 +75,8 @@ var boost_timer: float ## The time left in the current boost.
 var boost_queue: Array[float] ## The queue of boosts to be applied once the ground is hit.
 
 var is_hit: bool ## True when the kart is hit.
+
+var trick_combo_level: int ## Number of tricks currently comboed.
 
 #######################
 ## Process Functions ##
@@ -282,9 +291,9 @@ func hit(velocity_reduction_factor: float = 0.2, vertical_velocity_impulse: floa
 		velocity.y += vertical_velocity_impulse
 	is_hit = true
 
-###########################################
-## Getter, Setter, and Checker Functions ##
-###########################################
+#######################
+## Getters & Setters ##
+#######################
 
 ## Returns the horizontal velocity of the player as a Vector3 with y always set to 0.
 func get_horizontal_velocity() -> Vector3:
@@ -309,6 +318,10 @@ func set_stats() -> void:
 	handbrake_steering_velocity = 45.0 + kart_stats.base_handling
 	air_steering_velocity = 40.0 + kart_stats.base_handling
 
+#####################
+## Trick Functions ##
+#####################
+
 ## Returns if a trick is able to occur.
 func can_trick() -> bool:
 	# Immediate false if cooldown since last trick isn't over
@@ -332,10 +345,27 @@ func can_trick() -> bool:
 		if trick_buffer_timer.time_left > 0 and not trick_ray_cast_3d.is_colliding():
 			#print("Trick Case 3")
 			return true
-		if trick_buffer_timer.time_left > 0 and not ground_ray_cast_3d.is_colliding():
+		elif trick_buffer_timer.time_left > 0 and not ground_ray_cast_3d.is_colliding():
 			#print("Trick Case 4")
 			return true
 	return false
+
+## Returns if an air trick is able to occur.
+func can_air_trick() -> bool:
+	# Immediate false if cooldown since last trick isn't over
+	if trick_cooldown_timer.time_left > 0:
+		return false
+	
+	# Check logic for tricking depending on current state
+	if state_machine.current_state is FallState:
+		if hop_request and not ground_ray_cast_3d.is_colliding():
+			print("Air Trick")
+			return true
+	return false
+
+## Called when the trick combo timer runs out of time.
+func _on_trick_combo_timer_timeout() -> void:
+	trick_combo_level = 0
 
 #####################
 ## Debug Functions ##
@@ -356,6 +386,9 @@ func _update_debug_label():
 		"Buffer Timer: " + str(trick_buffer_timer.time_left > 0),
 		"Cooldown Timer: " + str(trick_cooldown_timer.time_left > 0),
 		"Road Factor: " + str(road_factor),
+		"Trick Combo Timer: " + str(trick_combo_timer.time_left > 0),
+		"Trick Combo: " + str(trick_combo_level),
+		"Boost Time Left: " + str(boost_timer),
 	]
 	
 	# Apply debug texts to label
