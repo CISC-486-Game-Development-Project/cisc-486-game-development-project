@@ -45,4 +45,4 @@ func _on_area_entered(area: Area3D) -> void:
 			hit_log.log_hit(hurtbox_owner)
 	
 	on_hit.emit(area)
-	area.recieve_hit()
+	area.recieve_hit(get_parent())

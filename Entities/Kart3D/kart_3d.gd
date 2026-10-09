@@ -155,11 +155,6 @@ func _handle_driving(delta: float) -> void:
 				set_boost(boost)
 			boost_queue.clear()
 	
-	# Apply boost if on boost panel
-	if ground_ray_cast_3d.get_collider() is BoostPanel:
-		var boost_panel: BoostPanel = ground_ray_cast_3d.get_collider()
-		set_boost(boost_panel.boost_time)
-	
 	if drift_request:
 		pass  ## Block of code will be used to process item if request is passed
 	
@@ -285,11 +280,17 @@ func queue_ground_boost(time: float):
 	boost_queue.append(time)
 
 ## Called when the kart is hit. Sets is_hit variable in order to transition to the HitState.
-func hit(velocity_reduction_factor: float = 0.2, vertical_velocity_impulse: float = 3.0) -> void:
-	if not is_hit: # Apply velocity effects if just hit
-		velocity *= velocity_reduction_factor
-		velocity.y += vertical_velocity_impulse
-	is_hit = true
+func hit(hitter: Node, velocity_reduction_factor: float = 0.2, vertical_velocity_impulse: float = 3.0) -> void:
+	# Boost panel hit logic
+	if hitter is BoostPanel:
+		queue_ground_boost(hitter.boost_time)
+	
+	# Normal hit logic
+	else:
+		if not is_hit: # Apply velocity effects if just hit
+			velocity *= velocity_reduction_factor
+			velocity.y += vertical_velocity_impulse
+		is_hit = true
 
 #######################
 ## Getters & Setters ##

@@ -1,21 +1,27 @@
 [gd_scene format=3 uid="uid://bfdd58efg72wk"]
 
 [ext_resource type="Script" uid="uid://khxqjcx6ysn0" path="res://Scenes/TrackParts/BoostPanel/boost_panel.gd" id="1_jbnex"]
+[ext_resource type="Script" uid="uid://bcubef2xy50jd" path="res://Components/Hitbox/hitbox.gd" id="3_m1foi"]
 [ext_resource type="Material" uid="uid://d1cchrqb4ptym" path="res://Resources/Shaders/BoostPanel/boost_panel.tres" id="5_a75cy"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_fmsym"]
-size = Vector3(15, 0.01, 5)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_o847y"]
 material = ExtResource("5_a75cy")
 size = Vector2(15, 5)
 
-[node name="BoostPanel" type="StaticBody3D" unique_id=630485332]
-script = ExtResource("1_jbnex")
+[sub_resource type="BoxShape3D" id="BoxShape3D_bxrk4"]
+size = Vector3(15, 0.2, 5)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=305961167]
-shape = SubResource("BoxShape3D_fmsym")
+[node name="BoostPanel" type="Node3D" unique_id=2073660667]
+script = ExtResource("1_jbnex")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=999690986]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.011, 0)
 mesh = SubResource("PlaneMesh_o847y")
+
+[node name="Hitbox" type="Area3D" parent="." unique_id=1626127104]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+script = ExtResource("3_m1foi")
+metadata/_custom_type_script = "uid://bcubef2xy50jd"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=1884829586]
+shape = SubResource("BoxShape3D_bxrk4")
