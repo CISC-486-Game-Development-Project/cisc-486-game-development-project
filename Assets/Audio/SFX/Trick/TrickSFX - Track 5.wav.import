@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dsox2f8vahjcv"
+path="res://.godot/imported/TrickSFX - Track 5.wav-1ecc561a2ae2e010ad943532f9452ba8.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX/Trick/TrickSFX - Track 5.wav"
+dest_files=["res://.godot/imported/TrickSFX - Track 5.wav-1ecc561a2ae2e010ad943532f9452ba8.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

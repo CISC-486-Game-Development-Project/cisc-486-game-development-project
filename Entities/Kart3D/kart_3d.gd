@@ -359,7 +359,7 @@ func can_air_trick() -> bool:
 	# Check logic for tricking depending on current state
 	if state_machine.current_state is FallState:
 		if hop_request and not ground_ray_cast_3d.is_colliding():
-			print("Air Trick")
+			#print("Air Trick")
 			return true
 	return false
 
@@ -387,8 +387,8 @@ func _update_debug_label():
 		"Cooldown Timer: " + str(trick_cooldown_timer.time_left > 0),
 		"Road Factor: " + str(road_factor),
 		"Trick Combo Timer: " + str(trick_combo_timer.time_left > 0),
-		"Trick Combo: " + str(trick_combo_level),
-		"Boost Time Left: " + str(boost_timer),
+		"Trick Combo: " + str(str(trick_combo_level) if trick_combo_level <= 4 else str(trick_combo_level) + " (MAX)"),
+		"Boost Time Left: " + str(clamp(round(boost_timer*10)/10, 0, 100)),
 	]
 	
 	# Apply debug texts to label

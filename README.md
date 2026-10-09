@@ -14,6 +14,7 @@ Current Tasks:
 - Splitscreen functionality (multiplayer in game, menu to handle which controller controls which part of the screen before character select, make character select also splitscreen)
 - Spline based track prototyping system
 - Fix how handling stat effects drifting so it's more intuitive (also fix: boosts make turning way faster for some reason)
+- Bugfix: Trick combo resets when just tricked, is the timer timing out at the same time the trick happens?
 
 ## Maia
 - Item system (inventory, item boxes, usable items, random item distribution)

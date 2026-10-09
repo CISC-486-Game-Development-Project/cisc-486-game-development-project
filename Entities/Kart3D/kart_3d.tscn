@@ -3,21 +3,21 @@
 [ext_resource type="Script" uid="uid://ccmyuvvgnljlr" path="res://Entities/Kart3D/kart_3d.gd" id="1_q7q2k"]
 [ext_resource type="PackedScene" uid="uid://d06ii74wx6vgl" path="res://Scenes/KartModels/basic_kart.tscn" id="2_7apc5"]
 [ext_resource type="Resource" uid="uid://d2lgutyflh3o3" path="res://Resources/KartStats/default_kart.tres" id="2_q7q2k"]
+[ext_resource type="AudioStream" uid="uid://dwxcjulimx2bp" path="res://Assets/Audio/SFX/Trick/TrickSFX - Track 1.wav" id="3_7apc5"]
 [ext_resource type="Script" uid="uid://t1pg06mo513h" path="res://Components/StateMachine/state_machine.gd" id="4_mehc1"]
+[ext_resource type="AudioStream" uid="uid://bsf1fcpxg2myp" path="res://Assets/Audio/SFX/Trick/TrickSFX - Track 2.wav" id="4_q7q2k"]
+[ext_resource type="AudioStream" uid="uid://p3qsv3x7sco2" path="res://Assets/Audio/SFX/Trick/TrickSFX - Track 3.wav" id="5_3khwq"]
 [ext_resource type="Script" uid="uid://b3yj5o2tso00m" path="res://Components/StateMachine/States/idle_state.gd" id="5_8lscg"]
 [ext_resource type="Script" uid="uid://l1hrvfthq543" path="res://Components/StateMachine/state_transition.gd" id="6_2kwd7"]
+[ext_resource type="AudioStream" uid="uid://7xype7ecekqt" path="res://Assets/Audio/SFX/Trick/TrickSFX - Track 4.wav" id="6_0767e"]
+[ext_resource type="AudioStream" uid="uid://dsox2f8vahjcv" path="res://Assets/Audio/SFX/Trick/TrickSFX - Track 5.wav" id="7_mehc1"]
 [ext_resource type="Script" uid="uid://doqfnn32ciliy" path="res://Components/StateMachine/States/drive_state.gd" id="7_u1ost"]
+[ext_resource type="AudioStream" uid="uid://durmvg28h7d6p" path="res://Assets/Audio/SFX/Trick/TrickSFX - Track 6.wav" id="8_8lscg"]
 [ext_resource type="Script" uid="uid://c8xfvksbxr3eg" path="res://Components/StateMachine/States/reverse_state.gd" id="8_iq8at"]
 [ext_resource type="Script" uid="uid://t3ju34iymdl0" path="res://Components/StateMachine/States/fall_state.gd" id="9_dqsqe"]
 [ext_resource type="Script" uid="uid://bbrw2uverowic" path="res://Components/StateMachine/States/hop_state.gd" id="10_4muo4"]
 [ext_resource type="Script" uid="uid://b2lqg5xhq7se0" path="res://Components/StateMachine/States/drift_state.gd" id="11_y2xwn"]
 [ext_resource type="Script" uid="uid://bmua4qbuf0vev" path="res://Components/StateMachine/States/trick_state.gd" id="12_kwn18"]
-[ext_resource type="AudioStream" uid="uid://bgic4q08x7rqj" path="res://Assets/Audio/SFX/Trick/TrickSFX1.wav" id="13_6ht8j"]
-[ext_resource type="AudioStream" uid="uid://b57qx7yuin5yw" path="res://Assets/Audio/SFX/Trick/TrickSFX2.wav" id="14_7apc5"]
-[ext_resource type="AudioStream" uid="uid://brx30q7a51gd0" path="res://Assets/Audio/SFX/Trick/TrickSFX3.wav" id="15_q7q2k"]
-[ext_resource type="AudioStream" uid="uid://55us1ihneb0f" path="res://Assets/Audio/SFX/Trick/TrickSFX4.wav" id="16_3khwq"]
-[ext_resource type="AudioStream" uid="uid://cmirgmr4e1fqj" path="res://Assets/Audio/SFX/Trick/TrickSFX5.wav" id="17_0767e"]
-[ext_resource type="AudioStream" uid="uid://b7wtxjpq430yw" path="res://Assets/Audio/SFX/Trick/TrickSFX6.wav" id="18_mehc1"]
 [ext_resource type="Script" uid="uid://cwmiqdt31xlsm" path="res://Components/StateMachine/States/air_trick_state.gd" id="19_7apc5"]
 [ext_resource type="Script" uid="uid://b3ataw1etlka7" path="res://Components/StateMachine/States/hit_state.gd" id="21_1byyu"]
 
@@ -192,7 +192,7 @@ top_reverse_speed = 8.0
 acceleration = 20.0
 boost_speed = 30.0
 boost_acceleration = 50.0
-trick_sfx = Array[AudioStream]([ExtResource("13_6ht8j"), ExtResource("14_7apc5"), ExtResource("15_q7q2k"), ExtResource("16_3khwq"), ExtResource("17_0767e"), ExtResource("18_mehc1")])
+trick_sfx = Array[AudioStream]([ExtResource("3_7apc5"), ExtResource("4_q7q2k"), ExtResource("5_3khwq"), ExtResource("6_0767e"), ExtResource("7_mehc1"), ExtResource("8_8lscg")])
 
 [node name="KartModel" type="Node3D" parent="." unique_id=510578739]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.325, 0)
@@ -248,10 +248,11 @@ wait_time = 0.1
 one_shot = true
 
 [node name="TrickCooldownTimer" type="Timer" parent="." unique_id=2067441193]
-wait_time = 0.5
+wait_time = 0.4
 one_shot = true
 
 [node name="TrickComboTimer" type="Timer" parent="." unique_id=406482767]
+wait_time = 1.5
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=858611665]
