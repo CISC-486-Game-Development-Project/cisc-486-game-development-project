@@ -239,7 +239,7 @@ material = SubResource("StandardMaterial3D_if3av")
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.5, -30)
 
 [node name="Barrel" parent="." unique_id=127053263 instance=ExtResource("7_7kucd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3330574, 1.8510174, 29.56303)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3330574, 1.8510174, 33.580196)
 
 [node name="PauseScreen" parent="." unique_id=608802068 instance=ExtResource("5_wgl67")]
 layer = 999

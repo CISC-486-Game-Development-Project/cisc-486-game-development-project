@@ -10,6 +10,7 @@
 Current Tasks:
 - Destructible objects [LOGIC DONE, DESTROY EFFECT NOT IMPLEMENTED]
 - Air Trick State? (optional, but could be fun) [DONE]
+- Make camer control based on a spring arm so it doesn't clip through the ground
 - Menu functionality, animations & stylization (pause menu, options menu, main menu, etc.)
 - Splitscreen functionality (multiplayer in game, menu to handle which controller controls which part of the screen before character select, make character select also splitscreen)
 - Spline based track prototyping system
