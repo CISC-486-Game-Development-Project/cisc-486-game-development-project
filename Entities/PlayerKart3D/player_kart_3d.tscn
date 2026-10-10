@@ -7,7 +7,7 @@
 [node name="PlayerKart3D" unique_id=32768770 node_paths=PackedStringArray("input_handler") instance=ExtResource("1_u0n23")]
 input_handler = NodePath("PlayerInputHandler")
 
-[node name="CameraController2" parent="." index="0" unique_id=587770499 instance=ExtResource("2_q6jvo")]
+[node name="CameraController" parent="." index="0" unique_id=587770499 instance=ExtResource("2_q6jvo")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2, 1.5, 30)
 
 [node name="PlayerInputHandler" type="Node" parent="." index="13" unique_id=943662880]

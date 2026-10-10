@@ -10,3 +10,4 @@ func handle_input() -> void:
 		kart.break_request = Input.is_action_pressed("Backward")
 		kart.hop_request = Input.is_action_just_pressed("Drift")
 		kart.drift_request = Input.is_action_pressed("Drift")
+		kart.camera_request = Input.get_vector("CameraLeft", "CameraRight", "CameraDown", "CameraUp")

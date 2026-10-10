@@ -67,7 +67,8 @@ var break_request: bool ## Break request to be set by an input_manager.
 var hop_request: bool ## Hop request to be set by an input_manager.
 var drift_request: bool ## Drift request to be set by an input_manager.
 var drift_dir: int ## The direction of a currently active drift. 1 = right, 0 = none, -1 = left.
-var item_request: bool ## Call to use stored item set by an input manager.
+var camera_request: Vector2 ## The vector for camera movement to be set by an input_manager.
+var item_request: bool ## Call to use stored item set by an input_manager.
 
 var steering: float ## The intensity of the current steering.
 var road_factor: float ## The intensity of the current road factor.
@@ -337,18 +338,18 @@ func can_trick() -> bool:
 	# Check logic for tricking depending on current state
 	if state_machine.current_state is DriveState:
 		if hop_request and not trick_ray_cast_3d.is_colliding():
-			#print("Trick Case 1")
+			#print("Trick Case 1 - Ledge Trick")
 			return true
 	elif state_machine.current_state is FallState:
-		if hop_request and trick_coyote_timer.time_left > 0:
-			#print("Trick Case 2")
+		if hop_request and trick_coyote_timer.time_left > 0 and not ground_ray_cast_3d.is_colliding():
+			#print("Trick Case 2 - Coyote Fall Trick")
 			return true
 	elif state_machine.current_state is HopState:
 		if trick_buffer_timer.time_left > 0 and not trick_ray_cast_3d.is_colliding():
-			#print("Trick Case 3")
+			#print("Trick Case 3 - Buffered Ledge Trick")
 			return true
 		elif trick_buffer_timer.time_left > 0 and not ground_ray_cast_3d.is_colliding():
-			#print("Trick Case 4")
+			#print("Trick Case 4 - Buffered Bump Trick")
 			return true
 	return false
 
