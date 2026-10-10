@@ -98,6 +98,7 @@ func _ready() -> void:
 		collision_shape_3d.position.y = kart.model_height / 2
 		wheels = kart.wheels
 		hurtbox = kart.hurtbox
+		hurtbox.reparent(self)
 		hurtbox.on_hit.connect(hit)
 		collision_shape_3d.shape = kart.collision_shape_3d.shape
 		
