@@ -30,7 +30,7 @@ func exit(_next_state: State) -> void:
 	entity.trick_combo_timer.start()
 	
 	# Queue boost for when the ground is hit
-	entity.queue_ground_boost(trick_boost_time * (1 + (clampi(entity.trick_combo_level - 1, 0, 5) * trick_boost_combo_multiplier)))
+	entity.queue_ground_boost(Boost.new(trick_boost_time * (1 + (clampi(entity.trick_combo_level - 1, 0, 5) * trick_boost_combo_multiplier))))
 
 func physics_update(delta: float) -> void:
 	# Handle hop movement and deceleration

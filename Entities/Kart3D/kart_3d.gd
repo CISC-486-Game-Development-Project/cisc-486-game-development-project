@@ -1,9 +1,6 @@
 class_name Kart3D
 extends CharacterBody3D
 
-# Enums
-enum TrickType { TRICK, AIR_TRICK }
-
 # Export Vars
 @export_category("Functionality")
 @export var kart_stats: KartStats ## The stats that define the kart.
@@ -26,10 +23,10 @@ enum TrickType { TRICK, AIR_TRICK }
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var wheel_base: float = 1.5 ## The diameter of the wheels.
 @export var drift_steering_multiplier: float = 1.2 ## The factor by which steer direction is multiplied while drifting.
 
-@export_group("Road Factors") # How much the kart will be affected by the terrain (top speed and accel.)
-@export var road_factor_paved: float = 0.0  
-@export var road_factor_offroad: float = 0.6
-@export var road_factor_harsh_offroad: float = 0.8    
+@export_group("offroad factors") # How much the kart will be affected by the terrain (top speed and accel.)
+@export var offroad_factor_paved: float = 0.0  
+@export var offroad_factor_offroad: float = 0.6
+@export var offroad_factor_harsh_offroad: float = 0.8    
 
 @export_group("Sound Effects")
 @export var trick_sfx: Array[AudioStream] ## SFX that will be played during sequentially comboed tricks.
@@ -71,10 +68,10 @@ var camera_request: Vector2 ## The vector for camera movement to be set by an in
 var item_request: bool ## Call to use stored item set by an input_manager.
 
 var steering: float ## The intensity of the current steering.
-var road_factor: float ## The intensity of the current road factor.
-
+var offroad_factor: float ## The intensity of the current offroad factor.
+var ignore_offroad_timer: float ## Determines whether speed calculations should ignore offroad currently.
 var boost_timer: float ## The time left in the current boost.
-var boost_queue: Array[float] ## The queue of boosts to be applied once the ground is hit.
+var boost_queue: Array[Boost] ## The queue of boosts to be applied once the ground is hit.
 
 var is_hit: bool ## True when the kart is hit.
 
@@ -115,7 +112,12 @@ func _process(delta: float) -> void:
 		if boost_timer <= 0: # Stop particles if boost is over
 			boost_particles.emitting = false
 	
-	recalculate_road_factor()
+	# Decrement ignore offroad timer when active
+	if ignore_offroad_timer > 0:
+		ignore_offroad_timer -= delta
+	
+	# Calculate offroad factor to apply
+	recalculate_offroad_factor()
 
 func _physics_process(delta: float) -> void:
 	## Step 1: Handle Input
@@ -158,7 +160,7 @@ func _handle_driving(delta: float) -> void:
 				set_boost(boost)
 			boost_queue.clear()
 	
-	if drift_request:
+	if item_request:
 		pass  ## Block of code will be used to process item if request is passed
 	
 	# Apply drag
@@ -233,9 +235,16 @@ func align_with_y(xform: Transform3D, new_y: Vector3) -> Transform3D:
 	xform.basis = xform.basis.orthonormalized()
 	return xform
 
-## Calculates the current road_factor based on terrain conditions.
-func recalculate_road_factor() -> void:
-	var total_road_factor: float = 0.0
+## Calculates the current offroad_factor based on terrain conditions.
+func recalculate_offroad_factor() -> void:
+	# Ignore offroad factor if timer running
+	if ignore_offroad_timer > 0.0:
+		if offroad_factor != 0.0:
+			offroad_factor = 0.0
+		return
+	
+	# Calculate offroad factor
+	var total_offroad_factor: float = 0.0
 	var wheels_on_ground: int = 0
 	
 	if len(wheels) > 0:
@@ -245,27 +254,27 @@ func recalculate_road_factor() -> void:
 			if wheel_terrain:
 				wheels_on_ground += 1
 				if wheel_terrain.is_in_group("Paved"):
-					total_road_factor += road_factor_paved
+					total_offroad_factor += offroad_factor_paved
 				elif wheel_terrain.is_in_group("Offroad"):
-					total_road_factor += road_factor_offroad
+					total_offroad_factor += offroad_factor_offroad
 				elif wheel_terrain.is_in_group("Harsh Offroad"):
-					total_road_factor += road_factor_harsh_offroad
+					total_offroad_factor += offroad_factor_harsh_offroad
 	else:
 		# Check ground raycast if no wheels
 		if ground_ray_cast_3d.is_colliding():
 			wheels_on_ground = 1
 			var ground_terrain = ground_ray_cast_3d.get_collider()
 			if ground_terrain.is_in_group("Paved"):
-				total_road_factor += road_factor_paved
+				total_offroad_factor += offroad_factor_paved
 			elif ground_terrain.is_in_group("Offroad"):
-				total_road_factor += road_factor_offroad
+				total_offroad_factor += offroad_factor_offroad
 			elif ground_terrain.is_in_group("Harsh Offroad"):
-				total_road_factor += road_factor_harsh_offroad
+				total_offroad_factor += offroad_factor_harsh_offroad
 	
-	# Set road_factor if different
-	var new_road_factor = total_road_factor / wheels_on_ground if wheels_on_ground > 0 else 0.0
-	if new_road_factor != road_factor:
-		road_factor = new_road_factor
+	# Set offroad_factor if different
+	var new_offroad_factor = total_offroad_factor / wheels_on_ground if wheels_on_ground > 0 else 0.0
+	if new_offroad_factor != offroad_factor:
+		offroad_factor = new_offroad_factor
 		set_stats()
 
 ###########################
@@ -273,20 +282,22 @@ func recalculate_road_factor() -> void:
 ###########################
 
 ## Sets the boost to be active for a set amount of time.
-func set_boost(time: float):
-	boost_timer = max(boost_timer, time)
+func set_boost(boost: Boost):
+	boost_timer = max(boost_timer, boost.boost_time)
+	if boost.ignore_offroad:
+		ignore_offroad_timer = max(ignore_offroad_timer, boost.boost_time)
 	if boost_timer >= 0:
 		boost_particles.emitting = true
 
 ## Queues a boost to be set once the ground is hit.
-func queue_ground_boost(time: float):
-	boost_queue.append(time)
+func queue_ground_boost(boost: Boost):
+	boost_queue.append(boost)
 
 ## Called when the kart is hit. Sets is_hit variable in order to transition to the HitState.
-func hit(hitter: Node, velocity_reduction_factor: float = 0.2, vertical_velocity_impulse: float = 3.0) -> void:
+func hit(hitter: Node, velocity_reduction_factor: float = 0.4, vertical_velocity_impulse: float = 3.0) -> void:
 	# Boost panel hit logic
 	if hitter is BoostPanel:
-		queue_ground_boost(hitter.boost_time)
+		queue_ground_boost(hitter.boost)
 	
 	# Normal hit logic
 	else:
@@ -307,11 +318,11 @@ func get_horizontal_velocity() -> Vector3:
 func set_stats() -> void:
 	## Stat Formulae
 	# Speed
-	top_speed = (20.0 + (kart_stats.base_speed / 2)) * (1 - road_factor)
-	top_reverse_speed = (8.0 + (kart_stats.base_speed / 2)) * (1 - road_factor)
+	top_speed = (20.0 + (kart_stats.base_speed / 2)) * (1 - offroad_factor)
+	top_reverse_speed = (8.0 + (kart_stats.base_speed / 2)) * (1 - offroad_factor)
 	
 	# Acceleration
-	acceleration = (12.0 + (kart_stats.base_acceleration * 2)) * (1 - road_factor)
+	acceleration = (12.0 + (kart_stats.base_acceleration * 2)) * (1 - offroad_factor)
 	
 	# Boost
 	boost_speed = (top_speed * 1.5) + (kart_stats.base_boost * 1.5)
@@ -389,10 +400,11 @@ func _update_debug_label():
 		"Coyote Timer: " + str(trick_coyote_timer.time_left > 0),
 		"Buffer Timer: " + str(trick_buffer_timer.time_left > 0),
 		"Cooldown Timer: " + str(trick_cooldown_timer.time_left > 0),
-		"Road Factor: " + str(road_factor),
 		"Trick Combo Timer: " + str(trick_combo_timer.time_left > 0),
 		"Trick Combo: " + str(str(trick_combo_level) if trick_combo_level <= 4 else str(trick_combo_level) + " (MAX)"),
 		"Boost Time Left: " + str(clamp(round(boost_timer*10)/10, 0, 100)),
+		"Ignore Offroad Time Left: " + str(clamp(round(ignore_offroad_timer*10)/10, 0, 100)),
+		"Offroad Factor: " + str(offroad_factor),
 	]
 	
 	# Apply debug texts to label
