@@ -116,7 +116,7 @@ func _process(delta: float) -> void:
 	if ignore_offroad_timer > 0:
 		ignore_offroad_timer -= delta
 	
-	# Calculate offroad factor to apply
+	# Calculate offroad factor to apply during physics calculations
 	recalculate_offroad_factor()
 
 func _physics_process(delta: float) -> void:
@@ -127,9 +127,9 @@ func _physics_process(delta: float) -> void:
 	if state_machine.current_state is not HitState:
 		_handle_driving(delta)
 		_handle_steering(delta)
+		_handle_item()
 	_align_to_ground(delta)
 	move_and_slide()
-	
 	
 	# Update Debug Label
 	_update_debug_label()
@@ -160,8 +160,9 @@ func _handle_driving(delta: float) -> void:
 				set_boost(boost)
 			boost_queue.clear()
 	
-	if item_request:
-		pass  ## Block of code will be used to process item if request is passed
+	# Bounce off walls
+	if is_on_wall():
+		_wall_bump()
 	
 	# Apply drag
 	horizontal_velocity = horizontal_velocity.lerp(Vector3.ZERO, 1 - pow(0.5, roll_friction * delta))
@@ -225,15 +226,19 @@ func _handle_steering(delta: float) -> void:
 func _align_to_ground(delta: float) -> void:
 	if is_on_floor():
 		var n = ground_ray_cast_3d.get_collision_normal()
-		var xform = align_with_y(kart_model.global_transform, n)
+		var xform = _align_with_y(kart_model.global_transform, n)
 		kart_model.global_transform = kart_model.global_transform.interpolate_with(xform, 12 * delta)
 
 ## Helper function for aligning a transform with the y of a normal vector.
-func align_with_y(xform: Transform3D, new_y: Vector3) -> Transform3D:
+func _align_with_y(xform: Transform3D, new_y: Vector3) -> Transform3D:
 	xform.basis.y = new_y
 	xform.basis.x = -xform.basis.z.cross(new_y)
 	xform.basis = xform.basis.orthonormalized()
 	return xform
+
+## Bounces off walls. Should be called when wall is hit.
+func _wall_bump() -> void:
+	pass # TODO: Implement bumping off walls like MKWorld
 
 ## Calculates the current offroad_factor based on terrain conditions.
 func recalculate_offroad_factor() -> void:
@@ -282,7 +287,7 @@ func recalculate_offroad_factor() -> void:
 ###########################
 
 ## Sets the boost to be active for a set amount of time.
-func set_boost(boost: Boost):
+func set_boost(boost: Boost) -> void:
 	boost_timer = max(boost_timer, boost.boost_time)
 	if boost.ignore_offroad:
 		ignore_offroad_timer = max(ignore_offroad_timer, boost.boost_time)
@@ -290,7 +295,7 @@ func set_boost(boost: Boost):
 		boost_particles.emitting = true
 
 ## Queues a boost to be set once the ground is hit.
-func queue_ground_boost(boost: Boost):
+func queue_ground_boost(boost: Boost) -> void:
 	boost_queue.append(boost)
 
 ## Called when the kart is hit. Sets is_hit variable in order to transition to the HitState.
@@ -305,6 +310,14 @@ func hit(hitter: Node, velocity_reduction_factor: float = 0.4, vertical_velocity
 			velocity *= velocity_reduction_factor
 			velocity.y += vertical_velocity_impulse
 		is_hit = true
+
+####################
+## Item Functions ##
+####################
+
+func _handle_item() -> void:
+	if item_request:
+		print("Item Used!")
 
 #######################
 ## Getters & Setters ##
@@ -388,7 +401,7 @@ func _on_trick_combo_timer_timeout() -> void:
 
 ## Updates the debug label's text with accurate information.
 ## Should be called every physics frame.
-func _update_debug_label():
+func _update_debug_label() -> void:
 	# Define debug texts to display
 	var debugs: Array[String] = [
 		"Velocity: " + str(roundf(velocity.length() * 10) / 10),
