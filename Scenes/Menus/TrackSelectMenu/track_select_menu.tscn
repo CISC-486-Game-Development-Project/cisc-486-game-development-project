@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dpjhad5swcika"]
 
 [ext_resource type="Script" uid="uid://b8w0n5pd41173" path="res://Scenes/Menus/TrackSelectMenu/track_select_menu.gd" id="1_cpjce"]
+[ext_resource type="PackedScene" uid="uid://p24brirrso0w" path="res://Scenes/Menus/TrackSelectMenu/track_button.tscn" id="2_08aid"]
 [ext_resource type="Texture2D" uid="uid://bl0bty04gbwjg" path="res://Assets/2D/Sprites/TrackIcons/DebugTrackIcon.png" id="4_nxhmo"]
 [ext_resource type="Texture2D" uid="uid://be457kbv51483" path="res://Assets/2D/Sprites/icon.svg" id="5_xkk6d"]
 
@@ -16,19 +17,13 @@ shadow_offset = Vector2(8, 8)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cpjce"]
 bg_color = Color(0, 0.46924525, 0.7268376, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_cpjce"]
-font_size = 48
-shadow_size = 16
-shadow_color = Color(0, 0, 0, 1)
-shadow_offset = Vector2(4, 4)
-
 [sub_resource type="LabelSettings" id="LabelSettings_cc374"]
 font_size = 64
 shadow_size = 16
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(4, 4)
 
-[node name="TrackSelectMenu" type="Control" unique_id=1328814950 node_paths=PackedStringArray("temp_next_button", "prev_button", "track_button_1", "track_button_2", "track_button_3", "track_button_4")]
+[node name="TrackSelectMenu" type="Control" unique_id=1328814950 node_paths=PackedStringArray("prev_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,12 +33,7 @@ grow_vertical = 2
 script = ExtResource("1_cpjce")
 next_scene = "uid://igg6cd4fnkgj"
 prev_scene = "uid://dujko6vu4ilbf"
-temp_next_button = NodePath("MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton1")
 prev_button = NodePath("TempBackButton")
-track_button_1 = NodePath("MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton1")
-track_button_2 = NodePath("MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton2")
-track_button_3 = NodePath("MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton3")
-track_button_4 = NodePath("MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton4")
 
 [node name="Panel" type="Panel" parent="." unique_id=104158427]
 layout_mode = 1
@@ -94,157 +84,34 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer" unique_id=600990054]
+[node name="TrackButtonContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer" unique_id=600990054]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 64
 
-[node name="TrackButton1" type="Button" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=1974582772]
+[node name="TrackButton1" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/TrackButtonContainer" unique_id=438021034 instance=ExtResource("2_08aid")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+track = "uid://igg6cd4fnkgj"
+track_name = "Debug Track"
+track_icon = ExtResource("4_nxhmo")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton1" unique_id=790868328]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton1/MarginContainer" unique_id=535217908]
+[node name="TrackButton2" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/TrackButtonContainer" unique_id=72095904 instance=ExtResource("2_08aid")]
 layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton1/MarginContainer/VBoxContainer" unique_id=675164523]
-layout_mode = 2
-size_flags_vertical = 7
-size_flags_stretch_ratio = 4.0
-texture = ExtResource("4_nxhmo")
-expand_mode = 1
-stretch_mode = 6
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton1/MarginContainer/VBoxContainer" unique_id=1407616613]
-layout_mode = 2
-size_flags_vertical = 7
-text = "Debug Track"
-label_settings = SubResource("LabelSettings_cpjce")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="TrackButton2" type="Button" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=528244172]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 disabled = true
+track_name = "Track 2"
+track_icon = ExtResource("5_xkk6d")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton2" unique_id=971378994]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton2/MarginContainer" unique_id=1944607251]
+[node name="TrackButton3" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/TrackButtonContainer" unique_id=1059642776 instance=ExtResource("2_08aid")]
 layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton2/MarginContainer/VBoxContainer" unique_id=673371096]
-layout_mode = 2
-size_flags_vertical = 7
-size_flags_stretch_ratio = 4.0
-texture = ExtResource("5_xkk6d")
-expand_mode = 1
-stretch_mode = 6
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton2/MarginContainer/VBoxContainer" unique_id=1091415686]
-layout_mode = 2
-size_flags_vertical = 7
-text = "Track 2"
-label_settings = SubResource("LabelSettings_cpjce")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="TrackButton3" type="Button" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=1321162569]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 disabled = true
+track_name = "Track 3"
+track_icon = ExtResource("5_xkk6d")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton3" unique_id=1508768810]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton3/MarginContainer" unique_id=148200732]
+[node name="TrackButton4" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/TrackButtonContainer" unique_id=414200251 instance=ExtResource("2_08aid")]
 layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton3/MarginContainer/VBoxContainer" unique_id=287900428]
-layout_mode = 2
-size_flags_vertical = 7
-size_flags_stretch_ratio = 4.0
-texture = ExtResource("5_xkk6d")
-expand_mode = 1
-stretch_mode = 6
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton3/MarginContainer/VBoxContainer" unique_id=830418059]
-layout_mode = 2
-size_flags_vertical = 7
-text = "Track 3"
-label_settings = SubResource("LabelSettings_cpjce")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="TrackButton4" type="Button" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=1853172854]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 disabled = true
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton4" unique_id=1304032538]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton4/MarginContainer" unique_id=1701832657]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton4/MarginContainer/VBoxContainer" unique_id=1339202543]
-layout_mode = 2
-size_flags_vertical = 7
-size_flags_stretch_ratio = 4.0
-texture = ExtResource("5_xkk6d")
-expand_mode = 1
-stretch_mode = 6
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TrackButton4/MarginContainer/VBoxContainer" unique_id=1789148576]
-layout_mode = 2
-size_flags_vertical = 7
-text = "Track 4"
-label_settings = SubResource("LabelSettings_cpjce")
-horizontal_alignment = 1
-vertical_alignment = 1
+track_name = "Track 4"
+track_icon = ExtResource("5_xkk6d")
 
 [node name="TempBackButton" type="Button" parent="." unique_id=1185787318]
 custom_minimum_size = Vector2(256, 128)

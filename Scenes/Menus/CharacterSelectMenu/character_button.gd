@@ -2,11 +2,13 @@
 class_name CharacterButton
 extends Button
 
+# Export Vars
 @export var character: Character:
 	set(value):
 		character = value
 		set_visuals()
 
+# Onready Vars
 @onready var label: Label = $Label
 @onready var texture_rect: TextureRect = $TextureRect
 @onready var panel: Panel = $Panel

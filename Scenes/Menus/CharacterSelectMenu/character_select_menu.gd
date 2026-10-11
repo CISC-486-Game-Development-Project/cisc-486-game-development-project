@@ -5,7 +5,6 @@ extends Control
 @export_file("*.tscn") var prev_scene: String = "res://Scenes/"
 @export var temp_next_button: Button ## Replace this with some kind of check if player has selected a kart.
 @export var prev_button: Button
-@export var character_buttons: Array[Button]
 
 # Onready Vars
 @onready var character_button_container: GridContainer = $MarginContainer/HBoxContainer/PanelContainer/MarginContainer/CharacterButtonContainer
@@ -13,8 +12,9 @@ extends Control
 @onready var name_label: Label = $MarginContainer/HBoxContainer/VBoxContainer/NameLabel
 
 # Internal Vars
+var character_buttons: Array[Button] ## The character buttons available to select.
 var player_num: int = 1 ## The player number this menu is associated with.
-var hover_kart: KartModel
+var hover_kart: KartModel ## The kart model being shown based on hover.
 
 func _ready() -> void:
 	# Get character_buttons

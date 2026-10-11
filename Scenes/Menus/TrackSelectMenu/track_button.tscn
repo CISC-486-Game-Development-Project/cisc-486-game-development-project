@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://p24brirrso0w"]
+
+[ext_resource type="Script" uid="uid://b3nrxriqg80lq" path="res://Scenes/Menus/TrackSelectMenu/track_button.gd" id="1_spsic"]
+[ext_resource type="Texture2D" uid="uid://be457kbv51483" path="res://Assets/2D/Sprites/icon.svg" id="2_spsic"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cpjce"]
+font_size = 48
+shadow_size = 16
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(4, 4)
+
+[node name="TrackButton1" type="Button" unique_id=438021034]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_spsic")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1466534635]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=679209258]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=694515490]
+layout_mode = 2
+size_flags_vertical = 7
+size_flags_stretch_ratio = 4.0
+texture = ExtResource("2_spsic")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=350169717]
+layout_mode = 2
+size_flags_vertical = 7
+text = "Track Name"
+label_settings = SubResource("LabelSettings_cpjce")
+horizontal_alignment = 1
+vertical_alignment = 1
