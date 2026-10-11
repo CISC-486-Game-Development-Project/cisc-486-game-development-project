@@ -17,10 +17,10 @@ var current_music: AudioStreamPlayer
 var current_sfx: Array = []
 var current_voices: Array = []
 
-var master_volume: float = 0.5
-var music_volume: float = 0.5
-var sfx_volume: float = 0.5
-var voice_volume: float = 0.5
+var master_volume: float = 0.75
+var music_volume: float = 0.75
+var sfx_volume: float = 0.75
+var voice_volume: float = 0.75
 
 ###################
 ## SFX Functions ##
@@ -41,7 +41,7 @@ func create_sound(sound: AudioStream, type: SoundType = SoundType.SFX) -> void:
 		current_voices.append(new_sound)
 	
 	# Connect signal to destroy once finished
-	new_sound.finished.connect(new_sound.queue_free)
+	new_sound.finished.connect(_erase_sound.bind(new_sound))
 	
 	# Add to scene and play sound
 	add_child(new_sound)
@@ -62,7 +62,7 @@ func create_sound_at_position(sound: AudioStream, location: Vector3, type: Sound
 		current_voices.append(new_sound)
 	
 	# Connect signal to destroy once finished
-	new_sound.finished.connect(new_sound.queue_free)
+	new_sound.finished.connect(_erase_sound.bind(new_sound))
 	
 	# Add to scene at position and play sound
 	add_child(new_sound)
@@ -84,11 +84,19 @@ func create_sound_with_parent(sound: AudioStream, parent: Node3D, type: SoundTyp
 		current_voices.append(new_sound)
 	
 	# Connect signal to destroy once finished
-	new_sound.finished.connect(new_sound.queue_free)
+	new_sound.finished.connect(_erase_sound.bind(new_sound))
 	
 	# Add to parent node and play sound
 	parent.add_child(new_sound)
 	new_sound.play()
+
+## Called when a sound is finished to remove it from the stored sound arrays and free the node playing the sound.
+func _erase_sound(sound: Node) -> void:
+	if sound in current_sfx:
+		current_sfx.erase(sound)
+	elif sound in current_voices:
+		current_voices.erase(sound)
+	sound.queue_free()
 
 #####################
 ## Music Functions ##
@@ -209,7 +217,8 @@ func set_voice_volume(value: float) -> void:
 ## Should be called any time a volume value is set.
 func _update_volumes() -> void:
 	# Update music volume
-	current_music.volume_linear = master_volume * music_volume
+	if current_music:
+		current_music.volume_linear = master_volume * music_volume
 	
 	# Update sfx volumes
 	for sfx in current_sfx:

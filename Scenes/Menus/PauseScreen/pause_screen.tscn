@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://htd17y0efmde"]
 
 [ext_resource type="Script" uid="uid://b0s7bnsoqfjge" path="res://Scenes/Menus/PauseScreen/pause_screen.gd" id="1_qkxxw"]
+[ext_resource type="PackedScene" uid="uid://chopbamug8408" path="res://Scenes/Menus/OptionsMenu/options_menu.tscn" id="2_25jlc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qkxxw"]
 bg_color = Color(0, 0, 0, 0.8)
@@ -19,11 +20,12 @@ shadow_offset = Vector2(4, 4)
 
 [node name="PauseScreen" type="CanvasLayer" unique_id=608802068 node_paths=PackedStringArray("resume_button", "options_button", "exit_button")]
 script = ExtResource("1_qkxxw")
-options_scene = "uid://chopbamug8408"
 exit_scene = "uid://b4byg6rmq7m24"
 resume_button = NodePath("MarginContainer/HBoxContainer/VBoxContainer/ResumeButton")
 options_button = NodePath("MarginContainer/HBoxContainer/VBoxContainer/OptionsButton")
 exit_button = NodePath("MarginContainer/HBoxContainer/VBoxContainer/ExitButton")
+
+[node name="OptionsMenu" parent="." unique_id=693100041 instance=ExtResource("2_25jlc")]
 
 [node name="Panel" type="Panel" parent="." unique_id=354774374]
 anchors_preset = 15

@@ -24,8 +24,12 @@ shadow_size = 16
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(4, 4)
 
-[node name="OptionsMenu" type="CanvasLayer" unique_id=693100041]
+[node name="OptionsMenu" type="CanvasLayer" unique_id=693100041 node_paths=PackedStringArray("master_volume_slider", "music_volume_slider", "sfx_volume_slider", "voice_volume_slider")]
 script = ExtResource("1_6iikp")
+master_volume_slider = NodePath("OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer/Master/HSlider")
+music_volume_slider = NodePath("OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer/Music/HSlider")
+sfx_volume_slider = NodePath("OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer/SFX/HSlider")
+voice_volume_slider = NodePath("OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer/Voices/HSlider")
 
 [node name="BackgroundPanel" type="Panel" parent="." unique_id=1204713798]
 anchors_preset = 15
@@ -122,9 +126,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 5.0
-value = 100.0
-rounded = true
-tick_count = 100
+max_value = 1.0
+step = 0.01
+tick_count = 101
+ticks_on_borders = true
 ticks_position = 2
 
 [node name="Music" type="HBoxContainer" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer" unique_id=1278897561]
@@ -145,9 +150,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 5.0
-value = 100.0
-rounded = true
-tick_count = 100
+max_value = 1.0
+step = 0.01
+tick_count = 101
+ticks_on_borders = true
 ticks_position = 2
 
 [node name="SFX" type="HBoxContainer" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer" unique_id=518904121]
@@ -168,9 +174,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 5.0
-value = 100.0
-rounded = true
-tick_count = 100
+max_value = 1.0
+step = 0.01
+tick_count = 101
+ticks_on_borders = true
 ticks_position = 2
 
 [node name="Voices" type="HBoxContainer" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume/VBoxContainer" unique_id=45080221]
@@ -191,9 +198,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 5.0
-value = 100.0
-rounded = true
-tick_count = 100
+max_value = 1.0
+step = 0.01
+tick_count = 101
+ticks_on_borders = true
 ticks_position = 2
 
 [node name="Miscellaneous" type="MarginContainer" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1697458373]
