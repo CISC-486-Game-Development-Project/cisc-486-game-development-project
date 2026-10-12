@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://chopbamug8408" path="res://Scenes/Menus/OptionsMenu/options_menu.tscn" id="3_yobja"]
 [ext_resource type="AudioStream" uid="uid://5iedummhc3e6" path="res://Assets/Audio/Music/MainMenu/KartMenuPhase2.wav" id="4_rbcii"]
 [ext_resource type="AudioStream" uid="uid://bi0eloy60w58n" path="res://Assets/Audio/Music/MainMenu/KartMenuPhase3.wav" id="5_eols4"]
+[ext_resource type="Script" uid="uid://dwdnygslhrnq3" path="res://Components/MenuParts/UIProperties/center_pivot.gd" id="6_rbcii"]
 
 [sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_2v5bn"]
 stream_count = 3
@@ -102,6 +103,10 @@ label_settings = SubResource("LabelSettings_t5fsa")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="CenterPivot" type="Node" parent="MarginContainer/HBoxContainer/ButtonContainer/SingleplayerButton" unique_id=1415621067]
+script = ExtResource("6_rbcii")
+metadata/_custom_type_script = "uid://dwdnygslhrnq3"
+
 [node name="MultiplayerButton" type="Button" parent="MarginContainer/HBoxContainer/ButtonContainer" unique_id=1746182648]
 layout_mode = 2
 size_flags_vertical = 3
@@ -117,6 +122,10 @@ text = "Multiplayer"
 label_settings = SubResource("LabelSettings_t5fsa")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="CenterPivot" type="Node" parent="MarginContainer/HBoxContainer/ButtonContainer/MultiplayerButton" unique_id=1884225328]
+script = ExtResource("6_rbcii")
+metadata/_custom_type_script = "uid://dwdnygslhrnq3"
 
 [node name="OptionsButton" type="Button" parent="MarginContainer/HBoxContainer/ButtonContainer" unique_id=2117550020]
 layout_mode = 2
@@ -134,6 +143,10 @@ label_settings = SubResource("LabelSettings_t5fsa")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="CenterPivot" type="Node" parent="MarginContainer/HBoxContainer/ButtonContainer/OptionsButton" unique_id=1657019742]
+script = ExtResource("6_rbcii")
+metadata/_custom_type_script = "uid://dwdnygslhrnq3"
+
 [node name="QuitButton" type="Button" parent="MarginContainer/HBoxContainer/ButtonContainer" unique_id=1379466379]
 layout_mode = 2
 size_flags_vertical = 3
@@ -149,6 +162,10 @@ text = "Quit"
 label_settings = SubResource("LabelSettings_t5fsa")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="CenterPivot" type="Node" parent="MarginContainer/HBoxContainer/ButtonContainer/QuitButton" unique_id=404184261]
+script = ExtResource("6_rbcii")
+metadata/_custom_type_script = "uid://dwdnygslhrnq3"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=24917810]
 layout_mode = 2

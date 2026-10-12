@@ -9,10 +9,10 @@
 
 Current Tasks:
 - Destructible objects [LOGIC DONE, DESTROY EFFECT NOT IMPLEMENTED]
-- Air Trick State? (optional, but could be fun) [DONE]
 - Make camera control based on a spring arm so it doesn't clip through the ground
 - Menu functionality, animations & stylization (pause menu, options menu, main menu, etc.)
-- Splitscreen functionality (multiplayer in game, menu to handle which controller controls which part of the screen before character select, make character select also splitscreen)
+- Fix CenterPivot: visibly incorrect pivot when first entering a menu, plus having to set pivot every frame doesn't make sense, there should be an easier solution
+- Splitscreen functionality (multiplayer in game, menu to handle which controller controls which part of the screen before character select, make character select also splitscreen) [DONE]
 - Spline based track prototyping system
 - Fix how handling stat effects drifting so it's more intuitive (also fix: boosts make turning way faster for some reason)
 

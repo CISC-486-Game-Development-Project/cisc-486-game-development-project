@@ -15,7 +15,7 @@ extends Button
 
 # Onready Vars
 @onready var label: Label = $MarginContainer/VBoxContainer/Label
-@onready var texture_rect: TextureRect = $MarginContainer/VBoxContainer/TextureRect
+@onready var texture_rect: TextureRect = $MarginContainer/VBoxContainer/PanelContainer/TextureRect
 
 func _ready() -> void:
 	set_visuals()

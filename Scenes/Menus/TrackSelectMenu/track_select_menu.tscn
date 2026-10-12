@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b8w0n5pd41173" path="res://Scenes/Menus/TrackSelectMenu/track_select_menu.gd" id="1_cpjce"]
 [ext_resource type="PackedScene" uid="uid://p24brirrso0w" path="res://Scenes/Menus/TrackSelectMenu/track_button.tscn" id="2_08aid"]
 [ext_resource type="Texture2D" uid="uid://bl0bty04gbwjg" path="res://Assets/2D/Sprites/TrackIcons/DebugTrackIcon.png" id="4_nxhmo"]
-[ext_resource type="Texture2D" uid="uid://jqk7pn4vcrx0" path="res://Assets/2D/Sprites/Menus/back_arrow.png" id="5_rnkhu"]
+[ext_resource type="PackedScene" uid="uid://cg4k2bd82eaol" path="res://Components/MenuParts/IconButtons/back_button.tscn" id="5_rnkhu"]
 [ext_resource type="Texture2D" uid="uid://be457kbv51483" path="res://Assets/2D/Sprites/icon.svg" id="5_xkk6d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rixt3"]
@@ -17,6 +17,10 @@ shadow_offset = Vector2(8, 8)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cpjce"]
 bg_color = Color(0, 0.46924525, 0.7268376, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
 
 [node name="TrackSelectMenu" type="Control" unique_id=1328814950 node_paths=PackedStringArray("back_button")]
 layout_mode = 3
@@ -74,12 +78,12 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_cpjce")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer" unique_id=1163452903]
 layout_mode = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
 
-[node name="TrackButtonContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer" unique_id=600990054]
+[node name="TrackButtonContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer" unique_id=84716039]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 64
@@ -108,37 +112,7 @@ disabled = true
 track_name = "Track 4"
 track_icon = ExtResource("5_xkk6d")
 
-[node name="BackButton" type="Button" parent="." unique_id=1185787318]
-custom_minimum_size = Vector2(128, 128)
+[node name="BackButton" parent="." unique_id=1382448741 instance=ExtResource("5_rnkhu")]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-offset_transform_enabled = true
-offset_transform_position = Vector2(16, 16)
-offset_transform_visual_only = false
-flat = true
-
-[node name="TextureRectShadow" type="TextureRect" parent="BackButton" unique_id=966806556]
-modulate = Color(0, 0, 0, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-offset_transform_enabled = true
-offset_transform_position = Vector2(10, 10)
-texture = ExtResource("5_rnkhu")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="TextureRect" type="TextureRect" parent="BackButton" unique_id=386042882]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_rnkhu")
-expand_mode = 1
-stretch_mode = 5
+offset_right = 150.0
+offset_bottom = 150.0

@@ -8,7 +8,6 @@ class_name CameraController extends Node3D
 
 # Onready Vars
 @onready var target := $".." ## The follow target of the camera.
-@onready var camera := $Camera3D ## The camera to be controlled.
 
 # Internal Vars
 var is_following_kart: bool = true

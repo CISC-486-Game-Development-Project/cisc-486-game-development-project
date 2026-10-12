@@ -2,19 +2,33 @@
 
 [ext_resource type="Texture2D" uid="uid://be457kbv51483" path="res://Assets/2D/Sprites/icon.svg" id="1_0dkj1"]
 [ext_resource type="Script" uid="uid://dc5qvfp2tjtj3" path="res://Scenes/Menus/CharacterSelectMenu/character_button.gd" id="1_pgjgr"]
+[ext_resource type="Script" uid="uid://dwdnygslhrnq3" path="res://Components/MenuParts/UIProperties/center_pivot.gd" id="3_7myq1"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xvvda"]
-bg_color = Color(0.28842413, 0.63370335, 0.8693449, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0dkj1"]
+bg_color = Color(0.2901961, 0.63529414, 0.87058824, 1)
 corner_radius_top_left = 64
 corner_radius_top_right = 64
 corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
+expand_margin_left = 16.0
+expand_margin_top = 16.0
+expand_margin_right = 16.0
+expand_margin_bottom = 16.0
 
-[sub_resource type="LabelSettings" id="LabelSettings_q3uil"]
-font_size = 48
-shadow_size = 16
-shadow_color = Color(0, 0, 0, 1)
-shadow_offset = Vector2(4, 4)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7myq1"]
+bg_color = Color(0.2901961, 0.63529414, 0.87058824, 0)
+border_width_left = 16
+border_width_top = 16
+border_width_right = 16
+border_width_bottom = 16
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+expand_margin_left = 16.0
+expand_margin_top = 16.0
+expand_margin_right = 16.0
+expand_margin_bottom = 16.0
 
 [node name="CharacterButton" type="Button" unique_id=655394739]
 anchors_preset = 15
@@ -24,42 +38,16 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-flat = true
+theme_override_styles/normal = SubResource("StyleBoxFlat_0dkj1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0dkj1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0dkj1")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_0dkj1")
+theme_override_styles/focus = SubResource("StyleBoxFlat_7myq1")
+icon = ExtResource("1_0dkj1")
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("1_pgjgr")
 
-[node name="Panel" type="Panel" parent="." unique_id=1293782023]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_xvvda")
-
-[node name="TextureRect" type="TextureRect" parent="." unique_id=2010298860]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_0dkj1")
-expand_mode = 1
-stretch_mode = 6
-
-[node name="Label" type="Label" parent="." unique_id=945231567]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Default
-Kart"
-label_settings = SubResource("LabelSettings_q3uil")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="CenterPivot" type="Node" parent="." unique_id=2115707577]
+script = ExtResource("3_7myq1")
+metadata/_custom_type_script = "uid://dwdnygslhrnq3"

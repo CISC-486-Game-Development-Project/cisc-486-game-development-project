@@ -2,8 +2,10 @@
 
 [ext_resource type="Script" uid="uid://cy83tt76elj41" path="res://Scenes/Menus/CharacterSelectMenu/character_select_menu.gd" id="1_hk7je"]
 [ext_resource type="PackedScene" uid="uid://d06ii74wx6vgl" path="res://Scenes/KartModels/basic_kart.tscn" id="4_0fmip"]
+[ext_resource type="Texture2D" uid="uid://c1lxdn14k7ogk" path="res://Assets/2D/Sprites/CharacterIcons/DefaultKartIcon.png" id="4_p6l55"]
 [ext_resource type="PackedScene" uid="uid://bjoxa6ritw47n" path="res://Scenes/Menus/CharacterSelectMenu/character_button.tscn" id="5_2k24t"]
-[ext_resource type="Texture2D" uid="uid://jqk7pn4vcrx0" path="res://Assets/2D/Sprites/Menus/back_arrow.png" id="6_0fmip"]
+[ext_resource type="PackedScene" uid="uid://cg4k2bd82eaol" path="res://Components/MenuParts/IconButtons/back_button.tscn" id="6_0fmip"]
+[ext_resource type="Texture2D" uid="uid://chu7hsk5m2y25" path="res://Assets/2D/Sprites/CharacterIcons/PawnIcon.png" id="6_d15w1"]
 [ext_resource type="Resource" uid="uid://ulcs3tytsjl0" path="res://Resources/Character/pawn_character.tres" id="7_7tf73"]
 [ext_resource type="Resource" uid="uid://k5txr2vfhnjr" path="res://Resources/Character/default_character.tres" id="7_d15w1"]
 
@@ -184,64 +186,42 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_t4f5k")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/PanelContainer" unique_id=1601216186]
 layout_mode = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 48
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 48
 
 [node name="CharacterButtonContainer" type="GridContainer" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer" unique_id=808808900]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
+theme_override_constants/h_separation = 64
+theme_override_constants/v_separation = 64
 columns = 2
 
 [node name="CharacterButton" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/CharacterButtonContainer" unique_id=655394739 instance=ExtResource("5_2k24t")]
 layout_mode = 2
+icon = ExtResource("4_p6l55")
 character = ExtResource("7_d15w1")
 
 [node name="CharacterButton2" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/CharacterButtonContainer" unique_id=1930832544 instance=ExtResource("5_2k24t")]
 layout_mode = 2
+icon = ExtResource("6_d15w1")
 character = ExtResource("7_7tf73")
 
 [node name="CharacterButton3" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/CharacterButtonContainer" unique_id=1591130101 instance=ExtResource("5_2k24t")]
 layout_mode = 2
+icon = ExtResource("4_p6l55")
 character = ExtResource("7_d15w1")
 
 [node name="CharacterButton4" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/CharacterButtonContainer" unique_id=1738604612 instance=ExtResource("5_2k24t")]
 layout_mode = 2
+icon = ExtResource("4_p6l55")
 character = ExtResource("7_d15w1")
 
-[node name="BackButton" type="Button" parent="." unique_id=707318638]
-custom_minimum_size = Vector2(128, 128)
+[node name="BackButton" parent="." unique_id=1382448741 instance=ExtResource("6_0fmip")]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-offset_transform_enabled = true
-offset_transform_position = Vector2(16, 16)
-offset_transform_visual_only = false
-flat = true
-
-[node name="TextureRectShadow" type="TextureRect" parent="BackButton" unique_id=1071994874]
-modulate = Color(0, 0, 0, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-offset_transform_enabled = true
-offset_transform_position = Vector2(10, 10)
-texture = ExtResource("6_0fmip")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="TextureRect" type="TextureRect" parent="BackButton" unique_id=1580510329]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_0fmip")
-expand_mode = 1
-stretch_mode = 5
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 166.0
+offset_bottom = 166.0

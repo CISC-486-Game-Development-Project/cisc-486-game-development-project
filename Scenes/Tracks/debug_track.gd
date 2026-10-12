@@ -1,3 +1,5 @@
+## This script is entirely placeholder code for before a proper track/race system is implemented.
+## Everything is subject to change and not indicative of any final product.
 extends Node3D
 
 @export var track_music: AudioStream ## Music to play while on this track.

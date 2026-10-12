@@ -55,8 +55,10 @@ func _handle_joypads() -> void:
 	# Disable ability to progress to next menu if only one joypad
 	if len(joypads) > 1:
 		next_button.disabled = false
+		#next_button.self_modulate = Color(0.5, 0.5, 0.5, 1.0)
 	else:
 		next_button.disabled = true
+		#next_button.self_modulate = Color(1.0, 1.0, 1.0, 1.0)
 	
 	# Set visuals for joypads
 	for i in range(4):

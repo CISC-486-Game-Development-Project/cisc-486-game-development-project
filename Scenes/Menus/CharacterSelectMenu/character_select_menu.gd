@@ -1,7 +1,9 @@
 extends Control
 
 # Constants
-const TWEEN_TIME: float = 0.5
+const SELECT_TWEEN_TIME: float = 0.5
+const FOCUS_TWEEN_TIME: float = 0.1
+const FOCUS_TWEEN_SCALE: float = 1.1
 
 # Export Vars
 @export_file("*.tscn") var next_scene: String = "res://Scenes/"
@@ -20,6 +22,7 @@ var player_num: int = 1 ## The player currently selecting a character.
 var hover_karts: Array[KartModel] = [null, null, null, null] ## The kart models being shown based on hover.
 var sub_viewports: Array[SubViewport] ## An array of the subviewports.
 var select_tweens: Array[Tween] = [null, null, null, null] ## Tweens that play when a character is selected.
+var current_focus: Control
 
 func _ready() -> void:
 	# Get character_buttons & sub_viewports
@@ -51,6 +54,8 @@ func _ready() -> void:
 		character_buttons[i].focus_entered.connect(hover_character.bind(character_buttons[i]))
 		character_buttons[i].mouse_entered.connect(character_buttons[i].grab_focus)
 	
+	get_viewport().gui_focus_changed.connect(_on_focus_changed)
+	
 	# Focus first button
 	character_buttons[0].grab_focus()
 	
@@ -79,7 +84,7 @@ func select_character(button: CharacterButton) -> void:
 	# Play tween animation & progress character selection process
 	if hover_karts[player_num-1]:
 		select_tweens[player_num-1] = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-		select_tweens[player_num-1].tween_property(hover_karts[player_num-1], "rotation_degrees", Vector3(0,220,0), TWEEN_TIME)
+		select_tweens[player_num-1].tween_property(hover_karts[player_num-1], "rotation_degrees", Vector3(0,220,0), SELECT_TWEEN_TIME)
 		_progress_selection()
 
 ## Called when a character is deselected.
@@ -152,6 +157,25 @@ func _reset_focus() -> void:
 	if character_buttons[0].has_focus():
 		character_buttons[0].release_focus()
 	character_buttons[0].grab_focus()
+
+## Called when focused control changes. Uses tweens to accentuate focused control.
+func _on_focus_changed(new_focus: Control) -> void:
+	# Create new tween
+	var tween: Tween = get_tree().create_tween().set_parallel()
+	
+	# Return old focus to normal
+	if current_focus:
+		tween.tween_property(current_focus, "scale", Vector2(1,1), FOCUS_TWEEN_TIME)
+	
+	# Set new focus
+	current_focus = new_focus
+	
+	# Return if new_focus isn't one of the menu buttons
+	if not new_focus in character_buttons:
+		return
+	
+	# Enlarge new focus
+	tween.tween_property(current_focus, "scale", Vector2(FOCUS_TWEEN_SCALE, FOCUS_TWEEN_SCALE), FOCUS_TWEEN_TIME)
 
 ## Called when all characters are selected.
 func _next_scene() -> void:
