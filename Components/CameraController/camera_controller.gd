@@ -35,6 +35,7 @@ func _handle_kart_camera(delta: float) -> void:
 		is_following_kart = false
 		rotation.y += target.camera_request.x * rotation_multiplier * delta
 		rotation.x += target.camera_request.y * rotation_multiplier * delta
+		rotation_degrees.x = clampf(rotation_degrees.x, -45, 45)
 	elif is_following_kart:
 		rotation.y = lerp_angle(rotation.y, target.global_rotation.y, rotation_smoothing)
 		rotation.x = lerp_angle(rotation.x, 0, rotation_smoothing)
