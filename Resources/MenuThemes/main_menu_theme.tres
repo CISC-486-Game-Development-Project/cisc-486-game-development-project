@@ -8,13 +8,13 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tjevy"]
-bg_color = Color(0.3297306, 0.6186119, 0.91389346, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l5q0j"]
+bg_color = Color(0.9490196, 0.60784316, 0.3372549, 1)
 skew = Vector2(0.5, 0)
-border_width_left = 8
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
+border_width_left = 16
+border_width_top = 16
+border_width_right = 16
+border_width_bottom = 16
 border_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
@@ -23,7 +23,7 @@ corner_radius_bottom_left = 16
 
 [resource]
 Button/styles/disabled = SubResource("StyleBoxFlat_xvvda")
-Button/styles/focus = SubResource("StyleBoxFlat_tjevy")
+Button/styles/focus = SubResource("StyleBoxFlat_l5q0j")
 Button/styles/hover = SubResource("StyleBoxFlat_xvvda")
 Button/styles/normal = SubResource("StyleBoxFlat_xvvda")
 Button/styles/pressed = SubResource("StyleBoxFlat_xvvda")
