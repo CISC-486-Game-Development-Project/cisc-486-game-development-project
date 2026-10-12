@@ -171,7 +171,8 @@ func _on_focus_changed(new_focus: Control) -> void:
 	current_focus = new_focus
 	
 	# Return if new_focus isn't one of the menu buttons
-	if not new_focus in character_buttons:
+	print(character_buttons)
+	if not (new_focus in character_buttons):
 		return
 	
 	# Enlarge new focus

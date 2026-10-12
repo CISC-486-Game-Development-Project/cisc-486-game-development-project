@@ -58,7 +58,7 @@ func _on_focus_changed(new_focus: Control) -> void:
 	current_focus = new_focus
 	
 	# Return if new_focus isn't one of the menu buttons
-	if not new_focus in track_buttons:
+	if not (new_focus in track_buttons):
 		return
 	
 	# Enlarge new focus

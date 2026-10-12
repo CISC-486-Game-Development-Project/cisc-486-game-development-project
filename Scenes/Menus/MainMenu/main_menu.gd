@@ -43,6 +43,7 @@ func _ready() -> void:
 	AudioManager.change_sync_track(0, 1)
 	
 	# Load scenes
+	#SceneManager.load_scene(prev_scene)
 	SceneManager.load_scene(singleplayer_scene)
 	SceneManager.load_scene(multiplayer_scene)
 
@@ -91,7 +92,7 @@ func _on_focus_changed(new_focus: Control) -> void:
 	current_focus = new_focus
 	
 	# Return if new_focus isn't one of the menu buttons
-	if not new_focus in button_container.get_children():
+	if not (new_focus in button_container.get_children()):
 		return
 	
 	# Enlarge new focus

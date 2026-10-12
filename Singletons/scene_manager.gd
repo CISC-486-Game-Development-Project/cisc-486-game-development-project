@@ -37,7 +37,7 @@ func _process(_delta: float) -> void:
 
 func load_scene(scene_path: String, use_sub_threads: bool = false):
 	if scene_path in errored_loads:
-		printerr("Trying to load scene which has already failed to load")
+		printerr("Trying to load scene which has already failed to load.")
 	if scene_path in loaded_scenes.keys():
 		return
 	in_process_loads[scene_path] = 0.0
@@ -48,9 +48,9 @@ func load_scene(scene_path: String, use_sub_threads: bool = false):
 
 func change_scene(scene_path: String, animation := FADE, disable_until_ready := true):
 	if scene_path in errored_loads:
-		printerr("Trying to change to scene which has already failed to load")
+		printerr("Trying to change to scene which has already failed to load.")
 	if scene_path not in loaded_scenes.keys() and scene_path not in in_process_loads.keys():
-		print("Shouldn't be happenning rn")
+		push_warning("Scene not loaded, load_scene() should be called before attemping to change to this scene.")
 		load_scene(scene_path)
 	# At this point the scene is either loaded or in the process of being loaded
 	# This is where anything that doesn't require the scene to be loaded should be done
@@ -62,7 +62,7 @@ func change_scene(scene_path: String, animation := FADE, disable_until_ready := 
 	
 	# Wait until the scene is loaded
 	if scene_path not in loaded_scenes.keys():
-		print("Weird")
+		push_warning("Scene not loaded, awaiting scene load...")
 		waiting_for_scene = scene_path
 		await _awaited_scene_loaded
 	
