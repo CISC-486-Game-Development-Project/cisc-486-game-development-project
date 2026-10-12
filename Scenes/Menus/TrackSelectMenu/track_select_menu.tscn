@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b8w0n5pd41173" path="res://Scenes/Menus/TrackSelectMenu/track_select_menu.gd" id="1_cpjce"]
 [ext_resource type="PackedScene" uid="uid://p24brirrso0w" path="res://Scenes/Menus/TrackSelectMenu/track_button.tscn" id="2_08aid"]
 [ext_resource type="Texture2D" uid="uid://bl0bty04gbwjg" path="res://Assets/2D/Sprites/TrackIcons/DebugTrackIcon.png" id="4_nxhmo"]
+[ext_resource type="Texture2D" uid="uid://jqk7pn4vcrx0" path="res://Assets/2D/Sprites/Menus/back_arrow.png" id="5_rnkhu"]
 [ext_resource type="Texture2D" uid="uid://be457kbv51483" path="res://Assets/2D/Sprites/icon.svg" id="5_xkk6d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rixt3"]
@@ -17,13 +18,7 @@ shadow_offset = Vector2(8, 8)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cpjce"]
 bg_color = Color(0, 0.46924525, 0.7268376, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_cc374"]
-font_size = 64
-shadow_size = 16
-shadow_color = Color(0, 0, 0, 1)
-shadow_offset = Vector2(4, 4)
-
-[node name="TrackSelectMenu" type="Control" unique_id=1328814950 node_paths=PackedStringArray("prev_button")]
+[node name="TrackSelectMenu" type="Control" unique_id=1328814950 node_paths=PackedStringArray("back_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,7 +28,7 @@ grow_vertical = 2
 script = ExtResource("1_cpjce")
 next_scene = "uid://igg6cd4fnkgj"
 prev_scene = "uid://dujko6vu4ilbf"
-prev_button = NodePath("TempBackButton")
+back_button = NodePath("BackButton")
 
 [node name="Panel" type="Panel" parent="." unique_id=104158427]
 layout_mode = 1
@@ -113,20 +108,37 @@ disabled = true
 track_name = "Track 4"
 track_icon = ExtResource("5_xkk6d")
 
-[node name="TempBackButton" type="Button" parent="." unique_id=1185787318]
-custom_minimum_size = Vector2(256, 128)
+[node name="BackButton" type="Button" parent="." unique_id=1185787318]
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(16, 16)
+offset_transform_visual_only = false
+flat = true
 
-[node name="Label" type="Label" parent="TempBackButton" unique_id=1518608882]
+[node name="TextureRectShadow" type="TextureRect" parent="BackButton" unique_id=966806556]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Back"
-label_settings = SubResource("LabelSettings_cc374")
-horizontal_alignment = 1
-vertical_alignment = 1
+offset_transform_enabled = true
+offset_transform_position = Vector2(10, 10)
+texture = ExtResource("5_rnkhu")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="BackButton" unique_id=386042882]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_rnkhu")
+expand_mode = 1
+stretch_mode = 5

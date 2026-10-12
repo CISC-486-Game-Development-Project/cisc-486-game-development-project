@@ -3,7 +3,7 @@ class_name TrackButton
 extends Button
 
 # Export Vars
-@export_file("*.tscn") var track: String = "res://Scenes/Tracks" ## The track this button references.
+@export_file("*.tscn") var track: String = "res://Scenes/Tracks/" ## The track this button references.
 @export var track_name: String: ## The name of the track to be displayed
 	set(value):
 		track_name = value

@@ -5,8 +5,11 @@ const FOCUS_TWEEN_TIME: float = 0.1
 const FOCUS_TWEEN_SCALE: float = 1.1
 
 # Export Vars
-@export_file("*.tscn") var start_scene: String = "res://Scenes/"
-@export var start_button: Button
+@export_file("*.tscn") var singleplayer_scene: String = "res://Scenes/"
+@export_file("*.tscn") var multiplayer_scene: String = "res://Scenes/"
+@export_file("*.tscn") var prev_scene: String = "res://Scenes/"
+@export var singleplayer_button: Button
+@export var multiplayer_button: Button
 @export var options_button: Button
 @export var quit_button: Button
 @export var menu_music: AudioStream
@@ -20,7 +23,8 @@ var current_focus: Control
 
 func _ready() -> void:
 	# Connect button signals
-	start_button.pressed.connect(_on_start_pressed)
+	singleplayer_button.pressed.connect(_on_singleplayer_pressed)
+	multiplayer_button.pressed.connect(_on_multiplayer_pressed)
 	options_button.pressed.connect(_on_options_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
 	
@@ -36,14 +40,27 @@ func _ready() -> void:
 	
 	# Play menu music and/or set sync stream
 	AudioManager.change_bgm(menu_music)
-	AudioManager.change_sync_track()
+	AudioManager.change_sync_track(0, 1)
 	
 	# Load scenes
-	SceneManager.load_scene(start_scene)
+	SceneManager.load_scene(singleplayer_scene)
+	SceneManager.load_scene(multiplayer_scene)
 
-## Called when the start button is pressed.
-func _on_start_pressed() -> void:
-	SceneManager.change_scene(start_scene, SceneManager.SLIDE_FORWARD)
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		if options_menu.visible:
+			options_menu.hide_menu()
+		else:
+			_prev_scene()
+
+## Called when the singleplayer button is pressed.
+func _on_singleplayer_pressed() -> void:
+	Globals.player_count = 1
+	SceneManager.change_scene(singleplayer_scene, SceneManager.SLIDE_FORWARD)
+
+## Called when the multiplayer button is pressed.
+func _on_multiplayer_pressed() -> void:
+	SceneManager.change_scene(multiplayer_scene, SceneManager.SLIDE_FORWARD)
 
 ## Called when the options button is pressed.
 func _on_options_pressed() -> void:
@@ -53,9 +70,13 @@ func _on_options_pressed() -> void:
 func _on_quit_pressed() -> void:
 	get_tree().quit()
 
+## Called when going backwards in the menu order.
+func _prev_scene() -> void:
+	SceneManager.change_scene(prev_scene, SceneManager.SLIDE_BACKWARD)
+
 ## Called when focus is unclaimed.
 func _claim_focus() -> void:
-	start_button.grab_focus()
+	singleplayer_button.grab_focus()
 
 ## Called when focused control changes. Uses tweens to accentuate focused control.
 func _on_focus_changed(new_focus: Control) -> void:

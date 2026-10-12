@@ -37,7 +37,7 @@ shadow_size = 16
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(8, 8)
 
-[node name="MainMenu" type="Control" unique_id=1982336967 node_paths=PackedStringArray("start_button", "options_button", "quit_button")]
+[node name="MainMenu" type="Control" unique_id=1982336967 node_paths=PackedStringArray("singleplayer_button", "multiplayer_button", "options_button", "quit_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -46,8 +46,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_gphap")
 script = ExtResource("1_yo6co")
-start_scene = "uid://dujko6vu4ilbf"
-start_button = NodePath("MarginContainer/HBoxContainer/ButtonContainer/SingleplayerButton")
+singleplayer_scene = "uid://dujko6vu4ilbf"
+multiplayer_scene = "uid://t53q73wn2lwv"
+prev_scene = "uid://vv680s1adm4y"
+singleplayer_button = NodePath("MarginContainer/HBoxContainer/ButtonContainer/SingleplayerButton")
+multiplayer_button = NodePath("MarginContainer/HBoxContainer/ButtonContainer/MultiplayerButton")
 options_button = NodePath("MarginContainer/HBoxContainer/ButtonContainer/OptionsButton")
 quit_button = NodePath("MarginContainer/HBoxContainer/ButtonContainer/QuitButton")
 menu_music = SubResource("AudioStreamSynchronized_2v5bn")

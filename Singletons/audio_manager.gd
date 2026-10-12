@@ -4,7 +4,7 @@ extends Node3D
 # Constants
 const SYNC_ZERO_VOLUME: float = -60.0 ## The muted volume for when a sync track is not playing.
 const SYNC_BASE_VOLUME: float = 0.0 ## The normal volume for when a sync track is playing.
-const CROSSFADE_TIME: float = 0.1 ## The time it takes to crossfade between tracks.
+const DEFAULT_CROSSFADE_TIME: float = 0.1 ## The default time it takes to crossfade between tracks.
 
 # Enums
 enum SoundType {
@@ -14,6 +14,7 @@ enum SoundType {
 
 # Internal Vars
 var current_music: AudioStreamPlayer
+var current_sync_index: int
 var current_sfx: Array = []
 var current_voices: Array = []
 
@@ -103,7 +104,7 @@ func _erase_sound(sound: Node) -> void:
 #####################
 
 ## Changes the background music to a specified track.
-func change_bgm(music: AudioStream, crossfade: bool = true, force_restart: bool = false) -> void:
+func change_bgm(music: AudioStream, crossfade: bool = true, force_restart: bool = false, crossfade_time: float = DEFAULT_CROSSFADE_TIME) -> void:
 	# Don't change bgm if music is the same as current_music unless force_restart is true
 	if current_music and not force_restart:
 		if current_music.stream == music:
@@ -125,6 +126,7 @@ func change_bgm(music: AudioStream, crossfade: bool = true, force_restart: bool 
 		for i in range(sync.get_stream_count()):
 			sync.set_sync_stream_volume(i, SYNC_ZERO_VOLUME)
 		sync.set_sync_stream_volume(0, SYNC_BASE_VOLUME)
+		current_sync_index = 0
 	
 	# Add to scene, play music, and set as current_music
 	add_child(new_music)
@@ -141,7 +143,7 @@ func change_bgm(music: AudioStream, crossfade: bool = true, force_restart: bool 
 			func(time: float) -> void: # Lambda function for crossfading between streams over time in a tween.
 				old_music.volume_linear = old_volume * cos(time * PI * 0.5)
 				new_music.volume_linear = target_volume * sin(time * PI * 0.5),
-			0.0, 1.0, CROSSFADE_TIME
+			0.0, 1.0, crossfade_time
 		)
 		fade_tween.tween_callback(old_music.queue_free) # Free old_music once crossfade is finished
 	elif old_music:
@@ -152,11 +154,23 @@ func stop_bgm() -> void:
 	if current_music:
 		current_music.queue_free()
 
+## Stops all currently playing sfx & voices.
+func stop_all_sounds() -> void:
+	for sfx in current_sfx:
+		_erase_sound(sfx)
+	for voice in current_voices:
+		_erase_sound(voice)
+
 ## Changes the sync track if music is an AudioStreamSynchronized.
-func change_sync_track(track_index: int = 0) -> void:
+func change_sync_track(track_index: int = 0, crossfade_time: float = DEFAULT_CROSSFADE_TIME) -> void:
 	# Only operate on AudioStreamSyncronized
 	if not current_music.stream is AudioStreamSynchronized:
 		return
+	
+	# Do nothing if track_index is already the current_sync_index
+	if track_index == current_sync_index:
+		return
+	current_sync_index = track_index
 	
 	# Initialize variables
 	var sync := current_music.stream as AudioStreamSynchronized
@@ -182,7 +196,7 @@ func change_sync_track(track_index: int = 0) -> void:
 				
 				# Avoid converting zero to -INF dB.
 				sync.set_sync_stream_volume(i, linear_to_db(maxf(gain, 0.0001))),
-		0.0, 1.0, CROSSFADE_TIME
+		0.0, 1.0, crossfade_time
 	)
 
 ####################

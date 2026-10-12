@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bfdd58efg72wk" path="res://Scenes/TrackParts/BoostPanel/boost_panel.tscn" id="4_7kucd"]
 [ext_resource type="PackedScene" uid="uid://htd17y0efmde" path="res://Scenes/Menus/PauseScreen/pause_screen.tscn" id="5_wgl67"]
 [ext_resource type="PackedScene" uid="uid://cfu5r4hr6ybjv" path="res://Entities/Barrel/barrel.tscn" id="7_7kucd"]
+[ext_resource type="PackedScene" uid="uid://cd2cwfschwv3h" path="res://Scenes/splitscreen_root.tscn" id="9_g43dg"]
 
 [sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_g43dg"]
 clip_count = 3
@@ -243,3 +244,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3330574, 1.8510174, 33.580
 
 [node name="PauseScreen" parent="." unique_id=608802068 instance=ExtResource("5_wgl67")]
 layer = 999
+visible = false
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=818883236]
+
+[node name="SplitscreenRoot" parent="HUD" unique_id=945732261 instance=ExtResource("9_g43dg")]

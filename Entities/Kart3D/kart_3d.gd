@@ -18,7 +18,7 @@ extends CharacterBody3D
 @export_group("Steering")
 @export_custom(PROPERTY_HINT_NONE, "suffix:degrees") var max_steering_angle_slow: float = 10.0 ## Defines the maximum steering angle, should be higher when going slow.
 @export_custom(PROPERTY_HINT_NONE, "suffix:degrees") var max_steering_angle_fast: float = 5.0 ## Defines the maximum steering angle, should be lower when going fast.
-@export_custom(PROPERTY_HINT_NONE, "suffix:degrees/s") var handbrake_steering_velocity: float = 45.0 ## Defines the speed of handbreak steering (turning while very slow).
+@export_custom(PROPERTY_HINT_NONE, "suffix:degrees/s") var handbrake_steering_velocity: float = 45.0 ## Defines the speed of handbrake steering (turning while very slow).
 @export_custom(PROPERTY_HINT_NONE, "suffix:degrees/s") var air_steering_velocity: float = 40.0 ## Defines the speed of mid-air steering.
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var wheel_base: float = 1.5 ## The diameter of the wheels.
 @export var drift_steering_multiplier: float = 1.2 ## The factor by which steer direction is multiplied while drifting.
@@ -60,7 +60,7 @@ var hurtbox: Hurtbox ## The hurtbox of this kart.
 var steer_request: float ## Steering intensity request to be set by an input_manager.
 var pitch_request: float ## Pitch intensity request to be set by an input_manager. (Entirely aesthetic)
 var accel_request: float ## Acceleration intensity request to be set by an input_manager.
-var break_request: bool ## Break request to be set by an input_manager.
+var brake_request: bool ## Brake request to be set by an input_manager.
 var hop_request: bool ## Hop request to be set by an input_manager.
 var drift_request: bool ## Drift request to be set by an input_manager.
 var drift_dir: int ## The direction of a currently active drift. 1 = right, 0 = none, -1 = left.
@@ -139,7 +139,7 @@ func _handle_input() -> void:
 	# Set movement requests based on input
 	steer_request = Input.get_axis("Left", "Right")
 	accel_request = Input.get_axis("Backward", "Forward")
-	break_request = Input.is_action_pressed("Backward")
+	brake_request = Input.is_action_pressed("Backward")
 	hop_request = Input.is_action_just_pressed("Drift")
 	drift_request = Input.is_action_pressed("Drift")
 	item_request = Input.is_action_just_pressed("Item")
@@ -200,7 +200,7 @@ func _handle_steering(delta: float) -> void:
 	
 	# Calculate angular_velocity when not mid-air
 	if is_on_floor():
-		if break_request && abs(horizonal_speed) < 1:
+		if brake_request && abs(horizonal_speed) < 1:
 			angular_velocity = deg_to_rad(handbrake_steering_velocity * steering)
 		else:
 			var steering_angle: float

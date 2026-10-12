@@ -1,29 +1,50 @@
 extends Control
 
+# Constants
+const TWEEN_TIME: float = 0.5
+
 # Export Vars
 @export_file("*.tscn") var next_scene: String = "res://Scenes/"
 @export_file("*.tscn") var prev_scene: String = "res://Scenes/"
-@export var temp_next_button: Button ## Replace this with some kind of check if player has selected a kart.
-@export var prev_button: Button
+@export var back_button: Button
 
 # Onready Vars
 @onready var character_button_container: GridContainer = $MarginContainer/HBoxContainer/PanelContainer/MarginContainer/CharacterButtonContainer
-@onready var sub_viewport: SubViewport = $MarginContainer/HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport
 @onready var name_label: Label = $MarginContainer/HBoxContainer/VBoxContainer/NameLabel
+@onready var sub_viewport_grid: GridContainer = $MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid
 
 # Internal Vars
 var character_buttons: Array[Button] ## The character buttons available to select.
-var player_num: int = 1 ## The player number this menu is associated with.
-var hover_kart: KartModel ## The kart model being shown based on hover.
+var player_count: int = 1 ## The total number of players.
+var player_num: int = 1 ## The player currently selecting a character.
+var hover_karts: Array[KartModel] = [null, null, null, null] ## The kart models being shown based on hover.
+var sub_viewports: Array[SubViewport] ## An array of the subviewports.
+var select_tweens: Array[Tween] = [null, null, null, null] ## Tweens that play when a character is selected.
 
 func _ready() -> void:
-	# Get character_buttons
+	# Get character_buttons & sub_viewports
 	for child in character_button_container.get_children():
 		if child is CharacterButton:
 			character_buttons.append(child)
+	for child in sub_viewport_grid.get_children():
+		if child is SubViewportContainer:
+			sub_viewports.append(child.get_node("SubViewport"))
+	
+	# Remove debug karts
+	for sub_viewport in sub_viewports:
+		for child in sub_viewport.get_children():
+			if child is KartModel:
+				child.queue_free()
+	
+	# Set number of characters to be selected & reset selected characters
+	player_count = Globals.player_count
+	for i in range(player_count):
+		if Globals.selected_characters[i]:
+			Globals.selected_characters[i] = null
+	_setup_viewports()
 	
 	# Connect button signals
-	prev_button.pressed.connect(_prev_scene)
+	back_button.pressed.connect(_prev_scene)
 	
 	for i in len(character_buttons):
 		character_buttons[i].pressed.connect(select_character.bind(character_buttons[i]))
@@ -34,41 +55,103 @@ func _ready() -> void:
 	character_buttons[0].grab_focus()
 	
 	# Play sync stream
-	AudioManager.change_sync_track(1)
+	AudioManager.change_sync_track(1, 1)
 
 	# Load scenes
 	SceneManager.load_scene(next_scene)
 	SceneManager.load_scene(prev_scene)
 
 func _process(delta: float) -> void:
-	if hover_kart:
-		hover_kart.rotate_y(delta)
+	if hover_karts[player_num-1]:
+		hover_karts[player_num-1].rotate_y(delta)
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		if Globals.selected_characters[player_count]:
+			return
+		deselect_character()
 
 ## Called when a character is selected.
-func select_character(button: CharacterButton):
+func select_character(button: CharacterButton) -> void:
 	# Set player's selected character
 	Globals.selected_characters[player_num-1] = button.character
 	
-	# Return if not all players have selected characters
-	for i in range(Globals.player_count):
-		if not Globals.selected_characters[i]:
-			return
+	# Play tween animation & progress character selection process
+	if hover_karts[player_num-1]:
+		select_tweens[player_num-1] = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+		select_tweens[player_num-1].tween_property(hover_karts[player_num-1], "rotation_degrees", Vector3(0,220,0), TWEEN_TIME)
+		_progress_selection()
+
+## Called when a character is deselected.
+func deselect_character() -> void:
+	# Set player's selected character
+	Globals.selected_characters[player_num-1] = null
 	
-	# Progress to next scene when all players have selected characters
-	_next_scene()
+	# Clean up hovered kart
+	for child in sub_viewports[player_num-1].get_children():
+		if child is KartModel:
+			child.queue_free()
+	
+	# Regress character selection process
+	_regress_selection()
 
 ## Called when a character is hovered.
-func hover_character(button: CharacterButton):
+func hover_character(button: CharacterButton) -> void:
 	# Clean up previous hovered kart
-	for child in sub_viewport.get_children():
+	for child in sub_viewports[player_num-1].get_children():
 		if child is KartModel:
 			child.queue_free()
 	
 	# Add new hovered kart and change text
 	var new_char = button.character
-	hover_kart = new_char.stats.kart_model.instantiate()
-	sub_viewport.add_child(hover_kart)
-	name_label.text = new_char.char_name + "\nin the\n" + new_char.kart_name if new_char.kart_name != "" else new_char.char_name
+	hover_karts[player_num-1] = new_char.stats.kart_model.instantiate()
+	hover_karts[player_num-1].position.x += 10 * (player_num-1)
+	hover_karts[player_num-1].rotation_degrees.y = 220
+	sub_viewports[player_num-1].add_child(hover_karts[player_num-1])
+	name_label.text = new_char.char_name + " in the " + new_char.kart_name if new_char.kart_name != "" else new_char.char_name
+
+## Sets up the viewports based on player_count.
+func _setup_viewports() -> void:
+	# Set grid columns
+	if player_count > 2:
+		sub_viewport_grid.columns = 2
+	else:
+		sub_viewport_grid.columns = 1
+	
+	# Set number of visible viewports
+	for i in range(4):
+		if i < player_count:
+			sub_viewports[i].get_parent().visible = true
+		else:
+			sub_viewports[i].get_parent().visible = false
+
+## Called after a character is selected. Progresses to next player or next scene if all characters are chosen.
+func _progress_selection() -> void:
+	# Return if not all players have selected characters
+	for i in range(player_count):
+		if not Globals.selected_characters[i]:
+			player_num += 1
+			_reset_focus()
+			return
+	
+	# Progress to next scene when all players have selected characters
+	if select_tweens[player_num-1]:
+		await select_tweens[player_num-1].finished
+	_next_scene()
+
+## Called after a character is deselected. Regresses to previous player or previous scene if all characters are already not chosen.
+func _regress_selection() -> void:
+	if player_num == 1:
+		_prev_scene()
+	else:
+		player_num -= 1
+		_reset_focus()
+
+## Resets the ui focus to the first character_button.
+func _reset_focus() -> void:
+	if character_buttons[0].has_focus():
+		character_buttons[0].release_focus()
+	character_buttons[0].grab_focus()
 
 ## Called when all characters are selected.
 func _next_scene() -> void:

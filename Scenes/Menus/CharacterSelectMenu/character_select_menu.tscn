@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cy83tt76elj41" path="res://Scenes/Menus/CharacterSelectMenu/character_select_menu.gd" id="1_hk7je"]
 [ext_resource type="PackedScene" uid="uid://d06ii74wx6vgl" path="res://Scenes/KartModels/basic_kart.tscn" id="4_0fmip"]
 [ext_resource type="PackedScene" uid="uid://bjoxa6ritw47n" path="res://Scenes/Menus/CharacterSelectMenu/character_button.tscn" id="5_2k24t"]
+[ext_resource type="Texture2D" uid="uid://jqk7pn4vcrx0" path="res://Assets/2D/Sprites/Menus/back_arrow.png" id="6_0fmip"]
 [ext_resource type="Resource" uid="uid://ulcs3tytsjl0" path="res://Resources/Character/pawn_character.tres" id="7_7tf73"]
 [ext_resource type="Resource" uid="uid://k5txr2vfhnjr" path="res://Resources/Character/default_character.tres" id="7_d15w1"]
 
@@ -20,7 +21,7 @@ background_energy_multiplier = 2.5
 sky = SubResource("Sky_0fmip")
 
 [sub_resource type="LabelSettings" id="LabelSettings_7tf73"]
-font_size = 48
+font_size = 42
 shadow_size = 16
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(4, 4)
@@ -32,13 +33,7 @@ corner_radius_top_right = 32
 corner_radius_bottom_right = 32
 corner_radius_bottom_left = 32
 
-[sub_resource type="LabelSettings" id="LabelSettings_hk7je"]
-font_size = 64
-shadow_size = 16
-shadow_color = Color(0, 0, 0, 1)
-shadow_offset = Vector2(4, 4)
-
-[node name="CharacterSelectMenu" type="Control" unique_id=2040534807 node_paths=PackedStringArray("temp_next_button", "prev_button")]
+[node name="CharacterSelectMenu" type="Control" unique_id=2040534807 node_paths=PackedStringArray("back_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -48,8 +43,7 @@ grow_vertical = 2
 script = ExtResource("1_hk7je")
 next_scene = "uid://dpjhad5swcika"
 prev_scene = "uid://b4byg6rmq7m24"
-temp_next_button = NodePath("TempBackButton")
-prev_button = NodePath("TempBackButton")
+back_button = NodePath("BackButton")
 
 [node name="Panel" type="Panel" parent="." unique_id=1216297583]
 layout_mode = 1
@@ -68,6 +62,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/margin_left = 128
 theme_override_constants/margin_top = 128
 theme_override_constants/margin_right = 128
@@ -75,40 +71,108 @@ theme_override_constants/margin_bottom = 128
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=2065621192]
 layout_mode = 2
-theme_override_constants/separation = 256
+theme_override_constants/separation = 64
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1261625257]
 custom_minimum_size = Vector2(512, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1554255989]
+[node name="SubViewportGrid" type="GridContainer" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1564684084]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 2.5
+size_flags_stretch_ratio = 10.0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid" unique_id=1554255989]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportContainer" unique_id=1334760120]
+[node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid/SubViewportContainer" unique_id=1334760120]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(512, 585)
+size = Vector2i(400, 373)
 render_target_update_mode = 4
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=1917114042]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid/SubViewportContainer/SubViewport" unique_id=1917114042]
 environment = SubResource("Environment_0fmip")
 
-[node name="Camera3D" type="Camera3D" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=1091578064]
-transform = Transform3D(-0.70710677, -0.1227878, 0.6963642, 0, 0.9848077, 0.17364818, -0.70710677, 0.1227878, -0.6963642, 2, 0.5, -2)
+[node name="Camera3D" type="Camera3D" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid/SubViewportContainer/SubViewport" unique_id=1091578064]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.98480767, 0.17364818, 0, -0.17364818, 0.98480767, 0, 0.5, 3)
 current = true
+fov = 55.0
 
-[node name="BasicKart" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=142078105 instance=ExtResource("4_0fmip")]
+[node name="BasicKart" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid/SubViewportContainer/SubViewport" unique_id=142078105 instance=ExtResource("4_0fmip")]
+transform = Transform3D(-0.7660445, 0, -0.6427876, 0, 1, 0, 0.6427876, 0, -0.7660445, 0, 0, 0)
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid" unique_id=1761944999]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid/SubViewportContainer2" unique_id=1778510669]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(400, 373)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid/SubViewportContainer2/SubViewport" unique_id=907384730]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.98480767, 0.17364818, 0, -0.17364818, 0.98480767, 10, 0.5, 3)
+current = true
+fov = 55.0
+
+[node name="BasicKart" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid/SubViewportContainer2/SubViewport" unique_id=492487025 instance=ExtResource("4_0fmip")]
+transform = Transform3D(-0.7660445, 0, -0.6427876, 0, 1, 0, 0.6427876, 0, -0.7660445, 10, 0, 0)
+
+[node name="SubViewportContainer3" type="SubViewportContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid" unique_id=1976519326]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid/SubViewportContainer3" unique_id=180987552]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(400, 372)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid/SubViewportContainer3/SubViewport" unique_id=2058326438]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.98480767, 0.17364818, 0, -0.17364818, 0.98480767, 20, 0.5, 3)
+current = true
+fov = 55.0
+
+[node name="BasicKart" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid/SubViewportContainer3/SubViewport" unique_id=1092539248 instance=ExtResource("4_0fmip")]
+transform = Transform3D(-0.7660445, 0, -0.6427876, 0, 1, 0, 0.6427876, 0, -0.7660445, 20, 0, 0)
+
+[node name="SubViewportContainer4" type="SubViewportContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid" unique_id=544597699]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid/SubViewportContainer4" unique_id=1931846251]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(400, 372)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid/SubViewportContainer4/SubViewport" unique_id=1805246842]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.98480767, 0.17364818, 0, -0.17364818, 0.98480767, 30, 0.5, 3)
+current = true
+fov = 55.0
+
+[node name="BasicKart" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid/SubViewportContainer4/SubViewport" unique_id=419008786 instance=ExtResource("4_0fmip")]
+transform = Transform3D(-0.7660445, 0, -0.6427876, 0, 1, 0, 0.6427876, 0, -0.7660445, 30, 0, 0)
 
 [node name="NameLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=651109801]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Character Name
-in the
-Kart Name"
+text = "Character Name in the Kart Name"
 label_settings = SubResource("LabelSettings_7tf73")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -116,7 +180,6 @@ vertical_alignment = 1
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer" unique_id=1829156650]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_t4f5k")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/PanelContainer" unique_id=1601216186]
@@ -148,20 +211,37 @@ character = ExtResource("7_d15w1")
 layout_mode = 2
 character = ExtResource("7_d15w1")
 
-[node name="TempBackButton" type="Button" parent="." unique_id=1142948134]
-custom_minimum_size = Vector2(256, 128)
-layout_mode = 1
+[node name="BackButton" type="Button" parent="." unique_id=707318638]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(16, 16)
+offset_transform_visual_only = false
+flat = true
 
-[node name="Label" type="Label" parent="TempBackButton" unique_id=2078310953]
+[node name="TextureRectShadow" type="TextureRect" parent="BackButton" unique_id=1071994874]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Back"
-label_settings = SubResource("LabelSettings_hk7je")
-horizontal_alignment = 1
-vertical_alignment = 1
+offset_transform_enabled = true
+offset_transform_position = Vector2(10, 10)
+texture = ExtResource("6_0fmip")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="BackButton" unique_id=1580510329]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_0fmip")
+expand_mode = 1
+stretch_mode = 5

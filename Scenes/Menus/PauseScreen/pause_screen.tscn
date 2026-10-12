@@ -26,6 +26,7 @@ options_button = NodePath("MarginContainer/HBoxContainer/VBoxContainer/OptionsBu
 exit_button = NodePath("MarginContainer/HBoxContainer/VBoxContainer/ExitButton")
 
 [node name="OptionsMenu" parent="." unique_id=693100041 instance=ExtResource("2_25jlc")]
+visible = false
 
 [node name="Panel" type="Panel" parent="." unique_id=354774374]
 anchors_preset = 15

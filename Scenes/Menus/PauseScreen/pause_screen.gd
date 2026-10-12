@@ -21,9 +21,6 @@ func _ready() -> void:
 	exit_button.pressed.connect(_on_exit_pressed)
 	options_menu.hiding.connect(show)
 	
-	# Focus first button
-	resume_button.grab_focus()
-	
 	# Load scenes
 	SceneManager.load_scene(exit_scene)
 
@@ -35,6 +32,7 @@ func _input(_event: InputEvent) -> void:
 		else:
 			show()
 			get_tree().paused = true
+			resume_button.grab_focus()
 
 ## Called when the resume button is pressed.
 func _on_resume_pressed() -> void:
@@ -50,4 +48,5 @@ func _on_options_pressed() -> void:
 func _on_exit_pressed() -> void:
 	hide()
 	get_tree().paused = false
+	AudioManager.stop_all_sounds()
 	SceneManager.change_scene(exit_scene, SceneManager.INSTANT)

@@ -19,6 +19,6 @@ func _ready() -> void:
 ## Sets the visual elements of this button.
 func set_visuals() -> void:
 	if label:
-		label.text = character.char_name + "\nin the\n" + character.kart_name if character.kart_name != "" else character.char_name
+		label.text = character.char_name + " in the " + character.kart_name if character.kart_name != "" else character.char_name
 	if texture_rect:
 		texture_rect.texture = character.char_icon
