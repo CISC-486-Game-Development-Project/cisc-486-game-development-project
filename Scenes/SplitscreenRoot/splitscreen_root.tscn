@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cd2cwfschwv3h"]
 
-[ext_resource type="Script" uid="uid://c3y0wyxbuhjil" path="res://Components/SplitscreenRoot/splitscreen_root.gd" id="1_iifmq"]
+[ext_resource type="Script" uid="uid://c3y0wyxbuhjil" path="res://Scenes/SplitscreenRoot/splitscreen_root.gd" id="1_iifmq"]
 
 [node name="SplitscreenRoot" type="Control" unique_id=945732261]
 layout_mode = 3
