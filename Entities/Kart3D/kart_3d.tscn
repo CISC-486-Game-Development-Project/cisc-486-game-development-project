@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://bmua4qbuf0vev" path="res://Components/StateMachine/States/trick_state.gd" id="12_kwn18"]
 [ext_resource type="Script" uid="uid://cwmiqdt31xlsm" path="res://Components/StateMachine/States/air_trick_state.gd" id="19_7apc5"]
 [ext_resource type="Script" uid="uid://b3ataw1etlka7" path="res://Components/StateMachine/States/hit_state.gd" id="21_1byyu"]
+[ext_resource type="Script" uid="uid://dlqoia1hk0gw8" path="res://Components/GrassDisplacer/grass_displacer.gd" id="21_q7q2k"]
 
 [sub_resource type="Curve" id="Curve_iwjoc"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -326,6 +327,10 @@ one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=858611665]
 libraries/ = SubResource("AnimationLibrary_7dnbs")
+
+[node name="GrassDisplacer" type="Node" parent="." unique_id=848599554]
+script = ExtResource("21_q7q2k")
+metadata/_custom_type_script = "uid://dlqoia1hk0gw8"
 
 [node name="MovementStateMachine" type="Node" parent="." unique_id=547351009 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_mehc1")

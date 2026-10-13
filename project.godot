@@ -20,6 +20,7 @@ config/icon="res://Assets/2D/Sprites/icon.svg"
 Globals="*uid://cdjwd5raysu57"
 SceneManager="*uid://frgi6tweejw5"
 AudioManager="*uid://bcq5ihk6khspi"
+GrassManager="*uid://dj8l4pv3cghxy"
 
 [display]
 
@@ -32,7 +33,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/inspector_code_highlighter/plugin.cfg")
+enabled=PackedStringArray("res://addons/grass_painter/plugin.cfg", "res://addons/inspector_code_highlighter/plugin.cfg", "res://addons/mesh_painter/plugin.cfg")
 
 [global_group]
 

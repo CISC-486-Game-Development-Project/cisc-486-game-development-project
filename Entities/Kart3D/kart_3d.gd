@@ -23,7 +23,7 @@ extends CharacterBody3D
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var wheel_base: float = 1.5 ## The diameter of the wheels.
 @export var drift_steering_multiplier: float = 1.2 ## The factor by which steer direction is multiplied while drifting.
 
-@export_group("offroad factors") # How much the kart will be affected by the terrain (top speed and accel.)
+@export_group("Offroad Factors") # How much the kart will be affected by the terrain (top speed and accel.)
 @export var offroad_factor_paved: float = 0.0  
 @export var offroad_factor_offroad: float = 0.6
 @export var offroad_factor_harsh_offroad: float = 0.8    
