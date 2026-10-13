@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://6k42b3njbbv1" path="res://Assets/Audio/Music/Track1/KartThemeFirstLoop.wav" id="3_xc45i"]
 [ext_resource type="PackedScene" uid="uid://bfdd58efg72wk" path="res://Scenes/TrackParts/BoostPanel/boost_panel.tscn" id="4_7kucd"]
 [ext_resource type="PackedScene" uid="uid://htd17y0efmde" path="res://Scenes/Menus/PauseScreen/pause_screen.tscn" id="5_wgl67"]
-[ext_resource type="Material" uid="uid://c4fscvl3hh2vb" path="res://Resources/Sky/night_sky.tres" id="6_ojj8n"]
+[ext_resource type="Material" uid="uid://mdid6csoosht" path="res://Resources/Sky/day_sky.tres" id="6_ojj8n"]
 [ext_resource type="PackedScene" uid="uid://cfu5r4hr6ybjv" path="res://Entities/Barrel/barrel.tscn" id="7_7kucd"]
 [ext_resource type="ArrayMesh" uid="uid://b6n4rueforx4o" path="res://Resources/Shaders/Grass/grass.res" id="7_56bb8"]
 [ext_resource type="Script" uid="uid://ca6obtta5oopp" path="res://addons/mesh_painter/mesh_painter.gd" id="7_xc45i"]
