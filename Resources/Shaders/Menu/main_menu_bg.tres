@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://mskidwycxwnw"]
 
 [ext_resource type="Shader" uid="uid://b1xeh7hxte84x" path="res://Resources/Shaders/Menu/menu_bg.gdshader" id="1_5hoan"]
-[ext_resource type="Texture2D" uid="uid://c5x5johe7myfv" path="res://Assets/2D/Sprites/Menus/checkered.png" id="2_c1b3s"]
+[ext_resource type="Texture2D" uid="uid://dkrjrinnpxamg" path="res://Assets/2D/Sprites/Menus/checkered.tres" id="2_5hoan"]
 
 [sub_resource type="Gradient" id="Gradient_7cp3c"]
 interpolation_mode = 2
@@ -20,7 +20,7 @@ shader_parameter/gradient_speed = 0.0
 shader_parameter/gradient_tiling = 0.5
 shader_parameter/gradient_fade = true
 shader_parameter/mirror_loop = false
-shader_parameter/bg_texture = ExtResource("2_c1b3s")
+shader_parameter/bg_texture = ExtResource("2_5hoan")
 shader_parameter/bg_opacity = 1.0
 shader_parameter/bg_speed = 0.025
 shader_parameter/bg_angle = 90.0

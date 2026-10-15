@@ -84,7 +84,6 @@ stretch_mode = 6
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=350169717]
 layout_mode = 2
 size_flags_vertical = 7
-text = "Track Name"
 label_settings = SubResource("LabelSettings_cpjce")
 horizontal_alignment = 1
 vertical_alignment = 1
