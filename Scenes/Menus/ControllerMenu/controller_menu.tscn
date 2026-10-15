@@ -2,35 +2,37 @@
 
 [ext_resource type="Script" uid="uid://tqb1lfysiy7h" path="res://Scenes/Menus/ControllerMenu/controller_menu.gd" id="1_10kwx"]
 [ext_resource type="Texture2D" uid="uid://be457kbv51483" path="res://Assets/2D/Sprites/icon.svg" id="1_aeu6d"]
+[ext_resource type="Material" uid="uid://3kb3uo5cklkj" path="res://Resources/Shaders/Menu/title_screen_bg.tres" id="3_k436g"]
 [ext_resource type="PackedScene" uid="uid://cg4k2bd82eaol" path="res://Components/MenuParts/IconButtons/back_button.tscn" id="3_oaxpj"]
 [ext_resource type="PackedScene" uid="uid://da6x0hxjl2mai" path="res://Components/MenuParts/IconButtons/next_button.tscn" id="4_k436g"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aeu6d"]
-bg_color = Color(2.3102762e-06, 0.6323629, 0.9693813, 1)
+[ext_resource type="FontFile" uid="uid://c2gld37y6b17m" path="res://Assets/2D/Fonts/DeltaBlock.ttf" id="4_y7yg4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4f5k"]
-bg_color = Color(0.10942747, 0.57151866, 0.8641765, 1)
+bg_color = Color(0.42749333, 0.42749298, 0.42749316, 0.36862746)
 border_width_top = 16
 border_width_bottom = 16
-border_color = Color(0.034017153, 0.2833714, 0.44143054, 1)
+border_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xvvda"]
-bg_color = Color(0, 0, 0, 0.6039216)
-border_width_left = 8
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
-border_color = Color(0, 0, 0, 0.8352941)
+bg_color = Color(0, 0, 0, 0.4627451)
+border_width_left = 16
+border_width_top = 16
+border_width_right = 16
+border_width_bottom = 16
+border_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 32
 corner_radius_top_right = 32
 corner_radius_bottom_right = 32
 corner_radius_bottom_left = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_t5fsa"]
+font = ExtResource("4_y7yg4")
 font_size = 64
+outline_size = 32
+outline_color = Color(0, 0, 0, 1)
 shadow_size = 16
 shadow_color = Color(0, 0, 0, 1)
-shadow_offset = Vector2(4, 4)
+shadow_offset = Vector2(8, 8)
 
 [node name="ControllerMenu" type="Control" unique_id=708152649 node_paths=PackedStringArray("next_button", "back_button")]
 layout_mode = 3
@@ -46,15 +48,14 @@ next_button = NodePath("NextButton")
 back_button = NodePath("BackButton")
 controller_texture = ExtResource("1_aeu6d")
 
-[node name="Panel" type="Panel" parent="." unique_id=991251920]
+[node name="MenuBG" type="ColorRect" parent="." unique_id=541188243]
+material = ExtResource("3_k436g")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_aeu6d")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=856748714]
 layout_mode = 0

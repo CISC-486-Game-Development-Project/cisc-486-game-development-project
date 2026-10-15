@@ -18,7 +18,7 @@ const OFFSCREEN_POSITION: Vector2 = Vector2(0,1080) ## The position the menu twe
 # Onready Vars
 @onready var background_panel: Panel = $BackgroundPanel
 @onready var options_container: MarginContainer = $OptionsContainer
-@onready var temp_back_button: Button = $OptionsContainer/TempBackButton
+@onready var back_button: Button = $OptionsContainer/BackButton
 
 # Internal Vars
 var menu_tween: Tween ## The current tween applying to this menu.
@@ -26,7 +26,7 @@ var menu_tween: Tween ## The current tween applying to this menu.
 func _ready() -> void:
 	_set_up_options()
 	hide()
-	temp_back_button.pressed.connect(hide_menu)
+	back_button.pressed.connect(hide_menu)
 
 ######################
 ## Showing & Hiding ##
@@ -47,7 +47,7 @@ func show_menu() -> void:
 	
 	# Emit signal & grab focus
 	showing.emit()
-	temp_back_button.grab_focus()
+	back_button.grab_focus()
 
 ## Should be called to hide menu.
 func hide_menu() -> void:

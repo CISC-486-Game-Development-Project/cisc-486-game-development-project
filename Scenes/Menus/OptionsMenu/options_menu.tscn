@@ -1,28 +1,42 @@
 [gd_scene format=3 uid="uid://chopbamug8408"]
 
 [ext_resource type="Script" uid="uid://dgsod5ahxppab" path="res://Scenes/Menus/OptionsMenu/options_menu.gd" id="1_6iikp"]
+[ext_resource type="Material" uid="uid://cena68mlloxwr" path="res://Resources/Shaders/Menu/options_menu_bg.tres" id="2_ubhnc"]
+[ext_resource type="FontFile" uid="uid://c2gld37y6b17m" path="res://Assets/2D/Fonts/DeltaBlock.ttf" id="3_2xv4m"]
+[ext_resource type="PackedScene" uid="uid://cg4k2bd82eaol" path="res://Components/MenuParts/IconButtons/back_button.tscn" id="4_2xv4m"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7by3x"]
 bg_color = Color(0, 0, 0, 0.8)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4f5k"]
-bg_color = Color(0.15459093, 0.2867201, 0.54762197, 1)
+bg_color = Color(0.70380783, 0.70380783, 0.70380783, 1)
+border_width_left = 16
+border_width_top = 16
+border_width_right = 16
+border_width_bottom = 16
+border_color = Color(1.8247963, 1.8247963, 1.8247963, 1)
 corner_radius_top_left = 32
 corner_radius_top_right = 32
 corner_radius_bottom_right = 32
 corner_radius_bottom_left = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_6iikp"]
+font = ExtResource("3_2xv4m")
 font_size = 128
+outline_size = 32
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 16
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(12, 12)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jghd8"]
+font = ExtResource("3_2xv4m")
+font_size = 64
+outline_size = 32
+outline_color = Color(0, 0, 0, 1)
 shadow_size = 16
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(8, 8)
-
-[sub_resource type="LabelSettings" id="LabelSettings_jghd8"]
-font_size = 64
-shadow_size = 16
-shadow_color = Color(0, 0, 0, 1)
-shadow_offset = Vector2(4, 4)
 
 [node name="OptionsMenu" type="CanvasLayer" unique_id=693100041 node_paths=PackedStringArray("master_volume_slider", "music_volume_slider", "sfx_volume_slider", "voice_volume_slider")]
 script = ExtResource("1_6iikp")
@@ -51,6 +65,7 @@ theme_override_constants/margin_right = 128
 theme_override_constants/margin_bottom = 128
 
 [node name="PanelContainer" type="PanelContainer" parent="OptionsContainer" unique_id=811147483]
+material = ExtResource("2_ubhnc")
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_t4f5k")
 
@@ -241,9 +256,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TempBackButton" type="Button" parent="OptionsContainer" unique_id=485200191]
-custom_minimum_size = Vector2(100, 100)
+[node name="BackButton" parent="OptionsContainer" unique_id=1382448741 instance=ExtResource("4_2xv4m")]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-text = "Back"

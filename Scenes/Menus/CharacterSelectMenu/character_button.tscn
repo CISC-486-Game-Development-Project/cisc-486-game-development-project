@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://dwdnygslhrnq3" path="res://Components/MenuParts/UIProperties/center_pivot.gd" id="3_7myq1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0dkj1"]
-bg_color = Color(0.2901961, 0.63529414, 0.87058824, 1)
+bg_color = Color(0.2901961, 0.63529414, 0.87058824, 0)
 corner_radius_top_left = 64
 corner_radius_top_right = 64
 corner_radius_bottom_right = 64
@@ -21,6 +21,7 @@ border_width_left = 16
 border_width_top = 16
 border_width_right = 16
 border_width_bottom = 16
+border_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 64
 corner_radius_top_right = 64
 corner_radius_bottom_right = 64

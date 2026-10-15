@@ -2,24 +2,32 @@
 
 [ext_resource type="Script" uid="uid://bpmv76f1ceqv4" path="res://Scenes/Menus/TitleScreen/title_screen.gd" id="1_s2kds"]
 [ext_resource type="AudioStream" uid="uid://s45hpgk6jctc" path="res://Assets/Audio/Music/RaceJingle.wav" id="2_bs8mv"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bs8mv"]
-bg_color = Color(2.3102762e-06, 0.6323629, 0.9693813, 1)
+[ext_resource type="Material" uid="uid://3kb3uo5cklkj" path="res://Resources/Shaders/Menu/title_screen_bg.tres" id="3_2v5bn"]
+[ext_resource type="FontFile" uid="uid://c2gld37y6b17m" path="res://Assets/2D/Fonts/DeltaBlock.ttf" id="4_whrq5"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2v5bn"]
+font = ExtResource("4_whrq5")
 font_size = 256
-shadow_size = 32
-shadow_color = Color(0, 0, 0, 1)
-shadow_offset = Vector2(8, 8)
-
-[sub_resource type="LabelSettings" id="LabelSettings_whrq5"]
-font_size = 128
+outline_size = 32
+outline_color = Color(0, 0, 0, 1)
 shadow_size = 16
 shadow_color = Color(0, 0, 0, 1)
-shadow_offset = Vector2(8, 8)
+shadow_offset = Vector2(16, 16)
+
+[sub_resource type="LabelSettings" id="LabelSettings_whrq5"]
+font = ExtResource("4_whrq5")
+font_size = 128
+outline_size = 32
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 16
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(12, 12)
 
 [sub_resource type="LabelSettings" id="LabelSettings_bs8mv"]
+font = ExtResource("4_whrq5")
 font_size = 64
+outline_size = 32
+outline_color = Color(0, 0, 0, 1)
 shadow_size = 16
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(8, 8)
@@ -35,15 +43,14 @@ script = ExtResource("1_s2kds")
 play_scene = "uid://b4byg6rmq7m24"
 title_music = ExtResource("2_bs8mv")
 
-[node name="Panel" type="Panel" parent="." unique_id=2000484202]
+[node name="MenuBG" type="ColorRect" parent="." unique_id=115785717]
+material = ExtResource("3_2v5bn")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_bs8mv")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=389258077]
 layout_mode = 1

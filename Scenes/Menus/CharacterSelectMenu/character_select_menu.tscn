@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://dujko6vu4ilbf"]
 
 [ext_resource type="Script" uid="uid://cy83tt76elj41" path="res://Scenes/Menus/CharacterSelectMenu/character_select_menu.gd" id="1_hk7je"]
+[ext_resource type="Material" uid="uid://3kb3uo5cklkj" path="res://Resources/Shaders/Menu/title_screen_bg.tres" id="2_d15w1"]
 [ext_resource type="PackedScene" uid="uid://d06ii74wx6vgl" path="res://Scenes/KartModels/basic_kart.tscn" id="4_0fmip"]
 [ext_resource type="Texture2D" uid="uid://c1lxdn14k7ogk" path="res://Assets/2D/Sprites/CharacterIcons/DefaultKartIcon.png" id="4_p6l55"]
+[ext_resource type="FontFile" uid="uid://c2gld37y6b17m" path="res://Assets/2D/Fonts/DeltaBlock.ttf" id="4_rpv32"]
 [ext_resource type="PackedScene" uid="uid://bjoxa6ritw47n" path="res://Scenes/Menus/CharacterSelectMenu/character_button.tscn" id="5_2k24t"]
 [ext_resource type="PackedScene" uid="uid://cg4k2bd82eaol" path="res://Components/MenuParts/IconButtons/back_button.tscn" id="6_0fmip"]
 [ext_resource type="Texture2D" uid="uid://chu7hsk5m2y25" path="res://Assets/2D/Sprites/CharacterIcons/PawnIcon.png" id="6_d15w1"]
@@ -23,13 +25,16 @@ background_energy_multiplier = 2.5
 sky = SubResource("Sky_0fmip")
 
 [sub_resource type="LabelSettings" id="LabelSettings_7tf73"]
+font = ExtResource("4_rpv32")
 font_size = 42
-shadow_size = 16
+outline_size = 24
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 12
 shadow_color = Color(0, 0, 0, 1)
-shadow_offset = Vector2(4, 4)
+shadow_offset = Vector2(6, 6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4f5k"]
-bg_color = Color(0, 0.46924525, 0.7268376, 1)
+bg_color = Color(1, 1, 1, 0.30588236)
 corner_radius_top_left = 32
 corner_radius_top_right = 32
 corner_radius_bottom_right = 32
@@ -56,6 +61,16 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_hk7je")
+
+[node name="MenuBG" type="ColorRect" parent="." unique_id=2030546478]
+material = ExtResource("2_d15w1")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.52156866)
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=840379834]
 layout_mode = 1

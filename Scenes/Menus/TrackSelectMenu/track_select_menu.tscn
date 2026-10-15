@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://b8w0n5pd41173" path="res://Scenes/Menus/TrackSelectMenu/track_select_menu.gd" id="1_cpjce"]
 [ext_resource type="PackedScene" uid="uid://p24brirrso0w" path="res://Scenes/Menus/TrackSelectMenu/track_button.tscn" id="2_08aid"]
+[ext_resource type="Material" uid="uid://3kb3uo5cklkj" path="res://Resources/Shaders/Menu/title_screen_bg.tres" id="2_rnkhu"]
+[ext_resource type="FontFile" uid="uid://c2gld37y6b17m" path="res://Assets/2D/Fonts/DeltaBlock.ttf" id="3_d041m"]
 [ext_resource type="Texture2D" uid="uid://bl0bty04gbwjg" path="res://Assets/2D/Sprites/TrackIcons/DebugTrackIcon.png" id="4_nxhmo"]
 [ext_resource type="PackedScene" uid="uid://cg4k2bd82eaol" path="res://Components/MenuParts/IconButtons/back_button.tscn" id="5_rnkhu"]
 [ext_resource type="Texture2D" uid="uid://be457kbv51483" path="res://Assets/2D/Sprites/icon.svg" id="5_xkk6d"]
@@ -10,13 +12,16 @@
 bg_color = Color(2.3102762e-06, 0.6323629, 0.9693813, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_08aid"]
+font = ExtResource("3_d041m")
 font_size = 128
+outline_size = 32
+outline_color = Color(0, 0, 0, 1)
 shadow_size = 16
 shadow_color = Color(0, 0, 0, 1)
-shadow_offset = Vector2(8, 8)
+shadow_offset = Vector2(12, 12)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cpjce"]
-bg_color = Color(0, 0.46924525, 0.7268376, 1)
+bg_color = Color(1, 1, 1, 0.30588236)
 corner_radius_top_left = 32
 corner_radius_top_right = 32
 corner_radius_bottom_right = 32
@@ -43,6 +48,16 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rixt3")
+
+[node name="MenuBG" type="ColorRect" parent="." unique_id=1178089424]
+material = ExtResource("2_rnkhu")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.52156866)
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=444095342]
 layout_mode = 1

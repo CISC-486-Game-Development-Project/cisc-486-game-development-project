@@ -1,0 +1,31 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://3kb3uo5cklkj"]
+
+[ext_resource type="Shader" uid="uid://b1xeh7hxte84x" path="res://Resources/Shaders/Menu/menu_bg.gdshader" id="1_e8r4e"]
+[ext_resource type="Texture2D" uid="uid://c5x5johe7myfv" path="res://Assets/2D/Sprites/Menus/checkered.png" id="2_d6pv4"]
+
+[sub_resource type="Gradient" id="Gradient_cgp0s"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.24113475, 0.78014183, 1)
+colors = PackedColorArray(0, 0.6313726, 0.96862745, 1, 0.7825834, 0.6816655, 1, 1, 0.81841034, 0.5927119, 0.47555602, 1, 0, 0.6313726, 0.96862745, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xvvda"]
+gradient = SubResource("Gradient_cgp0s")
+
+[resource]
+shader = ExtResource("1_e8r4e")
+shader_parameter/gradient = SubResource("GradientTexture1D_xvvda")
+shader_parameter/gradient_opacity = 0.90000004275
+shader_parameter/gradient_angle = 70.0
+shader_parameter/gradient_speed = 0.1
+shader_parameter/gradient_tiling = 0.2
+shader_parameter/gradient_fade = false
+shader_parameter/mirror_loop = false
+shader_parameter/bg_texture = ExtResource("2_d6pv4")
+shader_parameter/bg_opacity = 1.0
+shader_parameter/bg_speed = 0.05
+shader_parameter/bg_angle = 240.0
+shader_parameter/bg_tiling = Vector2(4, 8)
+shader_parameter/bg_fade = false
+shader_parameter/horizon_depth = 2.00000007241454
+shader_parameter/horizon_angle = 70.0
+shader_parameter/horizon_fade = 0.4

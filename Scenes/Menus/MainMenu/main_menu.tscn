@@ -6,7 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://chopbamug8408" path="res://Scenes/Menus/OptionsMenu/options_menu.tscn" id="3_yobja"]
 [ext_resource type="AudioStream" uid="uid://5iedummhc3e6" path="res://Assets/Audio/Music/MainMenu/KartMenuPhase2.wav" id="4_rbcii"]
 [ext_resource type="AudioStream" uid="uid://bi0eloy60w58n" path="res://Assets/Audio/Music/MainMenu/KartMenuPhase3.wav" id="5_eols4"]
+[ext_resource type="Material" uid="uid://mskidwycxwnw" path="res://Resources/Shaders/Menu/main_menu_bg.tres" id="6_eols4"]
 [ext_resource type="Script" uid="uid://dwdnygslhrnq3" path="res://Components/MenuParts/UIProperties/center_pivot.gd" id="6_rbcii"]
+[ext_resource type="FontFile" uid="uid://c2gld37y6b17m" path="res://Assets/2D/Fonts/DeltaBlock.ttf" id="7_7cp3c"]
 
 [sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_2v5bn"]
 stream_count = 3
@@ -21,22 +23,31 @@ stream_2/volume = 0.0
 bg_color = Color(2.3102762e-06, 0.6323629, 0.9693813, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_t5fsa"]
+font = ExtResource("7_7cp3c")
 font_size = 64
+outline_size = 32
+outline_color = Color(0, 0, 0, 1)
 shadow_size = 16
 shadow_color = Color(0, 0, 0, 1)
-shadow_offset = Vector2(4, 4)
+shadow_offset = Vector2(8, 8)
 
 [sub_resource type="LabelSettings" id="LabelSettings_i8lfl"]
+font = ExtResource("7_7cp3c")
 font_size = 256
-shadow_size = 32
-shadow_color = Color(0, 0, 0, 1)
-shadow_offset = Vector2(8, 8)
-
-[sub_resource type="LabelSettings" id="LabelSettings_u7k8n"]
-font_size = 128
+outline_size = 32
+outline_color = Color(0, 0, 0, 1)
 shadow_size = 16
 shadow_color = Color(0, 0, 0, 1)
-shadow_offset = Vector2(8, 8)
+shadow_offset = Vector2(16, 16)
+
+[sub_resource type="LabelSettings" id="LabelSettings_u7k8n"]
+font = ExtResource("7_7cp3c")
+font_size = 128
+outline_size = 32
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 16
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(12, 12)
 
 [node name="MainMenu" type="Control" unique_id=1982336967 node_paths=PackedStringArray("singleplayer_button", "multiplayer_button", "options_button", "quit_button")]
 layout_mode = 3
@@ -65,6 +76,16 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_t5fsa")
+
+[node name="MenuBG" type="ColorRect" parent="." unique_id=503519568]
+material = ExtResource("6_eols4")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -799.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1647161929]
 layout_mode = 1

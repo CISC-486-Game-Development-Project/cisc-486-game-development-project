@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://p24brirrso0w"]
 
 [ext_resource type="Script" uid="uid://b3nrxriqg80lq" path="res://Scenes/Menus/TrackSelectMenu/track_button.gd" id="1_spsic"]
-[ext_resource type="Texture2D" uid="uid://be457kbv51483" path="res://Assets/2D/Sprites/icon.svg" id="2_spsic"]
+[ext_resource type="FontFile" uid="uid://c2gld37y6b17m" path="res://Assets/2D/Fonts/DeltaBlock.ttf" id="2_fqsfx"]
 [ext_resource type="Script" uid="uid://dwdnygslhrnq3" path="res://Components/MenuParts/UIProperties/center_pivot.gd" id="3_fqsfx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ciew7"]
-bg_color = Color(0.16470589, 0.3647059, 0.81960785, 1)
+bg_color = Color(1, 1, 1, 0.40392157)
 corner_radius_top_left = 32
 corner_radius_top_right = 32
 corner_radius_bottom_right = 32
@@ -17,6 +17,7 @@ border_width_left = 16
 border_width_top = 16
 border_width_right = 16
 border_width_bottom = 16
+border_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 48
 corner_radius_top_right = 48
 corner_radius_bottom_right = 48
@@ -32,10 +33,13 @@ corner_radius_top_left = 32
 corner_radius_top_right = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_cpjce"]
-font_size = 40
-shadow_size = 16
+font = ExtResource("2_fqsfx")
+font_size = 48
+outline_size = 24
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 12
 shadow_color = Color(0, 0, 0, 1)
-shadow_offset = Vector2(4, 4)
+shadow_offset = Vector2(6, 6)
 
 [node name="TrackButton" type="Button" unique_id=438021034]
 anchors_preset = 15
@@ -74,7 +78,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_fsgd3")
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/PanelContainer" unique_id=694515490]
 layout_mode = 2
 size_flags_vertical = 7
-texture = ExtResource("2_spsic")
 expand_mode = 1
 stretch_mode = 6
 
