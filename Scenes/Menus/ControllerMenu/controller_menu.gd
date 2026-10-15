@@ -6,8 +6,6 @@ const TWEEN_TIME: float = 0.1
 # Export Vars
 @export_file("*.tscn") var next_scene: String = "res://Scenes/" ## The next scene to progress to.
 @export_file("*.tscn") var prev_scene: String = "res://Scenes/" ## The prev scene to return to.
-@export var next_button: Button ## The button used to progress to the next scene and lock in player count.
-@export var back_button: Button ## The button used to return to the prev scene.
 @export var controller_texture: Texture ## The texture to show when a controller is connected.
 
 # Onready Vars
@@ -25,13 +23,6 @@ func _ready() -> void:
 	for panel in name_panels.get_children():
 		controller_names.append(panel.get_node("Label"))
 	
-	# Connect button signals
-	next_button.pressed.connect(_next_scene)
-	back_button.pressed.connect(_prev_scene)
-	
-	# Focus button
-	next_button.grab_focus()
-	
 	# Initialize joypad handling
 	_handle_joypads()
 
@@ -44,21 +35,16 @@ func _input(event: InputEvent) -> void:
 		if event.is_pressed():
 			_tween_controller_image(controller_images[event.device])
 	
+	# Progress to next scene if accept pressed and more than one joypad connected
+	if event.is_action_pressed("ui_accept") and len(Input.get_connected_joypads()) > 1:
+		_next_scene()
 	# Return to previous scene if cancel pressed
-	if event.is_action_pressed("ui_cancel"):
+	elif event.is_action_pressed("ui_cancel"):
 		_prev_scene()
 
 ## Handles logic and visuals concerning the number of joypads connected.
 func _handle_joypads() -> void:
 	var joypads := Input.get_connected_joypads()
-	
-	# Disable ability to progress to next menu if only one joypad
-	if len(joypads) > 1:
-		next_button.disabled = false
-		#next_button.self_modulate = Color(0.5, 0.5, 0.5, 1.0)
-	else:
-		next_button.disabled = true
-		#next_button.self_modulate = Color(1.0, 1.0, 1.0, 1.0)
 	
 	# Set visuals for joypads
 	for i in range(4):

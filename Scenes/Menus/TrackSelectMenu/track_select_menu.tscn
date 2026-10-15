@@ -5,8 +5,8 @@
 [ext_resource type="Material" uid="uid://3kb3uo5cklkj" path="res://Resources/Shaders/Menu/title_screen_bg.tres" id="2_rnkhu"]
 [ext_resource type="FontFile" uid="uid://c2gld37y6b17m" path="res://Assets/2D/Fonts/DeltaBlock.ttf" id="3_d041m"]
 [ext_resource type="Texture2D" uid="uid://bl0bty04gbwjg" path="res://Assets/2D/Sprites/TrackIcons/DebugTrackIcon.png" id="4_nxhmo"]
-[ext_resource type="PackedScene" uid="uid://cg4k2bd82eaol" path="res://Components/MenuParts/IconButtons/back_button.tscn" id="5_rnkhu"]
 [ext_resource type="Texture2D" uid="uid://be457kbv51483" path="res://Assets/2D/Sprites/icon.svg" id="5_xkk6d"]
+[ext_resource type="PackedScene" uid="uid://yq6fhy13lgsb" path="res://Scenes/Menus/ControlHintBar/control_hint_bar.tscn" id="7_ptf7h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rixt3"]
 bg_color = Color(2.3102762e-06, 0.6323629, 0.9693813, 1)
@@ -27,7 +27,7 @@ corner_radius_top_right = 32
 corner_radius_bottom_right = 32
 corner_radius_bottom_left = 32
 
-[node name="TrackSelectMenu" type="Control" unique_id=1328814950 node_paths=PackedStringArray("back_button")]
+[node name="TrackSelectMenu" type="Control" unique_id=1328814950]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,7 +37,6 @@ grow_vertical = 2
 script = ExtResource("1_cpjce")
 next_scene = "uid://igg6cd4fnkgj"
 prev_scene = "uid://dujko6vu4ilbf"
-back_button = NodePath("BackButton")
 
 [node name="Panel" type="Panel" parent="." unique_id=104158427]
 layout_mode = 1
@@ -127,7 +126,9 @@ disabled = true
 track_name = "Track 4"
 track_icon = ExtResource("5_xkk6d")
 
-[node name="BackButton" parent="." unique_id=1382448741 instance=ExtResource("5_rnkhu")]
-layout_mode = 0
-offset_right = 150.0
-offset_bottom = 150.0
+[node name="ControlHintBar" parent="." unique_id=1676424252 instance=ExtResource("7_ptf7h")]
+layout_mode = 1
+offset_top = -100.0
+control_texts = Array[String](["Select", "Confirm", "Return"])
+control_inputs_keyboard = Array[String](["WASD", "ENTER", "ESC"])
+control_inputs_controller = Array[String](["Ⓛ", "A", "B"])

@@ -18,7 +18,6 @@ const OFFSCREEN_POSITION: Vector2 = Vector2(0, 1080) ## The position the menu tw
 # Onready Vars
 @onready var background_panel: Panel = $BackgroundPanel
 @onready var options_container: MarginContainer = $OptionsContainer
-@onready var back_button: Button = $OptionsContainer/BackButton
 
 # Internal Vars
 var menu_tween: Tween ## The current tween applying to this menu.
@@ -26,7 +25,6 @@ var menu_tween: Tween ## The current tween applying to this menu.
 func _ready() -> void:
 	_set_up_options()
 	hide()
-	back_button.pressed.connect(hide_menu)
 
 ######################
 ## Showing & Hiding ##
@@ -48,7 +46,7 @@ func show_menu() -> void:
 	
 	# Emit signal & grab focus
 	showing.emit()
-	back_button.grab_focus()
+	master_volume_slider.grab_focus() # TODO: If top thing changes this needs to be updated, maybe keep a list of focusables?
 
 ## Should be called to hide menu.
 func hide_menu() -> void:
@@ -58,7 +56,6 @@ func hide_menu() -> void:
 	
 	# Create new tween and run
 	menu_tween = create_tween().set_parallel().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	options_container.set_position(Vector2.ZERO)
 	menu_tween.tween_property(options_container, "position", OFFSCREEN_POSITION, TWEEN_TIME)
 	menu_tween.tween_property(background_panel, "modulate", Color(1.0, 1.0, 1.0, 0.0), TWEEN_TIME)
 	menu_tween.tween_callback(func(): visible = false).set_delay(TWEEN_TIME)

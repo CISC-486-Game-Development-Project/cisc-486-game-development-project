@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://dgsod5ahxppab" path="res://Scenes/Menus/OptionsMenu/options_menu.gd" id="1_6iikp"]
 [ext_resource type="Material" uid="uid://cena68mlloxwr" path="res://Resources/Shaders/Menu/options_menu_bg.tres" id="2_ubhnc"]
 [ext_resource type="FontFile" uid="uid://c2gld37y6b17m" path="res://Assets/2D/Fonts/DeltaBlock.ttf" id="3_2xv4m"]
-[ext_resource type="PackedScene" uid="uid://cg4k2bd82eaol" path="res://Components/MenuParts/IconButtons/back_button.tscn" id="4_2xv4m"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7by3x"]
 bg_color = Color(0, 0, 0, 0.8)
@@ -143,6 +142,7 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 5.0
 max_value = 1.0
 step = 0.01
+scrollable = false
 tick_count = 101
 ticks_on_borders = true
 ticks_position = 2
@@ -167,6 +167,7 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 5.0
 max_value = 1.0
 step = 0.01
+scrollable = false
 tick_count = 101
 ticks_on_borders = true
 ticks_position = 2
@@ -191,6 +192,7 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 5.0
 max_value = 1.0
 step = 0.01
+scrollable = false
 tick_count = 101
 ticks_on_borders = true
 ticks_position = 2
@@ -215,6 +217,7 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 5.0
 max_value = 1.0
 step = 0.01
+scrollable = false
 tick_count = 101
 ticks_on_borders = true
 ticks_position = 2
@@ -255,8 +258,3 @@ vertical_alignment = 1
 [node name="CheckButton" type="CheckButton" parent="OptionsContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Miscellaneous/VBoxContainer/PawnSounds" unique_id=1025495336]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="BackButton" parent="OptionsContainer" unique_id=1382448741 instance=ExtResource("4_2xv4m")]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0

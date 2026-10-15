@@ -9,6 +9,7 @@
 [ext_resource type="Material" uid="uid://mskidwycxwnw" path="res://Resources/Shaders/Menu/main_menu_bg.tres" id="6_eols4"]
 [ext_resource type="Script" uid="uid://dwdnygslhrnq3" path="res://Components/MenuParts/UIProperties/center_pivot.gd" id="6_rbcii"]
 [ext_resource type="FontFile" uid="uid://c2gld37y6b17m" path="res://Assets/2D/Fonts/DeltaBlock.ttf" id="7_7cp3c"]
+[ext_resource type="PackedScene" uid="uid://yq6fhy13lgsb" path="res://Scenes/Menus/ControlHintBar/control_hint_bar.tscn" id="9_rur1y"]
 
 [sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_2v5bn"]
 stream_count = 3
@@ -206,6 +207,13 @@ text = "Subtitle"
 label_settings = SubResource("LabelSettings_u7k8n")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ControlHintBar" parent="." unique_id=1676424252 instance=ExtResource("9_rur1y")]
+layout_mode = 1
+offset_top = -100.0
+control_texts = Array[String](["Select", "Confirm", "Return"])
+control_inputs_keyboard = Array[String](["WASD", "ENTER", "ESC"])
+control_inputs_controller = Array[String](["Ⓛ", "A", "B"])
 
 [node name="OptionsMenu" parent="." unique_id=693100041 instance=ExtResource("3_yobja")]
 visible = false

@@ -6,10 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://c1lxdn14k7ogk" path="res://Assets/2D/Sprites/CharacterIcons/DefaultKartIcon.png" id="4_p6l55"]
 [ext_resource type="FontFile" uid="uid://c2gld37y6b17m" path="res://Assets/2D/Fonts/DeltaBlock.ttf" id="4_rpv32"]
 [ext_resource type="PackedScene" uid="uid://bjoxa6ritw47n" path="res://Scenes/Menus/CharacterSelectMenu/character_button.tscn" id="5_2k24t"]
-[ext_resource type="PackedScene" uid="uid://cg4k2bd82eaol" path="res://Components/MenuParts/IconButtons/back_button.tscn" id="6_0fmip"]
 [ext_resource type="Texture2D" uid="uid://chu7hsk5m2y25" path="res://Assets/2D/Sprites/CharacterIcons/PawnIcon.png" id="6_d15w1"]
 [ext_resource type="Resource" uid="uid://ulcs3tytsjl0" path="res://Resources/Character/pawn_character.tres" id="7_7tf73"]
 [ext_resource type="Resource" uid="uid://k5txr2vfhnjr" path="res://Resources/Character/default_character.tres" id="7_d15w1"]
+[ext_resource type="PackedScene" uid="uid://yq6fhy13lgsb" path="res://Scenes/Menus/ControlHintBar/control_hint_bar.tscn" id="10_m0o7l"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hk7je"]
 bg_color = Color(2.3102762e-06, 0.6323629, 0.9693813, 1)
@@ -91,7 +91,7 @@ corner_radius_top_right = 32
 corner_radius_bottom_right = 32
 corner_radius_bottom_left = 32
 
-[node name="CharacterSelectMenu" type="Control" unique_id=2040534807 node_paths=PackedStringArray("back_button")]
+[node name="CharacterSelectMenu" type="Control" unique_id=2040534807]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -101,7 +101,6 @@ grow_vertical = 2
 script = ExtResource("1_hk7je")
 next_scene = "uid://dpjhad5swcika"
 prev_scene = "uid://b4byg6rmq7m24"
-back_button = NodePath("BackButton")
 
 [node name="Panel" type="Panel" parent="." unique_id=1216297583]
 layout_mode = 1
@@ -518,9 +517,9 @@ layout_mode = 2
 icon = ExtResource("4_p6l55")
 character = ExtResource("7_d15w1")
 
-[node name="BackButton" parent="." unique_id=1382448741 instance=ExtResource("6_0fmip")]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 166.0
-offset_bottom = 166.0
+[node name="ControlHintBar" parent="." unique_id=1676424252 instance=ExtResource("10_m0o7l")]
+layout_mode = 1
+offset_top = -100.0
+control_texts = Array[String](["Select", "Confirm", "Return", "Stats"])
+control_inputs_keyboard = Array[String](["WASD", "ENTER", "ESC", "H"])
+control_inputs_controller = Array[String](["Ⓛ", "A", "B", "+"])

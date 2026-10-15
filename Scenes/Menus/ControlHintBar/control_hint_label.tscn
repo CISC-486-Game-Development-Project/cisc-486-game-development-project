@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://388i1ofd26qq"]
+
+[ext_resource type="FontFile" uid="uid://c2gld37y6b17m" path="res://Assets/2D/Fonts/DeltaBlock.ttf" id="1_mheme"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rpv32"]
+font = ExtResource("1_mheme")
+font_size = 42
+outline_size = 24
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 12
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(6, 6)
+
+[node name="Label" type="Label" unique_id=845804349]
+size_flags_vertical = 1
+text = "B - Back"
+label_settings = SubResource("LabelSettings_rpv32")
+horizontal_alignment = 2
+vertical_alignment = 1

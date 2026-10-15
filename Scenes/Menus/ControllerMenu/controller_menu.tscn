@@ -3,9 +3,8 @@
 [ext_resource type="Script" uid="uid://tqb1lfysiy7h" path="res://Scenes/Menus/ControllerMenu/controller_menu.gd" id="1_10kwx"]
 [ext_resource type="Texture2D" uid="uid://be457kbv51483" path="res://Assets/2D/Sprites/icon.svg" id="1_aeu6d"]
 [ext_resource type="Material" uid="uid://3kb3uo5cklkj" path="res://Resources/Shaders/Menu/title_screen_bg.tres" id="3_k436g"]
-[ext_resource type="PackedScene" uid="uid://cg4k2bd82eaol" path="res://Components/MenuParts/IconButtons/back_button.tscn" id="3_oaxpj"]
-[ext_resource type="PackedScene" uid="uid://da6x0hxjl2mai" path="res://Components/MenuParts/IconButtons/next_button.tscn" id="4_k436g"]
 [ext_resource type="FontFile" uid="uid://c2gld37y6b17m" path="res://Assets/2D/Fonts/DeltaBlock.ttf" id="4_y7yg4"]
+[ext_resource type="PackedScene" uid="uid://yq6fhy13lgsb" path="res://Scenes/Menus/ControlHintBar/control_hint_bar.tscn" id="5_k436g"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4f5k"]
 bg_color = Color(0.42749333, 0.42749298, 0.42749316, 0.36862746)
@@ -34,7 +33,7 @@ shadow_size = 16
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(8, 8)
 
-[node name="ControllerMenu" type="Control" unique_id=708152649 node_paths=PackedStringArray("next_button", "back_button")]
+[node name="ControllerMenu" type="Control" unique_id=708152649]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -44,8 +43,6 @@ grow_vertical = 2
 script = ExtResource("1_10kwx")
 next_scene = "uid://dujko6vu4ilbf"
 prev_scene = "uid://b4byg6rmq7m24"
-next_button = NodePath("NextButton")
-back_button = NodePath("BackButton")
 controller_texture = ExtResource("1_aeu6d")
 
 [node name="MenuBG" type="ColorRect" parent="." unique_id=541188243]
@@ -218,12 +215,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 text_overrun_behavior = 3
 
-[node name="BackButton" parent="." unique_id=1382448741 instance=ExtResource("3_oaxpj")]
-layout_mode = 0
-offset_right = 150.0
-offset_bottom = 150.0
-
-[node name="NextButton" parent="." unique_id=910715084 instance=ExtResource("4_k436g")]
+[node name="ControlHintBar" parent="." unique_id=1676424252 instance=ExtResource("5_k436g")]
 layout_mode = 1
-offset_left = -150.0
-offset_top = -150.0
+offset_top = -100.0
+control_texts = Array[String](["Next", "Return"])
+control_inputs_keyboard = Array[String](["ENTER", "ESC"])
+control_inputs_controller = Array[String](["A", "B"])

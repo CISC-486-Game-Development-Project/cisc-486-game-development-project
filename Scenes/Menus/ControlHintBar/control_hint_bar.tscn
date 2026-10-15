@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://yq6fhy13lgsb"]
+
+[ext_resource type="Script" uid="uid://b36hnqqab1rpx" path="res://Scenes/Menus/ControlHintBar/control_hint_bar.gd" id="1_3dk2p"]
+[ext_resource type="PackedScene" uid="uid://388i1ofd26qq" path="res://Scenes/Menus/ControlHintBar/control_hint_label.tscn" id="2_3dk2p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7jgw0"]
+bg_color = Color(0, 0, 0, 0.8627451)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+
+[node name="ControlHintBar" type="PanelContainer" unique_id=1676424252]
+custom_minimum_size = Vector2(0, 100)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 10
+theme_override_styles/panel = SubResource("StyleBoxFlat_7jgw0")
+script = ExtResource("1_3dk2p")
+control_hint_label = ExtResource("2_3dk2p")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1889935438]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 8
+
+[node name="HintBox" type="HBoxContainer" parent="MarginContainer" unique_id=1850470355]
+layout_mode = 2
+theme_override_constants/separation = 128
+alignment = 2

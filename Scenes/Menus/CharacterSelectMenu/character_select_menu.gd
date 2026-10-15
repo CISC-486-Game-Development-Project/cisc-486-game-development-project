@@ -9,7 +9,6 @@ const STATS_TWEEN_TIME: float = 0.1 ## The time it takes for the stats panel twe
 # Export Vars
 @export_file("*.tscn") var next_scene: String = "res://Scenes/"
 @export_file("*.tscn") var prev_scene: String = "res://Scenes/"
-@export var back_button: Button
 
 # Onready Vars
 @onready var character_button_container: GridContainer = $MarginContainer/HBoxContainer/PanelContainer/MarginContainer/CharacterButtonContainer
@@ -61,8 +60,6 @@ func _ready() -> void:
 	_setup_viewports()
 	
 	# Connect button signals
-	back_button.pressed.connect(_prev_scene)
-	
 	for i in len(character_buttons):
 		character_buttons[i].pressed.connect(select_character.bind(character_buttons[i]))
 		character_buttons[i].focus_entered.connect(hover_character.bind(character_buttons[i]))

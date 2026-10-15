@@ -7,7 +7,6 @@ const FOCUS_TWEEN_SCALE: float = 1.1
 # Export Vars
 @export_file("*.tscn") var next_scene: String = "res://Scenes/"
 @export_file("*.tscn") var prev_scene: String = "res://Scenes/"
-@export var back_button: Button
 
 # Onready Vars
 @onready var track_button_container: HBoxContainer = $MarginContainer/VBoxContainer/PanelContainer/MarginContainer/TrackButtonContainer
@@ -23,8 +22,6 @@ func _ready() -> void:
 			track_buttons.append(child)
 	
 	# Connect button signals
-	back_button.pressed.connect(_prev_scene)
-	
 	for i in len(track_buttons):
 		track_buttons[i].pressed.connect(select_track.bind(track_buttons[i]))
 		track_buttons[i].mouse_entered.connect(track_buttons[i].grab_focus)
