@@ -24,6 +24,13 @@ background_mode = 2
 background_energy_multiplier = 2.5
 sky = SubResource("Sky_0fmip")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xvvda"]
+bg_color = Color(1, 1, 1, 0.30588236)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
 [sub_resource type="LabelSettings" id="LabelSettings_7tf73"]
 font = ExtResource("4_rpv32")
 font_size = 42
@@ -32,6 +39,50 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 12
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(6, 6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rpv32"]
+bg_color = Color(0, 0, 0, 0.77254903)
+skew = Vector2(0.5, 0)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fsgd3"]
+bg_color = Color(0.9490196, 0.60784316, 0.3372549, 1)
+skew = Vector2(0.5, 0)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2jtd5"]
+bg_color = Color(0, 0, 0, 0.77254903)
+skew = Vector2(0.5, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m0o7l"]
+bg_color = Color(0, 0, 0, 0.77254903)
+skew = Vector2(0.5, 0)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6qwey"]
+bg_color = Color(0, 0, 0, 0.77254903)
+skew = Vector2(0.5, 0)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tivmb"]
+bg_color = Color(0, 0, 0, 0.77254903)
+skew = Vector2(0.5, 0)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4f5k"]
 bg_color = Color(1, 1, 1, 0.30588236)
@@ -95,96 +146,328 @@ custom_minimum_size = Vector2(512, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SubViewportGrid" type="GridContainer" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1564684084]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=60764723]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 10.0
+
+[node name="SubViewportGrid" type="GridContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer" unique_id=1564684084]
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 2
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid" unique_id=1554255989]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/SubViewportGrid" unique_id=1554255989]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid/SubViewportContainer" unique_id=1334760120]
+[node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/SubViewportGrid/SubViewportContainer" unique_id=1334760120]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(400, 373)
 render_target_update_mode = 4
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid/SubViewportContainer/SubViewport" unique_id=1917114042]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/SubViewportGrid/SubViewportContainer/SubViewport" unique_id=1917114042]
 environment = SubResource("Environment_0fmip")
 
-[node name="Camera3D" type="Camera3D" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid/SubViewportContainer/SubViewport" unique_id=1091578064]
+[node name="Camera3D" type="Camera3D" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/SubViewportGrid/SubViewportContainer/SubViewport" unique_id=1091578064]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.98480767, 0.17364818, 0, -0.17364818, 0.98480767, 0, 0.5, 3)
 current = true
 fov = 55.0
 
-[node name="BasicKart" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid/SubViewportContainer/SubViewport" unique_id=142078105 instance=ExtResource("4_0fmip")]
+[node name="BasicKart" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/SubViewportGrid/SubViewportContainer/SubViewport" unique_id=142078105 instance=ExtResource("4_0fmip")]
 transform = Transform3D(-0.7660445, 0, -0.6427876, 0, 1, 0, 0.6427876, 0, -0.7660445, 0, 0, 0)
 
-[node name="SubViewportContainer2" type="SubViewportContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid" unique_id=1761944999]
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/SubViewportGrid" unique_id=1761944999]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid/SubViewportContainer2" unique_id=1778510669]
+[node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/SubViewportGrid/SubViewportContainer2" unique_id=1778510669]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(400, 373)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid/SubViewportContainer2/SubViewport" unique_id=907384730]
+[node name="Camera3D" type="Camera3D" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/SubViewportGrid/SubViewportContainer2/SubViewport" unique_id=907384730]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.98480767, 0.17364818, 0, -0.17364818, 0.98480767, 10, 0.5, 3)
 current = true
 fov = 55.0
 
-[node name="BasicKart" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid/SubViewportContainer2/SubViewport" unique_id=492487025 instance=ExtResource("4_0fmip")]
+[node name="BasicKart" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/SubViewportGrid/SubViewportContainer2/SubViewport" unique_id=492487025 instance=ExtResource("4_0fmip")]
 transform = Transform3D(-0.7660445, 0, -0.6427876, 0, 1, 0, 0.6427876, 0, -0.7660445, 10, 0, 0)
 
-[node name="SubViewportContainer3" type="SubViewportContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid" unique_id=1976519326]
+[node name="SubViewportContainer3" type="SubViewportContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/SubViewportGrid" unique_id=1976519326]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid/SubViewportContainer3" unique_id=180987552]
+[node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/SubViewportGrid/SubViewportContainer3" unique_id=180987552]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(400, 372)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid/SubViewportContainer3/SubViewport" unique_id=2058326438]
+[node name="Camera3D" type="Camera3D" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/SubViewportGrid/SubViewportContainer3/SubViewport" unique_id=2058326438]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.98480767, 0.17364818, 0, -0.17364818, 0.98480767, 20, 0.5, 3)
 current = true
 fov = 55.0
 
-[node name="BasicKart" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid/SubViewportContainer3/SubViewport" unique_id=1092539248 instance=ExtResource("4_0fmip")]
+[node name="BasicKart" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/SubViewportGrid/SubViewportContainer3/SubViewport" unique_id=1092539248 instance=ExtResource("4_0fmip")]
 transform = Transform3D(-0.7660445, 0, -0.6427876, 0, 1, 0, 0.6427876, 0, -0.7660445, 20, 0, 0)
 
-[node name="SubViewportContainer4" type="SubViewportContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid" unique_id=544597699]
+[node name="SubViewportContainer4" type="SubViewportContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/SubViewportGrid" unique_id=544597699]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid/SubViewportContainer4" unique_id=1931846251]
+[node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/SubViewportGrid/SubViewportContainer4" unique_id=1931846251]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(400, 372)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid/SubViewportContainer4/SubViewport" unique_id=1805246842]
+[node name="Camera3D" type="Camera3D" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/SubViewportGrid/SubViewportContainer4/SubViewport" unique_id=1805246842]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.98480767, 0.17364818, 0, -0.17364818, 0.98480767, 30, 0.5, 3)
 current = true
 fov = 55.0
 
-[node name="BasicKart" parent="MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid/SubViewportContainer4/SubViewport" unique_id=419008786 instance=ExtResource("4_0fmip")]
+[node name="BasicKart" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/SubViewportGrid/SubViewportContainer4/SubViewport" unique_id=419008786 instance=ExtResource("4_0fmip")]
 transform = Transform3D(-0.7660445, 0, -0.6427876, 0, 1, 0, 0.6427876, 0, -0.7660445, 30, 0, 0)
+
+[node name="StatsPanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer" unique_id=882877438]
+z_index = 1
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xvvda")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel" unique_id=1708380310]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer" unique_id=1640719212]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TopSpeed" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer" unique_id=176456616]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/TopSpeed" unique_id=293997524]
+layout_mode = 2
+text = "Top Speed"
+label_settings = SubResource("LabelSettings_7tf73")
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/TopSpeed" unique_id=2005040603]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_rpv32")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fsgd3")
+max_value = 5.0
+value = 4.0
+show_percentage = false
+
+[node name="ProgressTicks" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/TopSpeed/ProgressBar" unique_id=1144458569]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 130
+alignment = 1
+
+[node name="Panel1" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/TopSpeed/ProgressBar/ProgressTicks" unique_id=640186320]
+custom_maximum_size = Vector2(4, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_2jtd5")
+
+[node name="Panel2" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/TopSpeed/ProgressBar/ProgressTicks" unique_id=1485679842]
+custom_maximum_size = Vector2(4, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_2jtd5")
+
+[node name="Panel3" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/TopSpeed/ProgressBar/ProgressTicks" unique_id=206323730]
+custom_maximum_size = Vector2(4, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_2jtd5")
+
+[node name="Panel4" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/TopSpeed/ProgressBar/ProgressTicks" unique_id=464654617]
+custom_maximum_size = Vector2(4, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_2jtd5")
+
+[node name="Acceleration" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer" unique_id=1645841133]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/Acceleration" unique_id=2117556293]
+layout_mode = 2
+text = "Acceleration"
+label_settings = SubResource("LabelSettings_7tf73")
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/Acceleration" unique_id=1375511480]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_m0o7l")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fsgd3")
+max_value = 5.0
+value = 3.0
+show_percentage = false
+
+[node name="ProgressTicks" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/Acceleration/ProgressBar" unique_id=249115644]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 130
+alignment = 1
+
+[node name="Panel1" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/Acceleration/ProgressBar/ProgressTicks" unique_id=1323293563]
+custom_maximum_size = Vector2(4, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_2jtd5")
+
+[node name="Panel2" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/Acceleration/ProgressBar/ProgressTicks" unique_id=41330552]
+custom_maximum_size = Vector2(4, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_2jtd5")
+
+[node name="Panel3" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/Acceleration/ProgressBar/ProgressTicks" unique_id=1782258232]
+custom_maximum_size = Vector2(4, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_2jtd5")
+
+[node name="Panel4" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/Acceleration/ProgressBar/ProgressTicks" unique_id=400388792]
+custom_maximum_size = Vector2(4, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_2jtd5")
+
+[node name="BoostSpeed" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer" unique_id=1565026577]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/BoostSpeed" unique_id=608947209]
+layout_mode = 2
+text = "Boost Speed"
+label_settings = SubResource("LabelSettings_7tf73")
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/BoostSpeed" unique_id=719196585]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_6qwey")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fsgd3")
+max_value = 5.0
+value = 2.0
+show_percentage = false
+
+[node name="ProgressTicks" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/BoostSpeed/ProgressBar" unique_id=409145292]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 130
+alignment = 1
+
+[node name="Panel1" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/BoostSpeed/ProgressBar/ProgressTicks" unique_id=697152871]
+custom_maximum_size = Vector2(4, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_2jtd5")
+
+[node name="Panel2" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/BoostSpeed/ProgressBar/ProgressTicks" unique_id=367158216]
+custom_maximum_size = Vector2(4, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_2jtd5")
+
+[node name="Panel3" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/BoostSpeed/ProgressBar/ProgressTicks" unique_id=93379061]
+custom_maximum_size = Vector2(4, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_2jtd5")
+
+[node name="Panel4" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/BoostSpeed/ProgressBar/ProgressTicks" unique_id=335154816]
+custom_maximum_size = Vector2(4, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_2jtd5")
+
+[node name="Handling" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer" unique_id=967513483]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/Handling" unique_id=503410332]
+layout_mode = 2
+text = "Handling"
+label_settings = SubResource("LabelSettings_7tf73")
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/Handling" unique_id=537024994]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_tivmb")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fsgd3")
+max_value = 5.0
+value = 1.0
+show_percentage = false
+
+[node name="ProgressTicks" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/Handling/ProgressBar" unique_id=604117895]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 130
+alignment = 1
+
+[node name="Panel1" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/Handling/ProgressBar/ProgressTicks" unique_id=1519915057]
+custom_maximum_size = Vector2(4, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_2jtd5")
+
+[node name="Panel2" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/Handling/ProgressBar/ProgressTicks" unique_id=48863023]
+custom_maximum_size = Vector2(4, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_2jtd5")
+
+[node name="Panel3" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/Handling/ProgressBar/ProgressTicks" unique_id=494163564]
+custom_maximum_size = Vector2(4, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_2jtd5")
+
+[node name="Panel4" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/Handling/ProgressBar/ProgressTicks" unique_id=414722944]
+custom_maximum_size = Vector2(4, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_2jtd5")
 
 [node name="NameLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=651109801]
 layout_mode = 2
@@ -193,6 +476,7 @@ text = "Character Name in the Kart Name"
 label_settings = SubResource("LabelSettings_7tf73")
 horizontal_alignment = 1
 vertical_alignment = 1
+clip_text = true
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer" unique_id=1829156650]
 layout_mode = 2

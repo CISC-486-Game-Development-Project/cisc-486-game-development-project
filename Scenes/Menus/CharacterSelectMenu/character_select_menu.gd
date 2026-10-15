@@ -1,9 +1,10 @@
 extends Control
 
 # Constants
-const SELECT_TWEEN_TIME: float = 0.5
-const FOCUS_TWEEN_TIME: float = 0.1
-const FOCUS_TWEEN_SCALE: float = 1.1
+const SELECT_TWEEN_TIME: float = 0.5 ## The time it takes for the character selection tween to complete.
+const FOCUS_TWEEN_TIME: float = 0.1 ## The time it takes for the character focus tween to complete.
+const FOCUS_TWEEN_SCALE: float = 1.1 ## The scale used for the character focus tween.
+const STATS_TWEEN_TIME: float = 0.1 ## The time it takes for the stats panel tween to complete.
 
 # Export Vars
 @export_file("*.tscn") var next_scene: String = "res://Scenes/"
@@ -13,7 +14,8 @@ const FOCUS_TWEEN_SCALE: float = 1.1
 # Onready Vars
 @onready var character_button_container: GridContainer = $MarginContainer/HBoxContainer/PanelContainer/MarginContainer/CharacterButtonContainer
 @onready var name_label: Label = $MarginContainer/HBoxContainer/VBoxContainer/NameLabel
-@onready var sub_viewport_grid: GridContainer = $MarginContainer/HBoxContainer/VBoxContainer/SubViewportGrid
+@onready var sub_viewport_grid: GridContainer = $MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/SubViewportGrid
+@onready var stats_panel: PanelContainer = $MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel
 
 # Internal Vars
 var character_buttons: Array[Button] ## The character buttons available to select.
@@ -21,10 +23,15 @@ var player_count: int = 1 ## The total number of players.
 var player_num: int = 1 ## The player currently selecting a character.
 var hover_karts: Array[KartModel] = [null, null, null, null] ## The kart models being shown based on hover.
 var sub_viewports: Array[SubViewport] ## An array of the subviewports.
+var stats_bars: Array[ProgressBar] ## An array of the progress bars used to display stats.
+var stats_tween: Tween ## Tween used for showing and hiding the stats_panel.
 var select_tweens: Array[Tween] = [null, null, null, null] ## Tweens that play when a character is selected.
-var current_focus: Control
+var current_focus: Control ## The currently focused control node.
 
 func _ready() -> void:
+	# Hide stats panel
+	stats_panel.hide()
+	
 	# Get character_buttons & sub_viewports
 	for child in character_button_container.get_children():
 		if child is CharacterButton:
@@ -32,6 +39,13 @@ func _ready() -> void:
 	for child in sub_viewport_grid.get_children():
 		if child is SubViewportContainer:
 			sub_viewports.append(child.get_node("SubViewport"))
+	
+	# Get stats_bars
+	for child in stats_panel.get_node("MarginContainer/VBoxContainer").get_children():
+		var bar = child.get_node_or_null("ProgressBar")
+		if bar:
+			stats_bars.append(bar)
+			bar.value = 0.0
 	
 	# Remove debug karts
 	for sub_viewport in sub_viewports:
@@ -72,9 +86,14 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
-		if Globals.selected_characters[player_count]:
+		if Globals.selected_characters[player_count-1]:
 			return
 		deselect_character()
+	elif event.is_action_pressed("Pause"):
+		if stats_panel.visible:
+			_hide_stats()
+		else:
+			_show_stats()
 
 ## Called when a character is selected.
 func select_character(button: CharacterButton) -> void:
@@ -114,6 +133,36 @@ func hover_character(button: CharacterButton) -> void:
 	hover_karts[player_num-1].rotation_degrees.y = 220
 	sub_viewports[player_num-1].add_child(hover_karts[player_num-1])
 	name_label.text = new_char.char_name + " in the " + new_char.kart_name if new_char.kart_name != "" else new_char.char_name
+	
+	# Show new hovered kart's stats
+	var stats = new_char.stats
+	stats_bars[0].value = stats.base_speed
+	stats_bars[1].value = stats.base_acceleration
+	stats_bars[2].value = stats.base_boost
+	stats_bars[3].value = stats.base_handling
+
+## Should be called to show stats_panel.
+func _show_stats() -> void:
+	# Kill previous tween if still running
+	if stats_tween:
+		stats_tween.kill()
+	
+	# Create new tween and run
+	stats_tween = create_tween().set_parallel()
+	stats_panel.show()
+	stats_panel.modulate = Color(1.0, 1.0, 1.0, 0.0)
+	stats_tween.tween_property(stats_panel, "modulate", Color(1.0, 1.0, 1.0, 1.0), STATS_TWEEN_TIME)
+
+## Should be called to hide stats_panel.
+func _hide_stats() -> void:
+	# Kill previous tween if still running
+	if stats_tween:
+		stats_tween.kill()
+	
+	# Create new tween and run
+	stats_tween = create_tween().set_parallel()
+	stats_tween.tween_property(stats_panel, "modulate", Color(1.0, 1.0, 1.0, 0.0), STATS_TWEEN_TIME)
+	stats_tween.tween_callback(stats_panel.hide).set_delay(STATS_TWEEN_TIME)
 
 ## Sets up the viewports based on player_count.
 func _setup_viewports() -> void:

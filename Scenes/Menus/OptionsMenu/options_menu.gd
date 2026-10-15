@@ -7,7 +7,7 @@ signal hiding ## Emitted when hiding this menu.
 
 # Constants
 const TWEEN_TIME: float = 0.5 ## The time it takes for the menu to show or hide.
-const OFFSCREEN_POSITION: Vector2 = Vector2(0,1080) ## The position the menu tweens to and from when showing and hiding.
+const OFFSCREEN_POSITION: Vector2 = Vector2(0, 1080) ## The position the menu tweens to and from when showing and hiding.
 
 # Exprot Vars
 @export var master_volume_slider: HSlider
@@ -42,6 +42,7 @@ func show_menu() -> void:
 	menu_tween = create_tween().set_parallel().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	visible = true
 	options_container.set_position(OFFSCREEN_POSITION)
+	background_panel.modulate = Color(1.0, 1.0, 1.0, 0.0)
 	menu_tween.tween_property(options_container, "position", Vector2.ZERO, TWEEN_TIME)
 	menu_tween.tween_property(background_panel, "modulate", Color(1.0, 1.0, 1.0, 1.0), TWEEN_TIME)
 	
