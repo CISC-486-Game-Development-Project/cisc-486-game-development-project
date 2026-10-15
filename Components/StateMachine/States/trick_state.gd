@@ -19,6 +19,10 @@ func enter(_prev_state: State) -> void:
 	# Start trick cooldown
 	entity.trick_cooldown_timer.start()
 	
+	# Reset trick combo if timer has run out
+	if not entity.trick_combo_timer.time_left > 0:
+		entity.trick_combo_level = 0
+	
 	# Begin state's unique animation here
 	_play_trick_effect()
 

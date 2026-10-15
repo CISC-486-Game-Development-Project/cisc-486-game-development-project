@@ -5,16 +5,15 @@
 - Item Behaviour (implementing how items work when used)
 - Menus (main menu, character select, track select, in game HUD, UI tween animations, creating reusable menu themes)
 - SFX & Music (new song for each track? menu music? unique sounds for each character's kart? unique voice lines per character for interactions?)
-- Known bugs to fix (Trick combo resets when just tricked, is the timer timing out at the same time the trick happens?)
+- Known bugs to fix:
+- CenterPivot: visibly incorrect pivot when first entering a menu, plus having to set pivot every frame doesn't make sense, there should be an easier solution
+- CameraController: Make camera control based on a spring arm so it doesn't clip through the ground
+- Handling Stat: Fix how handling stat effects drifting so it's more intuitive (also fix: boosts make turning way faster for some reason)
 
 Current Tasks:
 - Destructible objects [LOGIC DONE, DESTROY EFFECT NOT IMPLEMENTED]
-- Make camera control based on a spring arm so it doesn't clip through the ground
-- Menu functionality, animations & stylization (pause menu, options menu, main menu, etc.)
-- Fix CenterPivot: visibly incorrect pivot when first entering a menu, plus having to set pivot every frame doesn't make sense, there should be an easier solution
-- Splitscreen functionality (multiplayer in game, menu to handle which controller controls which part of the screen before character select, make character select also splitscreen) [DONE]
+- Menu functionality, animations & stylization (pause menu, options menu, main menu, etc.) [DONE, MIGHT CONTINUE POLISHING LATER]
 - Spline based track prototyping system
-- Fix how handling stat effects drifting so it's more intuitive (also fix: boosts make turning way faster for some reason)
 
 ## Maia
 - Item system (inventory, item boxes, usable items, random item distribution)

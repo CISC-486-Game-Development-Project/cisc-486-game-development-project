@@ -558,5 +558,3 @@ script = ExtResource("6_2kwd7")
 to_state = NodePath("../../IdleState")
 advance_expression = "hit_timer.time_left <= 0"
 metadata/_custom_type_script = "uid://l1hrvfthq543"
-
-[connection signal="timeout" from="TrickComboTimer" to="." method="_on_trick_combo_timer_timeout"]

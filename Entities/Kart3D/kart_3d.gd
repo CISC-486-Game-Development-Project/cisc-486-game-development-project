@@ -391,10 +391,6 @@ func can_air_trick() -> bool:
 			return true
 	return false
 
-## Called when the trick combo timer runs out of time.
-func _on_trick_combo_timer_timeout() -> void:
-	trick_combo_level = 0
-
 #####################
 ## Debug Functions ##
 #####################
