@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://3kb3uo5cklkj"]
 
 [ext_resource type="Shader" uid="uid://b1xeh7hxte84x" path="res://Resources/Shaders/Menu/menu_bg.gdshader" id="1_e8r4e"]
-[ext_resource type="Texture2D" uid="uid://dkrjrinnpxamg" path="res://Assets/2D/Sprites/Menus/checkered.tres" id="2_7w6mm"]
+[ext_resource type="Texture2D" uid="uid://cxywdde32xids" path="res://Assets/2D/Sprites/Menus/checkered.png" id="2_7w6mm"]
 
 [sub_resource type="Gradient" id="Gradient_cgp0s"]
 interpolation_mode = 2

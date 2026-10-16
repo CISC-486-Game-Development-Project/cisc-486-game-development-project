@@ -76,6 +76,7 @@ var boost_queue: Array[Boost] ## The queue of boosts to be applied once the grou
 var is_hit: bool ## True when the kart is hit.
 
 var trick_combo_level: int ## Number of tricks currently comboed.
+var held_item: Item ## Currently held item.
 
 #######################
 ## Process Functions ##
