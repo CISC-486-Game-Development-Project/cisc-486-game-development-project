@@ -255,7 +255,7 @@ operation = 2
 size = Vector3(2, 1, 15)
 material = SubResource("StandardMaterial3D_if3av")
 
-[node name="BoostPanel" parent="Terrain" unique_id=630485332 instance=ExtResource("4_7kucd")]
+[node name="BoostPanel" parent="Terrain" unique_id=630485332 groups=["Paved"] instance=ExtResource("4_7kucd")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.5, -30)
 
 [node name="Barrel" parent="." unique_id=127053263 instance=ExtResource("7_7kucd")]

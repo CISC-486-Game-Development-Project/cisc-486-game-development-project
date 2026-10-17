@@ -14,6 +14,7 @@ extends CharacterBody3D
 @export_custom(PROPERTY_HINT_NONE, "suffix:m/s/s") var boost_acceleration: float ## Defines the rate of acceleration when boosting.
 @export var roll_friction: float = 0.8 ## Defines the intensity of the friction acting against the forward momentum.
 @export var trick_speed_threshold: float = 10.0 ## Defines the minimum speed required to trick while driving.
+@export var air_trick_speed_threshold: float = 4.0 ## Defines the minimum speed required to air trick while falling.
 
 @export_group("Steering")
 @export_custom(PROPERTY_HINT_NONE, "suffix:degrees") var max_steering_angle_slow: float = 10.0 ## Defines the maximum steering angle, should be higher when going slow.
@@ -247,6 +248,7 @@ func recalculate_offroad_factor() -> void:
 	if ignore_offroad_timer > 0.0:
 		if offroad_factor != 0.0:
 			offroad_factor = 0.0
+			set_stats()
 		return
 	
 	# Calculate offroad factor
@@ -367,7 +369,7 @@ func can_trick() -> bool:
 			#print("Trick Case 1 - Ledge Trick")
 			return true
 	elif state_machine.current_state is FallState:
-		if hop_request and trick_coyote_timer.time_left > 0 and not ground_ray_cast_3d.is_colliding():
+		if hop_request and not trick_ray_cast_3d.is_colliding() and trick_coyote_timer.time_left > 0:
 			#print("Trick Case 2 - Coyote Fall Trick")
 			return true
 	elif state_machine.current_state is HopState:
@@ -387,6 +389,10 @@ func can_air_trick() -> bool:
 	
 	# Check logic for tricking depending on current state
 	if state_machine.current_state is FallState:
+		# False if not above threshold (TODO: make air time check instead of this and see if it's better)
+		if velocity.length() < air_trick_speed_threshold:
+			return false
+		
 		if hop_request and not ground_ray_cast_3d.is_colliding():
 			#print("Air Trick")
 			return true
@@ -401,6 +407,7 @@ func can_air_trick() -> bool:
 func _update_debug_label() -> void:
 	# Define debug texts to display
 	var debugs: Array[String] = [
+		"Top Speed: " + str(top_speed),
 		"Velocity: " + str(roundf(velocity.length() * 10) / 10),
 		"State: " + state_machine.current_state.name,
 		"Drift Direction: " + str(drift_dir),
