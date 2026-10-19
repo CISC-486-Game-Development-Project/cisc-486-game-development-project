@@ -3,6 +3,20 @@
 [ext_resource type="PackedScene" uid="uid://btx1e5pbmrm5b" path="res://Entities/Kart3D/kart_3d.tscn" id="1_u0n23"]
 [ext_resource type="PackedScene" uid="uid://bpt5weu81habv" path="res://Components/CameraController/camera_controller.tscn" id="2_q6jvo"]
 [ext_resource type="Script" uid="uid://8saf5fuicdvx" path="res://Components/InputHandler/player_input_handler.gd" id="3_u0n23"]
+[ext_resource type="Script" uid="uid://dhsxlbjlxptmw" path="res://Scenes/Menus/PlayerHUD/item_ui.gd" id="4_so3bv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4f5k"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 16
+border_width_top = 16
+border_width_right = 16
+border_width_bottom = 16
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 512
+corner_radius_top_right = 512
+corner_radius_bottom_right = 512
+corner_radius_bottom_left = 512
+corner_detail = 16
 
 [node name="PlayerKart3D" unique_id=32768770 node_paths=PackedStringArray("input_handler") instance=ExtResource("1_u0n23")]
 input_handler = NodePath("PlayerInputHandler")
@@ -13,6 +27,56 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2, 1
 [node name="PlayerInputHandler" type="Node" parent="." index="13" unique_id=943662880]
 script = ExtResource("3_u0n23")
 metadata/_custom_type_script = "uid://8saf5fuicdvx"
+
+[node name="PlayerHUD" type="CanvasLayer" parent="." index="17" unique_id=173010069]
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerHUD" index="0" unique_id=59573880]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerHUD/MarginContainer" index="0" unique_id=398436781]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerHUD/MarginContainer/VBoxContainer" index="0" unique_id=295287550]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ItemPanel" type="PanelContainer" parent="PlayerHUD/MarginContainer/VBoxContainer/HBoxContainer" index="0" unique_id=281601326 node_paths=PackedStringArray("item_handler")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_t4f5k")
+script = ExtResource("4_so3bv")
+item_handler = NodePath("../../../../../ItemHandler")
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerHUD/MarginContainer/VBoxContainer/HBoxContainer/ItemPanel" index="0" unique_id=48452843]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="ItemTexture" type="TextureRect" parent="PlayerHUD/MarginContainer/VBoxContainer/HBoxContainer/ItemPanel/MarginContainer" index="0" unique_id=41607860]
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Spacer" type="Control" parent="PlayerHUD/MarginContainer/VBoxContainer/HBoxContainer" index="1" unique_id=238808917]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 8.0
+
+[node name="Spacer" type="Control" parent="PlayerHUD/MarginContainer/VBoxContainer" index="1" unique_id=1838161060]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
 
 [node name="ToIdle" parent="MovementStateMachine/DriftState" parent_id_path=PackedInt32Array(788034490) index="0" unique_id=1526947133]
 advance_expression = "not entity.drift_request or entity.get_horizontal_velocity().length() <= drift_speed_threshold or entity.drift_dir == 0"

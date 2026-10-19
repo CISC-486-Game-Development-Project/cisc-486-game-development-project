@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://c5wm052o3f1dg"]
+
+[ext_resource type="Script" uid="uid://dmptb23tryr46" path="res://Entities/Items/test_item.gd" id="1_u0dxw"]
+[ext_resource type="PackedScene" uid="uid://dny4f0rj2rv2i" path="res://Scenes/ItemModels/boost.tscn" id="2_f4hxo"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_f4hxo"]
+height = 1.4
+radius = 0.2
+
+[node name="TestItem" type="CharacterBody3D" unique_id=186559493 node_paths=PackedStringArray("model")]
+script = ExtResource("1_u0dxw")
+model = NodePath("Boost")
+
+[node name="Boost" parent="." unique_id=1086577294 instance=ExtResource("2_f4hxo")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1809339745]
+shape = SubResource("CylinderShape3D_f4hxo")
+
+[node name="LifeTimer" type="Timer" parent="." unique_id=128195417]

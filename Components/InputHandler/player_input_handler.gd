@@ -5,7 +5,7 @@ extends InputHandler
 # Constants
 const BASE_ACTIONS: Array[StringName] = [ ## Array of named actions from the base InputMap to make player-specific variants of.
 	&"Left", &"Right", &"Up", &"Down",
-	&"Forward", &"Backward", &"Drift",
+	&"Forward", &"Backward", &"Drift", &"Item",
 	&"CameraLeft", &"CameraRight", &"CameraDown", &"CameraUp",
 ]
 
@@ -28,6 +28,7 @@ func handle_input() -> void:
 		kart.brake_request = Input.is_action_pressed(_action_name(&"Backward"))
 		kart.hop_request = Input.is_action_just_pressed(_action_name(&"Drift"))
 		kart.drift_request = Input.is_action_pressed(_action_name(&"Drift"))
+		kart.item_request = Input.is_action_just_pressed(_action_name(&"Item"))
 		kart.camera_request = Input.get_vector(_action_name(&"CameraLeft"), _action_name(&"CameraRight"), _action_name(&"CameraDown"), _action_name(&"CameraUp"))
 
 ############################

@@ -38,6 +38,7 @@ extends CharacterBody3D
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
 
 @onready var state_machine: StateMachine = $MovementStateMachine
+@onready var item_handler: ItemHandler = $ItemHandler
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var ground_ray_cast_3d: RayCast3D = $GroundRayCast3D
@@ -77,7 +78,6 @@ var boost_queue: Array[Boost] ## The queue of boosts to be applied once the grou
 var is_hit: bool ## True when the kart is hit.
 
 var trick_combo_level: int ## Number of tricks currently comboed.
-var held_item: Item ## Currently held item.
 
 #######################
 ## Process Functions ##
@@ -129,22 +129,11 @@ func _physics_process(delta: float) -> void:
 	if state_machine.current_state is not HitState:
 		_handle_driving(delta)
 		_handle_steering(delta)
-		_handle_item()
 	_align_to_ground(delta)
 	move_and_slide()
 	
 	# Update Debug Label
 	_update_debug_label()
-
-## Called every physics frame to collect input data.
-func _handle_input() -> void:
-	# Set movement requests based on input
-	steer_request = Input.get_axis("Left", "Right")
-	accel_request = Input.get_axis("Backward", "Forward")
-	brake_request = Input.is_action_pressed("Backward")
-	hop_request = Input.is_action_just_pressed("Drift")
-	drift_request = Input.is_action_pressed("Drift")
-	item_request = Input.is_action_just_pressed("Item")
 
 #######################
 ## Physics Functions ##
@@ -230,6 +219,9 @@ func _align_to_ground(delta: float) -> void:
 		var n = ground_ray_cast_3d.get_collision_normal()
 		var xform = _align_with_y(kart_model.global_transform, n)
 		kart_model.global_transform = kart_model.global_transform.interpolate_with(xform, 12 * delta)
+		ground_ray_cast_3d.target_position = -n
+	else:
+		ground_ray_cast_3d.target_position = Vector3.DOWN
 
 ## Helper function for aligning a transform with the y of a normal vector.
 func _align_with_y(xform: Transform3D, new_y: Vector3) -> Transform3D:
@@ -307,20 +299,16 @@ func hit(hitter: Node, velocity_reduction_factor: float = 0.4, vertical_velocity
 	if hitter is BoostPanel:
 		queue_ground_boost(hitter.boost)
 	
+	# Do nothing for trailed items
+	elif hitter == item_handler.trailed_item:
+		return
+	
 	# Normal hit logic
 	else:
 		if not is_hit: # Apply velocity effects if just hit
 			velocity *= velocity_reduction_factor
 			velocity.y += vertical_velocity_impulse
 		is_hit = true
-
-####################
-## Item Functions ##
-####################
-
-func _handle_item() -> void:
-	if item_request:
-		print("Item Used!")
 
 #######################
 ## Getters & Setters ##
@@ -405,6 +393,10 @@ func can_air_trick() -> bool:
 ## Updates the debug label's text with accurate information.
 ## Should be called every physics frame.
 func _update_debug_label() -> void:
+	# Return if not visible
+	if not debug_label_3d.visible:
+		return
+	
 	# Define debug texts to display
 	var debugs: Array[String] = [
 		"Top Speed: " + str(top_speed),
