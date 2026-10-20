@@ -17,7 +17,7 @@ func _init(_hitbox_lifetime: float = 0.0, _shape: Shape3D = null, _hit_log: HitL
 		hit_log = _hit_log
 
 func _ready() -> void:
-	monitorable = false
+	#monitorable = false
 	area_entered.connect(_on_area_entered)
 	
 	if hitbox_lifetime > 0.0:
@@ -33,7 +33,7 @@ func _ready() -> void:
 
 ## Called when this hitbox detects an area.
 func _on_area_entered(area: Area3D) -> void:
-	if not area is Hurtbox:
+	if not area is Hitbox:
 		return
 
 	# Hit logging to prevent duplicate hits from the same attack
@@ -44,5 +44,6 @@ func _on_area_entered(area: Area3D) -> void:
 		else:
 			hit_log.log_hit(hurtbox_owner)
 	
+	# Emit on_hit in both hitboxes
 	on_hit.emit(area)
-	area.recieve_hit(get_parent())
+	area.on_hit.emit(self)

@@ -45,6 +45,8 @@ func _play_trick_effect() -> void:
 	AudioManager.create_sound(entity.trick_sfx[clampi(entity.trick_combo_level, 0, len(entity.trick_sfx) - 1)])
 	
 	# Play random trick animation based on direction held
+	if entity.animation_player.current_animation:
+		entity.animation_player.stop() # Stop existing animation to prevent no animation playing
 	if entity.steer_request > 0.2: # Right Trick
 		entity.animation_player.play("trick_anim_right")
 	elif entity.steer_request < -0.2: # Left Trick

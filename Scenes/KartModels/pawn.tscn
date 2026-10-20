@@ -2,25 +2,25 @@
 
 [ext_resource type="Script" uid="uid://t6a574qi7en4" path="res://Scenes/KartModels/kart_model.gd" id="1_dbw00"]
 [ext_resource type="PackedScene" uid="uid://b81oy5b65chmf" path="res://Assets/3D/Models/Vehicles/Pawn/SM_Pawn.fbx" id="2_kbcvn"]
-[ext_resource type="Script" uid="uid://bjgot7okketbh" path="res://Components/Hitbox/hurtbox.gd" id="3_kbcvn"]
+[ext_resource type="Script" uid="uid://bcubef2xy50jd" path="res://Components/Hitbox/hitbox.gd" id="3_kbcvn"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_y5b2d"]
 height = 1.5
 
-[node name="Pawn" type="Node3D" unique_id=2109640715 node_paths=PackedStringArray("body", "hurtbox", "collision_shape_3d")]
+[node name="Pawn" type="Node3D" unique_id=2109640715 node_paths=PackedStringArray("body", "hitbox", "collision_shape_3d")]
 script = ExtResource("1_dbw00")
 body = NodePath("PawnBody")
-hurtbox = NodePath("Hurtbox")
-collision_shape_3d = NodePath("Hurtbox/CollisionShape3D")
+hitbox = NodePath("Hitbox")
+collision_shape_3d = NodePath("Hitbox/CollisionShape3D")
 model_height = 1.5
 metadata/_custom_type_script = "uid://t6a574qi7en4"
 
 [node name="PawnBody" parent="." unique_id=323876086 instance=ExtResource("2_kbcvn")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.3, 0)
 
-[node name="Hurtbox" type="Area3D" parent="." unique_id=258126628]
+[node name="Hitbox" type="Area3D" parent="." unique_id=2130145760]
 script = ExtResource("3_kbcvn")
-metadata/_custom_type_script = "uid://bjgot7okketbh"
+metadata/_custom_type_script = "uid://bcubef2xy50jd"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox" unique_id=841639604]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=841639604]
 shape = SubResource("CylinderShape3D_y5b2d")

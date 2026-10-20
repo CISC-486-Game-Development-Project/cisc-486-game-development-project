@@ -57,7 +57,7 @@ extends CharacterBody3D
 
 # Internal Vars
 var wheels: Array[Wheel] ## The array of Wheel objects attaced to this kart.
-var hurtbox: Hurtbox ## The hurtbox of this kart.
+var hitbox: Hitbox ## The hitbox of this kart.
 
 var steer_request: float ## Steering intensity request to be set by an input_manager.
 var pitch_request: float ## Pitch intensity request to be set by an input_manager. (Entirely aesthetic)
@@ -96,9 +96,9 @@ func _ready() -> void:
 		kart_model.position.y = kart.model_height / 2
 		collision_shape_3d.position.y = kart.model_height / 2
 		wheels = kart.wheels
-		hurtbox = kart.hurtbox
-		hurtbox.reparent(self)
-		hurtbox.on_hit.connect(hit)
+		hitbox = kart.hitbox
+		hitbox.reparent(self)
+		hitbox.on_hit.connect(hit)
 		collision_shape_3d.shape = kart.collision_shape_3d.shape
 		
 		# Set kart's stats
@@ -124,12 +124,10 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	## Step 1: Handle Input
 	input_handler.handle_input()
-	
 	## Step 2: Handle Movement
 	if state_machine.current_state is not HitState:
 		_handle_driving(delta)
 		_handle_steering(delta)
-	_align_to_ground(delta)
 	move_and_slide()
 	
 	# Update Debug Label
@@ -213,23 +211,6 @@ func _handle_steering(delta: float) -> void:
 	else:
 		kart_model.rotation.y = lerp(kart_model.rotation.y, 0.0, 0.1)
 
-## Called every physics frame to align the kart with the angle of the ground.
-func _align_to_ground(delta: float) -> void:
-	if is_on_floor():
-		var n = ground_ray_cast_3d.get_collision_normal()
-		var xform = _align_with_y(kart_model.global_transform, n)
-		kart_model.global_transform = kart_model.global_transform.interpolate_with(xform, 12 * delta)
-		ground_ray_cast_3d.target_position = -n
-	else:
-		ground_ray_cast_3d.target_position = Vector3.DOWN
-
-## Helper function for aligning a transform with the y of a normal vector.
-func _align_with_y(xform: Transform3D, new_y: Vector3) -> Transform3D:
-	xform.basis.y = new_y
-	xform.basis.x = -xform.basis.z.cross(new_y)
-	xform.basis = xform.basis.orthonormalized()
-	return xform
-
 ## Bounces off walls. Should be called when wall is hit.
 func _wall_bump() -> void:
 	pass # TODO: Implement bumping off walls like MKWorld
@@ -294,21 +275,23 @@ func queue_ground_boost(boost: Boost) -> void:
 	boost_queue.append(boost)
 
 ## Called when the kart is hit. Sets is_hit variable in order to transition to the HitState.
-func hit(hitter: Node, velocity_reduction_factor: float = 0.4, vertical_velocity_impulse: float = 3.0) -> void:
+func hit(hitter_hitbox: Hitbox, velocity_reduction_factor: float = 0.4, vertical_velocity_impulse: float = 3.0) -> void:
+	var hitter = hitter_hitbox.get_parent()
+	
 	# Boost panel hit logic
 	if hitter is BoostPanel:
 		queue_ground_boost(hitter.boost)
+		return
 	
 	# Do nothing for trailed items
 	elif hitter == item_handler.trailed_item:
 		return
 	
 	# Normal hit logic
-	else:
-		if not is_hit: # Apply velocity effects if just hit
-			velocity *= velocity_reduction_factor
-			velocity.y += vertical_velocity_impulse
-		is_hit = true
+	if not is_hit: # Apply velocity effects if just hit
+		velocity *= velocity_reduction_factor
+		velocity.y += vertical_velocity_impulse
+	is_hit = true
 
 #######################
 ## Getters & Setters ##
