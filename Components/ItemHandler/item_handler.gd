@@ -6,7 +6,6 @@ signal item_changed(held_item) ## Emitted when [member held_item] changes with i
 
 # Export Vars
 @export var kart: Kart3D ## The kart this item handler is associated with.
-@export var spawn_distance: float = 5.0
 @export var debug_item: Item ## DEBUG: REMOVE LATER
 
 # Internal Vars
@@ -39,17 +38,9 @@ func use_item(_is_forward: bool = false, _direction: Vector3 = Vector3.ZERO) -> 
 	# Don't use if no held item
 	if not held_item:
 		return
-		
-	# Add item entity to world
-	var new_item := held_item.entity.instantiate()
-	get_tree().current_scene.add_child(new_item)
 	
-	# Place in front of kart and set facing direction
-	if held_item.type == Item.ItemType.THROWABLE:
-		new_item.rotation.y = kart.rotation.y
-		new_item.global_position = kart.global_position + -kart.global_basis.z * spawn_distance + kart.global_basis.y
-	
-	# Remove held item
+	# Use held item then remove
+	held_item.use(kart)
 	held_item = null
 
 ## Called when the [member held_item] changes to update the [member trailed_item].

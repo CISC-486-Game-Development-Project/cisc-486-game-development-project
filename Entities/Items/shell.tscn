@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c5wm052o3f1dg"]
 
 [ext_resource type="Script" uid="uid://dmptb23tryr46" path="res://Entities/Items/shell.gd" id="1_cqlpn"]
-[ext_resource type="PackedScene" uid="uid://dny4f0rj2rv2i" path="res://Scenes/ItemModels/boost.tscn" id="2_rvysw"]
+[ext_resource type="PackedScene" uid="uid://dny4f0rj2rv2i" path="res://Scenes/ItemModels/boost_model.tscn" id="2_rvysw"]
 [ext_resource type="Script" uid="uid://daex734a4hoq0" path="res://Components/AlignmentHandler/alignment_handler.gd" id="3_rvysw"]
 [ext_resource type="Script" uid="uid://t1pg06mo513h" path="res://Components/StateMachine/state_machine.gd" id="4_q84gw"]
 [ext_resource type="Script" uid="uid://b3yj5o2tso00m" path="res://Components/StateMachine/States/idle_state.gd" id="5_0upje"]
@@ -15,9 +15,9 @@ radius = 0.2
 [node name="Shell" type="CharacterBody3D" unique_id=186559493 node_paths=PackedStringArray("model")]
 floor_max_angle = 1.2217305
 script = ExtResource("1_cqlpn")
-model = NodePath("Boost")
+model = NodePath("BoostModel")
 
-[node name="Boost" parent="." unique_id=1086577294 instance=ExtResource("2_rvysw")]
+[node name="BoostModel" parent="." unique_id=1086577294 instance=ExtResource("2_rvysw")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1809339745]
 shape = SubResource("CylinderShape3D_f4hxo")
@@ -29,7 +29,7 @@ shape = SubResource("CylinderShape3D_f4hxo")
 [node name="AlignmentHandler" type="Node" parent="." unique_id=670871965 node_paths=PackedStringArray("body", "model", "ground_ray_cast_3d")]
 script = ExtResource("3_rvysw")
 body = NodePath("..")
-model = NodePath("../Boost")
+model = NodePath("../BoostModel")
 ground_ray_cast_3d = NodePath("../GroundRayCast3D")
 metadata/_custom_type_script = "uid://daex734a4hoq0"
 

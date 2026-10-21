@@ -1,15 +1,15 @@
-[gd_resource type="Resource" script_class="Item" format=3 uid="uid://c3un73a4jn8jp"]
+[gd_resource type="Resource" script_class="ThrowableItem" format=3 uid="uid://c3un73a4jn8jp"]
 
-[ext_resource type="Script" uid="uid://chs4os1f4g6eo" path="res://Resources/Items/item.gd" id="1_6u84x"]
 [ext_resource type="PackedScene" uid="uid://c5wm052o3f1dg" path="res://Entities/Items/shell.tscn" id="1_qwkww"]
-[ext_resource type="PackedScene" uid="uid://dny4f0rj2rv2i" path="res://Scenes/ItemModels/boost.tscn" id="2_nor1d"]
-[ext_resource type="Texture2D" uid="uid://be457kbv51483" path="res://Assets/2D/Sprites/icon.svg" id="4_8efwr"]
+[ext_resource type="PackedScene" uid="uid://dny4f0rj2rv2i" path="res://Scenes/ItemModels/boost_model.tscn" id="2_qwkww"]
+[ext_resource type="Script" uid="uid://3850ohww3gvc" path="res://Resources/Items/throwable_item.gd" id="3_senxa"]
+[ext_resource type="Texture2D" uid="uid://cxywdde32xids" path="res://Assets/2D/Sprites/Menus/checkered.png" id="4_qwkww"]
 
 [resource]
-script = ExtResource("1_6u84x")
+script = ExtResource("3_senxa")
 name = "Shell"
-type = 2
-texture = ExtResource("4_8efwr")
-model = ExtResource("2_nor1d")
+texture = ExtResource("4_qwkww")
+model = ExtResource("2_qwkww")
 entity = ExtResource("1_qwkww")
-metadata/_custom_type_script = "uid://chs4os1f4g6eo"
+max_uses = 3
+metadata/_custom_type_script = "uid://3850ohww3gvc"

@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://d06ii74wx6vgl" path="res://Scenes/KartModels/basic_kart.tscn" id="2_7apc5"]
 [ext_resource type="Resource" uid="uid://d2lgutyflh3o3" path="res://Resources/KartStats/default_kart.tres" id="2_q7q2k"]
 [ext_resource type="AudioStream" uid="uid://dwxcjulimx2bp" path="res://Assets/Audio/SFX/Trick/TrickSFX - Track 1.wav" id="3_7apc5"]
-[ext_resource type="Resource" uid="uid://c3un73a4jn8jp" path="res://Resources/Items/shell.tres" id="3_0767e"]
 [ext_resource type="Script" uid="uid://t1pg06mo513h" path="res://Components/StateMachine/state_machine.gd" id="4_mehc1"]
 [ext_resource type="AudioStream" uid="uid://bsf1fcpxg2myp" path="res://Assets/Audio/SFX/Trick/TrickSFX - Track 2.wav" id="4_q7q2k"]
 [ext_resource type="AudioStream" uid="uid://p3qsv3x7sco2" path="res://Assets/Audio/SFX/Trick/TrickSFX - Track 3.wav" id="5_3khwq"]
@@ -18,6 +17,7 @@
 [ext_resource type="Script" uid="uid://t3ju34iymdl0" path="res://Components/StateMachine/States/fall_state.gd" id="9_dqsqe"]
 [ext_resource type="Script" uid="uid://b81fhm3o6wy5v" path="res://Components/ItemHandler/item_handler.gd" id="10_3khwq"]
 [ext_resource type="Script" uid="uid://bbrw2uverowic" path="res://Components/StateMachine/States/hop_state.gd" id="10_4muo4"]
+[ext_resource type="Resource" uid="uid://cpe1ww3c6snam" path="res://Resources/Items/boost.tres" id="11_mehc1"]
 [ext_resource type="Script" uid="uid://b2lqg5xhq7se0" path="res://Components/StateMachine/States/drift_state.gd" id="11_y2xwn"]
 [ext_resource type="Script" uid="uid://bmua4qbuf0vev" path="res://Components/StateMachine/States/trick_state.gd" id="12_kwn18"]
 [ext_resource type="Script" uid="uid://daex734a4hoq0" path="res://Components/AlignmentHandler/alignment_handler.gd" id="13_mehc1"]
@@ -334,7 +334,7 @@ libraries/ = SubResource("AnimationLibrary_7dnbs")
 [node name="ItemHandler" type="Node" parent="." unique_id=1682402239 node_paths=PackedStringArray("kart")]
 script = ExtResource("10_3khwq")
 kart = NodePath("..")
-debug_item = ExtResource("3_0767e")
+debug_item = ExtResource("11_mehc1")
 metadata/_custom_type_script = "uid://b81fhm3o6wy5v"
 
 [node name="GrassDisplacer" type="Node" parent="." unique_id=848599554]
