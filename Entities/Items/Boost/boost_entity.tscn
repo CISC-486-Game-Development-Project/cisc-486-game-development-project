@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dhk37ngi7vyup"]
+
+[ext_resource type="Script" uid="uid://1osqmlpqoajk" path="res://Entities/Items/Boost/boost_entity.gd" id="1_bw6wg"]
+
+[node name="Boost" type="Node" unique_id=949656604]
+script = ExtResource("1_bw6wg")

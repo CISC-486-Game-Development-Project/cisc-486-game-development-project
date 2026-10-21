@@ -288,6 +288,10 @@ func hit(hitter_hitbox: Hitbox, velocity_reduction_factor: float = 0.4, vertical
 	elif hitter == item_handler.trailed_item:
 		return
 	
+	# Do nothing for children of self (ex. if an item is equipped)
+	elif hitter in self.get_children():
+		return
+	
 	# Normal hit logic
 	if not is_hit: # Apply velocity effects if just hit
 		velocity *= velocity_reduction_factor

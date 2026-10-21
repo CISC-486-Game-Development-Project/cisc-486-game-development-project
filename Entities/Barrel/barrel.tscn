@@ -119,7 +119,7 @@ size = Vector3(1.5, 2, 1.5)
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_i8lfl"]
+[sub_resource type="CurveTexture" id="CurveTexture_xp7jd"]
 curve = SubResource("Curve_xc45i")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xc45i"]
@@ -132,15 +132,15 @@ initial_velocity_max = 10.0
 damping_min = 1.0
 damping_max = 10.0
 color = Color(0.6375534, 0.56360936, 0.41572115, 1)
-alpha_curve = SubResource("CurveTexture_i8lfl")
+alpha_curve = SubResource("CurveTexture_xp7jd")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_klxp6"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7o0oo"]
 transparency = 1
 vertex_color_use_as_albedo = true
 billboard_mode = 1
 
 [sub_resource type="QuadMesh" id="QuadMesh_ojj8n"]
-material = SubResource("StandardMaterial3D_klxp6")
+material = SubResource("StandardMaterial3D_7o0oo")
 size = Vector2(0.1, 0.1)
 
 [node name="Barrel" type="RigidBody3D" unique_id=127053263]

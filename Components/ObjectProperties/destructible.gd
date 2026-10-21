@@ -13,18 +13,17 @@ func _ready() -> void:
 		hitbox.on_hit.connect(_on_hit.bind())
 
 ## Called when the hitbox is hit.
-func _on_hit(area: Area3D) -> void:
-	var hitter = area.get_parent()
+func _on_hit(_area: Area3D) -> void:
+	#var hitter = area.get_parent()
 	
-	if hitter is Kart3D:
-		# Destroy after breaking_time
-		get_tree().create_timer(breaking_time).timeout.connect(_destroy)
-		
-		# Play break_particles effect if it exists
-		if break_particles:
-			break_particles.lifetime = breaking_time / 2
-			break_particles.top_level = true # Set top level so particles don't move if object launches
-			break_particles.restart()
+	# Destroy after breaking_time
+	get_tree().create_timer(breaking_time).timeout.connect(_destroy)
+	
+	# Play break_particles effect if it exists
+	if break_particles:
+		break_particles.lifetime = breaking_time / 2
+		break_particles.top_level = true # Set top level so particles don't move if object launches
+		break_particles.restart()
 
 ## Called when to_break should be destroyed.
 func _destroy() -> void:

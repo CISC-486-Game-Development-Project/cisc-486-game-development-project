@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ConsumableItem" format=3 uid="uid://cpe1ww3c6snam"]
+
+[ext_resource type="PackedScene" uid="uid://dhk37ngi7vyup" path="res://Entities/Items/Boost/boost_entity.tscn" id="1_kjo3c"]
+[ext_resource type="PackedScene" uid="uid://dny4f0rj2rv2i" path="res://Scenes/ItemModels/boost_model.tscn" id="2_jt6sg"]
+[ext_resource type="Script" uid="uid://ditmxq4hx0qma" path="res://Resources/Items/Consumables/consumable_item.gd" id="3_3wmp6"]
+[ext_resource type="Texture2D" uid="uid://cvghihc6ydnvl" path="res://Assets/2D/Sprites/BoostPanel/arrow.png" id="4_5v0di"]
+
+[resource]
+script = ExtResource("3_3wmp6")
+name = "Boost"
+texture = ExtResource("4_5v0di")
+model = ExtResource("2_jt6sg")
+entity = ExtResource("1_kjo3c")
+metadata/_custom_type_script = "uid://ditmxq4hx0qma"

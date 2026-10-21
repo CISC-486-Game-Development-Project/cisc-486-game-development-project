@@ -1,14 +1,14 @@
 [gd_scene format=4 uid="uid://c5wm052o3f1dg"]
 
-[ext_resource type="Script" uid="uid://dmptb23tryr46" path="res://Entities/Items/shell.gd" id="1_cqlpn"]
-[ext_resource type="Script" uid="uid://iv2xakukupsd" path="res://Scenes/ItemModels/item_model.gd" id="2_kgetp"]
-[ext_resource type="Script" uid="uid://bcubef2xy50jd" path="res://Components/Hitbox/hitbox.gd" id="3_1eyft"]
-[ext_resource type="Script" uid="uid://daex734a4hoq0" path="res://Components/AlignmentHandler/alignment_handler.gd" id="3_rvysw"]
-[ext_resource type="Script" uid="uid://t1pg06mo513h" path="res://Components/StateMachine/state_machine.gd" id="4_q84gw"]
-[ext_resource type="Script" uid="uid://b3yj5o2tso00m" path="res://Components/StateMachine/States/idle_state.gd" id="5_0upje"]
-[ext_resource type="Script" uid="uid://l1hrvfthq543" path="res://Components/StateMachine/state_transition.gd" id="6_kgetp"]
-[ext_resource type="Script" uid="uid://t3ju34iymdl0" path="res://Components/StateMachine/States/fall_state.gd" id="7_1eyft"]
-[ext_resource type="Script" uid="uid://xlj78h55nuao" path="res://Components/ObjectProperties/destructible.gd" id="8_0upje"]
+[ext_resource type="Script" uid="uid://dmptb23tryr46" path="res://Entities/Items/Shell/shell_entity.gd" id="1_c24dl"]
+[ext_resource type="Script" uid="uid://iv2xakukupsd" path="res://Scenes/ItemModels/item_model.gd" id="2_812d2"]
+[ext_resource type="Script" uid="uid://bcubef2xy50jd" path="res://Components/Hitbox/hitbox.gd" id="3_e8kj2"]
+[ext_resource type="Script" uid="uid://daex734a4hoq0" path="res://Components/AlignmentHandler/alignment_handler.gd" id="4_bhfok"]
+[ext_resource type="Script" uid="uid://xlj78h55nuao" path="res://Components/ObjectProperties/destructible.gd" id="5_xytvw"]
+[ext_resource type="Script" uid="uid://t1pg06mo513h" path="res://Components/StateMachine/state_machine.gd" id="6_8bowd"]
+[ext_resource type="Script" uid="uid://b3yj5o2tso00m" path="res://Components/StateMachine/States/idle_state.gd" id="7_2watm"]
+[ext_resource type="Script" uid="uid://l1hrvfthq543" path="res://Components/StateMachine/state_transition.gd" id="8_as1xi"]
+[ext_resource type="Script" uid="uid://t3ju34iymdl0" path="res://Components/StateMachine/States/fall_state.gd" id="9_0l2uy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k2wio"]
 resource_name = "Boost White"
@@ -120,11 +120,11 @@ size = Vector2(0.1, 0.1)
 
 [node name="Shell" type="CharacterBody3D" unique_id=186559493 node_paths=PackedStringArray("model")]
 floor_max_angle = 1.2217305
-script = ExtResource("1_cqlpn")
+script = ExtResource("1_c24dl")
 model = NodePath("BoostModel")
 
 [node name="BoostModel" type="Node3D" parent="." unique_id=1086577294 node_paths=PackedStringArray("hitbox", "collision_shape_3d")]
-script = ExtResource("2_kgetp")
+script = ExtResource("2_812d2")
 hitbox = NodePath("Hitbox")
 collision_shape_3d = NodePath("Hitbox/CollisionShape3D")
 metadata/_custom_type_script = "uid://iv2xakukupsd"
@@ -134,7 +134,7 @@ transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1
 mesh = SubResource("ArrayMesh_oi4vk")
 
 [node name="Hitbox" type="Area3D" parent="BoostModel" unique_id=1306543664]
-script = ExtResource("3_1eyft")
+script = ExtResource("3_e8kj2")
 metadata/_custom_type_script = "uid://bcubef2xy50jd"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BoostModel/Hitbox" unique_id=769237083]
@@ -159,40 +159,40 @@ draw_pass_1 = SubResource("QuadMesh_kgetp")
 [node name="LifeTimer" type="Timer" parent="." unique_id=128195417]
 
 [node name="AlignmentHandler" type="Node" parent="." unique_id=670871965 node_paths=PackedStringArray("body", "model", "ground_ray_cast_3d")]
-script = ExtResource("3_rvysw")
+script = ExtResource("4_bhfok")
 body = NodePath("..")
 model = NodePath("../BoostModel")
 ground_ray_cast_3d = NodePath("../GroundRayCast3D")
 metadata/_custom_type_script = "uid://daex734a4hoq0"
 
 [node name="Destructible" type="Node" parent="." unique_id=1263458421 node_paths=PackedStringArray("hitbox", "to_break", "break_particles")]
-script = ExtResource("8_0upje")
+script = ExtResource("5_xytvw")
 hitbox = NodePath("../BoostModel/Hitbox")
 to_break = NodePath("..")
 break_particles = NodePath("../BreakParticles")
 metadata/_custom_type_script = "uid://xlj78h55nuao"
 
 [node name="MovementStateMachine" type="Node" parent="." unique_id=509311749 node_paths=PackedStringArray("initial_state")]
-script = ExtResource("4_q84gw")
+script = ExtResource("6_8bowd")
 initial_state = NodePath("FallState")
 metadata/_custom_type_script = "uid://t1pg06mo513h"
 
 [node name="IdleState" type="Node" parent="MovementStateMachine" unique_id=1693046627]
-script = ExtResource("5_0upje")
+script = ExtResource("7_2watm")
 metadata/_custom_type_script = "uid://b3yj5o2tso00m"
 
 [node name="ToFall" type="Node" parent="MovementStateMachine/IdleState" unique_id=418853503 node_paths=PackedStringArray("to_state")]
-script = ExtResource("6_kgetp")
+script = ExtResource("8_as1xi")
 to_state = NodePath("../../FallState")
 advance_expression = "not entity.is_on_floor()"
 metadata/_custom_type_script = "uid://l1hrvfthq543"
 
 [node name="FallState" type="Node" parent="MovementStateMachine" unique_id=1865225339]
-script = ExtResource("7_1eyft")
+script = ExtResource("9_0l2uy")
 metadata/_custom_type_script = "uid://t3ju34iymdl0"
 
 [node name="ToIdle" type="Node" parent="MovementStateMachine/FallState" unique_id=1915820461 node_paths=PackedStringArray("to_state")]
-script = ExtResource("6_kgetp")
+script = ExtResource("8_as1xi")
 to_state = NodePath("../../IdleState")
 advance_expression = "entity.is_on_floor()"
 metadata/_custom_type_script = "uid://l1hrvfthq543"

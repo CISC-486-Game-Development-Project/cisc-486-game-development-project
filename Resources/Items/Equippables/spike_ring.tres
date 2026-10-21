@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EquippableItem" format=3 uid="uid://dnprdu1gw768u"]
+
+[ext_resource type="PackedScene" uid="uid://dlqdlcxxaaw5f" path="res://Entities/Items/SpikeRing/spike_ring_entity.tscn" id="1_gqiqe"]
+[ext_resource type="PackedScene" uid="uid://byd3r3rd1m6ep" path="res://Scenes/ItemModels/spike_ring_model.tscn" id="2_poios"]
+[ext_resource type="Script" uid="uid://cfed1xowegnom" path="res://Resources/Items/Equippables/equippable_item.gd" id="3_i32ed"]
+[ext_resource type="Texture2D" uid="uid://b2bv858jkm4yj" path="res://Assets/2D/Sprites/BoostPanel/sparkle.png" id="4_5q57k"]
+
+[resource]
+script = ExtResource("3_i32ed")
+texture = ExtResource("4_5q57k")
+model = ExtResource("2_poios")
+entity = ExtResource("1_gqiqe")
+metadata/_custom_type_script = "uid://cfed1xowegnom"
