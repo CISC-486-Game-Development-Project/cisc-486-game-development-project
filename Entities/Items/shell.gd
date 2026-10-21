@@ -13,18 +13,15 @@ extends CharacterBody3D
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
 @onready var life_timer: Timer = $LifeTimer
 @onready var movement_state_machine: StateMachine = $MovementStateMachine
+@onready var destructible: Destructible = $Destructible
 
 # Internal Vars
 var hitbox: Hitbox
 var bounces: int
 
 func _ready() -> void:
-	# Set up hitbox
-	hitbox = model.hitbox
-	hitbox.on_hit.connect(_on_hit)
-	
 	# Start life timer and connect it to free on timeout
-	life_timer.timeout.connect(queue_free)
+	life_timer.timeout.connect(destructible._destroy)
 	life_timer.start(lifetime)
 
 func _physics_process(_delta: float) -> void:
@@ -45,8 +42,4 @@ func _physics_process(_delta: float) -> void:
 			# Add to bounces and free if too many bounces
 			bounces += 1
 			if bounces >= max_bounces:
-				queue_free()
-
-## Called when this object is hit.
-func _on_hit(_hitter_hitbox: Hitbox) -> void:
-	queue_free()
+				destructible._destroy()

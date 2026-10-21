@@ -30,5 +30,5 @@ func _on_hit(area: Area3D) -> void:
 func _destroy() -> void:
 	# Shrink, then free
 	var size_tween: Tween = create_tween()
-	size_tween.tween_property(to_break, "scale", Vector3.ZERO, 0.1)
+	size_tween.tween_property(to_break, "scale", Vector3.ONE/100, 0.1)
 	size_tween.finished.connect(to_break.queue_free)
