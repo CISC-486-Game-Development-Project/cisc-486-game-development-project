@@ -66,8 +66,9 @@ var brake_request: bool ## Brake request to be set by an input_manager.
 var hop_request: bool ## Hop request to be set by an input_manager.
 var drift_request: bool ## Drift request to be set by an input_manager.
 var drift_dir: int ## The direction of a currently active drift. 1 = right, 0 = none, -1 = left.
-var camera_request: Vector2 ## The vector for camera movement to be set by an input_manager.
 var item_request: bool ## Call to use stored item set by an input_manager.
+var camera_request: Vector2 ## The vector for camera movement to be set by an input_manager.
+var reverse_camera_request: bool ## Reverse camera request to be set by an input_manager.
 
 var steering: float ## The intensity of the current steering.
 var offroad_factor: float ## The intensity of the current offroad factor.

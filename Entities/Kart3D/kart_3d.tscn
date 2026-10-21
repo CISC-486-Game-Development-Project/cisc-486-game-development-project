@@ -272,7 +272,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.325, 0)
 
 [node name="AnimationPivot" type="Node3D" parent="KartModel" unique_id=640171345]
 
-[node name="DebugKart" parent="KartModel/AnimationPivot" unique_id=142078105 instance=ExtResource("2_7apc5")]
+[node name="DebugKart" parent="KartModel/AnimationPivot" unique_id=142078105 node_paths=PackedStringArray("collision_shape_3d") instance=ExtResource("2_7apc5")]
+collision_shape_3d = NodePath("Hurtbox/CollisionShape3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=562479446]
 
