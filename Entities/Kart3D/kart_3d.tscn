@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://d06ii74wx6vgl" path="res://Scenes/KartModels/basic_kart.tscn" id="2_7apc5"]
 [ext_resource type="Resource" uid="uid://d2lgutyflh3o3" path="res://Resources/KartStats/default_kart.tres" id="2_q7q2k"]
 [ext_resource type="AudioStream" uid="uid://dwxcjulimx2bp" path="res://Assets/Audio/SFX/Trick/TrickSFX - Track 1.wav" id="3_7apc5"]
-[ext_resource type="Resource" uid="uid://22igdfdt2thb" path="res://Resources/Items/shell.tres" id="3_0767e"]
+[ext_resource type="Resource" uid="uid://c3un73a4jn8jp" path="res://Resources/Items/shell.tres" id="3_0767e"]
 [ext_resource type="Script" uid="uid://t1pg06mo513h" path="res://Components/StateMachine/state_machine.gd" id="4_mehc1"]
 [ext_resource type="AudioStream" uid="uid://bsf1fcpxg2myp" path="res://Assets/Audio/SFX/Trick/TrickSFX - Track 2.wav" id="4_q7q2k"]
 [ext_resource type="AudioStream" uid="uid://p3qsv3x7sco2" path="res://Assets/Audio/SFX/Trick/TrickSFX - Track 3.wav" id="5_3khwq"]
@@ -20,7 +20,7 @@
 [ext_resource type="Script" uid="uid://bbrw2uverowic" path="res://Components/StateMachine/States/hop_state.gd" id="10_4muo4"]
 [ext_resource type="Script" uid="uid://b2lqg5xhq7se0" path="res://Components/StateMachine/States/drift_state.gd" id="11_y2xwn"]
 [ext_resource type="Script" uid="uid://bmua4qbuf0vev" path="res://Components/StateMachine/States/trick_state.gd" id="12_kwn18"]
-[ext_resource type="Script" uid="uid://daex734a4hoq0" path="res://Entities/Kart3D/alignment_handler.gd" id="13_mehc1"]
+[ext_resource type="Script" uid="uid://daex734a4hoq0" path="res://Components/AlignmentHandler/alignment_handler.gd" id="13_mehc1"]
 [ext_resource type="Script" uid="uid://cwmiqdt31xlsm" path="res://Components/StateMachine/States/air_trick_state.gd" id="19_7apc5"]
 [ext_resource type="Script" uid="uid://b3ataw1etlka7" path="res://Components/StateMachine/States/hit_state.gd" id="21_1byyu"]
 [ext_resource type="Script" uid="uid://dlqoia1hk0gw8" path="res://Components/GrassDisplacer/grass_displacer.gd" id="21_q7q2k"]
@@ -272,8 +272,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.325, 0)
 
 [node name="AnimationPivot" type="Node3D" parent="KartModel" unique_id=640171345]
 
-[node name="DebugKart" parent="KartModel/AnimationPivot" unique_id=142078105 node_paths=PackedStringArray("collision_shape_3d") instance=ExtResource("2_7apc5")]
-collision_shape_3d = NodePath("Hurtbox/CollisionShape3D")
+[node name="DebugKart" parent="KartModel/AnimationPivot" unique_id=142078105 instance=ExtResource("2_7apc5")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=562479446]
 
@@ -342,7 +341,7 @@ metadata/_custom_type_script = "uid://b81fhm3o6wy5v"
 script = ExtResource("21_q7q2k")
 metadata/_custom_type_script = "uid://dlqoia1hk0gw8"
 
-[node name="AlignmentHandler2" type="Node" parent="." unique_id=1629223168 node_paths=PackedStringArray("body", "model", "ground_ray_cast_3d")]
+[node name="AlignmentHandler" type="Node" parent="." unique_id=1629223168 node_paths=PackedStringArray("body", "model", "ground_ray_cast_3d")]
 script = ExtResource("13_mehc1")
 body = NodePath("..")
 model = NodePath("../KartModel")

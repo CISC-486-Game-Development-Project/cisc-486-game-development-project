@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://btx1e5pbmrm5b" path="res://Entities/Kart3D/kart_3d.tscn" id="1_u0n23"]
 [ext_resource type="PackedScene" uid="uid://bpt5weu81habv" path="res://Components/CameraController/camera_controller.tscn" id="2_q6jvo"]
 [ext_resource type="Script" uid="uid://8saf5fuicdvx" path="res://Components/InputHandler/player_input_handler.gd" id="3_u0n23"]
-[ext_resource type="Resource" path="res://Resources/Items/test_throwable.tres" id="4_lj2u5"]
 [ext_resource type="Script" uid="uid://dhsxlbjlxptmw" path="res://Scenes/Menus/PlayerHUD/item_ui.gd" id="4_so3bv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4f5k"]
@@ -28,9 +27,6 @@ target = NodePath("..")
 [node name="PlayerInputHandler" type="Node" parent="." index="13" unique_id=943662880]
 script = ExtResource("3_u0n23")
 metadata/_custom_type_script = "uid://8saf5fuicdvx"
-
-[node name="ItemHandler" parent="." index="15" unique_id=1682402239]
-debug_item = ExtResource("4_lj2u5")
 
 [node name="PlayerHUD" type="CanvasLayer" parent="." index="17" unique_id=173010069]
 

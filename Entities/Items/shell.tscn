@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dmptb23tryr46" path="res://Entities/Items/shell.gd" id="1_cqlpn"]
 [ext_resource type="PackedScene" uid="uid://dny4f0rj2rv2i" path="res://Scenes/ItemModels/boost.tscn" id="2_rvysw"]
-[ext_resource type="Script" uid="uid://daex734a4hoq0" path="res://Entities/Kart3D/alignment_handler.gd" id="3_rvysw"]
+[ext_resource type="Script" uid="uid://daex734a4hoq0" path="res://Components/AlignmentHandler/alignment_handler.gd" id="3_rvysw"]
 [ext_resource type="Script" uid="uid://t1pg06mo513h" path="res://Components/StateMachine/state_machine.gd" id="4_q84gw"]
 [ext_resource type="Script" uid="uid://b3yj5o2tso00m" path="res://Components/StateMachine/States/idle_state.gd" id="5_0upje"]
 [ext_resource type="Script" uid="uid://l1hrvfthq543" path="res://Components/StateMachine/state_transition.gd" id="6_kgetp"]

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://cpe1ww3c6snam"]
+
+[ext_resource type="PackedScene" uid="uid://dny4f0rj2rv2i" path="res://Scenes/ItemModels/boost.tscn" id="1_2y2j6"]
+[ext_resource type="Script" uid="uid://chs4os1f4g6eo" path="res://Resources/Items/item.gd" id="1_ahpc6"]
+[ext_resource type="Texture2D" uid="uid://cvghihc6ydnvl" path="res://Assets/2D/Sprites/BoostPanel/arrow.png" id="3_nu8ml"]
+
+[resource]
+script = ExtResource("1_ahpc6")
+name = "Boost"
+texture = ExtResource("3_nu8ml")
+model = ExtResource("1_2y2j6")
+metadata/_custom_type_script = "uid://chs4os1f4g6eo"
