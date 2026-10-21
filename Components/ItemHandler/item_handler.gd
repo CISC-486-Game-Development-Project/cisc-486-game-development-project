@@ -34,7 +34,7 @@ func get_item(item: Item) -> void:
 	held_item = item
 
 ## Called when an item is used.
-func use_item(_is_forward: bool = false, _direction: Vector3 = Vector3.ZERO) -> void:
+func use_item() -> void:
 	# Don't use if no held item
 	if not held_item:
 		return

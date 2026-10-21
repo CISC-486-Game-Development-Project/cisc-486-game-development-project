@@ -47,7 +47,7 @@ func _handle_kart_camera(delta: float) -> void:
 	# Move camera if camera_request, otherwise do normal camera movements
 	if target.camera_request != Vector2.ZERO:
 		is_following_kart = false
-		global_rotation.y += target.camera_request.x * rotation_multiplier * delta
+		global_rotation.y += -target.camera_request.x * rotation_multiplier * delta
 		global_rotation.x += target.camera_request.y * rotation_multiplier * delta
 		global_rotation_degrees.x = clampf(global_rotation_degrees.x, -45, 45)
 	elif is_following_kart:

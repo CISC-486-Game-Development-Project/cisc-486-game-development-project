@@ -8,5 +8,9 @@ func use(kart: Kart3D) -> void:
 	var new_item := entity.instantiate()
 	kart.get_tree().current_scene.add_child(new_item)
 	
-	new_item.rotation.y = kart.rotation.y
-	new_item.global_position = kart.global_position + -kart.global_basis.z * SPAWN_DISTANCE + kart.global_basis.y
+	# Send backward if holding back beyond deadzone, otherwise send forward
+	var dir: int = -1 if kart.pitch_request > 0.2 else 1
+	
+	# Rotation matches kart facing direction (or inverse), position in front of kart (or behind)
+	new_item.rotation.y = kart.rotation.y * dir
+	new_item.global_position = kart.global_position + (-kart.global_basis.z * SPAWN_DISTANCE * dir) + kart.global_basis.y
