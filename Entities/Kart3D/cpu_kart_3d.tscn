@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cyabyf8vue35i"]
+
+[ext_resource type="PackedScene" uid="uid://btx1e5pbmrm5b" path="res://Entities/Kart3D/kart_3d.tscn" id="1_m6r0l"]
+[ext_resource type="Script" uid="uid://c5ivcnj82w0aw" path="res://Components/InputHandler/cpu_input_handler.gd" id="2_a15ka"]
+
+[node name="CPUKart3D" unique_id=32768770 node_paths=PackedStringArray("input_handler") instance=ExtResource("1_m6r0l")]
+input_handler = NodePath("CPUInputHandler")
+
+[node name="CPUInputHandler" type="Node" parent="." index="12" unique_id=33849640]
+script = ExtResource("2_a15ka")
+metadata/_custom_type_script = "uid://c5ivcnj82w0aw"

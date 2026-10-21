@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://igg6cd4fnkgj"]
 
 [ext_resource type="Script" uid="uid://rdwha1wrjten" path="res://Scenes/Tracks/debug_track.gd" id="1_q5xdn"]
-[ext_resource type="PackedScene" uid="uid://dhqspbj6a6bij" path="res://Entities/PlayerKart3D/player_kart_3d.tscn" id="1_wqmp7"]
+[ext_resource type="PackedScene" uid="uid://dhqspbj6a6bij" path="res://Entities/Kart3D/player_kart_3d.tscn" id="1_wqmp7"]
 [ext_resource type="AudioStream" uid="uid://bnupymtpaocgh" path="res://Assets/Audio/Music/Track1/KartThemeIntro.wav" id="2_g43dg"]
 [ext_resource type="AudioStream" uid="uid://c66k30ehvrg64" path="res://Assets/Audio/Music/Track1/KartThemeLoop.wav" id="3_56bb8"]
 [ext_resource type="AudioStream" uid="uid://6k42b3njbbv1" path="res://Assets/Audio/Music/Track1/KartThemeFirstLoop.wav" id="3_xc45i"]
@@ -12,6 +12,7 @@
 [ext_resource type="ArrayMesh" uid="uid://b6n4rueforx4o" path="res://Resources/Shaders/Grass/grass.res" id="7_56bb8"]
 [ext_resource type="Script" uid="uid://ca6obtta5oopp" path="res://addons/mesh_painter/mesh_painter.gd" id="7_xc45i"]
 [ext_resource type="PackedScene" uid="uid://cd2cwfschwv3h" path="res://Scenes/SplitscreenRoot/splitscreen_root.tscn" id="9_g43dg"]
+[ext_resource type="PackedScene" uid="uid://cyabyf8vue35i" path="res://Entities/Kart3D/cpu_kart_3d.tscn" id="13_5unjq"]
 
 [sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_g43dg"]
 clip_count = 3
@@ -268,3 +269,6 @@ visible = false
 [node name="HUD" type="CanvasLayer" parent="." unique_id=818883236]
 
 [node name="SplitscreenRoot" parent="HUD" unique_id=945732261 instance=ExtResource("9_g43dg")]
+
+[node name="CPUKart3D" parent="." unique_id=32768770 instance=ExtResource("13_5unjq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -10.680214, 0.51651627, 29.59003)

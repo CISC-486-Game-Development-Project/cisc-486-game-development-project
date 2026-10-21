@@ -62,7 +62,6 @@ var hitbox: Hitbox ## The hitbox of this kart.
 var steer_request: float ## Steering intensity request to be set by an input_manager.
 var pitch_request: float ## Pitch intensity request to be set by an input_manager. (Entirely aesthetic)
 var accel_request: float ## Acceleration intensity request to be set by an input_manager.
-var brake_request: bool ## Brake request to be set by an input_manager.
 var hop_request: bool ## Hop request to be set by an input_manager.
 var drift_request: bool ## Drift request to be set by an input_manager.
 var drift_dir: int ## The direction of a currently active drift. 1 = right, 0 = none, -1 = left.
@@ -190,7 +189,7 @@ func _handle_steering(delta: float) -> void:
 	
 	# Calculate angular_velocity when not mid-air
 	if is_on_floor():
-		if brake_request && abs(horizonal_speed) < 1:
+		if (accel_request < 0.0) && abs(horizonal_speed) < 1:
 			angular_velocity = deg_to_rad(handbrake_steering_velocity * steering)
 		else:
 			var steering_angle: float
@@ -282,6 +281,10 @@ func hit(hitter_hitbox: Hitbox, velocity_reduction_factor: float = 0.4, vertical
 	# Boost panel hit logic
 	if hitter is BoostPanel:
 		queue_ground_boost(hitter.boost)
+		return
+	
+	# Do nothing for other karts
+	elif hitter is Kart3D:
 		return
 	
 	# Do nothing for trailed items

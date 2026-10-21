@@ -25,7 +25,6 @@ func handle_input() -> void:
 		kart.steer_request = Input.get_axis(_action_name(&"Left"), _action_name(&"Right"))
 		kart.pitch_request = Input.get_axis(_action_name(&"Up"), _action_name(&"Down"))
 		kart.accel_request = Input.get_axis(_action_name(&"Backward"), _action_name(&"Forward"))
-		kart.brake_request = Input.is_action_pressed(_action_name(&"Backward"))
 		kart.hop_request = Input.is_action_just_pressed(_action_name(&"Drift"))
 		kart.drift_request = Input.is_action_pressed(_action_name(&"Drift"))
 		kart.item_request = Input.is_action_just_pressed(_action_name(&"Item"))
