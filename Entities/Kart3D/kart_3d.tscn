@@ -260,11 +260,15 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0
 floor_max_angle = 1.2217305
 script = ExtResource("1_q7q2k")
 kart_stats = ExtResource("2_q7q2k")
-top_speed = 20.0
-top_reverse_speed = 8.0
-acceleration = 20.0
-boost_speed = 30.0
-boost_acceleration = 50.0
+base_top_speed = 20.0
+base_top_reverse_speed = 8.0
+base_acceleration = 12.0
+base_boost_speed = 30.0
+base_boost_acceleration = 50.0
+base_max_steering_angle_slow = 8.0
+base_max_steering_angle_fast = 4.0
+base_handbrake_steering_velocity = 45.0
+base_air_steering_velocity = 40.0
 trick_sfx = Array[AudioStream]([ExtResource("3_7apc5"), ExtResource("4_q7q2k"), ExtResource("5_3khwq"), ExtResource("6_0767e"), ExtResource("7_mehc1"), ExtResource("8_8lscg")])
 
 [node name="KartModel" type="Node3D" parent="." unique_id=510578739]

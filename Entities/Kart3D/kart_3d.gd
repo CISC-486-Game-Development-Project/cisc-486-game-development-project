@@ -7,22 +7,22 @@ extends CharacterBody3D
 @export var input_handler: InputHandler ## The input handler for controlling the kart.
 
 @export_group("Driving")
-@export_custom(PROPERTY_HINT_NONE, "suffix:m/s") var top_speed: float ## Defines the top speed.
-@export_custom(PROPERTY_HINT_NONE, "suffix:m/s") var top_reverse_speed: float ## Defines the top speed when reversing.
-@export_custom(PROPERTY_HINT_NONE, "suffix:m/s/s") var acceleration: float ## Defines the rate of acceleration.
-@export_custom(PROPERTY_HINT_NONE, "suffix:m/s") var boost_speed: float  ## Defines the top speed when boosting.
-@export_custom(PROPERTY_HINT_NONE, "suffix:m/s/s") var boost_acceleration: float ## Defines the rate of acceleration when boosting.
+@export_custom(PROPERTY_HINT_NONE, "suffix:m/s") var base_top_speed: float ## Defines the base top speed.
+@export_custom(PROPERTY_HINT_NONE, "suffix:m/s") var base_top_reverse_speed: float ## Defines the base top speed when reversing.
+@export_custom(PROPERTY_HINT_NONE, "suffix:m/s/s") var base_acceleration: float ## Defines the base rate of acceleration.
+@export_custom(PROPERTY_HINT_NONE, "suffix:m/s") var base_boost_speed: float  ## Defines the base top speed when boosting.
+@export_custom(PROPERTY_HINT_NONE, "suffix:m/s/s") var base_boost_acceleration: float ## Defines the base rate of acceleration when boosting.
 @export var roll_friction: float = 0.8 ## Defines the intensity of the friction acting against the forward momentum.
 @export var trick_speed_threshold: float = 10.0 ## Defines the minimum speed required to trick while driving.
 @export var air_trick_speed_threshold: float = 4.0 ## Defines the minimum speed required to air trick while falling.
 
 @export_group("Steering")
-@export_custom(PROPERTY_HINT_NONE, "suffix:degrees") var max_steering_angle_slow: float = 10.0 ## Defines the maximum steering angle, should be higher when going slow.
-@export_custom(PROPERTY_HINT_NONE, "suffix:degrees") var max_steering_angle_fast: float = 5.0 ## Defines the maximum steering angle, should be lower when going fast.
-@export_custom(PROPERTY_HINT_NONE, "suffix:degrees/s") var handbrake_steering_velocity: float = 45.0 ## Defines the speed of handbrake steering (turning while very slow).
-@export_custom(PROPERTY_HINT_NONE, "suffix:degrees/s") var air_steering_velocity: float = 40.0 ## Defines the speed of mid-air steering.
+@export_custom(PROPERTY_HINT_NONE, "suffix:degrees") var base_max_steering_angle_slow: float ## Defines the base maximum steering angle, should be higher when going slow.
+@export_custom(PROPERTY_HINT_NONE, "suffix:degrees") var base_max_steering_angle_fast: float ## Defines the base maximum steering angle, should be lower when going fast.
+@export_custom(PROPERTY_HINT_NONE, "suffix:degrees/s") var base_handbrake_steering_velocity: float ## Defines the base speed of handbrake steering (turning while very slow).
+@export_custom(PROPERTY_HINT_NONE, "suffix:degrees/s") var base_air_steering_velocity: float ## Defines the base speed of mid-air steering.
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var wheel_base: float = 1.5 ## The diameter of the wheels.
-@export var drift_steering_multiplier: float = 1.2 ## The factor by which steer direction is multiplied while drifting.
+@export var drift_steering_multiplier: float = 1.5 ## The factor by which steer direction is multiplied while drifting.
 
 @export_group("Offroad Factors") # How much the kart will be affected by the terrain (top speed and accel.)
 @export var offroad_factor_paved: float = 0.0  
@@ -56,9 +56,22 @@ extends CharacterBody3D
 @onready var debug_label_3d: Label3D = $DebugLabel3D
 
 # Internal Vars
+# Components
 var wheels: Array[Wheel] ## The array of Wheel objects attaced to this kart.
 var hitbox: Hitbox ## The hitbox of this kart.
 
+# Stats
+var top_speed: float ## Defines the top speed.
+var top_reverse_speed: float ## Defines the top speed when reversing.
+var acceleration: float ## Defines the rate of acceleration.
+var boost_speed: float ## Defines the top speed when boosting.
+var boost_acceleration: float ## Defines the rate of acceleration when boosting.
+var max_steering_angle_slow: float ## Defines the maximum steering angle, should be higher when going slow.
+var max_steering_angle_fast: float ## Defines the maximum steering angle, should be lower when going fast.
+var handbrake_steering_velocity: float ## Defines the speed of handbrake steering (turning while very slow).
+var air_steering_velocity: float ## Defines the speed of mid-air steering.
+
+# Requests
 var steer_request: float ## Steering intensity request to be set by an input_manager.
 var pitch_request: float ## Pitch intensity request to be set by an input_manager. (Entirely aesthetic)
 var accel_request: float ## Acceleration intensity request to be set by an input_manager.
@@ -184,7 +197,8 @@ func _handle_steering(delta: float) -> void:
 	# Default angle to when in mid-air
 	var angular_velocity: float = deg_to_rad(air_steering_velocity * steering)
 	
-	var max_steering_angle = lerp(max_steering_angle_slow, max_steering_angle_fast, clamp(horizonal_speed / top_speed, 0.0, 1.0))
+	var max_steering_angle = 1.0 / lerpf(1.0 / max_steering_angle_slow, 1.0 / max_steering_angle_fast, pow(maxf(horizonal_speed, 0.0) / top_speed, 1.5))
+	#var max_steering_angle = lerp(max_steering_angle_slow, max_steering_angle_fast, clamp(horizonal_speed / top_speed, 0.0, 1.0))
 	var avg_steering_angle = lerp(max_steering_angle_slow, max_steering_angle_fast, 1.0)
 	
 	# Calculate angular_velocity when not mid-air
@@ -312,21 +326,27 @@ func get_horizontal_velocity() -> Vector3:
 ## Sets the stats of the kart based on kart stats and current terrain conditions.
 func set_stats() -> void:
 	## Stat Formulae
+	var speed_mult: float = 0.9 + 0.05 * kart_stats.base_speed       # 0 = 0.9 | 5 = 1.15
+	var accel_mult: float = 0.8 + 0.1 * kart_stats.base_acceleration # 0 = 0.8 | 5 = 1.30
+	var boost_mult: float = 1.4 + 0.05 * kart_stats.base_boost       # 0 = 1.4 | 5 = 1.65 (multiplied by top_speed)
+	var handling_mult: float = 0.8 + 0.1 * kart_stats.base_handling  # 0 = 0.8 | 5 = 1.3
+	
 	# Speed
-	top_speed = (20.0 + (kart_stats.base_speed / 2)) * (1 - offroad_factor)
-	top_reverse_speed = (8.0 + (kart_stats.base_speed / 2)) * (1 - offroad_factor)
+	top_speed = base_top_speed * speed_mult * (1 - offroad_factor)
+	top_reverse_speed = base_top_reverse_speed * speed_mult * (1 - offroad_factor)
 	
 	# Acceleration
-	acceleration = (12.0 + (kart_stats.base_acceleration * 2)) * (1 - offroad_factor)
+	acceleration = base_acceleration * accel_mult * (1 - offroad_factor)
 	
 	# Boost
-	boost_speed = (top_speed * 1.5) + (kart_stats.base_boost * 1.5)
+	boost_speed = top_speed * boost_mult
+	boost_acceleration = max(base_boost_acceleration, acceleration)
 	
 	# Handling
-	max_steering_angle_slow = 8.0 + (kart_stats.base_handling / 2)
-	max_steering_angle_fast = 3.0 + (kart_stats.base_handling / 2)
-	handbrake_steering_velocity = 45.0 + kart_stats.base_handling
-	air_steering_velocity = 40.0 + kart_stats.base_handling
+	max_steering_angle_slow = base_max_steering_angle_slow * handling_mult
+	max_steering_angle_fast = base_max_steering_angle_fast * handling_mult
+	handbrake_steering_velocity = base_handbrake_steering_velocity * handling_mult
+	air_steering_velocity = base_air_steering_velocity * handling_mult
 
 #####################
 ## Trick Functions ##
