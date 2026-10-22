@@ -25,7 +25,7 @@ extends CharacterBody3D
 @export var drift_steering_multiplier: float = 1.5 ## The factor by which steer direction is multiplied while drifting.
 
 @export_group("Wall Bounce")
-@export var wall_bounce_strength: float = 0.6 ## The fraction of speed kept after bouncing off a wall.
+@export var wall_bounce_strength: float = 0.6 ## The fraction of speed used for bouncing off a wall.
 @export var wall_bounce_duration: float = 0.25 ## The number of seconds driving is overridden when bouncing off a wall.
 
 @export_group("Offroad Factors") # How much the kart will be affected by the terrain (top speed and accel.)
@@ -149,10 +149,12 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	## Step 1: Handle Input
 	input_handler.handle_input()
+	
 	## Step 2: Handle Movement
 	if state_machine.current_state is not HitState:
 		_handle_driving(delta)
 		_handle_steering(delta)
+		_update_trick_ray_cast()
 	pre_slide_velocity = velocity
 	move_and_slide()
 	
@@ -312,6 +314,11 @@ func recalculate_offroad_factor() -> void:
 		offroad_factor = new_offroad_factor
 		set_stats()
 
+## Sets the trick ray cast's position and target position to be relative to the dynamically aligned kart model.
+func _update_trick_ray_cast() -> void:
+	trick_ray_cast_3d.global_position = kart_model.global_position - kart_model.global_basis.z * 3 + kart_model.global_basis.y
+	trick_ray_cast_3d.target_position = trick_ray_cast_3d.global_basis.inverse() * -kart_model.global_basis.y * 3
+
 ###########################
 ## Boost & Hit Functions ##
 ###########################
@@ -405,18 +412,18 @@ func can_trick() -> bool:
 	# Check logic for tricking depending on current state
 	if state_machine.current_state is DriveState:
 		if hop_request and not trick_ray_cast_3d.is_colliding():
-			#print("Trick Case 1 - Ledge Trick")
+			print("Trick Case 1 - Ledge Trick")
 			return true
 	elif state_machine.current_state is FallState:
 		if hop_request and not trick_ray_cast_3d.is_colliding() and trick_coyote_timer.time_left > 0:
-			#print("Trick Case 2 - Coyote Fall Trick")
+			print("Trick Case 2 - Coyote Fall Trick")
 			return true
 	elif state_machine.current_state is HopState:
 		if trick_buffer_timer.time_left > 0 and not trick_ray_cast_3d.is_colliding():
-			#print("Trick Case 3 - Buffered Ledge Trick")
+			print("Trick Case 3 - Buffered Ledge Trick")
 			return true
 		elif trick_buffer_timer.time_left > 0 and not ground_ray_cast_3d.is_colliding():
-			#print("Trick Case 4 - Buffered Bump Trick")
+			print("Trick Case 4 - Buffered Bump Trick")
 			return true
 	return false
 
@@ -433,7 +440,7 @@ func can_air_trick() -> bool:
 			return false
 		
 		if hop_request and not ground_ray_cast_3d.is_colliding():
-			#print("Air Trick")
+			print("Air Trick")
 			return true
 	return false
 

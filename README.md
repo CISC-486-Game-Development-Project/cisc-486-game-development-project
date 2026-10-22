@@ -7,11 +7,9 @@
 - SFX & Music (new song for each track? menu music? unique sounds for each character's kart? unique voice lines per character for interactions?)
 - Known bugs to fix:
 - CenterPivot: visibly incorrect pivot when first entering a menu, plus having to set pivot every frame doesn't make sense, there should be an easier solution
-- CameraController: Make camera control based on a spring arm so it doesn't clip through the ground
-- Handling Stat: Fix how handling stat effects drifting so it's more intuitive (also fix: boosts make turning way faster for some reason)
 
 Current Tasks:
-- Destructible objects [LOGIC DONE, DESTROY EFFECT NOT IMPLEMENTED]
+- Item UI, make textures out of models to be displayed
 - Menu functionality, animations & stylization (pause menu, options menu, main menu, etc.) [DONE, MIGHT CONTINUE POLISHING LATER]
 - Spline based track prototyping system
 

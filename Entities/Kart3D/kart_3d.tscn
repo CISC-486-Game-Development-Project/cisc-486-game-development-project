@@ -287,7 +287,8 @@ text = "Debug Label: Visible"
 vertical_alignment = 2
 
 [node name="TrickRayCast3D" type="RayCast3D" parent="." unique_id=1264776242]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -3)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -3, 1, 1.3113416e-07)
+top_level = true
 target_position = Vector3(0, -3, 0)
 
 [node name="GroundRayCast3D" type="RayCast3D" parent="." unique_id=131992353]
