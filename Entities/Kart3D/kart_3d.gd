@@ -12,7 +12,7 @@ extends CharacterBody3D
 @export_custom(PROPERTY_HINT_NONE, "suffix:m/s/s") var base_acceleration: float ## Defines the base rate of acceleration.
 @export_custom(PROPERTY_HINT_NONE, "suffix:m/s") var base_boost_speed: float  ## Defines the base top speed when boosting.
 @export_custom(PROPERTY_HINT_NONE, "suffix:m/s/s") var base_boost_acceleration: float ## Defines the base rate of acceleration when boosting.
-@export var roll_friction: float = 0.8 ## Defines the intensity of the friction acting against the forward momentum.
+@export var roll_friction: float = 0.5 ## Defines the intensity of the friction acting against the forward momentum.
 @export var trick_speed_threshold: float = 10.0 ## Defines the minimum speed required to trick while driving.
 @export var air_trick_speed_threshold: float = 4.0 ## Defines the minimum speed required to air trick while falling.
 
@@ -220,7 +220,6 @@ func _handle_steering(delta: float) -> void:
 	var angular_velocity: float = deg_to_rad(air_steering_velocity * steering)
 	
 	var max_steering_angle = 1.0 / lerpf(1.0 / max_steering_angle_slow, 1.0 / max_steering_angle_fast, pow(maxf(horizonal_speed, 0.0) / top_speed, 1.5))
-	#var max_steering_angle = lerp(max_steering_angle_slow, max_steering_angle_fast, clamp(horizonal_speed / top_speed, 0.0, 1.0))
 	var avg_steering_angle = lerp(max_steering_angle_slow, max_steering_angle_fast, 1.0)
 	
 	# Calculate angular_velocity when not mid-air
@@ -375,7 +374,7 @@ func set_stats() -> void:
 	## Stat Formulae
 	var speed_mult: float = 0.9 + 0.05 * kart_stats.base_speed       # 0 = 0.9 | 5 = 1.15
 	var accel_mult: float = 0.8 + 0.1 * kart_stats.base_acceleration # 0 = 0.8 | 5 = 1.30
-	var boost_mult: float = 1.4 + 0.05 * kart_stats.base_boost       # 0 = 1.4 | 5 = 1.65 (multiplied by top_speed)
+	var boost_mult: float = 1.2 + 0.05 * kart_stats.base_boost       # 0 = 1.2 | 5 = 1.45 (multiplied by top_speed)
 	var handling_mult: float = 0.8 + 0.1 * kart_stats.base_handling  # 0 = 0.8 | 5 = 1.3
 	
 	# Speed
@@ -412,18 +411,18 @@ func can_trick() -> bool:
 	# Check logic for tricking depending on current state
 	if state_machine.current_state is DriveState:
 		if hop_request and not trick_ray_cast_3d.is_colliding():
-			print("Trick Case 1 - Ledge Trick")
+			#print("Trick Case 1 - Ledge Trick")
 			return true
 	elif state_machine.current_state is FallState:
 		if hop_request and not trick_ray_cast_3d.is_colliding() and trick_coyote_timer.time_left > 0:
-			print("Trick Case 2 - Coyote Fall Trick")
+			#print("Trick Case 2 - Coyote Fall Trick")
 			return true
 	elif state_machine.current_state is HopState:
 		if trick_buffer_timer.time_left > 0 and not trick_ray_cast_3d.is_colliding():
-			print("Trick Case 3 - Buffered Ledge Trick")
+			#print("Trick Case 3 - Buffered Ledge Trick")
 			return true
 		elif trick_buffer_timer.time_left > 0 and not ground_ray_cast_3d.is_colliding():
-			print("Trick Case 4 - Buffered Bump Trick")
+			#print("Trick Case 4 - Buffered Bump Trick")
 			return true
 	return false
 
@@ -440,7 +439,7 @@ func can_air_trick() -> bool:
 			return false
 		
 		if hop_request and not ground_ray_cast_3d.is_colliding():
-			print("Air Trick")
+			#print("Air Trick")
 			return true
 	return false
 
@@ -457,8 +456,11 @@ func _update_debug_label() -> void:
 	
 	# Define debug texts to display
 	var debugs: Array[String] = [
-		"Top Speed: " + str(top_speed),
+		"Top Speed: " + str(roundf(top_speed * 10) / 10),
+		"Acceleration: " + str(roundf(acceleration * 10) / 10),
+		"Boost Top Speed: " + str(roundf(boost_speed * 10) / 10),
 		"Velocity: " + str(roundf(velocity.length() * 10) / 10),
+		"Horizontal Speed: " + str (roundf(get_horizontal_velocity().length() * 10) / 10),
 		"State: " + state_machine.current_state.name,
 		"Drift Direction: " + str(drift_dir),
 		"Fast Charge: " + str(abs(steer_request) >= 0.8 and sign(steer_request) == drift_dir),

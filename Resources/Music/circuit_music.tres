@@ -1,0 +1,19 @@
+[gd_resource type="AudioStreamInteractive" format=3 uid="uid://cr14b6e44s2vb"]
+
+[ext_resource type="AudioStream" uid="uid://bnupymtpaocgh" path="res://Assets/Audio/Music/Track1/KartThemeIntro.wav" id="1_7mdsl"]
+[ext_resource type="AudioStream" uid="uid://6k42b3njbbv1" path="res://Assets/Audio/Music/Track1/KartThemeFirstLoop.wav" id="2_vkmvy"]
+[ext_resource type="AudioStream" uid="uid://c66k30ehvrg64" path="res://Assets/Audio/Music/Track1/KartThemeLoop.wav" id="3_1gkg1"]
+
+[resource]
+clip_count = 3
+clip_0/name = &"Kart Theme Intro"
+clip_0/stream = ExtResource("1_7mdsl")
+clip_0/auto_advance = 1
+clip_0/next_clip = 1
+clip_1/name = &"Kart Theme First Loop"
+clip_1/stream = ExtResource("2_vkmvy")
+clip_1/auto_advance = 1
+clip_1/next_clip = 2
+clip_2/name = &"Kart Theme Intro"
+clip_2/stream = ExtResource("3_1gkg1")
+clip_2/auto_advance = 0

@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://djkcvtyhb1sq6"]
+
+[ext_resource type="Shader" uid="uid://0al1ayu1pose" path="res://Resources/Shaders/texture_scaling.gdshader" id="1_nn5en"]
+[ext_resource type="Texture2D" uid="uid://cxywdde32xids" path="res://Assets/2D/Sprites/Menus/checkered.png" id="2_yj700"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_nn5en")
+shader_parameter/albedo_texture = ExtResource("2_yj700")
+shader_parameter/tiles_per_meter = 0.2
+shader_parameter/blend_sharpness = 4.0

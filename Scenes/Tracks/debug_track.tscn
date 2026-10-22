@@ -2,38 +2,22 @@
 
 [ext_resource type="Script" uid="uid://rdwha1wrjten" path="res://Scenes/Tracks/debug_track.gd" id="1_q5xdn"]
 [ext_resource type="PackedScene" uid="uid://dhqspbj6a6bij" path="res://Entities/Kart3D/player_kart_3d.tscn" id="1_wqmp7"]
-[ext_resource type="AudioStream" uid="uid://bnupymtpaocgh" path="res://Assets/Audio/Music/Track1/KartThemeIntro.wav" id="2_g43dg"]
-[ext_resource type="AudioStream" uid="uid://c66k30ehvrg64" path="res://Assets/Audio/Music/Track1/KartThemeLoop.wav" id="3_56bb8"]
-[ext_resource type="AudioStream" uid="uid://6k42b3njbbv1" path="res://Assets/Audio/Music/Track1/KartThemeFirstLoop.wav" id="3_xc45i"]
+[ext_resource type="AudioStream" uid="uid://cr14b6e44s2vb" path="res://Resources/Music/circuit_music.tres" id="2_xc45i"]
 [ext_resource type="PackedScene" uid="uid://bfdd58efg72wk" path="res://Scenes/TrackParts/BoostPanel/boost_panel.tscn" id="4_7kucd"]
 [ext_resource type="PackedScene" uid="uid://htd17y0efmde" path="res://Scenes/Menus/PauseScreen/pause_screen.tscn" id="5_wgl67"]
+[ext_resource type="PackedScene" uid="uid://ctnwy05xjck6l" path="res://Scenes/Menus/HUD/hud.tscn" id="5_xc45i"]
 [ext_resource type="Material" uid="uid://mdid6csoosht" path="res://Resources/Sky/day_sky.tres" id="6_ojj8n"]
 [ext_resource type="PackedScene" uid="uid://cfu5r4hr6ybjv" path="res://Entities/Barrel/barrel.tscn" id="7_7kucd"]
 [ext_resource type="ArrayMesh" uid="uid://b6n4rueforx4o" path="res://Resources/Shaders/Grass/grass.res" id="7_56bb8"]
 [ext_resource type="Script" uid="uid://ca6obtta5oopp" path="res://addons/mesh_painter/mesh_painter.gd" id="7_xc45i"]
-[ext_resource type="PackedScene" uid="uid://cd2cwfschwv3h" path="res://Scenes/SplitscreenRoot/splitscreen_root.tscn" id="9_g43dg"]
 [ext_resource type="PackedScene" uid="uid://cyabyf8vue35i" path="res://Entities/Kart3D/cpu_kart_3d.tscn" id="13_5unjq"]
 
-[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_g43dg"]
-clip_count = 3
-clip_0/name = &"Kart Theme Intro"
-clip_0/stream = ExtResource("2_g43dg")
-clip_0/auto_advance = 1
-clip_0/next_clip = 1
-clip_1/name = &"Kart Theme First Loop"
-clip_1/stream = ExtResource("3_xc45i")
-clip_1/auto_advance = 1
-clip_1/next_clip = 2
-clip_2/name = &"Kart Theme Intro"
-clip_2/stream = ExtResource("3_56bb8")
-clip_2/auto_advance = 0
-
-[sub_resource type="Sky" id="Sky_xvvda"]
+[sub_resource type="Sky" id="Sky_xc45i"]
 sky_material = ExtResource("6_ojj8n")
 
 [sub_resource type="Environment" id="Environment_t4f5k"]
 background_mode = 2
-sky = SubResource("Sky_xvvda")
+sky = SubResource("Sky_xc45i")
 
 [sub_resource type="Curve3D" id="Curve3D_fmsym"]
 closed = true
@@ -46,14 +30,6 @@ point_count = 7
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_infoe"]
 albedo_color = Color(0, 0, 0, 1)
 
-[sub_resource type="Curve3D" id="Curve3D_5unjq"]
-closed = true
-_data = {
-"points": PackedVector3Array(-17.413387, 9.536743e-07, -11.495636, 17.413387, -9.536743e-07, 11.495636, -42.416245, 0.51013184, -68.79696, -31.730268, 3.5762787e-07, 3.9159775, 31.730268, -3.5762787e-07, -3.9159775, 16.449492, 0.51013124, -60.57521, 8.620319, -1.1920929e-07, 2.6647415, -8.620319, 1.1920929e-07, -2.6647415, 19.310883, 0.510131, -93.53418, 3.821066, -7.390976e-06, -8.130402, -3.821066, 7.390976e-06, 8.130402, -9.757278, 1.1500105, -80.75077, 0, 0, 0, 0, 0, 0, -12.68132, 13.6004505, -59.267754, -4.8469057, 1.1920929e-07, -14.158218, 4.8469057, -1.1920929e-07, 14.158218, -7.625964, 0.510131, -21.726273, -4.3002167, 9.536743e-07, -19.233978, 4.3002167, -9.536743e-07, 19.233978, 34.65126, 0.51013184, -10.731522, 7.8845806, 7.748604e-07, -11.494461, -7.8845806, -7.748604e-07, 11.494461, 36.051254, 0.51013166, 26.794617, 4.8207703, -9.536743e-07, 4.5623474, -4.8207703, 9.536743e-07, -4.5623474, -11.079411, 0.51013184, 36.57808, 7.265625, -2.5451183e-05, 7.826584, -7.265625, 2.5451183e-05, -7.826584, -48.142174, 0.5083253, 46.11911, 16.013447, -4.6372414e-05, 0.6043701, -16.013447, 4.6372414e-05, -0.6043701, -52.011166, 0.5076138, -34.221054, 0.060585022, -7.5399876e-05, -10.087387, -0.060585022, 7.5399876e-05, 10.087387, -72.97703, 0.5070037, 35.983124, 19.34414, -6.0379505e-05, -0.11936951, -19.34414, 6.0379505e-05, 0.11936951, -80.55599, 0.5055526, 65.25888, 0, 0, 0, 0, 0, 0, -99.60965, 0.5048566, 28.78859, 0, 0, 0, 0, 0, 0, -99.78416, 0.5013573, -75.04967, -22.63972, 9.536743e-07, 0.66291046, 22.63972, -9.536743e-07, -0.66291046, -75.88849, 0.5, -111.076004),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-}
-point_count = 16
-
 [sub_resource type="Curve3D" id="Curve3D_56bb8"]
 closed = true
 _data = {
@@ -62,15 +38,15 @@ _data = {
 }
 point_count = 4
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_irhi4"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5unjq"]
 albedo_color = Color(0.12941177, 0.43137255, 0.17254902, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_7o0oo"]
-material = SubResource("StandardMaterial3D_irhi4")
-size = Vector2(1000, 1000)
+material = SubResource("StandardMaterial3D_5unjq")
+size = Vector2(500, 500)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2jtd5"]
-size = Vector3(1000, 1, 1000)
+size = Vector3(500, 1, 500)
 
 [sub_resource type="MultiMesh" id="MultiMesh_xc45i"]
 transform_format = 1
@@ -102,8 +78,12 @@ height = 10.0
 
 [node name="DebugTrack" type="Node3D" unique_id=1648609827]
 script = ExtResource("1_q5xdn")
-track_music = SubResource("AudioStreamInteractive_g43dg")
+track_music = ExtResource("2_xc45i")
 player_kart = ExtResource("1_wqmp7")
+pause_screen_scene = ExtResource("5_wgl67")
+hud_scene = ExtResource("5_xc45i")
+player_spawn_position = Vector3(5, 1, 30)
+player_spawn_rotation = 90.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1110344304]
 environment = SubResource("Environment_t4f5k")
@@ -126,27 +106,6 @@ mode = 2
 path_node = NodePath("..")
 path_interval_type = 0
 path_interval = 0.5
-path_simplify_angle = 0.0
-path_rotation = 1
-path_rotation_accurate = false
-path_local = false
-path_continuous_u = true
-path_u_distance = 1.0
-path_joined = true
-material = SubResource("StandardMaterial3D_infoe")
-
-[node name="Path3D3" type="Path3D" parent="Terrain" unique_id=1880910421]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 222.06122, -1.4175094, -32.404198)
-curve = SubResource("Curve3D_5unjq")
-
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Terrain/Path3D3" unique_id=1475681534 groups=["Paved"]]
-top_level = true
-use_collision = true
-polygon = PackedVector2Array(-8, 0, -7, 1, 7, 1, 8, 0)
-mode = 2
-path_node = NodePath("..")
-path_interval_type = 0
-path_interval = 0.1
 path_simplify_angle = 0.0
 path_rotation = 1
 path_rotation_accurate = false
@@ -290,14 +249,6 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0
 
 [node name="Barrel" parent="." unique_id=127053263 instance=ExtResource("7_7kucd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3330574, 1.8510174, 33.580196)
-
-[node name="PauseScreen" parent="." unique_id=608802068 instance=ExtResource("5_wgl67")]
-layer = 999
-visible = false
-
-[node name="HUD" type="CanvasLayer" parent="." unique_id=818883236]
-
-[node name="SplitscreenRoot" parent="HUD" unique_id=945732261 instance=ExtResource("9_g43dg")]
 
 [node name="CPUKart3D" parent="." unique_id=32768770 instance=ExtResource("13_5unjq")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -10.680214, 0.51651627, 29.59003)

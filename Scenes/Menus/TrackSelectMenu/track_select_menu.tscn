@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://c2gld37y6b17m" path="res://Assets/2D/Fonts/DeltaBlock.ttf" id="3_d041m"]
 [ext_resource type="Texture2D" uid="uid://bl0bty04gbwjg" path="res://Assets/2D/Sprites/TrackIcons/DebugTrackIcon.png" id="4_nxhmo"]
 [ext_resource type="Texture2D" uid="uid://be457kbv51483" path="res://Assets/2D/Sprites/icon.svg" id="5_xkk6d"]
+[ext_resource type="Texture2D" uid="uid://qlv8vskiydcq" path="res://Assets/2D/Sprites/TrackIcons/CircuitIcon.png" id="6_ptf7h"]
 [ext_resource type="PackedScene" uid="uid://yq6fhy13lgsb" path="res://Scenes/Menus/ControlHintBar/control_hint_bar.tscn" id="7_ptf7h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rixt3"]
@@ -110,9 +111,9 @@ track_icon = ExtResource("4_nxhmo")
 
 [node name="TrackButton2" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/TrackButtonContainer" unique_id=72095904 instance=ExtResource("2_08aid")]
 layout_mode = 2
-disabled = true
-track_name = "Track 2"
-track_icon = ExtResource("5_xkk6d")
+track = "uid://do3ibboy24q6k"
+track_name = "Circuit"
+track_icon = ExtResource("6_ptf7h")
 
 [node name="TrackButton3" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/TrackButtonContainer" unique_id=1059642776 instance=ExtResource("2_08aid")]
 layout_mode = 2

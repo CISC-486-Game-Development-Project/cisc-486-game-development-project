@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://ctnwy05xjck6l"]
+
+[ext_resource type="PackedScene" uid="uid://cd2cwfschwv3h" path="res://Scenes/Menus/HUD/SplitscreenRoot/splitscreen_root.tscn" id="1_33i1w"]
+
+[node name="HUD" type="CanvasLayer" unique_id=424278405]
+
+[node name="SplitscreenRoot" parent="." unique_id=945732261 instance=ExtResource("1_33i1w")]
