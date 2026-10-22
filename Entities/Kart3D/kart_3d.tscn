@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://d06ii74wx6vgl" path="res://Scenes/KartModels/basic_kart.tscn" id="2_7apc5"]
 [ext_resource type="Resource" uid="uid://d2lgutyflh3o3" path="res://Resources/KartStats/default_kart.tres" id="2_q7q2k"]
 [ext_resource type="AudioStream" uid="uid://dwxcjulimx2bp" path="res://Assets/Audio/SFX/Trick/TrickSFX - Track 1.wav" id="3_7apc5"]
+[ext_resource type="Resource" uid="uid://c3un73a4jn8jp" path="res://Resources/Items/Throwables/shell.tres" id="3_0767e"]
 [ext_resource type="Script" uid="uid://t1pg06mo513h" path="res://Components/StateMachine/state_machine.gd" id="4_mehc1"]
 [ext_resource type="AudioStream" uid="uid://bsf1fcpxg2myp" path="res://Assets/Audio/SFX/Trick/TrickSFX - Track 2.wav" id="4_q7q2k"]
 [ext_resource type="AudioStream" uid="uid://p3qsv3x7sco2" path="res://Assets/Audio/SFX/Trick/TrickSFX - Track 3.wav" id="5_3khwq"]
@@ -17,7 +18,6 @@
 [ext_resource type="Script" uid="uid://t3ju34iymdl0" path="res://Components/StateMachine/States/fall_state.gd" id="9_dqsqe"]
 [ext_resource type="Script" uid="uid://b81fhm3o6wy5v" path="res://Components/ItemHandler/item_handler.gd" id="10_3khwq"]
 [ext_resource type="Script" uid="uid://bbrw2uverowic" path="res://Components/StateMachine/States/hop_state.gd" id="10_4muo4"]
-[ext_resource type="Resource" uid="uid://cpe1ww3c6snam" path="res://Resources/Items/Consumables/boost.tres" id="11_mehc1"]
 [ext_resource type="Script" uid="uid://b2lqg5xhq7se0" path="res://Components/StateMachine/States/drift_state.gd" id="11_y2xwn"]
 [ext_resource type="Script" uid="uid://bmua4qbuf0vev" path="res://Components/StateMachine/States/trick_state.gd" id="12_kwn18"]
 [ext_resource type="Script" uid="uid://daex734a4hoq0" path="res://Components/AlignmentHandler/alignment_handler.gd" id="13_mehc1"]
@@ -257,7 +257,7 @@ _data = {
 
 [node name="Kart3D" type="CharacterBody3D" unique_id=32768770]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-floor_max_angle = 1.5707964
+floor_max_angle = 1.2217305
 script = ExtResource("1_q7q2k")
 kart_stats = ExtResource("2_q7q2k")
 base_top_speed = 20.0
@@ -338,7 +338,7 @@ libraries/ = SubResource("AnimationLibrary_7dnbs")
 [node name="ItemHandler" type="Node" parent="." unique_id=1682402239 node_paths=PackedStringArray("kart")]
 script = ExtResource("10_3khwq")
 kart = NodePath("..")
-debug_item = ExtResource("11_mehc1")
+debug_item = ExtResource("3_0767e")
 metadata/_custom_type_script = "uid://b81fhm3o6wy5v"
 
 [node name="GrassDisplacer" type="Node" parent="." unique_id=848599554]
@@ -347,8 +347,6 @@ metadata/_custom_type_script = "uid://dlqoia1hk0gw8"
 
 [node name="AlignmentHandler" type="Node" parent="." unique_id=1629223168 node_paths=PackedStringArray("body", "model", "collision_shape_3d", "ground_ray_cast_3d")]
 script = ExtResource("13_mehc1")
-align_model = true
-align_collision = true
 body = NodePath("..")
 model = NodePath("../KartModel")
 collision_shape_3d = NodePath("../CollisionShape3D")
@@ -379,7 +377,7 @@ metadata/_custom_type_script = "uid://l1hrvfthq543"
 [node name="ToFall" type="Node" parent="MovementStateMachine/IdleState" unique_id=1885645421 node_paths=PackedStringArray("to_state")]
 script = ExtResource("6_2kwd7")
 to_state = NodePath("../../FallState")
-advance_expression = "not entity.is_on_floor()"
+advance_expression = "not entity.is_on_floor() or not entity.ground_ray_cast_3d.is_colliding()"
 metadata/_custom_type_script = "uid://l1hrvfthq543"
 
 [node name="ToHop" type="Node" parent="MovementStateMachine/IdleState" unique_id=58778121 node_paths=PackedStringArray("to_state")]
@@ -413,7 +411,7 @@ metadata/_custom_type_script = "uid://l1hrvfthq543"
 [node name="ToFall" type="Node" parent="MovementStateMachine/DriveState" unique_id=1955009788 node_paths=PackedStringArray("to_state")]
 script = ExtResource("6_2kwd7")
 to_state = NodePath("../../FallState")
-advance_expression = "not entity.is_on_floor()"
+advance_expression = "not entity.is_on_floor() or not entity.ground_ray_cast_3d.is_colliding()"
 metadata/_custom_type_script = "uid://l1hrvfthq543"
 
 [node name="ToHop" type="Node" parent="MovementStateMachine/DriveState" unique_id=1876435733 node_paths=PackedStringArray("to_state")]
@@ -453,7 +451,7 @@ metadata/_custom_type_script = "uid://l1hrvfthq543"
 [node name="ToFall" type="Node" parent="MovementStateMachine/ReverseState" unique_id=757413217 node_paths=PackedStringArray("to_state")]
 script = ExtResource("6_2kwd7")
 to_state = NodePath("../../FallState")
-advance_expression = "not entity.is_on_floor()"
+advance_expression = "not entity.is_on_floor() or not entity.ground_ray_cast_3d.is_colliding()"
 metadata/_custom_type_script = "uid://l1hrvfthq543"
 
 [node name="ToHop" type="Node" parent="MovementStateMachine/ReverseState" unique_id=1999332881 node_paths=PackedStringArray("to_state")]
@@ -475,13 +473,13 @@ metadata/_custom_type_script = "uid://t3ju34iymdl0"
 [node name="ToIdle" type="Node" parent="MovementStateMachine/FallState" unique_id=406735254 node_paths=PackedStringArray("to_state")]
 script = ExtResource("6_2kwd7")
 to_state = NodePath("../../IdleState")
-advance_expression = "entity.is_on_floor() and not entity.drift_request"
+advance_expression = "entity.is_on_floor() and entity.ground_ray_cast_3d.is_colliding() and not entity.drift_request"
 metadata/_custom_type_script = "uid://l1hrvfthq543"
 
 [node name="ToDrift" type="Node" parent="MovementStateMachine/FallState" unique_id=1269919806 node_paths=PackedStringArray("to_state")]
 script = ExtResource("6_2kwd7")
 to_state = NodePath("../../DriftState")
-advance_expression = "entity.is_on_floor() and entity.drift_request and entity.get_horizontal_velocity().length() >= 5"
+advance_expression = "entity.is_on_floor() and entity.ground_ray_cast_3d.is_colliding() and entity.drift_request and entity.get_horizontal_velocity().length() >= 5"
 metadata/_custom_type_script = "uid://l1hrvfthq543"
 
 [node name="ToTrick" type="Node" parent="MovementStateMachine/FallState" unique_id=1224282618 node_paths=PackedStringArray("to_state")]

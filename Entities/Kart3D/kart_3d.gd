@@ -24,6 +24,10 @@ extends CharacterBody3D
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var wheel_base: float = 1.5 ## The diameter of the wheels.
 @export var drift_steering_multiplier: float = 1.5 ## The factor by which steer direction is multiplied while drifting.
 
+@export_group("Wall Bounce")
+@export var wall_bounce_strength: float = 0.6 ## The fraction of speed kept after bouncing off a wall.
+@export var wall_bounce_duration: float = 0.25 ## The number of seconds driving is overridden when bouncing off a wall.
+
 @export_group("Offroad Factors") # How much the kart will be affected by the terrain (top speed and accel.)
 @export var offroad_factor_paved: float = 0.0  
 @export var offroad_factor_offroad: float = 0.6
@@ -82,15 +86,23 @@ var item_request: bool ## Call to use stored item set by an input_manager.
 var camera_request: Vector2 ## The vector for camera movement to be set by an input_manager.
 var reverse_camera_request: bool ## Reverse camera request to be set by an input_manager.
 
+# Driving
 var steering: float ## The intensity of the current steering.
 var offroad_factor: float ## The intensity of the current offroad factor.
 var ignore_offroad_timer: float ## Determines whether speed calculations should ignore offroad currently.
 var boost_timer: float ## The time left in the current boost.
 var boost_queue: Array[Boost] ## The queue of boosts to be applied once the ground is hit.
 
+# Hitting
 var is_hit: bool ## True when the kart is hit.
 
+# Tricking
 var trick_combo_level: int ## Number of tricks currently comboed.
+
+# Wall Bouncing
+var pre_slide_velocity: Vector3 ## The velocity before move_and_slide() is called.
+var bounce_velocity: Vector3 ## The velocity of the wall bounce.
+var bounce_timer: float ## The duration of the wall bounce.
 
 #######################
 ## Process Functions ##
@@ -110,7 +122,7 @@ func _ready() -> void:
 		collision_shape_3d.position.y = kart.model_height / 2
 		wheels = kart.wheels
 		hitbox = kart.hitbox
-		#hitbox.reparent(self)
+		hitbox.reparent(self)
 		hitbox.on_hit.connect(hit)
 		collision_shape_3d.shape = kart.collision_shape_3d.shape
 		
@@ -141,6 +153,7 @@ func _physics_process(delta: float) -> void:
 	if state_machine.current_state is not HitState:
 		_handle_driving(delta)
 		_handle_steering(delta)
+	pre_slide_velocity = velocity
 	move_and_slide()
 	
 	# Update Debug Label
@@ -162,9 +175,16 @@ func _handle_driving(delta: float) -> void:
 				set_boost(boost)
 			boost_queue.clear()
 	
-	# Bounce off walls
-	if is_on_wall():
+	# Bounce off walls if on wall and not currently bouncing
+	if is_on_wall() and bounce_timer <= 0.0:
 		_wall_bump()
+	
+	# If still bouncing off a wall, handle bounce instead of driving
+	if bounce_timer > 0.0:
+		bounce_timer -= delta # Decrement timer
+		bounce_velocity = lerp(bounce_velocity, Vector3.ZERO, 1 - pow(0.5, 4.0 * delta)) # Ease out of bounce
+		velocity = bounce_velocity + Vector3.UP * velocity.y # Set horizontal velocity based on bounce
+		return
 	
 	# Apply drag
 	horizontal_velocity = horizontal_velocity.lerp(Vector3.ZERO, 1 - pow(0.5, roll_friction * delta))
@@ -227,7 +247,27 @@ func _handle_steering(delta: float) -> void:
 
 ## Bounces off walls. Should be called when wall is hit.
 func _wall_bump() -> void:
-	pass # TODO: Implement bumping off walls like MKWorld
+	# Get collision or return if no collision
+	var collision: KinematicCollision3D = get_last_slide_collision()
+	if collision == null:
+		return
+	
+	# Keep the bounce horizontal so slopes/floors don't launch the kart
+	var normal: Vector3 = collision.get_normal()
+	normal.y = 0.0 # Ignore vertical component
+	if normal.is_zero_approx():
+		return # Return if normal ~= zero (no bounce)
+	normal = normal.normalized()
+	
+	var incoming := Vector3(pre_slide_velocity.x, 0.0, pre_slide_velocity.z)
+	
+	# Only bump if kart was actually moving into the wall
+	if incoming.dot(normal) >= 0.0:
+		return # Dot product > 0 means vectors are pointing a similar direction, not facing each other, so return
+	
+	# Set bounce velocity and timer
+	bounce_velocity = incoming.bounce(normal) * wall_bounce_strength
+	bounce_timer = wall_bounce_duration
 
 ## Calculates the current offroad_factor based on terrain conditions.
 func recalculate_offroad_factor() -> void:
@@ -298,7 +338,7 @@ func hit(hitter_hitbox: Hitbox, velocity_reduction_factor: float = 0.4, vertical
 		return
 	
 	# Do nothing for other karts
-	elif hitter is KartModel:
+	elif hitter is Kart3D:
 		return
 	
 	# Do nothing for trailed items
