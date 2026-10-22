@@ -7,6 +7,7 @@
 
 [resource]
 script = ExtResource("3_i32ed")
+name = "Spike Ring"
 texture = ExtResource("4_5q57k")
 model = ExtResource("2_poios")
 entity = ExtResource("1_gqiqe")
