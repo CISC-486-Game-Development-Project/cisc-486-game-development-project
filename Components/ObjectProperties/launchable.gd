@@ -14,6 +14,7 @@ func _ready() -> void:
 func _on_hit(area: Area3D) -> void:
 	var hitter = area.get_parent()
 	
+	#TODO: FIX THIS NOW THAT HITBOX IS INSIDE KARTMODEL
 	# Launch object (hitter.global_position is close enough to work, switch to an integrate_forces() implementation for more accurate collision point detection)
 	if hitter is CharacterBody3D or hitter is RigidBody3D:
 		rigid_body_3d.apply_impulse(hitter.velocity + Vector3(0, hitter.velocity.length() / 2, 0), hitter.global_position - rigid_body_3d.global_position)

@@ -110,7 +110,7 @@ func _ready() -> void:
 		collision_shape_3d.position.y = kart.model_height / 2
 		wheels = kart.wheels
 		hitbox = kart.hitbox
-		hitbox.reparent(self)
+		#hitbox.reparent(self)
 		hitbox.on_hit.connect(hit)
 		collision_shape_3d.shape = kart.collision_shape_3d.shape
 		
@@ -298,7 +298,7 @@ func hit(hitter_hitbox: Hitbox, velocity_reduction_factor: float = 0.4, vertical
 		return
 	
 	# Do nothing for other karts
-	elif hitter is Kart3D:
+	elif hitter is KartModel:
 		return
 	
 	# Do nothing for trailed items

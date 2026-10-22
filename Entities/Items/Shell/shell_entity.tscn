@@ -160,6 +160,8 @@ draw_pass_1 = SubResource("QuadMesh_kgetp")
 
 [node name="AlignmentHandler" type="Node" parent="." unique_id=670871965 node_paths=PackedStringArray("body", "model", "ground_ray_cast_3d")]
 script = ExtResource("4_bhfok")
+align_model = true
+align_collision = true
 body = NodePath("..")
 model = NodePath("../BoostModel")
 ground_ray_cast_3d = NodePath("../GroundRayCast3D")

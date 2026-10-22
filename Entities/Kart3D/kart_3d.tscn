@@ -257,7 +257,7 @@ _data = {
 
 [node name="Kart3D" type="CharacterBody3D" unique_id=32768770]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-floor_max_angle = 1.2217305
+floor_max_angle = 1.5707964
 script = ExtResource("1_q7q2k")
 kart_stats = ExtResource("2_q7q2k")
 base_top_speed = 20.0
@@ -345,10 +345,13 @@ metadata/_custom_type_script = "uid://b81fhm3o6wy5v"
 script = ExtResource("21_q7q2k")
 metadata/_custom_type_script = "uid://dlqoia1hk0gw8"
 
-[node name="AlignmentHandler" type="Node" parent="." unique_id=1629223168 node_paths=PackedStringArray("body", "model", "ground_ray_cast_3d")]
+[node name="AlignmentHandler" type="Node" parent="." unique_id=1629223168 node_paths=PackedStringArray("body", "model", "collision_shape_3d", "ground_ray_cast_3d")]
 script = ExtResource("13_mehc1")
+align_model = true
+align_collision = true
 body = NodePath("..")
 model = NodePath("../KartModel")
+collision_shape_3d = NodePath("../CollisionShape3D")
 ground_ray_cast_3d = NodePath("../GroundRayCast3D")
 metadata/_custom_type_script = "uid://daex734a4hoq0"
 
