@@ -18,7 +18,7 @@ func _ready():
 	
 	var item_names = item_name_weights.keys()
 	
-	place_weight_distributions.resize(Globals.player_count)
+	place_weight_distributions.resize(item_name_weights[item_names[0]].size())
 	
 	for item_name in item_names:
 		var weights = item_name_weights[item_name]
