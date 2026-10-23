@@ -16,8 +16,14 @@ var position: int: set = _set_position
 ## Updates nextMajorCheckpoint if this checkpoint is also a major checkpoint
 ## Returns true if mostRecentlyPassed is updated and false if not.
 func entered_checkpoint(new_checkpoint: Checkpoint) -> bool:
-	# TODO: Write this function
-	return false
+	if new_checkpoint.major:
+		if new_checkpoint != nextMajorCheckpoint:
+			return false
+		nextMajorCheckpoint = new_checkpoint.nextMajorCheckpoint
+	elif new_checkpoint.nextMajorCheckpoint.checkpointIndex > nextMajorCheckpoint.checkpointIndex:
+		return false
+	mostRecentlyPassed = new_checkpoint
+	return true
 
 # Setters
 func _set_position(new_position: int):

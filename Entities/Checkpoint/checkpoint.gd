@@ -8,8 +8,10 @@ var nextMajorCheckpoint: Checkpoint ## Next major checkpoint excluding this one
 var checkpointIndex: int ## This orders the checkpoints, starting line is 0, its nextCheckpoint is 1, so on.
 
 func _ready():
-	# TODO: Calculate nextMajorCheckpoint by traversing until you find it
-	pass
+	var tempNextCheckpoint : Checkpoint = nextCheckpoint
+	while !tempNextCheckpoint.major:
+		tempNextCheckpoint = tempNextCheckpoint.nextCheckpoint
+	nextMajorCheckpoint = tempNextCheckpoint
 
 func _on_body_entered(body: Node3D):
 	if body != Kart3D:

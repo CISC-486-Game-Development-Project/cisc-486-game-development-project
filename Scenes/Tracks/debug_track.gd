@@ -63,7 +63,13 @@ func _ready() -> void:
 	starting_line.body_entered.connect(lap_check)
 	starting_line.body_entered.disconnect(starting_line._on_body_entered)
 	
-	# TODO: Calculate checkpointIndexs, starting_line is 0, its next is 1, loop through all assigning as you go
+	starting_line.checkpointIndex = 0
+	var tempCheckpoint : Checkpoint = starting_line.nextCheckpoint
+	var i : int = 1
+	while tempCheckpoint != starting_line:
+		tempCheckpoint.checkpointIndex = i
+		i +=1
+	
 func _process(_delta):
 	calculate_positions()
 
