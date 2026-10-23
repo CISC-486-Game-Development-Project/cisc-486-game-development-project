@@ -22,7 +22,7 @@ extends CharacterBody3D
 @export_custom(PROPERTY_HINT_NONE, "suffix:degrees/s") var base_handbrake_steering_velocity: float ## Defines the base speed of handbrake steering (turning while very slow).
 @export_custom(PROPERTY_HINT_NONE, "suffix:degrees/s") var base_air_steering_velocity: float ## Defines the base speed of mid-air steering.
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var wheel_base: float = 1.5 ## The diameter of the wheels.
-@export var drift_steering_multiplier: float = 1.5 ## The factor by which steer direction is multiplied while drifting.
+@export var drift_steering_multiplier: float = 1.3 ## The factor by which steer direction is multiplied while drifting.
 
 @export_group("Wall Bounce")
 @export var wall_bounce_strength: float = 0.6 ## The fraction of speed used for bouncing off a wall.

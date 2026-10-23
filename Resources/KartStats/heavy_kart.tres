@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="KartStats" format=3 uid="uid://3v03qpg4k2la"]
+
+[ext_resource type="PackedScene" uid="uid://d06ii74wx6vgl" path="res://Scenes/KartModels/basic_kart.tscn" id="1_tynwk"]
+[ext_resource type="Script" uid="uid://dl6dt8djqun4g" path="res://Resources/KartStats/kart_stats.gd" id="2_6agw8"]
+
+[resource]
+script = ExtResource("2_6agw8")
+base_speed = 5.0
+base_acceleration = 1.0
+base_boost = 1.0
+base_handling = 1.0
+kart_model = ExtResource("1_tynwk")
+metadata/_custom_type_script = "uid://dl6dt8djqun4g"

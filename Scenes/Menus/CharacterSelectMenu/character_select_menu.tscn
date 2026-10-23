@@ -9,7 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://chu7hsk5m2y25" path="res://Assets/2D/Sprites/CharacterIcons/PawnIcon.png" id="6_d15w1"]
 [ext_resource type="Resource" uid="uid://ulcs3tytsjl0" path="res://Resources/Character/pawn_character.tres" id="7_7tf73"]
 [ext_resource type="Resource" uid="uid://k5txr2vfhnjr" path="res://Resources/Character/default_character.tres" id="7_d15w1"]
+[ext_resource type="Resource" uid="uid://dw6y0pt367v7d" path="res://Resources/Character/heavy_character.tres" id="10_6qwey"]
 [ext_resource type="PackedScene" uid="uid://yq6fhy13lgsb" path="res://Scenes/Menus/ControlHintBar/control_hint_bar.tscn" id="10_m0o7l"]
+[ext_resource type="Resource" uid="uid://lharfx2r2yu5" path="res://Resources/Character/light_character.tres" id="11_tivmb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hk7je"]
 bg_color = Color(2.3102762e-06, 0.6323629, 0.9693813, 1)
@@ -510,12 +512,12 @@ character = ExtResource("7_7tf73")
 [node name="CharacterButton3" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/CharacterButtonContainer" unique_id=1591130101 instance=ExtResource("5_2k24t")]
 layout_mode = 2
 icon = ExtResource("4_p6l55")
-character = ExtResource("7_d15w1")
+character = ExtResource("10_6qwey")
 
 [node name="CharacterButton4" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/CharacterButtonContainer" unique_id=1738604612 instance=ExtResource("5_2k24t")]
 layout_mode = 2
 icon = ExtResource("4_p6l55")
-character = ExtResource("7_d15w1")
+character = ExtResource("11_tivmb")
 
 [node name="ControlHintBar" parent="." unique_id=1676424252 instance=ExtResource("10_m0o7l")]
 layout_mode = 1
