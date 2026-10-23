@@ -2,7 +2,7 @@
 extends Node3D
 
 # Constants
-const SYNC_ZERO_VOLUME: float = -60.0 ## The muted volume for when a sync track is not playing.
+const SYNC_ZERO_VOLUME: float = -100.0 ## The muted volume for when a sync track is not playing.
 const SYNC_BASE_VOLUME: float = 0.0 ## The normal volume for when a sync track is playing.
 const DEFAULT_CROSSFADE_TIME: float = 0.1 ## The default time it takes to crossfade between tracks.
 

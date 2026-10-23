@@ -3,12 +3,13 @@
 [ext_resource type="Script" uid="uid://rdwha1wrjten" path="res://Scenes/Tracks/debug_track.gd" id="1_4ctrg"]
 [ext_resource type="Material" uid="uid://djkcvtyhb1sq6" path="res://Resources/Shaders/Block/block.tres" id="1_q6h86"]
 [ext_resource type="Script" uid="uid://ca6obtta5oopp" path="res://addons/mesh_painter/mesh_painter.gd" id="2_4ctrg"]
-[ext_resource type="AudioStream" uid="uid://cr14b6e44s2vb" path="res://Resources/Music/circuit_music.tres" id="2_p6q4y"]
+[ext_resource type="AudioStream" uid="uid://cr14b6e44s2vb" path="res://Resources/Music/circuit_music.tres" id="2_s3opd"]
 [ext_resource type="ArrayMesh" uid="uid://b6n4rueforx4o" path="res://Resources/Shaders/Grass/grass.res" id="3_qud5h"]
 [ext_resource type="PackedScene" uid="uid://dhqspbj6a6bij" path="res://Entities/Kart3D/player_kart_3d.tscn" id="3_smo2k"]
 [ext_resource type="PackedScene" uid="uid://htd17y0efmde" path="res://Scenes/Menus/PauseScreen/pause_screen.tscn" id="4_iwi7x"]
 [ext_resource type="PackedScene" uid="uid://ctnwy05xjck6l" path="res://Scenes/Menus/HUD/hud.tscn" id="5_s3opd"]
 [ext_resource type="Material" uid="uid://mdid6csoosht" path="res://Resources/Sky/day_sky.tres" id="6_s3opd"]
+[ext_resource type="PackedScene" uid="uid://bfdd58efg72wk" path="res://Scenes/TrackParts/BoostPanel/boost_panel.tscn" id="10_6d6fr"]
 
 [sub_resource type="Sky" id="Sky_xvvda"]
 sky_material = ExtResource("6_s3opd")
@@ -20,10 +21,10 @@ sky = SubResource("Sky_xvvda")
 [sub_resource type="Curve3D" id="Curve3D_p6q4y"]
 closed = true
 _data = {
-"points": PackedVector3Array(-17.413387, 9.536743e-07, -11.495636, 17.413387, -9.536743e-07, 11.495636, -42.416245, 0.51013184, -68.79696, -31.730268, 3.5762787e-07, 3.9159775, 31.730268, -3.5762787e-07, -3.9159775, 16.449492, 0.51013124, -60.57521, 8.620319, -1.1920929e-07, 2.6647415, -8.620319, 1.1920929e-07, -2.6647415, 19.310883, 0.510131, -93.53418, 3.821066, -7.390976e-06, -8.130402, -3.821066, 7.390976e-06, 8.130402, -9.757278, 1.1500105, -80.75077, 0, 0, 0, 0, 0, 0, -12.68132, 13.6004505, -59.267754, -4.8469057, 1.1920929e-07, -14.158218, 4.8469057, -1.1920929e-07, 14.158218, -7.625964, 0.510131, -21.726273, -4.3002167, 9.536743e-07, -19.233978, 4.3002167, -9.536743e-07, 19.233978, 34.65126, 0.51013184, -10.731522, 7.8845806, 7.748604e-07, -11.494461, -7.8845806, -7.748604e-07, 11.494461, 36.051254, 0.51013166, 26.794617, 3.782627, -2.1338463e-05, 30.552147, -3.782627, 2.1338463e-05, -30.552147, -4.3095093, 0.51013184, 47.40989, 7.265625, -2.5451183e-05, 7.826584, -7.265625, 2.5451183e-05, -7.826584, -43.616745, 0.5083253, 46.11911, 16.013447, -4.6372414e-05, 0.6043701, -16.013447, 4.6372414e-05, -0.6043701, -52.011166, 0.5076138, -34.221054, 0.060585022, -7.5399876e-05, -10.087387, -0.060585022, 7.5399876e-05, 10.087387, -72.97703, 0.5070037, 35.983124, 19.34414, -6.0379505e-05, -0.11936951, -19.34414, 6.0379505e-05, 0.11936951, -80.55599, 0.5055526, 65.25888, 0, 0, 0, 0, 0, 0, -99.60965, 0.5048566, 28.78859, 0, 0, 0, 0, 0, 0, -99.78416, 0.5013573, -75.04967, -22.63972, 9.536743e-07, 0.66291046, 22.63972, -9.536743e-07, -0.66291046, -75.88849, 0.5, -111.076004),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(-17.413387, 9.536743e-07, -11.495636, 17.413387, -9.536743e-07, 11.495636, -42.416245, 0.51013184, -68.79696, -31.730268, 3.5762787e-07, 3.9159775, 31.730268, -3.5762787e-07, -3.9159775, 16.449492, 0.51013124, -60.57521, 8.620319, -1.1920929e-07, 2.6647415, -8.620319, 1.1920929e-07, -2.6647415, 19.310883, 0.510131, -93.53418, 3.821066, -7.390976e-06, -8.130402, -3.821066, 7.390976e-06, 8.130402, -9.757278, 1.1500105, -80.75077, 0.093860626, -0.18125439, -0.76969147, -0.093860626, 0.18125439, 0.76969147, -12.68132, 13.6004505, -59.267754, -4.8469057, 1.1920929e-07, -14.158218, 4.8469057, -1.1920929e-07, 14.158218, -7.625964, 0.510131, -21.726273, -4.3002167, 9.536743e-07, -19.233978, 4.3002167, -9.536743e-07, 19.233978, 34.65126, 0.51013184, -10.731522, 7.8845806, 7.748604e-07, -11.494461, -7.8845806, -7.748604e-07, 11.494461, 36.051258, 0.5101318, 56.081764, 7.265625, -2.5451183e-05, 7.826584, -7.265625, 2.5451183e-05, -7.826584, -43.616745, 0.50832534, 58.36084, 16.013447, -4.6372414e-05, 0.6043701, -16.013447, 4.6372414e-05, -0.6043701, -52.011166, 0.5076138, -34.221054, 0.060585022, -7.5399876e-05, -10.087387, -0.060585022, 7.5399876e-05, 10.087387, -72.97703, 0.5070037, 35.983124, 19.34414, -6.0379505e-05, -0.11936951, -19.34414, 6.0379505e-05, 0.11936951, -80.55599, 0.5055526, 65.25888, 0, 0, 0, 0, 0, 0, -99.60965, 0.5048566, 28.78859, 0, 0, 0, 0, 0, 0, -99.78416, 0.5013573, -75.04967, -22.63972, 9.536743e-07, 0.66291046, 22.63972, -9.536743e-07, -0.66291046, -75.88849, 0.5, -111.076004),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
-point_count = 16
+point_count = 15
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_smo2k"]
 albedo_color = Color(0, 0, 0, 1)
@@ -152,9 +153,19 @@ size = Vector3(500, 1, 500)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p6q4y"]
 
+[sub_resource type="PrismMesh" id="PrismMesh_t4f5k"]
+left_to_right = 0.0
+size = Vector3(20, 5, 12)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_15ay3"]
+albedo_color = Color(0.3840264, 0.19701323, 0, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_dku1w"]
+data = PackedVector3Array(-10, 2.5, 6, 10, -2.5, 6, -10, -2.5, 6, -10, 2.5, -6, -10, -2.5, -6, 10, -2.5, -6, -10, 2.5, 6, -10, 2.5, -6, 10, -2.5, 6, -10, 2.5, -6, 10, -2.5, -6, 10, -2.5, 6, -10, 2.5, -6, -10, 2.5, 6, -10, -2.5, -6, -10, 2.5, 6, -10, -2.5, 6, -10, -2.5, -6, -10, -2.5, 6, 10, -2.5, 6, -10, -2.5, -6, 10, -2.5, 6, 10, -2.5, -6, -10, -2.5, -6)
+
 [node name="Circuit" type="Node3D" unique_id=915020082]
 script = ExtResource("1_4ctrg")
-track_music = ExtResource("2_p6q4y")
+track_music = ExtResource("2_s3opd")
 player_kart = ExtResource("3_smo2k")
 pause_screen_scene = ExtResource("4_iwi7x")
 hud_scene = ExtResource("5_s3opd")
@@ -168,8 +179,23 @@ transform = Transform3D(1, 0, 0, 0, 0.8452619, 0.5343523, 0, -0.5343523, 0.84526
 
 [node name="Terrain" type="Node3D" parent="." unique_id=81297246]
 
+[node name="BoostPanel1" parent="Terrain" unique_id=2073660667 instance=ExtResource("10_6d6fr")]
+transform = Transform3D(-0.4, 0, 1.509958e-07, 0, 1, 0, -6.039832e-08, 0, -1, -95.83963, 0.505, 20)
+
+[node name="BoostPanel2" parent="Terrain" unique_id=800500154 instance=ExtResource("10_6d6fr")]
+transform = Transform3D(-0.4, 0, 1.509958e-07, 0, 1, 0, -6.039832e-08, 0, -1, -108.85964, 0.506, 40)
+
+[node name="BoostPanel3" parent="Terrain" unique_id=1503711919 instance=ExtResource("10_6d6fr")]
+transform = Transform3D(-0.4, 0, 1.509958e-07, 0, 1, 0, -6.039832e-08, 0, -1, -95.83963, 0.506, 60)
+
+[node name="BoostPanel4" parent="Terrain" unique_id=1167997493 instance=ExtResource("10_6d6fr")]
+transform = Transform3D(-0.4, 0, 1.509958e-07, 0, 1, 0, -6.039832e-08, 0, -1, -108.85973, 0.507, 80)
+
+[node name="BoostPanel5" parent="Terrain" unique_id=1412831615 instance=ExtResource("10_6d6fr")]
+transform = Transform3D(1.4, 0, 0, 0, 0.76604444, 0.6427876, 0, -0.6427876, 0.76604444, 27.854, 18.855762, -57.725212)
+
 [node name="Path3D" type="Path3D" parent="Terrain" unique_id=1296412365]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 46.927643, -1.4175094, 33.778187)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 46.928, -1.74, 33.778)
 curve = SubResource("Curve3D_p6q4y")
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="Terrain/Path3D" unique_id=1624946400 groups=["Paved"]]
@@ -179,7 +205,7 @@ polygon = PackedVector2Array(-8, 0, -7, 1, 7, 1, 8, 0)
 mode = 2
 path_node = NodePath("..")
 path_interval_type = 0
-path_interval = 0.1
+path_interval = 0.5
 path_simplify_angle = 0.0
 path_rotation = 1
 path_rotation_accurate = false
@@ -360,3 +386,16 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -102
 operation = 2
 size = Vector3(2, 1, 21.746063)
 material = SubResource("StandardMaterial3D_p6q4y")
+
+[node name="Ramp" type="StaticBody3D" parent="." unique_id=2030713762]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58.632, 2.954, 91.898)
+
+[node name="BoostPanel" parent="Ramp" unique_id=1386362047 instance=ExtResource("10_6d6fr")]
+transform = Transform3D(-3.4969112e-08, 0.2419219, -0.9702957, 0, 0.9702957, 0.2419219, 0.8, 1.0574742e-08, -4.2412974e-08, -7.59, 1.89, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ramp" unique_id=1112738671]
+mesh = SubResource("PrismMesh_t4f5k")
+surface_material_override/0 = SubResource("StandardMaterial3D_15ay3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ramp" unique_id=318397341]
+shape = SubResource("ConcavePolygonShape3D_dku1w")

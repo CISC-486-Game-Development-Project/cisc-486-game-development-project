@@ -5,7 +5,7 @@ signal _awaited_scene_loaded
 signal load_finished
 
 var loading_screen_packed: PackedScene = preload("uid://b4fkpdlylvkki")
-var loading_screen: CanvasLayer
+var loading_screen: LoadingScreen
 
 var loaded_scenes: Dictionary[String, PackedScene]
 var in_process_loads: Dictionary[String, float]
@@ -41,7 +41,7 @@ func load_scene(scene_path: String, use_sub_threads: bool = false):
 	if scene_path in loaded_scenes.keys():
 		return
 	in_process_loads[scene_path] = 0.0
-	var state = ResourceLoader.load_threaded_request(scene_path, "PackedScene", use_sub_threads)
+	var state := ResourceLoader.load_threaded_request(scene_path, "PackedScene", use_sub_threads)
 	if state != OK:
 		printerr(state)
 		errored_loads.append(scene_path)

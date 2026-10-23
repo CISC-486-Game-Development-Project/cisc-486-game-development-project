@@ -36,7 +36,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cpjce")
-next_scene = "uid://igg6cd4fnkgj"
+next_scene = "uid://do3ibboy24q6k"
 prev_scene = "uid://dujko6vu4ilbf"
 
 [node name="Panel" type="Panel" parent="." unique_id=104158427]
@@ -109,7 +109,7 @@ track = "uid://igg6cd4fnkgj"
 track_name = "Debug Track"
 track_icon = ExtResource("4_nxhmo")
 
-[node name="TrackButton2" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/TrackButtonContainer" unique_id=72095904 instance=ExtResource("2_08aid")]
+[node name="TrackButton2" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/TrackButtonContainer" unique_id=1404925923 instance=ExtResource("2_08aid")]
 layout_mode = 2
 track = "uid://do3ibboy24q6k"
 track_name = "Circuit"
@@ -118,12 +118,14 @@ track_icon = ExtResource("6_ptf7h")
 [node name="TrackButton3" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/TrackButtonContainer" unique_id=1059642776 instance=ExtResource("2_08aid")]
 layout_mode = 2
 disabled = true
+track = "uid://igg6cd4fnkgj"
 track_name = "Track 3"
 track_icon = ExtResource("5_xkk6d")
 
 [node name="TrackButton4" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/TrackButtonContainer" unique_id=414200251 instance=ExtResource("2_08aid")]
 layout_mode = 2
 disabled = true
+track = "uid://igg6cd4fnkgj"
 track_name = "Track 4"
 track_icon = ExtResource("5_xkk6d")
 

@@ -25,6 +25,7 @@ func _ready() -> void:
 	for i in len(track_buttons):
 		track_buttons[i].pressed.connect(select_track.bind(track_buttons[i]))
 		track_buttons[i].mouse_entered.connect(track_buttons[i].grab_focus)
+		#SceneManager.load_scene(track_buttons[i].track)
 	
 	get_viewport().gui_focus_changed.connect(_on_focus_changed)
 	

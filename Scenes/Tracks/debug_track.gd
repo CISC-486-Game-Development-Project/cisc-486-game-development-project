@@ -17,7 +17,7 @@ var sub_viewports: Array[SubViewport]
 
 func _ready() -> void:
 	# Begin music
-	AudioManager.change_bgm(track_music)
+	AudioManager.change_bgm.call_deferred(track_music)
 	
 	# Add UI to scene
 	pause_screen = pause_screen_scene.instantiate()
