@@ -34,20 +34,18 @@ func _ready():
 			weight_distribution[item_index] /= weight_sum
 	
 	items.resize(item_names.size())
-	var unfound_items: Array = item_names.map(func(item_name): return item_name + ".tres")
 	var item_dir = DirAccess.open(BASE_PATH)
 	item_dir.list_dir_begin()
 	var file_name = item_dir.get_next()
 	while file_name != "":
 		if item_dir.current_is_dir:
 			var potential_files: Array = ResourceLoader.list_directory(BASE_PATH + file_name)
-			# Iterates through files which were in that folder which are also in unfound_items
-			for found_file_name: String in potential_files.filter(func(potential_file_name): return potential_file_name in unfound_items):
-				var found_file: Item = load(BASE_PATH+file_name+"/"+found_file_name)
-				items[item_names.find(found_file_name.get_basename())] = found_file
-				unfound_items.remove_at(unfound_items.find(found_file)) # Remove found_file from unfound_items
+			for potential_file in potential_files:
+				if potential_file.split(".")[0] in item_names and potential_file.split(".")[1] == "tres":
+					var found_file: Item = load(BASE_PATH+file_name+"/"+potential_file)
+					items[item_names.find(potential_file.split(".")[0])] = found_file
 		file_name = item_dir.get_next()
-	assert(unfound_items.size() == 0, "The item(s) %s have not been found in %s" % [", ".join(unfound_items), BASE_PATH])
+	assert(items.count(null) == 0, "The %s item(s) have not been found in %s, end result is %s" % [items.count(null), BASE_PATH, items])
 
 func get_random_item(place: int) -> Item:
 	"""
