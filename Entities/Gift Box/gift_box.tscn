@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cw5hrem1n6xtn"]
+
+[ext_resource type="Script" uid="uid://db5fu7jt0gnf0" path="res://Entities/Gift Box/gift_box.gd" id="1_suyc2"]
+[ext_resource type="PackedScene" uid="uid://ckuqdu2xyr82t" path="res://Assets/3D/Models/Track Objects/SM_Gift_Box.fbx" id="2_beg1s"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q8348"]
+size = Vector3(1.6137695, 1.8638306, 1.2318726)
+
+[node name="ItemBlock" type="Area3D" unique_id=1976244613]
+script = ExtResource("1_suyc2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=220355049]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.036376953, 0.36801147, 0.0030822754)
+shape = SubResource("BoxShape3D_q8348")
+debug_color = Color(0.99999994, 0.01433998, 0.035907272, 0.41960785)
+
+[node name="GiftBoxMesh" parent="." unique_id=496935258 instance=ExtResource("2_beg1s")]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

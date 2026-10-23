@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cfu5r4hr6ybjv" path="res://Entities/Barrel/barrel.tscn" id="7_7kucd"]
 [ext_resource type="ArrayMesh" uid="uid://b6n4rueforx4o" path="res://Resources/Shaders/Grass/grass.res" id="7_56bb8"]
 [ext_resource type="Script" uid="uid://ca6obtta5oopp" path="res://addons/mesh_painter/mesh_painter.gd" id="7_xc45i"]
-[ext_resource type="PackedScene" uid="uid://cw5hrem1n6xtn" path="res://Entities/Item Block/item_block.tscn" id="12_ojj8n"]
+[ext_resource type="PackedScene" uid="uid://cw5hrem1n6xtn" path="res://Entities/Gift Box/gift_box.tscn" id="12_ojj8n"]
 [ext_resource type="PackedScene" uid="uid://cyabyf8vue35i" path="res://Entities/Kart3D/cpu_kart_3d.tscn" id="13_5unjq"]
 
 [sub_resource type="Sky" id="Sky_xc45i"]
@@ -264,4 +264,4 @@ base_handbrake_steering_velocity = 0.0
 base_air_steering_velocity = 0.0
 
 [node name="ItemBlock" parent="." unique_id=1976244613 instance=ExtResource("12_ojj8n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.801186, 1.5264423, 30.479073)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.801186, 1.3053291, 30.479073)
