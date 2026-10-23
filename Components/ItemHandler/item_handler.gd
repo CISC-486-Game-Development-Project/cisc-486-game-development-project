@@ -2,22 +2,19 @@ class_name ItemHandler
 extends Node
 
 # Signals
-signal item_changed(held_item) ## Emitted when [member held_item] changes with it's new value.
+signal inventory_changed(new_inventory) ## Emitted when [member held_item] changes with it's new value.
 
 # Export Vars
 @export var kart: Kart3D ## The kart this item handler is associated with.
-@export var debug_item: Item ## DEBUG: REMOVE LATER
+@export var inventory_slots := 1
 
 # Internal Vars
-var held_item: Item: ## The current held item.
-	set(value):
-		held_item = value
-		_update_trail_item()
-		item_changed.emit(held_item)
+var inventory: Array[Item] ## The current held item.
 var trailed_item: ItemModel ## The current trailed item.
 
 func _ready() -> void:
-	get_item.call_deferred(debug_item) # DEBUG
+	inventory_changed.connect(_update_trail_item)
+	roll_item.call_deferred()
 
 func _process(_delta: float) -> void:
 	# If item request input detected, attempt to use item
@@ -25,34 +22,37 @@ func _process(_delta: float) -> void:
 		use_item()
 
 ## Called when an item is obtained.
-func get_item(item: Item) -> void:
+func roll_item() -> void:
 	# If existing item, don't get item
-	if held_item:
+	if inventory.size() >= inventory_slots:
 		return
 	
 	# Set new held item
-	held_item = item
+	inventory.append(ItemManager.get_random_item(1)) # TODO: replace this with the kart's current place
+	inventory_changed.emit(inventory)
 
 ## Called when an item is used.
 func use_item() -> void:
 	# Don't use if no held item
-	if not held_item:
+	if inventory.size() == 0:
 		return
 	
 	# Use held item then remove
-	held_item.use(kart)
-	held_item = null
+	var used_item = inventory.pop_front()
+	used_item.use(kart)
+	inventory_changed.emit(inventory)
 
 ## Called when the [member held_item] changes to update the [member trailed_item].
 func _update_trail_item() -> void:
+	print(inventory)
 	# Free previous trailed item and return if no current held item
 	if trailed_item:
 		trailed_item.queue_free()
-	if not held_item:
+	if inventory.size() == 0:
 		return
 	
 	# Create new item model and trail it
-	var new_trail: ItemModel = held_item.model.instantiate()
+	var new_trail: ItemModel = inventory[0].model.instantiate()
 	kart.add_child(new_trail)
 	new_trail.scale *= 0.3
 	new_trail.global_position += kart.global_basis.z * 1.3 + kart.global_basis.y / 2
