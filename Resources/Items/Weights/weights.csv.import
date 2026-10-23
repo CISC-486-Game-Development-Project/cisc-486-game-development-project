@@ -1,19 +1,17 @@
 [remap]
 
-importer="csv_translation"
-type="Translation"
+importer="com.timothyqiu.godot-csv-importer"
+type="Resource"
 uid="uid://u1o804vjh5hf"
+path="res://.godot/imported/weights.csv-92253888bed97b69ecf83ab2d702022f.res"
 
 [deps]
 
-files=["res://Resources/Items/Weights/weights.shell.translation", "res://Resources/Items/Weights/weights.spike.translation"]
-
 source_file="res://Resources/Items/Weights/weights.csv"
-dest_files=["res://Resources/Items/Weights/weights.shell.translation", "res://Resources/Items/Weights/weights.spike.translation"]
+dest_files=["res://.godot/imported/weights.csv-92253888bed97b69ecf83ab2d702022f.res"]
 
 [params]
 
-compress=1
 delimiter=0
-unescape_keys=false
-unescape_translations=true
+detect_numbers=true
+force_float=true
