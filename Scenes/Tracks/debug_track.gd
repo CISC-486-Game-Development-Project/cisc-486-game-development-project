@@ -8,12 +8,17 @@ extends Node3D
 @export var hud_scene: PackedScene
 @export var player_spawn_position: Vector3
 @export var player_spawn_rotation: float
+@export var starting_line: Checkpoint
+@export var race_laps: int = 1
 
 var pause_screen: CanvasLayer
 var hud: CanvasLayer
 var splitscreen_root: Control
 
 var sub_viewports: Array[SubViewport]
+
+var karts: Array[Kart3D]
+var finished_karts: Array[Kart3D]
 
 func _ready() -> void:
 	# Begin music
@@ -38,6 +43,7 @@ func _ready() -> void:
 		add_child(new_player)
 		new_player.global_position = player_spawn_position
 		new_player.global_rotation_degrees.y = player_spawn_rotation
+		karts.append(new_player)
 	else:
 		splitscreen_root.show()
 		
@@ -53,3 +59,31 @@ func _ready() -> void:
 			sub_viewports[i].add_child(new_player)
 			new_player.global_position = player_spawn_position * Vector3(i,1,1)
 			new_player.global_rotation_degrees.y = player_spawn_rotation
+			karts.append(new_player)
+	starting_line.body_entered.connect(lap_check)
+	starting_line.body_entered.disconnect(starting_line._on_body_entered)
+	
+	# TODO: Calculate checkpointIndexs, starting_line is 0, its next is 1, loop through all assigning as you go
+func _process(_delta):
+	calculate_positions()
+
+## Calculates each kart's position and sets each kart's position variable accordingly
+func calculate_positions():
+	# Finished players have their position locked.
+	# Sort unfinished players by laps completed
+	# Break ties with their mostRecentlyPassed's checkpoint index
+	# Break ties with their distance to the next checkpoint.
+	pass
+
+func lap_check(body):
+	if body != Kart3D:
+		return
+	var kart = body as Kart3D
+	var valid_lap = kart.race_handler.entered_checkpoint(starting_line)
+	if valid_lap:
+		if kart.race_handler.lap >= race_laps:
+			# kart has finished the race
+			finished_karts.append(kart)
+			# TODO: indicate this has happenned
+		else:
+			kart.race_handler.lap += 1

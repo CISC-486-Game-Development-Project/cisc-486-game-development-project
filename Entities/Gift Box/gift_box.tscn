@@ -6,7 +6,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_q8348"]
 size = Vector3(1.6137695, 1.8638306, 1.2318726)
 
-[node name="ItemBlock" type="Area3D" unique_id=1976244613]
+[node name="GiftBox" type="Area3D" unique_id=1976244613]
 script = ExtResource("1_suyc2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=220355049]

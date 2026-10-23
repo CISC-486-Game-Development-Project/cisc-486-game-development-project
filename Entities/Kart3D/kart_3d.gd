@@ -43,6 +43,7 @@ extends CharacterBody3D
 
 @onready var state_machine: StateMachine = $MovementStateMachine
 @onready var item_handler: ItemHandler = $ItemHandler
+@onready var race_handler: RaceHandler = $RaceHandler
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var ground_ray_cast_3d: RayCast3D = $GroundRayCast3D
