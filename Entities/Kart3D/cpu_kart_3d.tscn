@@ -2,10 +2,23 @@
 
 [ext_resource type="PackedScene" uid="uid://btx1e5pbmrm5b" path="res://Entities/Kart3D/kart_3d.tscn" id="1_m6r0l"]
 [ext_resource type="Script" uid="uid://c5ivcnj82w0aw" path="res://Components/InputHandler/cpu_input_handler.gd" id="2_a15ka"]
+[ext_resource type="Script" uid="uid://bvlphwgvfndmr" path="res://Components/DetectionArea3D/detection_area_3d.gd" id="2_awvhu"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_t5fsa"]
+radius = 5.0
 
 [node name="CPUKart3D" unique_id=32768770 node_paths=PackedStringArray("input_handler") instance=ExtResource("1_m6r0l")]
 input_handler = NodePath("CPUInputHandler")
 
-[node name="CPUInputHandler" type="Node" parent="." index="12" unique_id=33849640]
+[node name="DetectionArea3D" type="Area3D" parent="." index="2" unique_id=1828305195]
+script = ExtResource("2_awvhu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea3D" index="0" unique_id=1123151218]
+shape = SubResource("SphereShape3D_t5fsa")
+
+[node name="CPUInputHandler" type="Node" parent="." index="13" unique_id=33849640]
 script = ExtResource("2_a15ka")
 metadata/_custom_type_script = "uid://c5ivcnj82w0aw"
+
+[connection signal="body_entered" from="DetectionArea3D" to="DetectionArea3D" method="_on_body_entered"]
+[connection signal="body_exited" from="DetectionArea3D" to="DetectionArea3D" method="_on_body_exited"]
