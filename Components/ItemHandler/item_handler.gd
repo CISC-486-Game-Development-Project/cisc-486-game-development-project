@@ -14,7 +14,6 @@ var trailed_item: ItemModel ## The current trailed item.
 
 func _ready() -> void:
 	inventory_changed.connect(_update_trail_item)
-	roll_item.call_deferred()
 
 func _process(_delta: float) -> void:
 	# If item request input detected, attempt to use item
@@ -42,9 +41,8 @@ func use_item() -> void:
 	used_item.use(kart)
 	inventory_changed.emit(inventory)
 
-## Called when the [member held_item] changes to update the [member trailed_item].
-func _update_trail_item() -> void:
-	print(inventory)
+## Called when the [member inventory] changes to update the [member trailed_item].
+func _update_trail_item(_inventory) -> void:
 	# Free previous trailed item and return if no current held item
 	if trailed_item:
 		trailed_item.queue_free()
