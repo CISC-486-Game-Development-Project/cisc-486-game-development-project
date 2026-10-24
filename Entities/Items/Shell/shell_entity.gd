@@ -2,12 +2,17 @@ class_name Shell
 extends CharacterBody3D
 
 # Export Vars
+@export_group("Functionality")
 @export var model: ItemModel
 @export var speed: float = 20.0
 @export var max_velocity: float = 20.0
 @export var lifetime: float = 10.0
 @export var thrower_immunity_time: float = 1.0
 @export var max_bounces: int = 5
+
+@export_group("Falling")
+@export var fall_velocity: float = -100.0 ## Speed of falling.
+@export var fall_gravity: float = 20.0 ## Intensity of gravitational force.
 
 # Onready Vars
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D

@@ -1,20 +1,12 @@
 class_name TrickState
 extends State
 
-# Export Vars
-@export var trick_boost_time: float = 1.0 ## Duration of boost gained from this trick.
-@export var trick_boost_combo_multiplier: float = 0.1 ## Added to boost multiplier for each trick in the combo beyond the first.
-
-@export_group("Physics Parameters")
-@export var trick_hop_velocity: float = 10.0 ## Velocity impulse when hopping.
-@export var trick_hop_deceleration: float = 100.0 ## How quickly the hop decelerates from the impulse.
-
 # Onready Vars
 @onready var entity: CharacterBody3D = state_machine.get_parent()
 
 func enter(_prev_state: State) -> void:
 	# Add impulse velocity when hop begins
-	entity.velocity.y = trick_hop_velocity
+	entity.velocity.y = entity.trick_hop_velocity
 	
 	# Start trick cooldown
 	entity.trick_cooldown_timer.start()
@@ -34,11 +26,11 @@ func exit(_next_state: State) -> void:
 	entity.trick_combo_timer.start()
 	
 	# Queue boost for when the ground is hit
-	entity.queue_ground_boost(Boost.new(trick_boost_time * (1 + (clampi(entity.trick_combo_level - 1, 0, 5) * trick_boost_combo_multiplier))))
+	entity.queue_ground_boost(Boost.new(entity.trick_boost_time * (1 + (clampi(entity.trick_combo_level - 1, 0, 5) * entity.trick_boost_combo_multiplier))))
 
 func physics_update(delta: float) -> void:
 	# Handle hop movement and deceleration
-	entity.velocity.y = move_toward(entity.velocity.y, 0, trick_hop_deceleration * delta)
+	entity.velocity.y = move_toward(entity.velocity.y, 0, entity.trick_hop_deceleration * delta)
 	
 	check_transitions()
 

@@ -21,7 +21,7 @@ func _on_hit(_area: Area3D) -> void:
 	
 	# Play break_particles effect if it exists
 	if break_particles:
-		break_particles.lifetime = breaking_time / 2
+		break_particles.lifetime = breaking_time / 2 if breaking_time > 0.0 else 1.0
 		break_particles.top_level = true # Set top level so particles don't move if object launches
 		break_particles.restart()
 

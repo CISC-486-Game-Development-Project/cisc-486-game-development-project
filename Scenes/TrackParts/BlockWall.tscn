@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://rck5rennd5k6"]
+
+[ext_resource type="Material" uid="uid://djkcvtyhb1sq6" path="res://Resources/Shaders/Block/block.tres" id="1_oc4vy"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_iwi7x"]
+material = ExtResource("1_oc4vy")
+
+[node name="BlockWall" type="Node3D" unique_id=1919780964]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=795510336]
+mesh = SubResource("BoxMesh_iwi7x")

@@ -364,17 +364,17 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_2jtd5")
 
-[node name="BoostSpeed" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer" unique_id=1565026577]
+[node name="StuntBoost" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer" unique_id=1565026577]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 8
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/BoostSpeed" unique_id=608947209]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/StuntBoost" unique_id=608947209]
 layout_mode = 2
-text = "Boost Speed"
+text = "Stunt Boost"
 label_settings = SubResource("LabelSettings_7tf73")
 
-[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/BoostSpeed" unique_id=719196585]
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/StuntBoost" unique_id=719196585]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_6qwey")
@@ -383,7 +383,7 @@ max_value = 5.0
 value = 2.0
 show_percentage = false
 
-[node name="ProgressTicks" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/BoostSpeed/ProgressBar" unique_id=409145292]
+[node name="ProgressTicks" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/StuntBoost/ProgressBar" unique_id=409145292]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -393,25 +393,78 @@ grow_vertical = 2
 theme_override_constants/separation = 130
 alignment = 1
 
-[node name="Panel1" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/BoostSpeed/ProgressBar/ProgressTicks" unique_id=697152871]
+[node name="Panel1" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/StuntBoost/ProgressBar/ProgressTicks" unique_id=697152871]
 custom_maximum_size = Vector2(4, -1)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_2jtd5")
 
-[node name="Panel2" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/BoostSpeed/ProgressBar/ProgressTicks" unique_id=367158216]
+[node name="Panel2" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/StuntBoost/ProgressBar/ProgressTicks" unique_id=367158216]
 custom_maximum_size = Vector2(4, -1)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_2jtd5")
 
-[node name="Panel3" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/BoostSpeed/ProgressBar/ProgressTicks" unique_id=93379061]
+[node name="Panel3" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/StuntBoost/ProgressBar/ProgressTicks" unique_id=93379061]
 custom_maximum_size = Vector2(4, -1)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_2jtd5")
 
-[node name="Panel4" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/BoostSpeed/ProgressBar/ProgressTicks" unique_id=335154816]
+[node name="Panel4" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/StuntBoost/ProgressBar/ProgressTicks" unique_id=335154816]
+custom_maximum_size = Vector2(4, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_2jtd5")
+
+[node name="Weight" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer" unique_id=548597140]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/Weight" unique_id=1257200859]
+layout_mode = 2
+text = "Weight"
+label_settings = SubResource("LabelSettings_7tf73")
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/Weight" unique_id=612719374]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_6qwey")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fsgd3")
+max_value = 5.0
+value = 2.0
+show_percentage = false
+
+[node name="ProgressTicks" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/Weight/ProgressBar" unique_id=1471634250]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 130
+alignment = 1
+
+[node name="Panel1" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/Weight/ProgressBar/ProgressTicks" unique_id=539320790]
+custom_maximum_size = Vector2(4, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_2jtd5")
+
+[node name="Panel2" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/Weight/ProgressBar/ProgressTicks" unique_id=478107261]
+custom_maximum_size = Vector2(4, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_2jtd5")
+
+[node name="Panel3" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/Weight/ProgressBar/ProgressTicks" unique_id=1636674153]
+custom_maximum_size = Vector2(4, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_2jtd5")
+
+[node name="Panel4" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/StatsPanel/MarginContainer/VBoxContainer/Weight/ProgressBar/ProgressTicks" unique_id=1146423428]
 custom_maximum_size = Vector2(4, -1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -523,5 +576,5 @@ character = ExtResource("11_tivmb")
 layout_mode = 1
 offset_top = -100.0
 control_texts = Array[String](["Select", "Confirm", "Return", "Stats"])
-control_inputs_keyboard = Array[String](["WASD", "ENTER", "ESC", "H"])
+control_inputs_keyboard = Array[String](["WASD", "ENTER", "ESC", "M"])
 control_inputs_controller = Array[String](["Ⓛ", "A", "B", "+"])

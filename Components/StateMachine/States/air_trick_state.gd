@@ -1,17 +1,12 @@
 class_name AirTrickState
 extends State
 
-# Export Vars
-@export var trick_boost_time: float = 1.0 ## Duration of boost gained from this trick.
-@export var trick_boost_combo_multiplier: float = 0.1 ## Added to boost multiplier for each trick in the combo beyond the first.
-@export var directional_trick_intensity: float = 10.0 ## The intensity of the rotation applied when air tricking in a direction.
-
 # Onready Vars
 @onready var entity: CharacterBody3D = state_machine.get_parent()
 
 func enter(_prev_state: State) -> void:
 	# Rotate in the direction of steering
-	entity.rotate_y(deg_to_rad(directional_trick_intensity * -entity.steer_request))
+	entity.rotate_y(deg_to_rad(entity.directional_air_trick_intensity * -entity.steer_request))
 	
 	# Start trick cooldown
 	entity.trick_cooldown_timer.start()
@@ -28,7 +23,7 @@ func exit(_next_state: State) -> void:
 	entity.trick_combo_timer.start()
 	
 	# Queue boost for when the ground is hit
-	entity.queue_ground_boost(Boost.new(trick_boost_time * (1 + (clampi(entity.trick_combo_level - 1, 0, 5) * trick_boost_combo_multiplier))))
+	entity.queue_ground_boost(Boost.new(entity.air_trick_boost_time * (1 + (clampi(entity.trick_combo_level - 1, 0, 5) * entity.air_trick_boost_combo_multiplier))))
 
 func physics_update(_delta: float) -> void:
 	check_transitions()

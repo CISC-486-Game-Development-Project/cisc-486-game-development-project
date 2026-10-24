@@ -10,8 +10,8 @@ extends CharacterBody3D
 @export_custom(PROPERTY_HINT_NONE, "suffix:m/s") var base_top_speed: float ## Defines the base top speed.
 @export_custom(PROPERTY_HINT_NONE, "suffix:m/s") var base_top_reverse_speed: float ## Defines the base top speed when reversing.
 @export_custom(PROPERTY_HINT_NONE, "suffix:m/s/s") var base_acceleration: float ## Defines the base rate of acceleration.
-@export_custom(PROPERTY_HINT_NONE, "suffix:m/s") var base_boost_speed: float  ## Defines the base top speed when boosting.
 @export_custom(PROPERTY_HINT_NONE, "suffix:m/s/s") var base_boost_acceleration: float ## Defines the base rate of acceleration when boosting.
+@export var base_boost_speed_multiplier: float  ## Defines the factor base top speed is multiplied by when boosting.
 @export var roll_friction: float = 0.5 ## Defines the intensity of the friction acting against the forward momentum.
 @export var trick_speed_threshold: float = 10.0 ## Defines the minimum speed required to trick while driving.
 @export var air_trick_speed_threshold: float = 4.0 ## Defines the minimum speed required to air trick while falling.
@@ -24,9 +24,42 @@ extends CharacterBody3D
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var wheel_base: float = 1.5 ## The diameter of the wheels.
 @export var drift_steering_multiplier: float = 1.3 ## The factor by which steer direction is multiplied while drifting.
 
+@export_group("Drifting")
+@export var drift_speed_threshold: float = 5.0 ## Speed that must be exceeded for drifting.
+
+@export var base_short_turbo_charge_time: float = 2.0 ## The base time in seconds it takes to charge a short turbo.
+@export var base_mid_turbo_charge_time: float = 4.0 ## The base time in seconds it takes to charge a medium turbo.
+@export var base_long_turbo_charge_time: float = 6.0 ## The base time in seconds it takes to charge a long turbo.
+
+@export var fast_charge_threshold: float = 0.8 ## The percent threshold of the control stick that begins fast charging.
+@export var fast_charge_multiplier: float = 1.5 ## The time multiplier granted by fast charging.
+
+@export var base_short_turbo_boost_time: float = 1.0 ## The base time in seconds a short turbo's boost lasts.
+@export var base_mid_turbo_boost_time: float = 2.0 ## The base time in seconds a medium turbo's boost lasts.
+@export var base_long_turbo_boost_time: float = 3.0 ## The base time in seconds a long turbo's boost lasts.
+
 @export_group("Wall Bounce")
 @export var wall_bounce_strength: float = 0.6 ## The fraction of speed used for bouncing off a wall.
 @export var wall_bounce_duration: float = 0.25 ## The number of seconds driving is overridden when bouncing off a wall.
+
+@export_group("Falling")
+@export var base_fall_velocity: float = -100.0 ## Base speed of falling.
+@export var base_fall_gravity: float = 20.0 ## Base intensity of gravitational force.
+
+@export_group("Hopping")
+@export var hop_velocity: float = 10.0 ## Velocity impulse when hopping.
+@export var hop_deceleration: float = 100.0 ## How quickly the hop decelerates from the impulse.
+
+@export_group("Tricking")
+@export var trick_hop_velocity: float = 10.0 ## Velocity impulse when trick hopping.
+@export var trick_hop_deceleration: float = 100.0 ## How quickly the trick hop decelerates from the impulse.
+
+@export var base_trick_boost_time: float = 1.0 ## Base duration of boost gained from this trick.
+@export var base_trick_boost_combo_multiplier: float = 0.1 ## Base multiplier added to boost multiplier for each trick in the combo beyond the first.
+
+@export var base_air_trick_boost_time: float = 1.0 ## Base duration of boost gained from this air trick.
+@export var base_air_trick_boost_combo_multiplier: float = 0.1 ## Base multiplier added to boost multiplier for each air trick in the combo beyond the first.
+@export var base_directional_air_trick_intensity: float = 10.0 ## The base intensity of the rotation applied when air tricking in a direction.
 
 @export_group("Offroad Factors") # How much the kart will be affected by the terrain (top speed and accel.)
 @export var offroad_factor_paved: float = 0.0  
@@ -68,13 +101,32 @@ var hitbox: Hitbox ## The hitbox of this kart.
 # Stats
 var top_speed: float ## Defines the top speed.
 var top_reverse_speed: float ## Defines the top speed when reversing.
-var acceleration: float ## Defines the rate of acceleration.
 var boost_speed: float ## Defines the top speed when boosting.
+
+var acceleration: float ## Defines the rate of acceleration.
 var boost_acceleration: float ## Defines the rate of acceleration when boosting.
+
+var short_turbo_charge_time: float ## The time in seconds it takes to charge a short turbo.
+var mid_turbo_charge_time: float ## The time in seconds it takes to charge a medium turbo.
+var long_turbo_charge_time: float ## The time in seconds it takes to charge a long turbo.
+
+var short_turbo_boost_time: float ## The time in seconds a short turbo's boost lasts.
+var mid_turbo_boost_time: float ## The time in seconds a medium turbo's boost lasts.
+var long_turbo_boost_time: float ## The time in seconds a long turbo's boost lasts.
+
+var trick_boost_time: float ## Duration of boost gained from this trick.
+var trick_boost_combo_multiplier: float ## Added to boost multiplier for each trick in the combo beyond the first.
+var air_trick_boost_time: float ## Duration of boost gained from this air trick.
+var air_trick_boost_combo_multiplier: float ## Added to boost multiplier for each air trick in the combo beyond the first.
+
+var fall_velocity: float ## Speed of falling.
+var fall_gravity: float ## Intensity of gravitational force.
+
 var max_steering_angle_slow: float ## Defines the maximum steering angle, should be higher when going slow.
 var max_steering_angle_fast: float ## Defines the maximum steering angle, should be lower when going fast.
 var handbrake_steering_velocity: float ## Defines the speed of handbrake steering (turning while very slow).
 var air_steering_velocity: float ## Defines the speed of mid-air steering.
+var directional_air_trick_intensity ## The intensity of the rotation applied when air tricking in a direction.
 
 # Requests
 var steer_request: float ## Steering intensity request to be set by an input_manager.
@@ -373,27 +425,45 @@ func get_horizontal_velocity() -> Vector3:
 ## Sets the stats of the kart based on kart stats and current terrain conditions.
 func set_stats() -> void:
 	## Stat Formulae
-	var speed_mult: float = 0.9 + 0.05 * kart_stats.base_speed       # 0 = 0.9 | 5 = 1.15
-	var accel_mult: float = 0.8 + 0.1 * kart_stats.base_acceleration # 0 = 0.8 | 5 = 1.30
-	var boost_mult: float = 1.2 + 0.05 * kart_stats.base_boost       # 0 = 1.2 | 5 = 1.45 (multiplied by top_speed)
+	var speed_mult: float = 0.8 + 0.1 * kart_stats.base_speed        # 0 = 0.8 | 5 = 1.3
+	var accel_mult: float = 0.8 + 0.1 * kart_stats.base_acceleration # 0 = 0.8 | 5 = 1.3
+	var boost_mult: float = 0.8 + 0.1 * kart_stats.base_boost        # 0 = 0.8 | 5 = 1.3
+	var weight_mult: float = 0.8 + 0.1 * kart_stats.base_weight      # 0 = 0.8 | 5 = 1.3
 	var handling_mult: float = 0.8 + 0.1 * kart_stats.base_handling  # 0 = 0.8 | 5 = 1.3
 	
 	# Speed
 	top_speed = base_top_speed * speed_mult * (1 - offroad_factor)
 	top_reverse_speed = base_top_reverse_speed * speed_mult * (1 - offroad_factor)
+	boost_speed = top_speed * base_boost_speed_multiplier
 	
 	# Acceleration
 	acceleration = base_acceleration * accel_mult * (1 - offroad_factor)
-	
-	# Boost
-	boost_speed = top_speed * boost_mult
 	boost_acceleration = max(base_boost_acceleration, acceleration)
+	
+	# Stunt Boost
+	short_turbo_charge_time = base_short_turbo_charge_time * (1 / boost_mult)
+	mid_turbo_charge_time = base_mid_turbo_charge_time * (1 / boost_mult)
+	long_turbo_charge_time = base_long_turbo_charge_time * (1 / boost_mult)
+	
+	short_turbo_boost_time = base_short_turbo_boost_time * boost_mult
+	mid_turbo_boost_time = base_mid_turbo_boost_time * boost_mult
+	long_turbo_boost_time = base_long_turbo_boost_time * boost_mult
+	
+	trick_boost_time = base_trick_boost_time * boost_mult
+	trick_boost_combo_multiplier = base_trick_boost_combo_multiplier * boost_mult
+	air_trick_boost_time = base_air_trick_boost_time * boost_mult
+	air_trick_boost_combo_multiplier = base_air_trick_boost_combo_multiplier * boost_mult
+	
+	# Weight
+	fall_velocity = base_fall_velocity * weight_mult
+	fall_gravity = base_fall_gravity * weight_mult
 	
 	# Handling
 	max_steering_angle_slow = base_max_steering_angle_slow * handling_mult
 	max_steering_angle_fast = base_max_steering_angle_fast * handling_mult
 	handbrake_steering_velocity = base_handbrake_steering_velocity * handling_mult
 	air_steering_velocity = base_air_steering_velocity * handling_mult
+	directional_air_trick_intensity = base_directional_air_trick_intensity * handling_mult
 
 #####################
 ## Trick Functions ##

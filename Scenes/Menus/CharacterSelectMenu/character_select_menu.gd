@@ -136,7 +136,8 @@ func hover_character(button: CharacterButton) -> void:
 	stats_bars[0].value = stats.base_speed
 	stats_bars[1].value = stats.base_acceleration
 	stats_bars[2].value = stats.base_boost
-	stats_bars[3].value = stats.base_handling
+	stats_bars[3].value = stats.base_weight
+	stats_bars[4].value = stats.base_handling
 
 ## Should be called to show stats_panel.
 func _show_stats() -> void:

@@ -8,6 +8,7 @@ script = ExtResource("2_ow3j8")
 base_speed = 1.0
 base_acceleration = 5.0
 base_boost = 5.0
+base_weight = 1.0
 base_handling = 5.0
 kart_model = ExtResource("1_ma7tb")
 metadata/_custom_type_script = "uid://dl6dt8djqun4g"

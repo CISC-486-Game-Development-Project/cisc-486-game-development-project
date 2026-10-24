@@ -1,24 +1,6 @@
 class_name DriftState
 extends State
 
-# Export Vars
-@export_category("Charge Times")
-@export var short_turbo_charge_time: float = 2.0 ## The time in seconds it takes to charge a short turbo.
-@export var mid_turbo_charge_time: float = 4.0 ## The time in seconds it takes to charge a medium turbo.
-@export var long_turbo_charge_time: float = 6.0 ## The time in seconds it takes to charge a long turbo.
-@export var fast_charge_threshold: float = 0.8 ## The percent threshold of the control stick that begins fast charging.
-@export var fast_charge_multiplier: float = 1.5 ## The time multiplier granted by fast charging.
-
-@export_category("Boost Times")
-@export var short_turbo_boost_time: float = 1.0 ## The time in seconds a short turbo's boost lasts.
-@export var mid_turbo_boost_time: float = 2.0 ## The time in seconds a medium turbo's boost lasts.
-@export var long_turbo_boost_time: float = 3.0 ## The time in seconds a long turbo's boost lasts.
-
-@export_group("Physics Parameters")
-@export var fall_velocity: float = -100.0 ## Speed of falling.
-@export var fall_gravity: float = 20.0 ## Intensity of gravitational force.
-@export var drift_speed_threshold: float = 12.0 ## Speed that must be exceeded for drifting.
-
 # Onready Vars
 @onready var entity: CharacterBody3D = state_machine.get_parent()
 
@@ -35,12 +17,12 @@ func enter(_prev_state: State) -> void:
 	# Begin state's unique animation here
 
 func exit(_next_state: State) -> void:
-	if entity.get_horizontal_velocity().length() > drift_speed_threshold: # No boost if too slow or in offroad
+	if entity.get_horizontal_velocity().length() > entity.drift_speed_threshold: # No boost if too slow or in offroad
 		# Apply turbo boost
 		match drift_level:
-			1: entity.set_boost(Boost.new(short_turbo_boost_time))
-			2: entity.set_boost(Boost.new(mid_turbo_boost_time))
-			3: entity.set_boost(Boost.new(long_turbo_boost_time))
+			1: entity.set_boost(Boost.new(entity.short_turbo_boost_time))
+			2: entity.set_boost(Boost.new(entity.mid_turbo_boost_time))
+			3: entity.set_boost(Boost.new(entity.long_turbo_boost_time))
 	
 	# Reset vars
 	entity.drift_dir = 0
@@ -50,26 +32,26 @@ func exit(_next_state: State) -> void:
 
 func update(delta: float) -> void:
 	# Fast charge if holding above threshold in drift direction
-	if abs(entity.steer_request) >= fast_charge_threshold and sign(entity.steer_request) == entity.drift_dir:
-		drift_time += delta * fast_charge_multiplier
+	if abs(entity.steer_request) >= entity.fast_charge_threshold and sign(entity.steer_request) == entity.drift_dir:
+		drift_time += delta * entity.fast_charge_multiplier
 	else:
 		drift_time += delta
 	
-	if drift_time < short_turbo_charge_time:
+	if drift_time < entity.short_turbo_charge_time:
 		drift_level = 0
 		entity.drift_particles.process_material.color = Color(0.3, 0.3, 0.3, 1.0)
-	elif drift_time >= short_turbo_charge_time and drift_time < mid_turbo_charge_time:
+	elif drift_time >= entity.short_turbo_charge_time and drift_time < entity.mid_turbo_charge_time:
 		drift_level = 1
 		entity.drift_particles.process_material.color = Color(1.0, 1.0, 0.0, 1.0)
-	elif drift_time >= mid_turbo_charge_time and drift_time < long_turbo_charge_time:
+	elif drift_time >= entity.mid_turbo_charge_time and drift_time < entity.long_turbo_charge_time:
 		drift_level = 2
 		entity.drift_particles.process_material.color = Color(1.0, 0.45, 0.0, 1.0)
-	elif drift_time >= long_turbo_charge_time:
+	elif drift_time >= entity.long_turbo_charge_time:
 		drift_level = 3
 		entity.drift_particles.process_material.color = Color(1.0, 0.0, 0.0, 1.0)
 
 func physics_update(delta: float) -> void:
 	# Handle fall movement
-	entity.velocity.y = move_toward(entity.velocity.y, fall_velocity, fall_gravity * delta)
+	entity.velocity.y = move_toward(entity.velocity.y, entity.fall_velocity, entity.fall_gravity * delta)
 	
 	check_transitions()

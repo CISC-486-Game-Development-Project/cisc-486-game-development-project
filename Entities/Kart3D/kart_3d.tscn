@@ -263,8 +263,8 @@ kart_stats = ExtResource("2_q7q2k")
 base_top_speed = 25.0
 base_top_reverse_speed = 10.0
 base_acceleration = 12.0
-base_boost_speed = 30.0
 base_boost_acceleration = 50.0
+base_boost_speed_multiplier = 1.5
 base_max_steering_angle_slow = 6.0
 base_max_steering_angle_fast = 3.0
 base_handbrake_steering_velocity = 45.0
@@ -484,7 +484,7 @@ metadata/_custom_type_script = "uid://l1hrvfthq543"
 [node name="ToDrift" type="Node" parent="MovementStateMachine/FallState" unique_id=1269919806 node_paths=PackedStringArray("to_state")]
 script = ExtResource("6_2kwd7")
 to_state = NodePath("../../DriftState")
-advance_expression = "entity.is_on_floor() and entity.ground_ray_cast_3d.is_colliding() and entity.drift_request and entity.get_horizontal_velocity().length() >= 5"
+advance_expression = "entity.is_on_floor() and entity.ground_ray_cast_3d.is_colliding() and entity.drift_request and entity.get_horizontal_velocity().length() >= entity.drift_speed_threshold"
 metadata/_custom_type_script = "uid://l1hrvfthq543"
 
 [node name="ToTrick" type="Node" parent="MovementStateMachine/FallState" unique_id=1224282618 node_paths=PackedStringArray("to_state")]
@@ -534,7 +534,7 @@ metadata/_custom_type_script = "uid://b2lqg5xhq7se0"
 [node name="ToIdle" type="Node" parent="MovementStateMachine/DriftState" unique_id=1526947133 node_paths=PackedStringArray("to_state")]
 script = ExtResource("6_2kwd7")
 to_state = NodePath("../../IdleState")
-advance_expression = "not entity.drift_request or entity.get_horizontal_velocity().length() <= 5 or entity.drift_dir == 0"
+advance_expression = "not entity.drift_request or entity.get_horizontal_velocity().length() <= entity.drift_speed_threshold or entity.drift_dir == 0"
 metadata/_custom_type_script = "uid://l1hrvfthq543"
 
 [node name="ToHit" type="Node" parent="MovementStateMachine/DriftState" unique_id=562125298 node_paths=PackedStringArray("to_state")]
