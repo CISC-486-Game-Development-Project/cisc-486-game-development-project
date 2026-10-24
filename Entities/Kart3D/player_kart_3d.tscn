@@ -20,6 +20,15 @@ corner_radius_bottom_right = 512
 corner_radius_bottom_left = 512
 corner_detail = 16
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o5d48"]
+bg_color = Color(1, 1, 1, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 512
+corner_radius_top_right = 512
+corner_radius_bottom_right = 512
+corner_radius_bottom_left = 512
+corner_detail = 16
+
 [sub_resource type="LabelSettings" id="LabelSettings_epros"]
 font = ExtResource("5_w0t0o")
 font_size = 54
@@ -91,6 +100,23 @@ theme_override_constants/margin_bottom = 32
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
+
+[node name="RollingContainer" type="PanelContainer" parent="PlayerHUD/MarginContainer/VBoxContainer/TopContainer/ItemPanel" index="1" unique_id=1423867666]
+clip_children = 1
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_o5d48")
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerHUD/MarginContainer/VBoxContainer/TopContainer/ItemPanel/RollingContainer" index="0" unique_id=1617392088]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = -76
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = -1000
+
+[node name="RollingTextures" type="VBoxContainer" parent="PlayerHUD/MarginContainer/VBoxContainer/TopContainer/ItemPanel/RollingContainer/MarginContainer" index="0" unique_id=1959446628]
+visible = false
+layout_mode = 2
+offset_transform_enabled = true
 
 [node name="Spacer" type="Control" parent="PlayerHUD/MarginContainer/VBoxContainer/TopContainer" index="1" unique_id=238808917]
 layout_mode = 2
