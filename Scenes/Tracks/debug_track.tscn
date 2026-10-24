@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://ca6obtta5oopp" path="res://addons/mesh_painter/mesh_painter.gd" id="7_xc45i"]
 [ext_resource type="PackedScene" uid="uid://cw5hrem1n6xtn" path="res://Entities/Gift Box/gift_box.tscn" id="12_ojj8n"]
 [ext_resource type="PackedScene" uid="uid://cyabyf8vue35i" path="res://Entities/Kart3D/cpu_kart_3d.tscn" id="13_5unjq"]
+[ext_resource type="PackedScene" uid="uid://civujlmhlhoir" path="res://Entities/Checkpoint/checkpoint.tscn" id="13_reyh8"]
 
 [sub_resource type="Sky" id="Sky_xc45i"]
 sky_material = ExtResource("6_ojj8n")
@@ -77,7 +78,7 @@ height = 10.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_if3av"]
 
-[node name="DebugTrack" type="Node3D" unique_id=1648609827]
+[node name="DebugTrack" type="Node3D" unique_id=1648609827 node_paths=PackedStringArray("starting_line")]
 script = ExtResource("1_q5xdn")
 track_music = ExtResource("2_xc45i")
 player_kart = ExtResource("1_wqmp7")
@@ -85,6 +86,8 @@ pause_screen_scene = ExtResource("5_wgl67")
 hud_scene = ExtResource("5_xc45i")
 player_spawn_position = Vector3(5, 1, 30)
 player_spawn_rotation = 90.0
+starting_line = NodePath("Checkpoint")
+race_laps = 3
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1110344304]
 environment = SubResource("Environment_t4f5k")
@@ -265,3 +268,13 @@ base_air_steering_velocity = 0.0
 
 [node name="ItemBlock" parent="." unique_id=1976244613 instance=ExtResource("12_ojj8n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.801186, 1.3053291, 30.479073)
+
+[node name="Checkpoint" parent="." unique_id=2087625636 node_paths=PackedStringArray("nextCheckpoint") instance=ExtResource("13_reyh8")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14.89901, 1.1519282, 34.5672)
+nextCheckpoint = NodePath("../Checkpoint2")
+major = true
+
+[node name="Checkpoint2" parent="." unique_id=1717947 node_paths=PackedStringArray("nextCheckpoint") instance=ExtResource("13_reyh8")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14.89901, 1.1519282, -31.952856)
+nextCheckpoint = NodePath("../Checkpoint")
+major = true

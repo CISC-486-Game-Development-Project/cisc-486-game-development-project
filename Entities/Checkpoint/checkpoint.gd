@@ -14,7 +14,7 @@ func _ready():
 	nextMajorCheckpoint = tempNextCheckpoint
 
 func _on_body_entered(body: Node3D):
-	if body != Kart3D:
+	if not body is Kart3D:
 		return false
 	var kart = body as Kart3D
 	kart.race_handler.entered_checkpoint(self)

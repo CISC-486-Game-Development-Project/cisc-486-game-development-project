@@ -8,8 +8,8 @@ signal lap_changed(new_lap)
 
 var mostRecentlyPassed: Checkpoint
 var nextMajorCheckpoint: Checkpoint
-var lap: int: set = _set_lap
-var position: int: set = _set_position
+var lap: int = 1: set = _set_lap
+var position: int = -1: set = _set_position
 
 ## Called when player has entered new_checkpoint.
 ## Updates mostRecentlyPassed if this checkpoint lines up with the player's nextMajorCheckpoint

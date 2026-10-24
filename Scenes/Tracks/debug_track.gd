@@ -43,6 +43,8 @@ func _ready() -> void:
 		add_child(new_player)
 		new_player.global_position = player_spawn_position
 		new_player.global_rotation_degrees.y = player_spawn_rotation
+		new_player.race_handler.mostRecentlyPassed = starting_line
+		new_player.race_handler.nextMajorCheckpoint = starting_line.nextMajorCheckpoint
 		karts.append(new_player)
 	else:
 		splitscreen_root.show()
@@ -56,6 +58,8 @@ func _ready() -> void:
 			if Globals.selected_characters[i]:
 				new_player.kart_stats = Globals.selected_characters[i].stats
 			new_player.input_handler.player_num = i+1
+			new_player.race_handler.mostRecentlyPassed = starting_line
+			new_player.race_handler.nextMajorCheckpoint = starting_line.nextMajorCheckpoint
 			sub_viewports[i].add_child(new_player)
 			new_player.global_position = player_spawn_position * Vector3(i,1,1)
 			new_player.global_rotation_degrees.y = player_spawn_rotation
@@ -68,7 +72,8 @@ func _ready() -> void:
 	var i : int = 1
 	while tempCheckpoint != starting_line:
 		tempCheckpoint.checkpointIndex = i
-		i +=1
+		tempCheckpoint = tempCheckpoint.nextCheckpoint
+		i += 1
 	
 func _process(_delta):
 	calculate_positions()
@@ -82,7 +87,7 @@ func calculate_positions():
 	pass
 
 func lap_check(body):
-	if body != Kart3D:
+	if not body is Kart3D:
 		return
 	var kart = body as Kart3D
 	var valid_lap = kart.race_handler.entered_checkpoint(starting_line)

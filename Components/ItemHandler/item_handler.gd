@@ -27,7 +27,7 @@ func roll_item() -> void:
 		return
 	
 	# Set new held item
-	inventory.append(ItemManager.get_random_item(1)) # TODO: replace this with the kart's current place
+	inventory.append(ItemManager.get_random_item(kart.race_handler.position))
 	inventory_changed.emit(inventory)
 
 ## Called when an item is used.
