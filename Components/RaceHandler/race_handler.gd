@@ -3,12 +3,14 @@ extends Node
 
 signal position_changed(new_position)
 signal lap_changed(new_lap)
+signal finished ## Kart has completed all laps
 
 @export var kart: Kart3D
 
 var mostRecentlyPassed: Checkpoint
 var nextMajorCheckpoint: Checkpoint
 var lap: int = 1: set = _set_lap
+var race_laps: int
 var position: int = -1: set = _set_position
 
 ## Called when player has entered new_checkpoint.
@@ -20,6 +22,13 @@ func entered_checkpoint(new_checkpoint: Checkpoint) -> bool:
 		if new_checkpoint != nextMajorCheckpoint:
 			return false
 		nextMajorCheckpoint = new_checkpoint.nextMajorCheckpoint
+		if new_checkpoint.checkpointIndex == 0: # If this is the starting line
+			if kart.race_handler.lap >= race_laps:
+				# kart has finished the race
+				finished.emit()
+				# TODO: this should disable the input of the kart and be visually shown in some way
+			else:
+				lap += 1
 	elif new_checkpoint.nextMajorCheckpoint.checkpointIndex > nextMajorCheckpoint.checkpointIndex:
 		return false
 	mostRecentlyPassed = new_checkpoint

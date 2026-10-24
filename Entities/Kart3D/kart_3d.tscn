@@ -339,6 +339,7 @@ libraries/ = SubResource("AnimationLibrary_7dnbs")
 [node name="ItemHandler" type="Node" parent="." unique_id=1682402239 node_paths=PackedStringArray("kart")]
 script = ExtResource("10_3khwq")
 kart = NodePath("..")
+inventory_slots = 2
 metadata/_custom_type_script = "uid://b81fhm3o6wy5v"
 
 [node name="GrassDisplacer" type="Node" parent="." unique_id=848599554]

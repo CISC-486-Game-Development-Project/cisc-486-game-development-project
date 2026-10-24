@@ -269,6 +269,9 @@ base_air_steering_velocity = 0.0
 [node name="ItemBlock" parent="." unique_id=1976244613 instance=ExtResource("12_ojj8n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.801186, 1.3053291, 30.479073)
 
+[node name="ItemBlock2" parent="." unique_id=1842701422 instance=ExtResource("12_ojj8n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.700344, 1.3053291, 30.479073)
+
 [node name="Checkpoint" parent="." unique_id=2087625636 node_paths=PackedStringArray("nextCheckpoint") instance=ExtResource("13_reyh8")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14.89901, 1.1519282, 34.5672)
 nextCheckpoint = NodePath("../Checkpoint2")

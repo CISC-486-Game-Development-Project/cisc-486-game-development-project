@@ -19,6 +19,7 @@ func _process(_delta: float) -> void:
 	# If item request input detected, attempt to use item
 	if kart.item_request:
 		use_item()
+		kart.item_request = false # Request has been handled
 
 ## Called when an item is obtained.
 func roll_item() -> void:

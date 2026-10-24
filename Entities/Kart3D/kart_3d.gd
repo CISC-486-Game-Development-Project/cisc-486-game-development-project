@@ -475,7 +475,6 @@ func _update_debug_label() -> void:
 		"Boost Time Left: " + str(clamp(round(boost_timer*10)/10, 0, 100)),
 		"Ignore Offroad Time Left: " + str(clamp(round(ignore_offroad_timer*10)/10, 0, 100)),
 		"Offroad Factor: " + str(offroad_factor),
-		"Lap: " + str(race_handler.lap)
 	]
 	
 	# Apply debug texts to label

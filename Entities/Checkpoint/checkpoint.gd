@@ -17,4 +17,5 @@ func _on_body_entered(body: Node3D):
 	if not body is Kart3D:
 		return false
 	var kart = body as Kart3D
-	kart.race_handler.entered_checkpoint(self)
+	if kart.race_handler: # I think this will only be false if a kart starts in a checkpoint, nothing needs to happen in that case
+		kart.race_handler.entered_checkpoint(self)

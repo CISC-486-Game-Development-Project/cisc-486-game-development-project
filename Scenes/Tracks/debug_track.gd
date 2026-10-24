@@ -36,16 +36,7 @@ func _ready() -> void:
 		splitscreen_root.hide()
 		
 		# Add one player
-		var new_player = player_kart.instantiate()
-		if Globals.selected_characters[0]:
-			new_player.kart_stats = Globals.selected_characters[0].stats
-		new_player.input_handler.player_num = 1
-		add_child(new_player)
-		new_player.global_position = player_spawn_position
-		new_player.global_rotation_degrees.y = player_spawn_rotation
-		new_player.race_handler.mostRecentlyPassed = starting_line
-		new_player.race_handler.nextMajorCheckpoint = starting_line.nextMajorCheckpoint
-		karts.append(new_player)
+		create_player(0)
 	else:
 		splitscreen_root.show()
 		
@@ -54,18 +45,7 @@ func _ready() -> void:
 		
 		# Add multiple players
 		for i in range(Globals.player_count):
-			var new_player = player_kart.instantiate()
-			if Globals.selected_characters[i]:
-				new_player.kart_stats = Globals.selected_characters[i].stats
-			new_player.input_handler.player_num = i+1
-			new_player.race_handler.mostRecentlyPassed = starting_line
-			new_player.race_handler.nextMajorCheckpoint = starting_line.nextMajorCheckpoint
-			sub_viewports[i].add_child(new_player)
-			new_player.global_position = player_spawn_position * Vector3(i,1,1)
-			new_player.global_rotation_degrees.y = player_spawn_rotation
-			karts.append(new_player)
-	starting_line.body_entered.connect(lap_check)
-	starting_line.body_entered.disconnect(starting_line._on_body_entered)
+			create_player(i, sub_viewports[i])
 	
 	starting_line.checkpointIndex = 0
 	var tempCheckpoint : Checkpoint = starting_line.nextCheckpoint
@@ -74,6 +54,21 @@ func _ready() -> void:
 		tempCheckpoint.checkpointIndex = i
 		tempCheckpoint = tempCheckpoint.nextCheckpoint
 		i += 1
+
+## Creates a player, player_num starts at 0, if parent_array is defined 
+func create_player(player_num: int, player_parent=self) -> void:
+	var new_player = player_kart.instantiate()
+	if Globals.selected_characters[player_num]:
+		new_player.kart_stats = Globals.selected_characters[player_num].stats
+	new_player.input_handler.player_num = player_num + 1
+	player_parent.add_child(new_player)
+	new_player.global_position = player_spawn_position
+	new_player.global_rotation_degrees.y = player_spawn_rotation
+	new_player.race_handler.mostRecentlyPassed = starting_line
+	new_player.race_handler.nextMajorCheckpoint = starting_line.nextMajorCheckpoint
+	new_player.race_handler.race_laps = race_laps
+	new_player.race_handler.finished.connect(kart_finished.bind(new_player))
+	karts.append(new_player)
 	
 func _process(_delta):
 	calculate_positions()
@@ -86,15 +81,6 @@ func calculate_positions():
 	# Break ties with their distance to the next checkpoint.
 	pass
 
-func lap_check(body):
-	if not body is Kart3D:
-		return
-	var kart = body as Kart3D
-	var valid_lap = kart.race_handler.entered_checkpoint(starting_line)
-	if valid_lap:
-		if kart.race_handler.lap >= race_laps:
-			# kart has finished the race
-			finished_karts.append(kart)
-			# TODO: indicate this has happenned
-		else:
-			kart.race_handler.lap += 1
+func kart_finished(kart):
+	finished_karts.append(kart)
+	print(finished_karts)
