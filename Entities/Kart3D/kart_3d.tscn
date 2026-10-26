@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://t3ju34iymdl0" path="res://Components/StateMachine/States/fall_state.gd" id="9_dqsqe"]
 [ext_resource type="Script" uid="uid://b81fhm3o6wy5v" path="res://Components/ItemHandler/item_handler.gd" id="10_3khwq"]
 [ext_resource type="Script" uid="uid://bbrw2uverowic" path="res://Components/StateMachine/States/hop_state.gd" id="10_4muo4"]
+[ext_resource type="AudioStream" uid="uid://7hxvodiv5qlo" path="res://Assets/Audio/SFX/KartDrive.wav" id="10_8lscg"]
 [ext_resource type="Script" uid="uid://b2lqg5xhq7se0" path="res://Components/StateMachine/States/drift_state.gd" id="11_y2xwn"]
 [ext_resource type="Script" uid="uid://bmua4qbuf0vev" path="res://Components/StateMachine/States/trick_state.gd" id="12_kwn18"]
 [ext_resource type="Script" uid="uid://dipl7saf1mwxk" path="res://Components/RaceHandler/race_handler.gd" id="13_8lscg"]
@@ -316,6 +317,13 @@ explosiveness = 1.0
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_r41fb")
 draw_pass_1 = SubResource("QuadMesh_iwjoc")
+
+[node name="DriveSFX" type="AudioStreamPlayer3D" parent="." unique_id=244414122]
+stream = ExtResource("10_8lscg")
+volume_db = -80.0
+max_db = 0.0
+autoplay = true
+doppler_tracking = 2
 
 [node name="TrickCoyoteTimer" type="Timer" parent="." unique_id=1157052154]
 wait_time = 0.1

@@ -85,10 +85,13 @@ extends CharacterBody3D
 @onready var boost_particles: GPUParticles3D = $BoostParticles
 @onready var drift_particles: GPUParticles3D = $DriftParticles
 @onready var trick_particles: GPUParticles3D = $TrickParticles
+
 @onready var trick_coyote_timer: Timer = $TrickCoyoteTimer
 @onready var trick_buffer_timer: Timer = $TrickBufferTimer
 @onready var trick_cooldown_timer: Timer = $TrickCooldownTimer
 @onready var trick_combo_timer: Timer = $TrickComboTimer
+
+@onready var drive_sfx: AudioStreamPlayer3D = $DriveSFX
 
 @onready var debug_kart: KartModel = $KartModel/AnimationPivot/DebugKart
 @onready var debug_label_3d: Label3D = $DebugLabel3D
@@ -210,6 +213,9 @@ func _physics_process(delta: float) -> void:
 		_update_trick_ray_cast()
 	pre_slide_velocity = velocity
 	move_and_slide()
+	
+	# Handle Constant SFX
+	_handle_sfx()
 	
 	# Update Debug Label
 	_update_debug_label()
@@ -413,6 +419,17 @@ func hit(hitter_hitbox: Hitbox, velocity_reduction_factor: float = 0.4, vertical
 		velocity *= velocity_reduction_factor
 		velocity.y += vertical_velocity_impulse
 	is_hit = true
+
+#####################
+## Audio Functions ##
+#####################
+
+## Handles the pitch and volume of constantly playing kart sound effects.
+func _handle_sfx() -> void:
+	# Set pitch and volume based on horizontal speed
+	# TODO: Hacky way of implementing this, update it to be more dynamic later
+	drive_sfx.pitch_scale = remap(get_horizontal_velocity().length(), 0.0, 50.0, 1.0, 2.0)
+	drive_sfx.volume_linear = clampf(remap(get_horizontal_velocity().length(), 0.0, 20.0, 0.0, 0.15), 0.0, 0.15)
 
 #######################
 ## Getters & Setters ##
