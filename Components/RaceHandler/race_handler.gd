@@ -8,10 +8,12 @@ signal finished ## Kart has completed all laps
 @export var kart: Kart3D
 
 var mostRecentlyPassed: Checkpoint
+var next_checkpoint_plane: Plane
 var nextMajorCheckpoint: Checkpoint
 var lap: int = 1: set = _set_lap
 var race_laps: int
 var position: int = -1: set = _set_position
+var distance_to_next_checkpoint: float
 
 ## Called when player has entered new_checkpoint.
 ## Updates mostRecentlyPassed if this checkpoint lines up with the player's nextMajorCheckpoint
@@ -32,7 +34,13 @@ func entered_checkpoint(new_checkpoint: Checkpoint) -> bool:
 	elif new_checkpoint.nextMajorCheckpoint.checkpointIndex > nextMajorCheckpoint.checkpointIndex:
 		return false
 	mostRecentlyPassed = new_checkpoint
+	next_checkpoint_plane = mostRecentlyPassed.nextCheckpoint.boundary_plane
 	return true
+	
+	#TODO: Update distance to next checkpoint each frame.
+func _process(delta: float) -> void:
+	distance_to_next_checkpoint = next_checkpoint_plane.distance_to(kart.global_position)
+	pass
 
 # Setters
 func _set_position(new_position: int):
