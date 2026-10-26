@@ -143,6 +143,7 @@ var camera_request: Vector2 ## The vector for camera movement to be set by an in
 var reverse_camera_request: bool ## Reverse camera request to be set by an input_manager.
 
 # Driving
+var can_drive: bool ## Determines if kart can drive.
 var steering: float ## The intensity of the current steering.
 var offroad_factor: float ## The intensity of the current offroad factor.
 var ignore_offroad_timer: float ## Determines whether speed calculations should ignore offroad currently.
@@ -207,7 +208,7 @@ func _physics_process(delta: float) -> void:
 	input_handler.handle_input()
 	
 	## Step 2: Handle Movement
-	if state_machine.current_state is not HitState:
+	if state_machine.current_state is not HitState and can_drive:
 		_handle_driving(delta)
 		_handle_steering(delta)
 		_update_trick_ray_cast()

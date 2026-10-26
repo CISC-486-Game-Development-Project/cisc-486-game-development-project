@@ -22,6 +22,7 @@
 [ext_resource type="Script" uid="uid://bmua4qbuf0vev" path="res://Components/StateMachine/States/trick_state.gd" id="12_kwn18"]
 [ext_resource type="Script" uid="uid://dipl7saf1mwxk" path="res://Components/RaceHandler/race_handler.gd" id="13_8lscg"]
 [ext_resource type="Script" uid="uid://daex734a4hoq0" path="res://Components/AlignmentHandler/alignment_handler.gd" id="13_mehc1"]
+[ext_resource type="Script" uid="uid://ctetl6mapa42m" path="res://Components/StateMachine/States/start_state.gd" id="16_2kwd7"]
 [ext_resource type="Script" uid="uid://cwmiqdt31xlsm" path="res://Components/StateMachine/States/air_trick_state.gd" id="19_7apc5"]
 [ext_resource type="Script" uid="uid://b3ataw1etlka7" path="res://Components/StateMachine/States/hit_state.gd" id="21_1byyu"]
 [ext_resource type="Script" uid="uid://dlqoia1hk0gw8" path="res://Components/GrassDisplacer/grass_displacer.gd" id="21_q7q2k"]
@@ -368,8 +369,18 @@ kart = NodePath("..")
 
 [node name="MovementStateMachine" type="Node" parent="." unique_id=547351009 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_mehc1")
-initial_state = NodePath("IdleState")
+initial_state = NodePath("StartState")
 metadata/_custom_type_script = "uid://t1pg06mo513h"
+
+[node name="StartState" type="Node" parent="MovementStateMachine" unique_id=1581551379]
+script = ExtResource("16_2kwd7")
+metadata/_custom_type_script = "uid://ctetl6mapa42m"
+
+[node name="ToIdle" type="Node" parent="MovementStateMachine/StartState" unique_id=1879868487 node_paths=PackedStringArray("to_state")]
+script = ExtResource("6_2kwd7")
+to_state = NodePath("../../IdleState")
+advance_expression = "is_started"
+metadata/_custom_type_script = "uid://l1hrvfthq543"
 
 [node name="IdleState" type="Node" parent="MovementStateMachine" unique_id=73060959]
 script = ExtResource("5_8lscg")
