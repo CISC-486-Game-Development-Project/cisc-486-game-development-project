@@ -19,6 +19,7 @@ var sub_viewports: Array[SubViewport]
 
 var karts: Array[Kart3D]
 var finished_karts: Array[Kart3D]
+var checkpoint_count: int
 
 func _ready() -> void:
 	# Begin music
@@ -54,6 +55,7 @@ func _ready() -> void:
 		tempCheckpoint.checkpointIndex = i
 		tempCheckpoint = tempCheckpoint.nextCheckpoint
 		i += 1
+	checkpoint_count = i
 
 ## Creates a player, player_num starts at 0, if parent_array is defined 
 func create_player(player_num: int, player_parent=self) -> void:
@@ -75,11 +77,41 @@ func _process(_delta):
 
 ## Calculates each kart's position and sets each kart's position variable accordingly
 func calculate_positions():
+	"""#var ranked_kart_positions = [[[]]]
+	#for kart in karts:
+		#if kart in finished_karts:
+			#continue
+		#ranked_kart_positions[kart.race_handler.lap][kart.race_handler.mostRecentlyPassed.checkpointIndex].append(kart)
+	var placement = len(finished_karts)
+	for i in range(race_laps): #Check if this is number of laps
+		for j in range(checkpoint_count):
+			if len(ranked_kart_positions[i][j]) > 1:
+				#Check how to get this information
+				ranked_kart_positions[i][j].sort_custom(func(a, b): a.race_handler.distance < b.race_handler.distance)
+			for kart in ranked_kart_positions[i][j]:
+				kart.race_handler._set_position = placement  # Is this the correct way of using a setter?
+				placement += 1
+				"""
 	# Finished players have their position locked.
 	# Sort unfinished players by laps completed
 	# Break ties with their mostRecentlyPassed's checkpoint index
 	# Break ties with their distance to the next checkpoint.
-	pass
+	var unfinished_karts: Array[Kart3D]
+	for kart in karts:
+		if kart not in finished_karts:
+			unfinished_karts.append(kart)
+	unfinished_karts.sort_custom(_placement_priority)
+	var placement = len(finished_karts)
+	for kart in unfinished_karts:
+		placement += 1
+		kart.race_handler.position = placement
+			
+func _placement_priority(kart_a, kart_b) -> bool:
+	if kart_a.race_handler.lap != kart_b.race_handler.lap:
+		return kart_a.race_handler.lap > kart_b.race_handler.lap
+	if kart_a.race_handler.mostRecentlyPassed.checkpointIndex != kart_b.race_handler.mostRecentlyPassed.checkpointIndex:
+		return kart_a.race_handler.mostRecentlyPassed.checkpointIndex > kart_b.race_handler.mostRecentlyPassed.checkpointIndex
+	return kart_a.race_handler.distance_to_next_checkpoint < kart_b.race_handler.distance_to_next_checkpoint
 
 func kart_finished(kart):
 	finished_karts.append(kart)
