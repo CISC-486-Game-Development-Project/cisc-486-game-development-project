@@ -4,8 +4,8 @@ extends State
 # Onready Vars
 @onready var entity: CharacterBody3D = state_machine.get_parent()
 
-# Internal
-var is_started: bool
+# Internal Vars
+var is_ready: bool ## When true, leave this state.
 
 func enter(_prev_state: State) -> void:
 	# If Kart3D, set can_drive to false
@@ -13,8 +13,8 @@ func enter(_prev_state: State) -> void:
 		if entity.can_drive:
 			entity.can_drive = false
 	
-	is_started = false
-	get_tree().create_timer(3).timeout.connect(func(): is_started = true)
+	is_ready = true
+	#RaceManager.race_started.connect(func(): is_ready = true)
 
 func exit(_next_state: State) -> void:
 	# If Kart3D, set can_drive to true

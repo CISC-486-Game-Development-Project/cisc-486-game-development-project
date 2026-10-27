@@ -21,7 +21,7 @@ func _handle_acceleration() -> float:
 
 ## Returns a bool for if the CPU should hop this frame.
 func _handle_hopping() -> bool:
-	return false
+	return kart.can_trick() # Trick when able to.
 
 ## Returns a bool for if the CPU should drift this frame.
 func _handle_drifting() -> bool:

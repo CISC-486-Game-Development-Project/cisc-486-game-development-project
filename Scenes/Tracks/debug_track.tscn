@@ -259,7 +259,6 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -10.
 base_top_speed = 0.0
 base_top_reverse_speed = 0.0
 base_acceleration = 0.0
-base_boost_speed = 0.0
 base_boost_acceleration = 0.0
 base_max_steering_angle_slow = 0.0
 base_max_steering_angle_fast = 0.0

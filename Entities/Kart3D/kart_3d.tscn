@@ -379,7 +379,7 @@ metadata/_custom_type_script = "uid://ctetl6mapa42m"
 [node name="ToIdle" type="Node" parent="MovementStateMachine/StartState" unique_id=1879868487 node_paths=PackedStringArray("to_state")]
 script = ExtResource("6_2kwd7")
 to_state = NodePath("../../IdleState")
-advance_expression = "is_started"
+advance_expression = "is_ready"
 metadata/_custom_type_script = "uid://l1hrvfthq543"
 
 [node name="IdleState" type="Node" parent="MovementStateMachine" unique_id=73060959]
