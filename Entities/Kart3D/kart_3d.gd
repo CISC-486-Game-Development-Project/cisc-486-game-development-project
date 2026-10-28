@@ -5,6 +5,7 @@ extends CharacterBody3D
 @export_category("Functionality")
 @export var kart_stats: KartStats ## The stats that define the kart.
 @export var input_handler: InputHandler ## The input handler for controlling the kart.
+@export var is_player: bool ## Determines whether or not this kart is treated as a player.
 
 @export_group("Driving")
 @export_custom(PROPERTY_HINT_NONE, "suffix:m/s") var base_top_speed: float ## Defines the base top speed.

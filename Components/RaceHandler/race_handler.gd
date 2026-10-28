@@ -38,7 +38,7 @@ func entered_checkpoint(new_checkpoint: Checkpoint) -> bool:
 	return true
 	
 	#TODO: Update distance to next checkpoint each frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	distance_to_next_checkpoint = next_checkpoint_plane.distance_to(kart.global_position)
 	pass
 

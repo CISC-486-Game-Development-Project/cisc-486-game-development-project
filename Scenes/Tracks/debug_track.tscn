@@ -255,15 +255,7 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3330574, 1.8510174, 33.580196)
 
 [node name="CPUKart3D" parent="." unique_id=32768770 instance=ExtResource("13_5unjq")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -10.680214, 0.51651627, 29.59003)
-base_top_speed = 0.0
-base_top_reverse_speed = 0.0
-base_acceleration = 0.0
-base_boost_acceleration = 0.0
-base_max_steering_angle_slow = 0.0
-base_max_steering_angle_fast = 0.0
-base_handbrake_steering_velocity = 0.0
-base_air_steering_velocity = 0.0
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -10.68, 1, 29.59)
 
 [node name="ItemBlock" parent="." unique_id=1976244613 instance=ExtResource("12_ojj8n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.801186, 1.3053291, 30.479073)

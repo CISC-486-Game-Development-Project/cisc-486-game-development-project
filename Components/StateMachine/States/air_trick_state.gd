@@ -37,7 +37,8 @@ func _play_trick_effect() -> void:
 		entity.trick_combo_level += 1
 	elif entity.trick_combo_timer.time_left > 0:
 		entity.trick_combo_level += 1
-	AudioManager.create_sound(entity.trick_sfx[clampi(entity.trick_combo_level, 0, len(entity.trick_sfx) - 1)])
+	if entity is Kart3D and entity.is_player:
+		AudioManager.create_sound(entity.trick_sfx[clampi(entity.trick_combo_level, 0, len(entity.trick_sfx) - 1)])
 	
 	# Play random trick animation based on direction held
 	if entity.animation_player.current_animation:

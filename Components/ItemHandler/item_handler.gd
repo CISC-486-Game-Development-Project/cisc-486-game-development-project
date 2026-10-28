@@ -34,7 +34,7 @@ func roll_item() -> void:
 ## Called when an item is used.
 func use_item() -> void:
 	# Don't use if no held item
-	if inventory.size() == 0:
+	if not is_holding_item():
 		return
 	
 	# Use held item then remove
@@ -47,7 +47,7 @@ func _update_trail_item(_inventory) -> void:
 	# Free previous trailed item and return if no current held item
 	if trailed_item:
 		trailed_item.queue_free()
-	if inventory.size() == 0:
+	if not is_holding_item():
 		return
 	
 	# Create new item model and trail it
@@ -56,3 +56,7 @@ func _update_trail_item(_inventory) -> void:
 	new_trail.scale *= 0.3
 	new_trail.global_position += kart.global_basis.z * 1.3 + kart.global_basis.y / 2
 	trailed_item = new_trail
+
+## Returns if at least one item is held.
+func is_holding_item() -> bool:
+	return inventory.size() > 0
