@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://b1w1ox4hyquyt"]
+
+[ext_resource type="PackedScene" uid="uid://cp4q5q0qj65yq" path="res://Assets/3D/Models/Farm Level/SM_Track_Flat.fbx" id="1_lll07"]
+[ext_resource type="PackedScene" uid="uid://b1cq4c54p38m4" path="res://Assets/3D/Models/Farm Level/SM_Barn_Flat.fbx" id="2_7ugss"]
+[ext_resource type="PackedScene" uid="uid://hioycd3nj6nh" path="res://Assets/3D/Models/Farm Level/SM_Fence_String_Flat.fbx" id="3_8bf2w"]
+[ext_resource type="PackedScene" uid="uid://kdp4k7nv34i3" path="res://Assets/3D/Models/Farm Level/SM_Corn.fbx" id="4_me4l0"]
+[ext_resource type="PackedScene" uid="uid://d3e4fcn4vnvck" path="res://Assets/3D/Models/Farm Level/SM_Tractor.fbx" id="5_vhoev"]
+[ext_resource type="PackedScene" uid="uid://ctp32pq0opu" path="res://Assets/3D/Models/Farm Level/SM_Wheat.fbx" id="6_rkrvq"]
+[ext_resource type="PackedScene" uid="uid://dafnpq7goykos" path="res://Assets/3D/Models/Farm Level/SM_Rake.fbx" id="7_nrb4o"]
+[ext_resource type="PackedScene" uid="uid://civujlmhlhoir" path="res://Entities/Checkpoint/checkpoint.tscn" id="8_7ugss"]
+
+[node name="Farm Level" type="Node3D" unique_id=1937614561]
+
+[node name="SM_Track_Flat" parent="." unique_id=1194820884 instance=ExtResource("1_lll07")]
+
+[node name="SM_Barn_Flat" parent="." unique_id=1992315344 instance=ExtResource("2_7ugss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.571878, 3.1043038, -3.2511005)
+
+[node name="SM_Fence_String_Flat" parent="." unique_id=744795425 instance=ExtResource("3_8bf2w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.03424, 0, -19.865196)
+
+[node name="SM_Corn" parent="." unique_id=518218564 instance=ExtResource("4_me4l0")]
+transform = Transform3D(1.7, 0, 0, 0, 1.7, 0, 0, 0, 1.7, -34.54299, 0, 26.011053)
+
+[node name="SM_Tractor" parent="." unique_id=1894074175 instance=ExtResource("5_vhoev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.983952, 2.7075133, 17.149818)
+
+[node name="SM_Wheat" parent="." unique_id=1759921441 instance=ExtResource("6_rkrvq")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 37.811108)
+
+[node name="SM_Rake" parent="." unique_id=1041915051 instance=ExtResource("7_nrb4o")]
+transform = Transform3D(-2.6226832e-08, 0, -0.59999996, 0, 0.59999996, 0, 0.59999996, 0, -2.6226832e-08, -19.601696, 0, -22.8947)
+
+[node name="Checkpoint Holder" type="Node3D" parent="." unique_id=2088300666]
+
+[node name="Start Line" parent="Checkpoint Holder" unique_id=2087625636 instance=ExtResource("8_7ugss")]
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 20.286945, 0, 0)
+
+[node name="Checkpoint1" parent="Checkpoint Holder" unique_id=102224462 instance=ExtResource("8_7ugss")]
+transform = Transform3D(-0.9444382, 0, 0.32868847, 0, 1, 0, -0.32868847, 0, -0.9444382, -0.35791683, 0, 4.290826)
+
+[node name="Checkpoint2" parent="Checkpoint Holder" unique_id=1319670094 instance=ExtResource("8_7ugss")]
+transform = Transform3D(0.9730481, 0, 0.23060173, 0, 1, 0, -0.23060173, 0, 0.9730481, -2.4546585, 0, 20.86188)
+
+[node name="Checkpoint3" parent="Checkpoint Holder" unique_id=1251714868 instance=ExtResource("8_7ugss")]
+transform = Transform3D(0.9999997, 0, 0, 0, 1, 0, 0, 0, 0.9999997, 9.335374, 0, 27.222504)
+
+[node name="Checkpoint4" parent="Checkpoint Holder" unique_id=867967028 instance=ExtResource("8_7ugss")]
+transform = Transform3D(0.4181494, 0, -0.9083776, 0, 1, 0, 0.9083776, 0, 0.4181494, 0, 0, 40.878967)
+
+[node name="Checkpoint5" parent="Checkpoint Holder" unique_id=934424953 instance=ExtResource("8_7ugss")]
+transform = Transform3D(-4.3711335e-08, 0, 0.99999875, 0, 1, 0, -0.99999875, 0, -4.3711335e-08, -19.972021, 0, 38.37142)
+
+[node name="Major Checkpoint 1" parent="Checkpoint Holder" unique_id=1445417625 instance=ExtResource("8_7ugss")]
+transform = Transform3D(0.21483019, 0, 0.97664887, 0, 1, 0, -0.97664887, 0, 0.21483019, -37.21566, 0, 38.072018)
+
+[node name="Checkpoint6" parent="Checkpoint Holder" unique_id=410029286 instance=ExtResource("8_7ugss")]
+transform = Transform3D(-0.9999975, 0, -8.742256e-08, 0, 1, 0, 8.742256e-08, 0, -0.9999975, -49.38425, 0, 24.725513)
+
+[node name="Checkpoint7" parent="Checkpoint Holder" unique_id=1544578177 instance=ExtResource("8_7ugss")]
+transform = Transform3D(0.9073456, 0, -0.42037362, 0, 1, 0, 0.42037362, 0, 0.9073456, -29.617805, 0, 18.549036)
+
+[node name="Checkpoint8" parent="Checkpoint Holder" unique_id=1776424461 instance=ExtResource("8_7ugss")]
+transform = Transform3D(0.90629876, 0, 0.42261407, 0, 1, 0, -0.42261407, 0, 0.90629876, -34.502335, 0, 6.888685)
+
+[node name="Checkpoint9" parent="Checkpoint Holder" unique_id=596099232 instance=ExtResource("8_7ugss")]
+transform = Transform3D(-0.90923375, 0, -0.41627967, 0, 1, 0, 0.41627967, 0, -0.90923375, -59.475502, 0, 3.6181355)
+
+[node name="Checkpoint10" parent="Checkpoint Holder" unique_id=677565408 instance=ExtResource("8_7ugss")]
+transform = Transform3D(0.8267601, 0, -0.5625453, 0, 1, 0, 0.5625453, 0, 0.8267601, -57.54563, 0, -6.6187663)
+
+[node name="Major Checkpoint 2" parent="Checkpoint Holder" unique_id=234962059 instance=ExtResource("8_7ugss")]
+transform = Transform3D(-0.301473, 0, 0.9534721, 0, 1, 0, -0.9534721, 0, -0.301473, -31.379835, 0, -19.798742)
+
+[node name="Checkpoint11" parent="Checkpoint Holder" unique_id=2037236154 instance=ExtResource("8_7ugss")]
+transform = Transform3D(-4.3711168e-08, 0, 0.99999493, 0, 1, 0, -0.99999493, 0, -4.3711168e-08, 13.585966, 0, -28.751823)
+
+[node name="Major Checkpoint 3" parent="Checkpoint Holder" unique_id=1896363104 instance=ExtResource("8_7ugss")]
+transform = Transform3D(-0.9999975, 0, -8.742256e-08, 0, 1, 0, 8.742256e-08, 0, -0.9999975, 34.314804, 0, -15.5785265)
+
+[node name="Checkpoint12" parent="Checkpoint Holder" unique_id=1864623095 instance=ExtResource("8_7ugss")]
+transform = Transform3D(-0.6203337, 0, 0.78433484, 0, 1, 0, -0.78433484, 0, -0.6203337, 31.09268, 0, -2.461976)
