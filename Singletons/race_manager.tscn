@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bf54wioynsdmg"]
+
+[ext_resource type="Script" uid="uid://c4ywf8xfafqep" path="res://Singletons/race_manager.gd" id="1_yjo86"]
+
+[node name="RaceManager" type="Node" unique_id=1801410601]
+script = ExtResource("1_yjo86")
+
+[node name="Timer" type="Timer" parent="." unique_id=1849193999]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

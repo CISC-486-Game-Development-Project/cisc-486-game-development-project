@@ -29,6 +29,14 @@ corner_radius_bottom_right = 512
 corner_radius_bottom_left = 512
 corner_detail = 16
 
+[sub_resource type="LabelSettings" id="LabelSettings_wown4"]
+font = ExtResource("5_w0t0o")
+font_size = 113
+font_color = Color(1, 1, 0, 1)
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(12, 12)
+
 [sub_resource type="LabelSettings" id="LabelSettings_epros"]
 font = ExtResource("5_w0t0o")
 font_size = 54
@@ -81,6 +89,7 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 
 [node name="TopContainer" type="HBoxContainer" parent="PlayerHUD/MarginContainer/VBoxContainer" index="0" unique_id=295287550]
+custom_minimum_size = Vector2(0, 175)
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -130,7 +139,22 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
 
-[node name="BottomContainer" type="HBoxContainer" parent="PlayerHUD/MarginContainer/VBoxContainer" index="2" unique_id=855871508]
+[node name="MiddleContainer" type="HBoxContainer" parent="PlayerHUD/MarginContainer/VBoxContainer" index="2" unique_id=26590181]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PlayerHUD/MarginContainer/VBoxContainer/MiddleContainer" index="0" unique_id=1642469692]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Get ready!"
+label_settings = SubResource("LabelSettings_wown4")
+horizontal_alignment = 1
+
+[node name="Spacer2" type="Control" parent="PlayerHUD/MarginContainer/VBoxContainer" index="3" unique_id=698190860]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+
+[node name="BottomContainer" type="HBoxContainer" parent="PlayerHUD/MarginContainer/VBoxContainer" index="4" unique_id=855871508]
 layout_mode = 2
 
 [node name="LapContainer" type="VBoxContainer" parent="PlayerHUD/MarginContainer/VBoxContainer/BottomContainer" index="0" unique_id=1546138669]

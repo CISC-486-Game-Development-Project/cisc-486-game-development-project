@@ -56,6 +56,8 @@ func _ready() -> void:
 		tempCheckpoint = tempCheckpoint.nextCheckpoint
 		i += 1
 	checkpoint_count = i
+	
+	RaceManager.start_countdown()
 
 ## Creates a player, player_num starts at 0, if parent_array is defined 
 func create_player(player_num: int, player_parent=self) -> void:
@@ -115,4 +117,3 @@ func _placement_priority(kart_a, kart_b) -> bool:
 
 func kart_finished(kart):
 	finished_karts.append(kart)
-	print(finished_karts)

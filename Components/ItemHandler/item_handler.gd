@@ -2,11 +2,14 @@ class_name ItemHandler
 extends Node
 
 # Signals
-signal inventory_changed(new_inventory) ## Emitted when [member held_item] changes with it's new value.
+signal inventory_changed(new_inventory: Array[Item]) ## Emitted when [member held_item] changes with it's new value.
+signal item_rolled(item: Item, slot: int) ## Emitted when a player has hit an item block, they will have item once ROLL_TIME has elapsed.
 
 # Export Vars
 @export var kart: Kart3D ## The kart this item handler is associated with.
 @export var inventory_slots := 1
+
+const ROLL_TIME = 1.5 ## Time between hitting item block and having item
 
 # Internal Vars
 var inventory: Array[Item] ## The current held item.
@@ -27,8 +30,13 @@ func roll_item() -> void:
 	if inventory.size() >= inventory_slots:
 		return
 	
+	var new_item = ItemManager.get_random_item(kart.race_handler.position)
+	
+	item_rolled.emit(new_item, inventory.size())
+	
+	await get_tree().create_timer(ROLL_TIME).timeout
 	# Set new held item
-	inventory.append(ItemManager.get_random_item(kart.race_handler.position))
+	inventory.append(new_item)
 	inventory_changed.emit(inventory)
 
 ## Called when an item is used.

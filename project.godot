@@ -22,6 +22,7 @@ SceneManager="*uid://frgi6tweejw5"
 AudioManager="*uid://bcq5ihk6khspi"
 GrassManager="*uid://dj8l4pv3cghxy"
 ItemManager="*uid://xdr6ico71s6m"
+RaceManager="*uid://bf54wioynsdmg"
 
 [display]
 

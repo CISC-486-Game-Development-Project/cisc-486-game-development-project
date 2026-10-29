@@ -11,15 +11,18 @@ var mostRecentlyPassed: Checkpoint
 var next_checkpoint_plane: Plane
 var nextMajorCheckpoint: Checkpoint
 var lap: int = 1: set = _set_lap
-var race_laps: int
+var race_laps: int ## Read only, assigned by the track
 var position: int = -1: set = _set_position
 var distance_to_next_checkpoint: float
+var is_finished := false
 
 ## Called when player has entered new_checkpoint.
 ## Updates mostRecentlyPassed if this checkpoint lines up with the player's nextMajorCheckpoint
 ## Updates nextMajorCheckpoint if this checkpoint is also a major checkpoint
 ## Returns true if mostRecentlyPassed is updated and false if not.
 func entered_checkpoint(new_checkpoint: Checkpoint) -> bool:
+	if is_finished:
+		return false
 	if new_checkpoint.major:
 		if new_checkpoint != nextMajorCheckpoint:
 			return false
@@ -28,7 +31,8 @@ func entered_checkpoint(new_checkpoint: Checkpoint) -> bool:
 			if kart.race_handler.lap >= race_laps:
 				# kart has finished the race
 				finished.emit()
-				# TODO: this should disable the input of the kart and be visually shown in some way
+				is_finished = true
+				# TODO: this should be visually shown in some way
 			else:
 				lap += 1
 	elif new_checkpoint.nextMajorCheckpoint.checkpointIndex > nextMajorCheckpoint.checkpointIndex:

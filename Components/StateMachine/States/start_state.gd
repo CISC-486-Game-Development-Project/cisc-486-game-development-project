@@ -13,8 +13,8 @@ func enter(_prev_state: State) -> void:
 		if entity.can_drive:
 			entity.can_drive = false
 	
-	is_ready = true
-	#RaceManager.race_started.connect(func(): is_ready = true)
+	is_ready = false
+	RaceManager.race_started.connect(func(): is_ready = true)
 
 func exit(_next_state: State) -> void:
 	# If Kart3D, set can_drive to true

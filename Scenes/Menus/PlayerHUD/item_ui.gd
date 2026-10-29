@@ -8,10 +8,8 @@ var rolling: bool = false
 
 ## Called when the item handler's held item changes to display the item's texture.
 func set_item_visual(item: Item) -> void:
+	stop_roll()
 	if item:
-		start_roll()
-		await get_tree().create_timer(1.5).timeout
-		stop_roll()
 		item_texture.texture = item.texture
 	else:
 		item_texture.texture = null
@@ -19,6 +17,7 @@ func set_item_visual(item: Item) -> void:
 func start_roll():
 	if not rolling:
 		rolling = true
+		rolling_textures.visible = true
 		item_texture.visible = false
 		var item_order: Array[Item] = ItemManager.items.duplicate()
 		item_order.shuffle()
@@ -38,6 +37,8 @@ func start_roll():
 
 func stop_roll():
 	if rolling:
+		print(1)
+		rolling = false
 		rolling_textures.visible = false
 		item_texture.visible = true
 
