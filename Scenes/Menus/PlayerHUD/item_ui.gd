@@ -37,7 +37,6 @@ func start_roll():
 
 func stop_roll():
 	if rolling:
-		print(1)
 		rolling = false
 		rolling_textures.visible = false
 		item_texture.visible = true

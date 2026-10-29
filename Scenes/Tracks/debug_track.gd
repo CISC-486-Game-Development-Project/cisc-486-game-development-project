@@ -66,7 +66,7 @@ func create_player(player_num: int, player_parent=self) -> void:
 		new_player.kart_stats = Globals.selected_characters[player_num].stats
 	new_player.input_handler.player_num = player_num + 1
 	player_parent.add_child(new_player)
-	new_player.global_position = player_spawn_position
+	new_player.global_position = player_spawn_position * Vector3(player_num+1, 1, 1)
 	new_player.global_rotation_degrees.y = player_spawn_rotation
 	new_player.race_handler.mostRecentlyPassed = starting_line
 	new_player.race_handler.nextMajorCheckpoint = starting_line.nextMajorCheckpoint
