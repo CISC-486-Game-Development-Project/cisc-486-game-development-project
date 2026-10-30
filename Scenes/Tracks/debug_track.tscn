@@ -82,6 +82,7 @@ height = 10.0
 script = ExtResource("1_q5xdn")
 track_music = ExtResource("2_xc45i")
 player_kart = ExtResource("1_wqmp7")
+cpu_kart = ExtResource("13_5unjq")
 pause_screen_scene = ExtResource("5_wgl67")
 hud_scene = ExtResource("5_xc45i")
 player_spawn_position = Vector3(5, 1, 30)
