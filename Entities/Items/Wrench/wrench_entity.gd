@@ -1,4 +1,4 @@
-class_name Shell
+class_name Wrench
 extends CharacterBody3D
 
 # Export Vars

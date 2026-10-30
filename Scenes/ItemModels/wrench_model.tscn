@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://duev7ddaasyi"]
+
+[ext_resource type="Script" uid="uid://iv2xakukupsd" path="res://Scenes/ItemModels/item_model.gd" id="1_m1rh1"]
+[ext_resource type="PackedScene" uid="uid://75lyd1c5kws3" path="res://Assets/3D/Models/Powerups/SM_Wrench_Pickup.fbx" id="2_jkcus"]
+[ext_resource type="Script" uid="uid://bcubef2xy50jd" path="res://Components/Hitbox/hitbox.gd" id="3_b7c7l"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vs4ik"]
+height = 0.4
+radius = 1.1
+
+[node name="WrenchModel" type="Node3D" unique_id=183529910]
+script = ExtResource("1_m1rh1")
+metadata/_custom_type_script = "uid://iv2xakukupsd"
+
+[node name="WrenchMesh" parent="." unique_id=1848530308 instance=ExtResource("2_jkcus")]
+transform = Transform3D(-2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-08, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="Hitbox" type="Area3D" parent="." unique_id=989158908]
+script = ExtResource("3_b7c7l")
+metadata/_custom_type_script = "uid://bcubef2xy50jd"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=478079199]
+shape = SubResource("CylinderShape3D_vs4ik")

@@ -257,6 +257,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3330574, 1.8510174, 33.580
 
 [node name="CPUKart3D" parent="." unique_id=32768770 instance=ExtResource("13_5unjq")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -10.68, 1, 29.59)
+drive_sfx = null
 
 [node name="ItemBlock" parent="." unique_id=1976244613 instance=ExtResource("12_ojj8n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.801186, 1.3053291, 30.479073)
@@ -264,12 +265,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.801186, 1.3053291, 30.479
 [node name="ItemBlock2" parent="." unique_id=1842701422 instance=ExtResource("12_ojj8n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.700344, 1.3053291, 30.479073)
 
-[node name="Checkpoint" parent="." unique_id=2087625636 node_paths=PackedStringArray("nextCheckpoint") instance=ExtResource("13_reyh8")]
+[node name="Checkpoint" parent="." unique_id=2087625636 node_paths=PackedStringArray("next_checkpoint") instance=ExtResource("13_reyh8")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14.89901, 1.1519282, 34.5672)
-nextCheckpoint = NodePath("../Checkpoint2")
+next_checkpoint = NodePath("../Checkpoint2")
 major = true
 
-[node name="Checkpoint2" parent="." unique_id=1717947 node_paths=PackedStringArray("nextCheckpoint") instance=ExtResource("13_reyh8")]
+[node name="Checkpoint2" parent="." unique_id=1717947 node_paths=PackedStringArray("next_checkpoint") instance=ExtResource("13_reyh8")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14.89901, 1.1519282, -31.952856)
-nextCheckpoint = NodePath("../Checkpoint")
+next_checkpoint = NodePath("../Checkpoint")
 major = true

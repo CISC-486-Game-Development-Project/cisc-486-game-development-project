@@ -31,7 +31,7 @@ func handle_input() -> void:
 ## Updates the required information from the kart to be used in determining this frame's actions.
 func _update_information() -> void:
 	current_location = kart.global_position
-	if (kart.race_handler.most_recent_checkpoint and kart.navigation_agent_3d.target_position != kart.race_handler.most_recent_checkpoint.next_checkpoint.global_position) or target_update_timer > target_update_time:
+	if kart.race_handler.most_recent_checkpoint and (kart.navigation_agent_3d.target_position != kart.race_handler.most_recent_checkpoint.next_checkpoint.global_position or target_update_timer > target_update_time):
 		kart.navigation_agent_3d.target_position = kart.race_handler.most_recent_checkpoint.next_checkpoint.global_position
 		target_update_timer = 0.0
 	if kart.offroad_factor > 0.0:
