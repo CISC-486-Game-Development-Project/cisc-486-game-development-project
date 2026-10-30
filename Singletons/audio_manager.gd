@@ -28,7 +28,7 @@ var voice_volume: float = 0.75
 ###################
 
 ## Plays a sound.
-func create_sound(sound: AudioStream, type: SoundType = SoundType.SFX) -> void:
+func create_sound(sound: AudioStream, type: SoundType = SoundType.SFX) -> AudioStreamPlayer:
 	# Create new AudioStreamPlayer based on input AudioStream
 	var new_sound: AudioStreamPlayer = AudioStreamPlayer.new()
 	new_sound.stream = sound
@@ -47,9 +47,10 @@ func create_sound(sound: AudioStream, type: SoundType = SoundType.SFX) -> void:
 	# Add to scene and play sound
 	add_child(new_sound)
 	new_sound.play()
+	return new_sound
 
 ## Plays a positional sound at a specified location.
-func create_sound_at_position(sound: AudioStream, location: Vector3, type: SoundType = SoundType.SFX) -> void:
+func create_sound_at_position(sound: AudioStream, location: Vector3, type: SoundType = SoundType.SFX) -> AudioStreamPlayer3D:
 	# Create new AudioStreamPlayer3D based on input AudioStream
 	var new_sound: AudioStreamPlayer3D = AudioStreamPlayer3D.new()
 	new_sound.stream = sound
@@ -69,9 +70,10 @@ func create_sound_at_position(sound: AudioStream, location: Vector3, type: Sound
 	add_child(new_sound)
 	new_sound.position = location
 	new_sound.play()
+	return new_sound
 
 ## Plays a positional sound attached to a specified parent node.
-func create_sound_with_parent(sound: AudioStream, parent: Node3D, type: SoundType = SoundType.SFX) -> void:
+func create_sound_with_parent(sound: AudioStream, parent: Node3D, type: SoundType = SoundType.SFX) -> AudioStreamPlayer3D:
 	# Create new AudioStreamPlayer3D based on input AudioStream
 	var new_sound: AudioStreamPlayer3D = AudioStreamPlayer3D.new()
 	new_sound.stream = sound
@@ -90,6 +92,7 @@ func create_sound_with_parent(sound: AudioStream, parent: Node3D, type: SoundTyp
 	# Add to parent node and play sound
 	parent.add_child(new_sound)
 	new_sound.play()
+	return new_sound
 
 ## Called when a sound is finished to remove it from the stored sound arrays and free the node playing the sound.
 func _erase_sound(sound: Node) -> void:
@@ -104,7 +107,7 @@ func _erase_sound(sound: Node) -> void:
 #####################
 
 ## Changes the background music to a specified track.
-func change_bgm(music: AudioStream, crossfade: bool = true, force_restart: bool = false, crossfade_time: float = DEFAULT_CROSSFADE_TIME) -> void:
+func change_bgm(music: AudioStream, crossfade: bool = true, force_restart: bool = false, crossfade_time: float = DEFAULT_CROSSFADE_TIME) -> AudioStreamPlayer:
 	# Don't change bgm if music is the same as current_music unless force_restart is true
 	if current_music and not force_restart:
 		if current_music.stream == music:
@@ -148,6 +151,7 @@ func change_bgm(music: AudioStream, crossfade: bool = true, force_restart: bool 
 		fade_tween.tween_callback(old_music.queue_free) # Free old_music once crossfade is finished
 	elif old_music:
 		old_music.queue_free() # Free old_music if it exists after bgm changed
+	return new_music
 
 ## Stops currently playing backrgound music.
 func stop_bgm() -> void:

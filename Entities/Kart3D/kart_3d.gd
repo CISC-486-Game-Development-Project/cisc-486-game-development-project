@@ -69,6 +69,7 @@ extends CharacterBody3D
 
 @export_group("Sound Effects")
 @export var trick_sfx: Array[AudioStream] ## SFX that will be played during sequentially comboed tricks.
+@export var drive_sfx: AudioStream ## Dynamic SFX that plays while driving
 
 # Onready Vars
 @onready var kart_model: Node3D = $KartModel
@@ -92,8 +93,6 @@ extends CharacterBody3D
 @onready var trick_cooldown_timer: Timer = $TrickCooldownTimer
 @onready var trick_combo_timer: Timer = $TrickComboTimer
 
-@onready var drive_sfx: AudioStreamPlayer3D = $DriveSFX
-
 @onready var debug_kart: KartModel = $KartModel/AnimationPivot/DebugKart
 @onready var debug_label_3d: Label3D = $DebugLabel3D
 
@@ -103,6 +102,7 @@ extends CharacterBody3D
 # Components
 var wheels: Array[Wheel] ## The array of Wheel objects attaced to this kart.
 var hitbox: Hitbox ## The hitbox of this kart.
+var drive_sfx_player: AudioStreamPlayer3D ## The SFX that plays while driving.
 
 # Stats
 var top_speed: float ## Defines the top speed.
@@ -186,6 +186,7 @@ func _ready() -> void:
 		hitbox.on_hit.connect(hit)
 		collision_shape_3d.shape = kart.collision_shape_3d.shape
 		drift_particles.process_material = drift_particles.process_material.duplicate() # TODO: Make a particle manager later
+		drive_sfx_player = AudioManager.create_sound_with_parent(drive_sfx, self)
 		
 		# Set kart's stats
 		set_stats()
@@ -433,8 +434,8 @@ func hit(hitter_hitbox: Hitbox, velocity_reduction_factor: float = 0.4, vertical
 func _handle_sfx() -> void:
 	# Set pitch and volume based on horizontal speed
 	# TODO: Hacky way of implementing this, update it to be more dynamic later
-	drive_sfx.pitch_scale = remap(get_horizontal_velocity().length(), 0.0, 50.0, 1.0, 2.0)
-	drive_sfx.volume_linear = clampf(remap(get_horizontal_velocity().length(), 0.0, 20.0, 0.0, 0.15), 0.0, 0.15)
+	drive_sfx_player.pitch_scale = remap(get_horizontal_velocity().length(), 0.0, 50.0, 1.0, 2.0)
+	drive_sfx_player.volume_linear = clampf(remap(get_horizontal_velocity().length(), 0.0, 20.0, 0.0, 0.15), 0.0, 0.15)
 
 #######################
 ## Getters & Setters ##

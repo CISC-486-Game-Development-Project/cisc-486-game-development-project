@@ -267,6 +267,7 @@ base_max_steering_angle_fast = 3.0
 base_handbrake_steering_velocity = 45.0
 base_air_steering_velocity = 40.0
 trick_sfx = Array[AudioStream]([ExtResource("3_7apc5"), ExtResource("4_q7q2k"), ExtResource("5_3khwq"), ExtResource("6_0767e"), ExtResource("7_mehc1"), ExtResource("8_8lscg")])
+drive_sfx = ExtResource("10_8lscg")
 
 [node name="KartModel" type="Node3D" parent="." unique_id=510578739]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.325, 0)
@@ -314,13 +315,6 @@ explosiveness = 1.0
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_r41fb")
 draw_pass_1 = SubResource("QuadMesh_iwjoc")
-
-[node name="DriveSFX" type="AudioStreamPlayer3D" parent="." unique_id=244414122]
-stream = ExtResource("10_8lscg")
-volume_db = -80.0
-max_db = 0.0
-autoplay = true
-doppler_tracking = 2
 
 [node name="TrickCoyoteTimer" type="Timer" parent="." unique_id=1157052154]
 wait_time = 0.1
