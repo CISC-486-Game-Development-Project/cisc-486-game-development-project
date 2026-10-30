@@ -50,8 +50,8 @@ func _process(_delta: float) -> void:
 func _set_position(new_position: int):
 	if position == new_position:
 		return
-	position_changed.emit(new_position)
 	position = new_position
+	position_changed.emit(new_position)
 
 func _set_lap(new_lap: int):
 	lap_changed.emit(new_lap)

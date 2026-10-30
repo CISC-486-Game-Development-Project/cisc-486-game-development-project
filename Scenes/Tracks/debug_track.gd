@@ -56,11 +56,11 @@ func _ready() -> void:
 			create_player(i, KartType.CPU)
 	
 	starting_line.checkpoint_index = 0
-	var tempCheckpoint : Checkpoint = starting_line.next_checkpoint
+	var temp_checkpoint : Checkpoint = starting_line.next_checkpoint
 	var i : int = 1
-	while tempCheckpoint != starting_line:
-		tempCheckpoint.checkpoint_index = i
-		tempCheckpoint = tempCheckpoint.next_checkpoint
+	while temp_checkpoint != starting_line:
+		temp_checkpoint.checkpoint_index = i
+		temp_checkpoint = temp_checkpoint.next_checkpoint
 		i += 1
 	checkpoint_count = i
 	
