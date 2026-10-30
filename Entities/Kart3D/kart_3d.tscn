@@ -345,6 +345,9 @@ one_shot = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=858611665]
 libraries/ = SubResource("AnimationLibrary_7dnbs")
 
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=270511629]
+debug_enabled = true
+
 [node name="ItemHandler" type="Node" parent="." unique_id=1682402239 node_paths=PackedStringArray("kart")]
 script = ExtResource("10_3khwq")
 kart = NodePath("..")

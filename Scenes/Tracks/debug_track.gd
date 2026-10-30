@@ -4,6 +4,7 @@ extends Node3D
 
 @export var track_music: AudioStream ## Music to play while on this track.
 @export var player_kart: PackedScene
+@export var cpu_kart: PackedScene
 @export var pause_screen_scene: PackedScene
 @export var hud_scene: PackedScene
 @export var player_spawn_position: Vector3
@@ -21,6 +22,8 @@ var karts: Array[Kart3D]
 var finished_karts: Array[Kart3D]
 var checkpoint_count: int
 
+enum KartType {PLAYER, CPU}
+
 func _ready() -> void:
 	# Begin music
 	AudioManager.change_bgm.call_deferred(track_music)
@@ -37,7 +40,9 @@ func _ready() -> void:
 		splitscreen_root.hide()
 		
 		# Add one player
-		create_player(0)
+		create_player(0, KartType.PLAYER)
+		for i in range(1, 4):
+			create_player(i, KartType.CPU)
 	else:
 		splitscreen_root.show()
 		
@@ -46,7 +51,9 @@ func _ready() -> void:
 		
 		# Add multiple players
 		for i in range(Globals.player_count):
-			create_player(i, sub_viewports[i])
+			create_player(i, KartType.PLAYER, sub_viewports[i])
+		for i in range(Globals.player_count, 4):
+			create_player(i, KartType.CPU)
 	
 	starting_line.checkpointIndex = 0
 	var tempCheckpoint : Checkpoint = starting_line.nextCheckpoint
@@ -60,15 +67,20 @@ func _ready() -> void:
 	RaceManager.start_countdown()
 
 ## Creates a player, player_num starts at 0, if parent_array is defined 
-func create_player(player_num: int, player_parent=self) -> void:
-	var new_player = player_kart.instantiate()
+func create_player(player_num: int, kart_type: KartType, player_parent=self, ) -> void:
+	var new_player: Kart3D
+	if kart_type == KartType.PLAYER:
+		new_player = player_kart.instantiate()
+		new_player.input_handler.player_num = player_num + 1
+	else:
+		new_player = cpu_kart.instantiate()
 	if Globals.selected_characters[player_num]:
 		new_player.kart_stats = Globals.selected_characters[player_num].stats
-	new_player.input_handler.player_num = player_num + 1
 	player_parent.add_child(new_player)
-	new_player.global_position = player_spawn_position * Vector3(player_num+1, 1, 1)
+	new_player.global_position = player_spawn_position + Vector3(player_num*5, 1, 1)
 	new_player.global_rotation_degrees.y = player_spawn_rotation
 	new_player.race_handler.mostRecentlyPassed = starting_line
+	new_player.race_handler.next_checkpoint_plane = starting_line.nextCheckpoint.boundary_plane
 	new_player.race_handler.nextMajorCheckpoint = starting_line.nextMajorCheckpoint
 	new_player.race_handler.race_laps = race_laps
 	new_player.race_handler.finished.connect(kart_finished.bind(new_player))

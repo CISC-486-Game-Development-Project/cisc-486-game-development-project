@@ -27,7 +27,9 @@ func handle_input() -> void:
 ## Updates the required information from the kart to be used in determining this frame's actions.
 func _update_information() -> void:
 	current_location = kart.global_position
-	current_target = kart.global_position - kart.global_basis.z + kart.global_basis.x
+	if kart.race_handler.mostRecentlyPassed and kart.navigation_agent_3d.target_position != kart.race_handler.mostRecentlyPassed.nextCheckpoint.global_position:
+		kart.navigation_agent_3d.target_position = kart.race_handler.mostRecentlyPassed.nextCheckpoint.global_position
+	current_target = kart.navigation_agent_3d.get_next_path_position()
 	current_velocity = kart.velocity
 	distance_to_target = current_location.distance_to(current_target)
 	direction_to_target = current_location.direction_to(current_target)
@@ -44,10 +46,11 @@ func _handle_steering() -> float:
 
 ## Returns a float for how the CPU should accelerate this frame (-1.0 for backwards, 1.0 for forwards).
 func _handle_acceleration() -> float:
-	return 1.0 # Always accelerate
+	return 0.1 # Always accelerate
 
 ## Returns a bool for if the CPU should hop this frame.
 func _handle_hopping() -> bool:
+	return false
 	# Hop if one of the raycasts aren't colliding, might be able to trick
 	if not kart.trick_ray_cast_3d.is_colliding():
 		return true

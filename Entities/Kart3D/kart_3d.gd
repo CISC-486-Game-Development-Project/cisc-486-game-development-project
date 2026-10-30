@@ -97,6 +97,8 @@ extends CharacterBody3D
 @onready var debug_kart: KartModel = $KartModel/AnimationPivot/DebugKart
 @onready var debug_label_3d: Label3D = $DebugLabel3D
 
+@onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
+
 # Internal Vars
 # Components
 var wheels: Array[Wheel] ## The array of Wheel objects attaced to this kart.
