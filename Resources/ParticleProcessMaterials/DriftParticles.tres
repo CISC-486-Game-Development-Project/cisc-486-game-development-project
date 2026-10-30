@@ -1,0 +1,14 @@
+[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://opeehht13fv2"]
+
+[sub_resource type="Curve" id="Curve_u7k8n"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_i8lfl"]
+curve = SubResource("Curve_u7k8n")
+
+[resource]
+direction = Vector3(0, 0, 0)
+initial_velocity_max = 0.5
+gravity = Vector3(0, 1, 0)
+alpha_curve = SubResource("CurveTexture_i8lfl")

@@ -55,12 +55,12 @@ func _ready() -> void:
 		for i in range(Globals.player_count, 4):
 			create_player(i, KartType.CPU)
 	
-	starting_line.checkpointIndex = 0
-	var tempCheckpoint : Checkpoint = starting_line.nextCheckpoint
+	starting_line.checkpoint_index = 0
+	var tempCheckpoint : Checkpoint = starting_line.next_checkpoint
 	var i : int = 1
 	while tempCheckpoint != starting_line:
-		tempCheckpoint.checkpointIndex = i
-		tempCheckpoint = tempCheckpoint.nextCheckpoint
+		tempCheckpoint.checkpoint_index = i
+		tempCheckpoint = tempCheckpoint.next_checkpoint
 		i += 1
 	checkpoint_count = i
 	
@@ -79,9 +79,9 @@ func create_player(player_num: int, kart_type: KartType, player_parent=self, ) -
 	player_parent.add_child(new_player)
 	new_player.global_position = player_spawn_position + Vector3(player_num*5, 1, 1)
 	new_player.global_rotation_degrees.y = player_spawn_rotation
-	new_player.race_handler.mostRecentlyPassed = starting_line
-	new_player.race_handler.next_checkpoint_plane = starting_line.nextCheckpoint.boundary_plane
-	new_player.race_handler.nextMajorCheckpoint = starting_line.nextMajorCheckpoint
+	new_player.race_handler.most_recent_checkpoint = starting_line
+	new_player.race_handler.next_checkpoint_plane = starting_line.next_checkpoint.boundary_plane
+	new_player.race_handler.next_major_checkpoint = starting_line.next_major_checkpoint
 	new_player.race_handler.race_laps = race_laps
 	new_player.race_handler.finished.connect(kart_finished.bind(new_player))
 	karts.append(new_player)
@@ -95,7 +95,7 @@ func calculate_positions():
 	#for kart in karts:
 		#if kart in finished_karts:
 			#continue
-		#ranked_kart_positions[kart.race_handler.lap][kart.race_handler.mostRecentlyPassed.checkpointIndex].append(kart)
+		#ranked_kart_positions[kart.race_handler.lap][kart.race_handler.most_recent_checkpoint.checkpoint_index].append(kart)
 	var placement = len(finished_karts)
 	for i in range(race_laps): #Check if this is number of laps
 		for j in range(checkpoint_count):
@@ -108,7 +108,7 @@ func calculate_positions():
 				"""
 	# Finished players have their position locked.
 	# Sort unfinished players by laps completed
-	# Break ties with their mostRecentlyPassed's checkpoint index
+	# Break ties with their most_recent_checkpoint's checkpoint index
 	# Break ties with their distance to the next checkpoint.
 	var unfinished_karts: Array[Kart3D]
 	for kart in karts:
@@ -123,8 +123,8 @@ func calculate_positions():
 func _placement_priority(kart_a, kart_b) -> bool:
 	if kart_a.race_handler.lap != kart_b.race_handler.lap:
 		return kart_a.race_handler.lap > kart_b.race_handler.lap
-	if kart_a.race_handler.mostRecentlyPassed.checkpointIndex != kart_b.race_handler.mostRecentlyPassed.checkpointIndex:
-		return kart_a.race_handler.mostRecentlyPassed.checkpointIndex > kart_b.race_handler.mostRecentlyPassed.checkpointIndex
+	if kart_a.race_handler.most_recent_checkpoint.checkpoint_index != kart_b.race_handler.most_recent_checkpoint.checkpoint_index:
+		return kart_a.race_handler.most_recent_checkpoint.checkpoint_index > kart_b.race_handler.most_recent_checkpoint.checkpoint_index
 	return kart_a.race_handler.distance_to_next_checkpoint < kart_b.race_handler.distance_to_next_checkpoint
 
 func kart_finished(kart):

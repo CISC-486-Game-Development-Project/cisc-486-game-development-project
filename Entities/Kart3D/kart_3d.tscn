@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://b81fhm3o6wy5v" path="res://Components/ItemHandler/item_handler.gd" id="10_3khwq"]
 [ext_resource type="Script" uid="uid://bbrw2uverowic" path="res://Components/StateMachine/States/hop_state.gd" id="10_4muo4"]
 [ext_resource type="AudioStream" uid="uid://7hxvodiv5qlo" path="res://Assets/Audio/SFX/KartDrive.wav" id="10_8lscg"]
+[ext_resource type="Material" uid="uid://opeehht13fv2" path="res://Resources/ParticleProcessMaterials/DriftParticles.tres" id="10_u1ost"]
 [ext_resource type="Script" uid="uid://b2lqg5xhq7se0" path="res://Components/StateMachine/States/drift_state.gd" id="11_y2xwn"]
 [ext_resource type="Script" uid="uid://bmua4qbuf0vev" path="res://Components/StateMachine/States/trick_state.gd" id="12_kwn18"]
 [ext_resource type="Script" uid="uid://dipl7saf1mwxk" path="res://Components/RaceHandler/race_handler.gd" id="13_8lscg"]
@@ -60,22 +61,16 @@ billboard_mode = 1
 material = SubResource("StandardMaterial3D_klxp6")
 size = Vector2(0.1, 0.1)
 
+[sub_resource type="QuadMesh" id="QuadMesh_7dnbs"]
+material = SubResource("StandardMaterial3D_klxp6")
+size = Vector2(0.1, 0.1)
+
 [sub_resource type="Curve" id="Curve_u7k8n"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_i8lfl"]
 curve = SubResource("Curve_u7k8n")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wo5un"]
-direction = Vector3(0, 0, 0)
-initial_velocity_max = 0.5
-gravity = Vector3(0, 1, 0)
-alpha_curve = SubResource("CurveTexture_i8lfl")
-
-[sub_resource type="QuadMesh" id="QuadMesh_7dnbs"]
-material = SubResource("StandardMaterial3D_klxp6")
-size = Vector2(0.1, 0.1)
 
 [sub_resource type="Gradient" id="Gradient_iwjoc"]
 offsets = PackedFloat32Array(0, 0.6886792)
@@ -284,6 +279,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.325, 0)
 
 [node name="DebugLabel3D" type="Label3D" parent="." unique_id=2145134111]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 billboard = 1
 text = "Debug Label: Visible"
 vertical_alignment = 2
@@ -307,7 +303,7 @@ draw_pass_1 = SubResource("QuadMesh_r80q4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 emitting = false
 local_coords = true
-process_material = SubResource("ParticleProcessMaterial_wo5un")
+process_material = ExtResource("10_u1ost")
 draw_pass_1 = SubResource("QuadMesh_7dnbs")
 
 [node name="TrickParticles" type="GPUParticles3D" parent="." unique_id=674311255]
@@ -346,6 +342,8 @@ one_shot = true
 libraries/ = SubResource("AnimationLibrary_7dnbs")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=270511629]
+path_desired_distance = 5.0
+target_desired_distance = 5.0
 debug_enabled = true
 
 [node name="ItemHandler" type="Node" parent="." unique_id=1682402239 node_paths=PackedStringArray("kart")]

@@ -185,6 +185,7 @@ func _ready() -> void:
 		hitbox.reparent(self)
 		hitbox.on_hit.connect(hit)
 		collision_shape_3d.shape = kart.collision_shape_3d.shape
+		drift_particles.process_material = drift_particles.process_material.duplicate() # TODO: Make a particle manager later
 		
 		# Set kart's stats
 		set_stats()
