@@ -70,7 +70,8 @@ layout_mode = 2
 [node name="Title" type="Label" parent="MarginContainer/VBoxContainer" unique_id=495874356]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Title"
+text = "Public
+Domain Kart"
 label_settings = SubResource("LabelSettings_2v5bn")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -78,7 +79,6 @@ vertical_alignment = 1
 [node name="Subtitle" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1401487257]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Subtitle"
 label_settings = SubResource("LabelSettings_whrq5")
 horizontal_alignment = 1
 vertical_alignment = 1

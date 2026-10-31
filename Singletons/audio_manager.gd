@@ -15,8 +15,8 @@ enum SoundType {
 # Internal Vars
 var current_music: AudioStreamPlayer
 var current_sync_index: int
-var current_sfx: Array = []
-var current_voices: Array = []
+var current_sfx: Array = []: get = _get_current_sfx
+var current_voices: Array = []: get = _get_current_voices
 
 var master_volume: float = 0.75
 var music_volume: float = 0.75
@@ -245,3 +245,20 @@ func _update_volumes() -> void:
 	# Update voice volumes
 	for voice in current_voices:
 		voice.volume_linear = master_volume * voice_volume
+
+######################
+## Getter Functions ##
+######################
+
+func _get_current_sfx() -> Array:
+	print("getting sfx") # TODO: Fix this function not running when volumes updating. (get isn't working?)
+	for i in len(current_sfx):
+		if current_sfx[i] == null:
+			current_sfx.erase(i)
+	return current_sfx
+
+func _get_current_voices() -> Array:
+	for i in len(current_voices):
+		if current_voices[i] == null:
+			current_voices.erase(i)
+	return current_voices
