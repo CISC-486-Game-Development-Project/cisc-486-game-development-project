@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://d2qxks6q725n"]
+
+[ext_resource type="Script" uid="uid://bd2frnw8tk58m" path="res://Scenes/Menus/Results/results.gd" id="1_1ngmh"]
+[ext_resource type="FontFile" uid="uid://c2gld37y6b17m" path="res://Assets/2D/Fonts/DeltaBlock.ttf" id="1_7grdj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1ngmh"]
+font = ExtResource("1_7grdj")
+font_size = 128
+outline_size = 32
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 16
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(12, 12)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7grdj"]
+font = ExtResource("1_7grdj")
+font_size = 100
+outline_size = 32
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 16
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(12, 12)
+
+[node name="Results" type="Control" unique_id=753493978]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1ngmh")
+main_menu_scene = "uid://b4byg6rmq7m24"
+
+[node name="Label" type="Label" parent="." unique_id=679963417]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -28.0
+offset_right = 28.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Results"
+label_settings = SubResource("LabelSettings_1ngmh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1500148180]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -896.0
+offset_top = -228.0
+offset_right = 896.0
+offset_bottom = 228.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=2029072000]
+layout_mode = 2
+text = "1 - Player 1"
+label_settings = SubResource("LabelSettings_7grdj")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer" unique_id=663245082]
+layout_mode = 2
+text = "2 - Player 2"
+label_settings = SubResource("LabelSettings_7grdj")
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="VBoxContainer" unique_id=1915804593]
+layout_mode = 2
+text = "3 - Player 3"
+label_settings = SubResource("LabelSettings_7grdj")
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="VBoxContainer" unique_id=1489474831]
+layout_mode = 2
+text = "4 - Player 4"
+label_settings = SubResource("LabelSettings_7grdj")
+horizontal_alignment = 1
+
+[node name="MainMenuButton" type="Button" parent="." unique_id=1240015641]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -78.5
+offset_top = -31.0
+offset_right = 78.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "Back to Main Menu"
+
+[connection signal="pressed" from="MainMenuButton" to="." method="_on_main_menu_button_pressed"]

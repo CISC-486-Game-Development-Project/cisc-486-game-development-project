@@ -51,11 +51,11 @@ func _handle_joypads() -> void:
 		if len(joypads) >= i+1:
 			controller_images[i].texture = controller_texture
 			controller_names[i].text = Input.get_joy_name(joypads[i])
-			Globals.player_devices[i] = joypads[i]
+			RaceManager.player_devices[i] = joypads[i]
 		else:
 			controller_images[i].texture = null
 			controller_names[i].text = ""
-			Globals.player_devices[i] = -1
+			RaceManager.player_devices[i] = -1
 
 ## Play a quick tween animation on a controller image.
 ## Called when a joypad button is pressed.
@@ -68,7 +68,7 @@ func _tween_controller_image(image: TextureRect) -> void:
 
 ## Called when the next button is pressed.
 func _next_scene() -> void:
-	Globals.player_count = clampi(len(Input.get_connected_joypads()), 1, 4)
+	RaceManager.player_count = clampi(len(Input.get_connected_joypads()), 1, 4)
 	SceneManager.change_scene(next_scene, SceneManager.SLIDE_FORWARD)
 
 ## Called when the back button is pressed.

@@ -41,8 +41,8 @@ func _action_name(base: StringName) -> StringName:
 
 ## Sets up the InputMap to hold this player's specific actions.
 func _setup_player_actions() -> void:
-	# Get device from Globals (device = the device id of the controller being used by this player)
-	var device: int = Globals.player_devices[player_num - 1] 
+	# Get device from RaceManager (device = the device id of the controller being used by this player)
+	var device: int = RaceManager.player_devices[player_num - 1] 
 	
 	# Add player specific actions to the InputMap based on BASE_ACTIONS
 	for base_action in BASE_ACTIONS:
