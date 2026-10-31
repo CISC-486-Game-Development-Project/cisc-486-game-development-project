@@ -36,7 +36,7 @@ func _ready() -> void:
 	splitscreen_root = hud.get_node("SplitscreenRoot")
 	
 	# Add players to scene
-	if Globals.player_count == 1:
+	if RaceManager.player_count == 1:
 		splitscreen_root.hide()
 		
 		# Add one player
@@ -50,9 +50,9 @@ func _ready() -> void:
 		sub_viewports = splitscreen_root.sub_viewports
 		
 		# Add multiple players
-		for i in range(Globals.player_count):
+		for i in range(RaceManager.player_count):
 			create_player(i, KartType.PLAYER, sub_viewports[i])
-		for i in range(Globals.player_count, 4):
+		for i in range(RaceManager.player_count, 4):
 			create_player(i, KartType.CPU)
 	
 	starting_line.checkpoint_index = 0
@@ -74,8 +74,7 @@ func create_player(player_num: int, kart_type: KartType, player_parent=self, ) -
 		new_player.input_handler.player_num = player_num + 1
 	else:
 		new_player = cpu_kart.instantiate()
-	if Globals.selected_characters[player_num]:
-		new_player.kart_stats = Globals.selected_characters[player_num].stats
+	new_player.kart_stats = RaceManager.kart_characters[player_num].stats
 	player_parent.add_child(new_player)
 	new_player.global_position = player_spawn_position + Vector3(player_num*5, 1, 1)
 	new_player.global_rotation_degrees.y = player_spawn_rotation
@@ -129,3 +128,15 @@ func _placement_priority(kart_a, kart_b) -> bool:
 
 func kart_finished(kart):
 	finished_karts.append(kart)
+	calculate_positions()
+	var karts_ranked: Array[int]
+	for all_kart in karts:
+		print(all_kart.position)
+		if all_kart not in finished_karts:
+			if all_kart.is_player:
+				return
+		karts_ranked.append(all_kart.race_handler.position)
+	print(karts_ranked)
+	# All players have finished
+	RaceManager.race_finished(karts_ranked)
+	SceneManager.change_scene.call_deferred("res://Scenes/Menus/Results/results.tscn")

@@ -56,7 +56,7 @@ func _input(event: InputEvent) -> void:
 
 ## Called when the singleplayer button is pressed.
 func _on_singleplayer_pressed() -> void:
-	Globals.player_count = 1
+	RaceManager.player_count = 1
 	SceneManager.change_scene(singleplayer_scene, SceneManager.SLIDE_FORWARD)
 
 ## Called when the multiplayer button is pressed.

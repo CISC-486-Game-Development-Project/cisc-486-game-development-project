@@ -53,10 +53,12 @@ func _ready() -> void:
 				child.queue_free()
 	
 	# Set number of characters to be selected & reset selected characters
-	player_count = Globals.player_count
+	player_count = RaceManager.player_count
 	for i in range(player_count):
-		if Globals.selected_characters[i]:
-			Globals.selected_characters[i] = null
+		if RaceManager.kart_characters[i]:
+			RaceManager.kart_characters[i] = null
+	for i in range(player_count, RaceManager.TOTAL_KART_COUNT):
+		RaceManager.kart_characters[i] = character_buttons.pick_random().character # TODO: Either let players choose this or make sure you aren't overlapping with player choices
 	_setup_viewports()
 	
 	# Connect button signals
@@ -83,7 +85,7 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
-		if Globals.selected_characters[player_count-1]:
+		if RaceManager.kart_characters[player_count-1]:
 			return
 		deselect_character()
 	elif event.is_action_pressed("Pause"):
@@ -95,7 +97,7 @@ func _input(event: InputEvent) -> void:
 ## Called when a character is selected.
 func select_character(button: CharacterButton) -> void:
 	# Set player's selected character
-	Globals.selected_characters[player_num-1] = button.character
+	RaceManager.kart_characters[player_num-1] = button.character
 	
 	# Play tween animation & progress character selection process
 	if hover_karts[player_num-1]:
@@ -106,7 +108,7 @@ func select_character(button: CharacterButton) -> void:
 ## Called when a character is deselected.
 func deselect_character() -> void:
 	# Set player's selected character
-	Globals.selected_characters[player_num-1] = null
+	RaceManager.kart_characters[player_num-1] = null
 	
 	# Clean up hovered kart
 	for child in sub_viewports[player_num-1].get_children():
@@ -181,7 +183,7 @@ func _setup_viewports() -> void:
 func _progress_selection() -> void:
 	# Return if not all players have selected characters
 	for i in range(player_count):
-		if not Globals.selected_characters[i]:
+		if not RaceManager.kart_characters[i]:
 			player_num += 1
 			_reset_focus()
 			return
