@@ -1,5 +1,4 @@
-# Group TODO
-- Hold meeting before Sept. 21st to decide on project workflow and submit a project proposal
+Gameplay video: <https://youtu.be/XWxKoz6zXQ0>
 
 ## Lillie
 - Item Behaviour (implementing how items work when used)
