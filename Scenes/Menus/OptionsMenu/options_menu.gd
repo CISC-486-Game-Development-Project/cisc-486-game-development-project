@@ -18,6 +18,7 @@ const OFFSCREEN_POSITION: Vector2 = Vector2(0, 1080) ## The position the menu tw
 # Onready Vars
 @onready var background_panel: Panel = $BackgroundPanel
 @onready var options_container: MarginContainer = $OptionsContainer
+@onready var panel_container: PanelContainer = $OptionsContainer/PanelContainer
 
 # Internal Vars
 var menu_tween: Tween ## The current tween applying to this menu.
@@ -25,6 +26,7 @@ var menu_tween: Tween ## The current tween applying to this menu.
 func _ready() -> void:
 	_set_up_options()
 	hide()
+	set_process_input(false)
 
 ######################
 ## Showing & Hiding ##
@@ -35,6 +37,8 @@ func show_menu() -> void:
 	# Kill previous tween if still running
 	if menu_tween:
 		menu_tween.kill()
+	
+	set_process_input(true)
 	
 	# Create new tween and run
 	menu_tween = create_tween().set_parallel().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
@@ -53,6 +57,8 @@ func hide_menu() -> void:
 	# Kill previous tween if still running
 	if menu_tween:
 		menu_tween.kill()
+	
+	set_process_input(false)
 	
 	# Create new tween and run
 	menu_tween = create_tween().set_parallel().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
@@ -101,3 +107,9 @@ func _on_sfx_volume_changed(value: float) -> void:
 ## Called when the Voices Volume slider emits value_changed signal.
 func _on_voice_volume_changed(value: float) -> void:
 	AudioManager.set_voice_volume(value)
+
+## Only runs when options menu is open, checks for click outside of menu
+func _input(event: InputEvent):
+	# If the event is that the left mouse button was pressed outside of the bounds of PanelContainer (with padding of 50)
+	if event is InputEventMouseButton and event.is_pressed() and event.button_index == 1 and not panel_container.get_rect().grow(50).has_point(event.position):
+		hide_menu()

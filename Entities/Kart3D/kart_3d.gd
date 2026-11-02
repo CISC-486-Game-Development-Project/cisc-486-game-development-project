@@ -435,7 +435,8 @@ func _handle_sfx() -> void:
 	# Set pitch and volume based on horizontal speed
 	# TODO: Hacky way of implementing this, update it to be more dynamic later
 	drive_sfx_player.pitch_scale = remap(get_horizontal_velocity().length(), 0.0, 50.0, 1.0, 2.0)
-	drive_sfx_player.volume_linear = clampf(remap(get_horizontal_velocity().length(), 0.0, 20.0, 0.0, 0.15), 0.0, 0.15)
+	var max_sfx_volume = 0.27*AudioManager.master_volume*AudioManager.sfx_volume
+	drive_sfx_player.volume_linear = clampf(remap(get_horizontal_velocity().length(), 0.0, 20.0, 0.0, max_sfx_volume), 0.0, max_sfx_volume)
 
 #######################
 ## Getters & Setters ##

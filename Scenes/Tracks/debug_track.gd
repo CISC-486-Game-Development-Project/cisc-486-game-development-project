@@ -7,6 +7,7 @@ extends Node3D
 @export var cpu_kart: PackedScene
 @export var pause_screen_scene: PackedScene
 @export var hud_scene: PackedScene
+@export_file var results_screen_scene: String
 @export var player_spawn_position: Vector3
 @export var player_spawn_rotation: float
 @export var starting_line: Checkpoint
@@ -41,7 +42,7 @@ func _ready() -> void:
 		
 		# Add one player
 		create_player(0, KartType.PLAYER)
-		for i in range(1, 4):
+		for i in range(1, RaceManager.TOTAL_KART_COUNT):
 			create_player(i, KartType.CPU)
 	else:
 		splitscreen_root.show()
@@ -52,7 +53,7 @@ func _ready() -> void:
 		# Add multiple players
 		for i in range(RaceManager.player_count):
 			create_player(i, KartType.PLAYER, sub_viewports[i])
-		for i in range(RaceManager.player_count, 4):
+		for i in range(RaceManager.player_count, RaceManager.TOTAL_KART_COUNT):
 			create_player(i, KartType.CPU)
 	
 	starting_line.checkpoint_index = 0
@@ -63,6 +64,8 @@ func _ready() -> void:
 		temp_checkpoint = temp_checkpoint.next_checkpoint
 		i += 1
 	checkpoint_count = i
+	
+	SceneManager.load_scene(results_screen_scene)
 	
 	RaceManager.start_countdown()
 
@@ -131,12 +134,10 @@ func kart_finished(kart):
 	calculate_positions()
 	var karts_ranked: Array[int]
 	for all_kart in karts:
-		print(all_kart.position)
 		if all_kart not in finished_karts:
 			if all_kart.is_player:
 				return
 		karts_ranked.append(all_kart.race_handler.position)
-	print(karts_ranked)
 	# All players have finished
 	RaceManager.race_finished(karts_ranked)
-	SceneManager.change_scene.call_deferred("res://Scenes/Menus/Results/results.tscn")
+	SceneManager.change_scene.call_deferred(results_screen_scene)

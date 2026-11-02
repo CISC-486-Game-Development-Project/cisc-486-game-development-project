@@ -19,6 +19,7 @@ shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(4, 4)
 
 [node name="PauseScreen" type="CanvasLayer" unique_id=608802068 node_paths=PackedStringArray("resume_button", "options_button", "exit_button")]
+layer = 2
 script = ExtResource("1_qkxxw")
 exit_scene = "uid://b4byg6rmq7m24"
 resume_button = NodePath("MarginContainer/HBoxContainer/VBoxContainer/ResumeButton")

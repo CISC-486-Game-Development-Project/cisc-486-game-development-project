@@ -29,15 +29,8 @@ func _ready():
 func _update_laps(new_count: int) -> void:
 	lap_count.text = "%s/%s" % [new_count, race_handler.race_laps]
 
-func _get_position_prefix(position: int):
-	if position < 4:
-		return ["st", "nd", "rd"][position-1]
-	elif position > 20:
-		return _get_position_prefix(position % 10)
-	return "th"
-
 func _update_position(new_position: int) -> void:
-	place.text = str(new_position) + _get_position_prefix(new_position)
+	place.text = str(new_position) + RaceManager.get_position_prefix(new_position)
 
 func _set_item_visual(new_item: Item, slot: int):
 	item_panels[slot].start_roll()

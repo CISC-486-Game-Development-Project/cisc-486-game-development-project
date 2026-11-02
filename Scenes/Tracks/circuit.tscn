@@ -116,6 +116,7 @@ player_kart = ExtResource("3_smo2k")
 cpu_kart = ExtResource("3_b1wkx")
 pause_screen_scene = ExtResource("4_iwi7x")
 hud_scene = ExtResource("5_s3opd")
+results_screen_scene = "uid://d2qxks6q725n"
 player_spawn_position = Vector3(-102.68, 1, -34.132)
 starting_line = NodePath("Checkpoint")
 race_laps = 3

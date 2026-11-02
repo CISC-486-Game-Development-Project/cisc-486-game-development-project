@@ -1,6 +1,5 @@
 extends Node
 
-#TODO: Change these back to longer values
 const COUNTDOWN_LEAD_IN = 1 ## Delay between start of scene and start of countdown
 const COUNTDOWN_SPACING = 1 ## Delay between countdown numbers
 const COUNTDOWN_START_VALUE = 3 ## Value the count starts at
@@ -16,10 +15,9 @@ const TOTAL_KART_COUNT = 4 ## How many karts there will be in the race
 var player_count: int = 1 ## How many players there are in the race
 
 # These three are in the same order
-# TODO: Make these dynamic
-var player_devices: Array[int] = [-1, -1, -1, -1] ## Device ID for controller of each player
-var kart_characters: Array[Character] = [null, null, null, null] ## Character resource for all karts in the race, starts with players
-var kart_points: Array[int] = [0, 0, 0, 0] ## Points of all karts in race, starts with players
+var player_devices: Array[int] ## Device ID for controller of each player, default value of -1
+var kart_characters: Array[Character] ## Character resource for all karts in the race, starts with players
+var kart_points: Array[int] ## Points of all karts in race, starts with players
 
 var last_race_positions: Array[int] # Each index represents the place a player of that id came in the last race
 
@@ -27,6 +25,13 @@ var countdown_time: int = 0: ## 0 when a countdown is not running, -1 when leadi
 	set(new_value):
 		countdown_update.emit(new_value)
 		countdown_time = new_value
+
+func _ready():
+	# Create arrays with correct size and default value
+	player_devices.resize(TOTAL_KART_COUNT)
+	player_devices.fill(-1)
+	kart_characters.resize(TOTAL_KART_COUNT)
+	kart_points.resize(TOTAL_KART_COUNT)
 
 func start_countdown():
 	countdown_time = -1 # Indicates lead in specifically
@@ -48,3 +53,10 @@ func _on_timer_timeout():
 func race_finished(positions: Array[int]):
 	last_race_positions = positions
 	#TODO: Handle points
+
+func get_position_prefix(position: int):
+	if position < 4:
+		return ["st", "nd", "rd"][position-1]
+	elif position > 20:
+		return get_position_prefix(position % 10)
+	return "th"

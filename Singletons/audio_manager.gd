@@ -15,8 +15,8 @@ enum SoundType {
 # Internal Vars
 var current_music: AudioStreamPlayer
 var current_sync_index: int
-var current_sfx: Array = []: get = _get_current_sfx
-var current_voices: Array = []: get = _get_current_voices
+var current_sfx: Array = []
+var current_voices: Array = []
 
 var master_volume: float = 0.75
 var music_volume: float = 0.75
@@ -43,6 +43,7 @@ func create_sound(sound: AudioStream, type: SoundType = SoundType.SFX) -> AudioS
 	
 	# Connect signal to destroy once finished
 	new_sound.finished.connect(_erase_sound.bind(new_sound))
+	new_sound.tree_exiting.connect(_erase_sound.bind(new_sound, true))
 	
 	# Add to scene and play sound
 	add_child(new_sound)
@@ -65,6 +66,7 @@ func create_sound_at_position(sound: AudioStream, location: Vector3, type: Sound
 	
 	# Connect signal to destroy once finished
 	new_sound.finished.connect(_erase_sound.bind(new_sound))
+	new_sound.tree_exiting.connect(_erase_sound.bind(new_sound, true))
 	
 	# Add to scene at position and play sound
 	add_child(new_sound)
@@ -88,6 +90,7 @@ func create_sound_with_parent(sound: AudioStream, parent: Node3D, type: SoundTyp
 	
 	# Connect signal to destroy once finished
 	new_sound.finished.connect(_erase_sound.bind(new_sound))
+	new_sound.tree_exiting.connect(_erase_sound.bind(new_sound, true))
 	
 	# Add to parent node and play sound
 	parent.add_child(new_sound)
@@ -95,12 +98,13 @@ func create_sound_with_parent(sound: AudioStream, parent: Node3D, type: SoundTyp
 	return new_sound
 
 ## Called when a sound is finished to remove it from the stored sound arrays and free the node playing the sound.
-func _erase_sound(sound: Node) -> void:
+func _erase_sound(sound: Node, exiting := false) -> void:
 	if sound in current_sfx:
 		current_sfx.erase(sound)
 	elif sound in current_voices:
 		current_voices.erase(sound)
-	sound.queue_free()
+	if not exiting:
+		sound.queue_free()
 
 #####################
 ## Music Functions ##
@@ -245,20 +249,3 @@ func _update_volumes() -> void:
 	# Update voice volumes
 	for voice in current_voices:
 		voice.volume_linear = master_volume * voice_volume
-
-######################
-## Getter Functions ##
-######################
-
-func _get_current_sfx() -> Array:
-	print("getting sfx") # TODO: Fix this function not running when volumes updating. (get isn't working?)
-	for i in len(current_sfx):
-		if current_sfx[i] == null:
-			current_sfx.erase(i)
-	return current_sfx
-
-func _get_current_voices() -> Array:
-	for i in len(current_voices):
-		if current_voices[i] == null:
-			current_voices.erase(i)
-	return current_voices

@@ -19,20 +19,22 @@ func _ready() -> void:
 	resume_button.pressed.connect(_on_resume_pressed)
 	options_button.pressed.connect(_on_options_pressed)
 	exit_button.pressed.connect(_on_exit_pressed)
-	options_menu.hiding.connect(show)
+	options_menu.hiding.connect(_on_options_menu_hiding)
 	
 	# Load scenes
 	SceneManager.load_scene(exit_scene)
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("Pause"):
-		if get_tree().paused:
-			hide()
-			get_tree().paused = false
-		else:
+		if not get_tree().paused:
 			show()
 			get_tree().paused = true
 			resume_button.grab_focus()
+		elif visible:
+			hide()
+			get_tree().paused = false
+		elif options_menu.visible:
+			options_menu.hide_menu()
 
 ## Called when the resume button is pressed.
 func _on_resume_pressed() -> void:
@@ -43,6 +45,11 @@ func _on_resume_pressed() -> void:
 func _on_options_pressed() -> void:
 	hide()
 	options_menu.show_menu()
+
+## Called when the options menu is being hidden
+func _on_options_menu_hiding() -> void:
+	show()
+	options_button.grab_focus()
 
 ## Called when the exit button is pressed.
 func _on_exit_pressed() -> void:

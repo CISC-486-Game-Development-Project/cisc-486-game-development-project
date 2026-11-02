@@ -15,6 +15,5 @@ func _ready() -> void:
 				sub_viewports.append(sub_viewport)
 	
 	# Set visibility of sub_viewport_containers based on player_count
-	for i in range(4):
-		if i >= RaceManager.player_count:
+	for i in range(RaceManager.player_count, 4):
 			sub_viewport_containers[i].hide()
