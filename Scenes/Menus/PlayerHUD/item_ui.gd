@@ -40,6 +40,8 @@ func stop_roll():
 		rolling = false
 		rolling_textures.visible = false
 		item_texture.visible = true
+		for rolling_child in rolling_textures.get_children():
+			rolling_textures.remove_child(rolling_child)
 
 func _process(_f):
 	if rolling:
