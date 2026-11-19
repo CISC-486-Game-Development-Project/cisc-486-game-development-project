@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://ixmm3y716vcj"
-path="res://.godot/imported/SM_Fence_Flat.fbx-c0eeb827acb7e41f2a6c3cd5f1e150eb.scn"
+uid="uid://j36ivyl6skmf"
+path="res://.godot/imported/SM_Santa.fbx-d7d4e1e75ef35de93dc661317c68fcc0.scn"
 
 [deps]
 
-source_file="res://Assets/3D/Models/Farm/SM_Fence_Flat.fbx"
-dest_files=["res://.godot/imported/SM_Fence_Flat.fbx-c0eeb827acb7e41f2a6c3cd5f1e150eb.scn"]
+source_file="res://Assets/3D/Models/Vehicles/Santa/SM_Santa.fbx"
+dest_files=["res://.godot/imported/SM_Santa.fbx-d7d4e1e75ef35de93dc661317c68fcc0.scn"]
 
 [params]
 

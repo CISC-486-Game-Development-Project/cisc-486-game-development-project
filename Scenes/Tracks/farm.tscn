@@ -10,9 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://d3e4fcn4vnvck" path="res://Assets/3D/Models/Farm/SM_Tractor.fbx" id="8_jwi42"]
 [ext_resource type="PackedScene" uid="uid://dafnpq7goykos" path="res://Assets/3D/Models/Farm/SM_Rake.fbx" id="9_4eai8"]
 [ext_resource type="PackedScene" uid="uid://civujlmhlhoir" path="res://Entities/Checkpoint/checkpoint.tscn" id="10_p1duh"]
-[ext_resource type="PackedScene" uid="uid://cp4q5q0qj65yq" path="res://Assets/3D/Models/Farm/SM_Track_Flat.fbx" id="11_4285d"]
+[ext_resource type="PackedScene" uid="uid://bess1hr8tdtio" path="res://Scenes/TrackParts/sm_track.tscn" id="11_g1tx8"]
 [ext_resource type="PackedScene" uid="uid://hioycd3nj6nh" path="res://Assets/3D/Models/Farm/SM_Fence_String_Flat.fbx" id="12_64850"]
-[ext_resource type="PackedScene" uid="uid://b1cq4c54p38m4" path="res://Assets/3D/Models/Farm/SM_Barn_Flat.fbx" id="13_b2c4f"]
+[ext_resource type="PackedScene" uid="uid://bi2hq3p5sducm" path="res://Scenes/TrackParts/sm_barn_037.tscn" id="13_g1tx8"]
 [ext_resource type="ArrayMesh" uid="uid://b6n4rueforx4o" path="res://Resources/Shaders/Grass/grass.res" id="14_ulpbr"]
 [ext_resource type="Script" uid="uid://ca6obtta5oopp" path="res://addons/mesh_painter/mesh_painter.gd" id="15_stcoa"]
 [ext_resource type="ArrayMesh" uid="uid://gettsak4c77r" path="res://Resources/Shaders/Grass/corn.res" id="16_g23l0"]
@@ -166,16 +166,16 @@ transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.643, -0.17, -0.273)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/TrackParts/Track" unique_id=1428004633]
-transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, 0, 0, 0)
+transform = Transform3D(100, 0, 0, 0, -4.3711384e-06, 99.99999, 0, -99.99999, -4.3711384e-06, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_eocr8")
 
-[node name="SM_Track_Flat" parent="Terrain/TrackParts/Track" unique_id=1194820884 instance=ExtResource("11_4285d")]
+[node name="SM_Track" parent="Terrain/TrackParts/Track" unique_id=1969038440 instance=ExtResource("11_g1tx8")]
 
 [node name="Fences" type="StaticBody3D" parent="Terrain/TrackParts" unique_id=1771635049]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.677, -0.225, -20.138)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/TrackParts/Fences" unique_id=762399988]
-transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, 0, 0, 0)
+transform = Transform3D(100, 0, 0, 0, -4.3711384e-06, 99.99999, 0, -99.99999, -4.3711384e-06, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_h8swb")
 
 [node name="SM_Fence_String_Flat" parent="Terrain/TrackParts/Fences" unique_id=744795425 instance=ExtResource("12_64850")]
@@ -187,7 +187,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.929, 2.96, -3.524)
 transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_i02pu")
 
-[node name="SM_Barn_Flat" parent="Terrain/TrackParts/Barn" unique_id=1992315344 instance=ExtResource("13_b2c4f")]
+[node name="SM_Barn_037" parent="Terrain/TrackParts/Barn" unique_id=1852552973 instance=ExtResource("13_g1tx8")]
 
 [node name="Ground" type="StaticBody3D" parent="Terrain" unique_id=1263379809 groups=["Offroad"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)

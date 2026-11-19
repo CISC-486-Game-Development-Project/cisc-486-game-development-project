@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cp4q5q0qj65yq"
-path="res://.godot/imported/SM_Track_Flat.fbx-49524f52932f9fe099e3d0db7c70b9cd.scn"
+uid="uid://d2yh01xvfo1p"
+path="res://.godot/imported/SM_New_Long_Fence.fbx-2381a2612e510697c3e4803bb899e26e.scn"
 
 [deps]
 
-source_file="res://Assets/3D/Models/Farm/SM_Track_Flat.fbx"
-dest_files=["res://.godot/imported/SM_Track_Flat.fbx-49524f52932f9fe099e3d0db7c70b9cd.scn"]
+source_file="res://Assets/3D/Models/Farm/SM_New_Long_Fence.fbx"
+dest_files=["res://.godot/imported/SM_New_Long_Fence.fbx-2381a2612e510697c3e4803bb899e26e.scn"]
 
 [params]
 

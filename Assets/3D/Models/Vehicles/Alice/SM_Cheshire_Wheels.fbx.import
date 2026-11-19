@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c4mobcs3evxal"
-path="res://.godot/imported/SM_Fence_String.fbx-75248a6481a7d978c149ced13b50cdb6.scn"
+uid="uid://bcvyk5tf1i10f"
+path="res://.godot/imported/SM_Cheshire_Wheels.fbx-29652880618efe059e1193f212678abe.scn"
 
 [deps]
 
-source_file="res://Assets/3D/Models/Farm/SM_Fence_String.fbx"
-dest_files=["res://.godot/imported/SM_Fence_String.fbx-75248a6481a7d978c149ced13b50cdb6.scn"]
+source_file="res://Assets/3D/Models/Vehicles/Alice/SM_Cheshire_Wheels.fbx"
+dest_files=["res://.godot/imported/SM_Cheshire_Wheels.fbx-29652880618efe059e1193f212678abe.scn"]
 
 [params]
 

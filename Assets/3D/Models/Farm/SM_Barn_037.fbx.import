@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://ctp32pq0opu"
-path="res://.godot/imported/SM_Wheat.fbx-d248fa26e77dfdccd62d16707f5c29c9.scn"
+uid="uid://hogxra81p681"
+path="res://.godot/imported/SM_Barn_037.fbx-f41ba43d0e9bec90638a82d3d527882b.scn"
 
 [deps]
 
-source_file="res://Assets/3D/Models/Farm/SM_Wheat.fbx"
-dest_files=["res://.godot/imported/SM_Wheat.fbx-d248fa26e77dfdccd62d16707f5c29c9.scn"]
+source_file="res://Assets/3D/Models/Farm/SM_Barn_037.fbx"
+dest_files=["res://.godot/imported/SM_Barn_037.fbx-f41ba43d0e9bec90638a82d3d527882b.scn"]
 
 [params]
 

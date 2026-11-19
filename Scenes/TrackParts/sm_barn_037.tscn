@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bi2hq3p5sducm"]
+
+[ext_resource type="PackedScene" uid="uid://hogxra81p681" path="res://Assets/3D/Models/Farm/SM_Barn_037.fbx" id="1_fgn62"]
+[ext_resource type="Texture2D" uid="uid://dtj6tuw1i7r58" path="res://Assets/3D/Texture Images/Barn Wood Red Export.png" id="2_xqalp"]
+[ext_resource type="Texture2D" uid="uid://83idhcio07f5" path="res://Assets/3D/Texture Images/Barn Wood Brown Export.png" id="3_a83ln"]
+[ext_resource type="Texture2D" uid="uid://dksq864uw2jl5" path="res://Assets/3D/Texture Images/Barn Wood White Export.png" id="4_12fsb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w5vck"]
+albedo_texture = ExtResource("2_xqalp")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5pi85"]
+albedo_texture = ExtResource("3_a83ln")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vmdl1"]
+albedo_texture = ExtResource("4_12fsb")
+
+[node name="SM_Barn_037" unique_id=1852552973 instance=ExtResource("1_fgn62")]
+
+[node name="Barn_037" parent="." index="0" unique_id=499193413]
+transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, -0.00774765, 0, -0.023638725)
+surface_material_override/0 = SubResource("StandardMaterial3D_w5vck")
+surface_material_override/2 = SubResource("StandardMaterial3D_5pi85")
+surface_material_override/3 = SubResource("StandardMaterial3D_vmdl1")

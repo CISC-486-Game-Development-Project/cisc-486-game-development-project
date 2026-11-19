@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cah2g6ve6jtcx"
-path="res://.godot/imported/SM_Barn.fbx-510892ed18155ebf032b5312a1d6d2aa.scn"
+uid="uid://b212hebh5jgbr"
+path="res://.godot/imported/SM_Alice.fbx-684c54282e973ac3b736388cbdaa4c97.scn"
 
 [deps]
 
-source_file="res://Assets/3D/Models/Farm/SM_Barn.fbx"
-dest_files=["res://.godot/imported/SM_Barn.fbx-510892ed18155ebf032b5312a1d6d2aa.scn"]
+source_file="res://Assets/3D/Models/Vehicles/Alice/SM_Alice.fbx"
+dest_files=["res://.godot/imported/SM_Alice.fbx-684c54282e973ac3b736388cbdaa4c97.scn"]
 
 [params]
 
