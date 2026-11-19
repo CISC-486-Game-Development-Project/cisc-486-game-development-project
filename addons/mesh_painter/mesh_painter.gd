@@ -17,7 +17,18 @@ signal clear_requested ## Emitted when a request to clear all painted meshes is 
 @export var painting: bool = false ## When true, paint functionality is enabled.
 @export var radius: float = 2.0 ## The radius of the paintbrush.
 @export var meshes_per_stroke: int = 40 ## The number of meshes to paint per stroke. Higher = greater density.
-@export var scale_variation: float = 0.2 ## The variation in scale of the meshes, expressed as a percentage.
+@export_custom(PROPERTY_HINT_LINK, "suffix:") var mesh_scale: Vector3 = Vector3.ONE: ## Scale applied to every mesh being painted, relative to the resource's scale.
+	set(value):
+		mesh_scale = value
+		_rebuild_if_ready()
+@export_custom(PROPERTY_HINT_RANGE, "-360, 360, 0.1, radians_as_degrees") var mesh_rotation: Vector3 = Vector3.ZERO: ## Rotation applied to every mesh being painted, in degrees (X = pitch, Y = yaw, Z = roll).
+	set(value):
+		mesh_rotation = value
+		_rebuild_if_ready()
+@export var scale_variation: float = 0.2: ## The variation in scale of the meshes, expressed as a percentage.
+	set(value):
+		scale_variation = value
+		_rebuild_if_ready()
 @export var is_grass: bool ## Determines if the painted meshes will be treated as grass.
 
 @export_storage var points := PackedVector3Array() ## Storage for the points array not exposed to the editor.
@@ -85,18 +96,27 @@ func rebuild() -> void:
 	# Get transform from ground local space to painter local space
 	var to_local := global_transform.affine_inverse() * ground.global_transform
 	
-	# Each mesh gets a random rotation and scale seeded from the mesh's position
+	# Set constant rotation for every mesh
+	var base_rotation := Basis.from_euler(mesh_rotation)
+	
+	# Get orientation from basis
+	var orientation := to_local.basis.orthonormalized()
+	
+	# Each mesh gets a random rotation and variation on it's scale seeded from the mesh's position
 	var rng := RandomNumberGenerator.new()
 	for i in points.size():
 		# Seed with hash map to keep rotation & scale consistent between rebuilds
 		rng.seed = hash(points[i])
 		
-		# Randomize rotation of mesh, then randomize scale of mesh based on scale_variation
-		var b := Basis(Vector3.UP, rng.randf() * TAU)
-		b = b.scaled(Vector3.ONE * rng.randf_range(1 - scale_variation, 1 + scale_variation))
-		
+		# Randomize rotation around the up axis, then randomize scale based on scale_variation
+		var random_yaw := Basis(Vector3.UP, rng.randf() * TAU)
+		var random_scale := rng.randf_range(1 - scale_variation, 1 + scale_variation)
+
+		# Compose in the mesh's local space. Scale first, then the fixed rotation, then the random yaw
+		var b := random_yaw * base_rotation * Basis.from_scale(mesh_scale * random_scale)
+
 		# Apply transform to mesh using local space transformation
-		mm.set_instance_transform(i, Transform3D(to_local.basis.orthonormalized() * b, to_local * points[i]))
+		mm.set_instance_transform(i, Transform3D(orientation * b, to_local * points[i]))
 	
 	# Set MultiMesh to the created MultiMesh
 	multimesh = mm
@@ -110,14 +130,22 @@ func restore_points(new_points: PackedVector3Array) -> void:
 func _invalidate_tri() -> void:
 	_tri_source = null
 
+## Rebuilds the MultiMesh only when the node is in the tree and has everything rebuild() needs.
+func _rebuild_if_ready() -> void:
+	if is_inside_tree() and ground != null and paint_mesh != null and not points.is_empty():
+		rebuild()
+
 func _enter_tree() -> void:
 	if Engine.is_editor_hint():
 		return # Autoloads don't exist in the editor
 	if is_grass: # If grass, add to GrassManager registry
-		GrassManager.register_material(paint_mesh.surface_get_material(0) as ShaderMaterial)
+		for i in range(paint_mesh.get_surface_count()):
+			GrassManager.register_material(paint_mesh.surface_get_material(i) as ShaderMaterial)
 
 func _exit_tree() -> void:
 	if Engine.is_editor_hint():
 		return # Autoloads don't exist in the editor
 	if is_grass: # If grass, remove from GrassManager registry
-		GrassManager.unregister_material(paint_mesh.surface_get_material(0) as ShaderMaterial)
+		for i in range(paint_mesh.get_surface_count()):
+			GrassManager.unregister_material(paint_mesh.surface_get_material(i) as ShaderMaterial)
+		

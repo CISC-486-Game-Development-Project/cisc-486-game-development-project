@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b1cq4c54p38m4"
-path="res://.godot/imported/SM_Barn_Flat.fbx-00e350166425443e3ccbeeb69b340c7f.scn"
+uid="uid://kdp4k7nv34i3"
+path="res://.godot/imported/SM_Corn.fbx-0b95de6f1852686dd8cd36d47322de20.scn"
 
 [deps]
 
-source_file="res://Assets/3D/Models/Farm Level/SM_Barn_Flat.fbx"
-dest_files=["res://.godot/imported/SM_Barn_Flat.fbx-00e350166425443e3ccbeeb69b340c7f.scn"]
+source_file="res://Assets/3D/Models/Farm/SM_Corn.fbx"
+dest_files=["res://.godot/imported/SM_Corn.fbx-0b95de6f1852686dd8cd36d47322de20.scn"]
 
 [params]
 

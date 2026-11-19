@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dafnpq7goykos"
-path="res://.godot/imported/SM_Rake.fbx-0f1db8b803cfa4086407524441e5cb8d.scn"
+uid="uid://dfpcibj4nn3gw"
+path="res://.godot/imported/SM_Track.fbx-8495736ddb5166879eeed386d1c43c0a.scn"
 
 [deps]
 
-source_file="res://Assets/3D/Models/Farm Level/SM_Rake.fbx"
-dest_files=["res://.godot/imported/SM_Rake.fbx-0f1db8b803cfa4086407524441e5cb8d.scn"]
+source_file="res://Assets/3D/Models/Farm/SM_Track.fbx"
+dest_files=["res://.godot/imported/SM_Track.fbx-8495736ddb5166879eeed386d1c43c0a.scn"]
 
 [params]
 

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bhoo8umtxsmuy"
-path="res://.godot/imported/SM_Tractor_Wheel_Small.fbx-c594e0c2b04f22b5a34848034efa4989.scn"
+uid="uid://d3e4fcn4vnvck"
+path="res://.godot/imported/SM_Tractor.fbx-275cf2ff301167eb56095fb0421309cd.scn"
 
 [deps]
 
-source_file="res://Assets/3D/Models/Farm Level/SM_Tractor_Wheel_Small.fbx"
-dest_files=["res://.godot/imported/SM_Tractor_Wheel_Small.fbx-c594e0c2b04f22b5a34848034efa4989.scn"]
+source_file="res://Assets/3D/Models/Farm/SM_Tractor.fbx"
+dest_files=["res://.godot/imported/SM_Tractor.fbx-275cf2ff301167eb56095fb0421309cd.scn"]
 
 [params]
 

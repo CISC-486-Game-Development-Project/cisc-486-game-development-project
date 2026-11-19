@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://ctp32pq0opu"
-path="res://.godot/imported/SM_Wheat.fbx-06e8ccfb60e45d5215bc635703ee08a5.scn"
+uid="uid://bvoj7huhld8dc"
+path="res://.godot/imported/SM_Fence.fbx-3513d3e301d31cda8516c9b75e529aa3.scn"
 
 [deps]
 
-source_file="res://Assets/3D/Models/Farm Level/SM_Wheat.fbx"
-dest_files=["res://.godot/imported/SM_Wheat.fbx-06e8ccfb60e45d5215bc635703ee08a5.scn"]
+source_file="res://Assets/3D/Models/Farm/SM_Fence.fbx"
+dest_files=["res://.godot/imported/SM_Fence.fbx-3513d3e301d31cda8516c9b75e529aa3.scn"]
 
 [params]
 

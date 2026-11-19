@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://be457kbv51483" path="res://Assets/2D/Sprites/icon.svg" id="5_xkk6d"]
 [ext_resource type="Texture2D" uid="uid://qlv8vskiydcq" path="res://Assets/2D/Sprites/TrackIcons/CircuitIcon.png" id="6_ptf7h"]
 [ext_resource type="PackedScene" uid="uid://yq6fhy13lgsb" path="res://Scenes/Menus/ControlHintBar/control_hint_bar.tscn" id="7_ptf7h"]
+[ext_resource type="Texture2D" uid="uid://cxt3ax6xxaeux" path="res://Assets/2D/Sprites/TrackIcons/FarmIcon.png" id="7_t6y8g"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rixt3"]
 bg_color = Color(2.3102762e-06, 0.6323629, 0.9693813, 1)
@@ -117,10 +118,9 @@ track_icon = ExtResource("6_ptf7h")
 
 [node name="TrackButton3" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/TrackButtonContainer" unique_id=1059642776 instance=ExtResource("2_08aid")]
 layout_mode = 2
-disabled = true
-track = "uid://igg6cd4fnkgj"
-track_name = "Track 3"
-track_icon = ExtResource("5_xkk6d")
+track = "uid://b1w1ox4hyquyt"
+track_name = "Farm"
+track_icon = ExtResource("7_t6y8g")
 
 [node name="TrackButton4" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/TrackButtonContainer" unique_id=414200251 instance=ExtResource("2_08aid")]
 layout_mode = 2

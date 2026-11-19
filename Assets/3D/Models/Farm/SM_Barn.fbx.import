@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cah2g6ve6jtcx"
-path="res://.godot/imported/SM_Barn.fbx-52e49f9fe15fb67912d87ff725e98cce.scn"
+path="res://.godot/imported/SM_Barn.fbx-510892ed18155ebf032b5312a1d6d2aa.scn"
 
 [deps]
 
-source_file="res://Assets/3D/Models/Farm Level/SM_Barn.fbx"
-dest_files=["res://.godot/imported/SM_Barn.fbx-52e49f9fe15fb67912d87ff725e98cce.scn"]
+source_file="res://Assets/3D/Models/Farm/SM_Barn.fbx"
+dest_files=["res://.godot/imported/SM_Barn.fbx-510892ed18155ebf032b5312a1d6d2aa.scn"]
 
 [params]
 

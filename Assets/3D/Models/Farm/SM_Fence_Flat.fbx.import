@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bvoj7huhld8dc"
-path="res://.godot/imported/SM_Fence.fbx-91f7bf8f681f39a438a67fd177281101.scn"
+uid="uid://ixmm3y716vcj"
+path="res://.godot/imported/SM_Fence_Flat.fbx-c0eeb827acb7e41f2a6c3cd5f1e150eb.scn"
 
 [deps]
 
-source_file="res://Assets/3D/Models/Farm Level/SM_Fence.fbx"
-dest_files=["res://.godot/imported/SM_Fence.fbx-91f7bf8f681f39a438a67fd177281101.scn"]
+source_file="res://Assets/3D/Models/Farm/SM_Fence_Flat.fbx"
+dest_files=["res://.godot/imported/SM_Fence_Flat.fbx-c0eeb827acb7e41f2a6c3cd5f1e150eb.scn"]
 
 [params]
 
