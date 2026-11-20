@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://b0wsig6nbcpds"]
+
+[ext_resource type="PackedScene" uid="uid://bg0sp6ktueqpy" path="res://Assets/3D/Models/Farm/SM_Low_linked_fence.fbx" id="1_m2sje"]
+[ext_resource type="Texture2D" uid="uid://bw2au7ftt2fqf" path="res://Assets/3D/Texture Images/Fence Wood Export.png" id="2_3a62i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mobys"]
+albedo_texture = ExtResource("2_3a62i")
+
+[node name="SM_Low_linked_fence" unique_id=2060389460 instance=ExtResource("1_m2sje")]
+
+[node name="Low linked fence" parent="." index="0" unique_id=450485084]
+surface_material_override/0 = SubResource("StandardMaterial3D_mobys")
