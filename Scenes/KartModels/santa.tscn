@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dqiq5je7rx3a8"]
+
+[ext_resource type="Script" uid="uid://t6a574qi7en4" path="res://Scenes/KartModels/kart_model.gd" id="1_qniws"]
+[ext_resource type="PackedScene" uid="uid://j36ivyl6skmf" path="res://Assets/3D/Models/Vehicles/Santa/SM_Santa.fbx" id="2_d2ryh"]
+[ext_resource type="Script" uid="uid://bcubef2xy50jd" path="res://Components/Hitbox/hitbox.gd" id="3_r1rg5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t4f5k"]
+size = Vector3(1.27, 1.93, 2.325)
+
+[node name="Santa" type="Node3D" unique_id=10405480 node_paths=PackedStringArray("body", "hitbox", "collision_shape_3d")]
+script = ExtResource("1_qniws")
+body = NodePath("SM_Santa")
+hitbox = NodePath("Hitbox")
+collision_shape_3d = NodePath("Hitbox/CollisionShape3D")
+model_height = 1.9300000000000002
+
+[node name="SM_Santa" parent="." unique_id=1291515023 instance=ExtResource("2_d2ryh")]
+transform = Transform3D(-9.616505e-08, 0, -2.2, 0, 2.2, 0, 2.2, 0, -9.616505e-08, 0, -0.9222864, 0.5895099)
+
+[node name="Hitbox" type="Area3D" parent="." unique_id=1443324979]
+script = ExtResource("3_r1rg5")
+metadata/_custom_type_script = "uid://bcubef2xy50jd"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=169736749]
+shape = SubResource("BoxShape3D_t4f5k")

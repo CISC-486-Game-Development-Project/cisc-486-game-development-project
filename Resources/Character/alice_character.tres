@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Character" format=3 uid="uid://lharfx2r2yu5"]
 
-[ext_resource type="Texture2D" uid="uid://c0hni52qtms50" path="res://Assets/2D/Sprites/CharacterIcons/AliceIcon.png" id="1_jqiq7"]
+[ext_resource type="Texture2D" uid="uid://cjrpj8orwh42d" path="res://Assets/2D/Sprites/CharacterIcons/AliceIcon.png" id="1_jqiq7"]
 [ext_resource type="Script" uid="uid://cqk2f7i3x8obw" path="res://Resources/Character/character.gd" id="2_s8et7"]
 [ext_resource type="Resource" uid="uid://c4bg4ayji7r2e" path="res://Resources/KartStats/alice_kart.tres" id="3_jqiq7"]
 

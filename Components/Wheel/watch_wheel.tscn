@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bxpg1cx00dkrb"]
+
+[ext_resource type="PackedScene" uid="uid://dtcyal4perrkp" path="res://Components/Wheel/wheel.tscn" id="1_ixogo"]
+[ext_resource type="PackedScene" uid="uid://b8ai50q8v1k26" path="res://Assets/3D/Models/Vehicles/Alice/sm_watch_wheel.tscn" id="2_1hxvi"]
+
+[node name="WatchWheel" unique_id=950822510 node_paths=PackedStringArray("wheel_visual") instance=ExtResource("1_ixogo")]
+wheel_visual = NodePath("SM_Watch_Wheel")
+
+[node name="WheelVisual" parent="." index="0" unique_id=2090125690]
+visible = false
+
+[node name="SM_Watch_Wheel" parent="." index="1" unique_id=1360595861 instance=ExtResource("2_1hxvi")]

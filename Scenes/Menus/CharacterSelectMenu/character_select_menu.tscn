@@ -10,8 +10,9 @@
 [ext_resource type="Resource" uid="uid://ulcs3tytsjl0" path="res://Resources/Character/pawn_character.tres" id="7_7tf73"]
 [ext_resource type="Resource" uid="uid://k5txr2vfhnjr" path="res://Resources/Character/default_character.tres" id="7_d15w1"]
 [ext_resource type="Resource" uid="uid://dw6y0pt367v7d" path="res://Resources/Character/santa_character.tres" id="10_6qwey"]
+[ext_resource type="Texture2D" uid="uid://cc00lrwm5aurb" path="res://Assets/2D/Sprites/CharacterIcons/SantaIcon.png" id="10_7jgw0"]
 [ext_resource type="PackedScene" uid="uid://yq6fhy13lgsb" path="res://Scenes/Menus/ControlHintBar/control_hint_bar.tscn" id="10_m0o7l"]
-[ext_resource type="Texture2D" uid="uid://c0hni52qtms50" path="res://Assets/2D/Sprites/CharacterIcons/AliceIcon.png" id="11_7jgw0"]
+[ext_resource type="Texture2D" uid="uid://cjrpj8orwh42d" path="res://Assets/2D/Sprites/CharacterIcons/AliceIcon.png" id="11_7jgw0"]
 [ext_resource type="Resource" uid="uid://lharfx2r2yu5" path="res://Resources/Character/alice_character.tres" id="11_tivmb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hk7je"]
@@ -565,7 +566,7 @@ character = ExtResource("7_7tf73")
 
 [node name="CharacterButton3" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/CharacterButtonContainer" unique_id=1591130101 instance=ExtResource("5_2k24t")]
 layout_mode = 2
-icon = ExtResource("4_p6l55")
+icon = ExtResource("10_7jgw0")
 character = ExtResource("10_6qwey")
 
 [node name="CharacterButton4" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/CharacterButtonContainer" unique_id=1738604612 instance=ExtResource("5_2k24t")]

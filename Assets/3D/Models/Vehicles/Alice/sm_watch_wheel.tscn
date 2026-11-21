@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://b8ai50q8v1k26"]
+
+[ext_resource type="PackedScene" uid="uid://bbs84cstwccd6" path="res://Assets/3D/Models/Vehicles/Alice/SM_Watch_Wheel.fbx" id="1_h4vt8"]
+[ext_resource type="Texture2D" uid="uid://fn0qhbufov0j" path="res://Assets/3D/Texture Images/Pocketwatch Export.png" id="2_g7td8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_whpcv"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.74138474, 0.7413847, 0.74138457, 1)
+normal_enabled = true
+normal_texture = ExtResource("2_g7td8")
+
+[node name="SM_Watch_Wheel" unique_id=1360595861 instance=ExtResource("1_h4vt8")]
+
+[node name="Watch Wheel" parent="." index="0" unique_id=648538703]
+transform = Transform3D(-4.371139e-06, -99.99999, -4.3711384e-06, 0, -4.3711384e-06, 99.99999, -100, 4.3711384e-06, 1.9106853e-13, 0, 0, 0)
+surface_material_override/1 = SubResource("StandardMaterial3D_whpcv")

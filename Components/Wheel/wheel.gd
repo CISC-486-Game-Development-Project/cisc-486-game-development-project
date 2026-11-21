@@ -4,13 +4,13 @@ class_name Wheel extends Node3D
 const RADIAL_SPEED_FACTOR: float = (2 * 0.21 * PI) / 2 * PI
 
 # Export Vars
+@export var wheel_visual: Node3D ## The visual for this wheel.
 @export var steering_enabled: bool ## If enabled, wheel can be steered.
 @export var steering_intensity: float = 2.0 ## The intensity of the wheel rotation from steering.
 @export var spring_length: float = 0.5 ## The length in metres of the spring arm.
 @export var wheel_radius: float = 0.5 ## The radius in metres of the wheel.
 
 # Onready Vars
-@onready var wheel_visual: Node3D = $WheelVisual
 @onready var spring_arm_3d: SpringArm3D = $SpringArm3D
 @onready var wheel_pivot: Node3D = $SpringArm3D/WheelPivot
 @onready var ray_cast_3d: RayCast3D = $RayCast3D

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cvtf3qr2cpxj5"]
+
+[ext_resource type="PackedScene" uid="uid://bfxeveywaee5p" path="res://Assets/3D/Models/Vehicles/Alice/SM_Cheshire_Wheel.fbx" id="1_vh1gl"]
+
+[node name="SM_Cheshire_Wheel" unique_id=1283335619 instance=ExtResource("1_vh1gl")]
+
+[node name="Cheshire Wheel" parent="." index="0" unique_id=538161304]
+transform = Transform3D(-4.371139e-06, -99.99999, -4.3711384e-06, 0, -4.3711384e-06, 99.99999, -100, 4.3711384e-06, 1.9106853e-13, 0, 0, 0)

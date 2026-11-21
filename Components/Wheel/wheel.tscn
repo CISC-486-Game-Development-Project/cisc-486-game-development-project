@@ -3,9 +3,10 @@
 [ext_resource type="Script" uid="uid://c3wfj3uwwdahi" path="res://Components/Wheel/wheel.gd" id="1_fjxvo"]
 [ext_resource type="PackedScene" uid="uid://vp2ox0cie7xw" path="res://Assets/3D/Models/Vehicles/BasicCar/SM_Basic_Car_Wheel.fbx" id="2_g7ls8"]
 
-[node name="Wheel" type="Node3D" unique_id=950822510]
+[node name="Wheel" type="Node3D" unique_id=950822510 node_paths=PackedStringArray("wheel_visual")]
 transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 0, 0, 0)
 script = ExtResource("1_fjxvo")
+wheel_visual = NodePath("WheelVisual")
 
 [node name="WheelVisual" parent="." unique_id=2090125690 instance=ExtResource("2_g7ls8")]
 

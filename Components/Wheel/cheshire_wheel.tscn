@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bt5yatilrotfj"]
+
+[ext_resource type="PackedScene" uid="uid://dtcyal4perrkp" path="res://Components/Wheel/wheel.tscn" id="1_urhjf"]
+[ext_resource type="PackedScene" uid="uid://cvtf3qr2cpxj5" path="res://Assets/3D/Models/Vehicles/Alice/sm_cheshire_wheel.tscn" id="2_urhjf"]
+
+[node name="CheshireWheel" unique_id=950822510 node_paths=PackedStringArray("wheel_visual") instance=ExtResource("1_urhjf")]
+wheel_visual = NodePath("SM_Cheshire_Wheel")
+
+[node name="SM_Cheshire_Wheel" parent="." index="0" unique_id=1283335619 instance=ExtResource("2_urhjf")]
+
+[node name="WheelVisual" parent="." index="1" unique_id=2090125690]
+visible = false
