@@ -14,7 +14,7 @@ shadow_offset = Vector2(12, 12)
 
 [sub_resource type="LabelSettings" id="LabelSettings_7grdj"]
 font = ExtResource("1_7grdj")
-font_size = 62
+font_size = 85
 outline_size = 32
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 16
@@ -43,7 +43,7 @@ grow_horizontal = 2
 text = "Results"
 label_settings = SubResource("LabelSettings_1ngmh")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1500148180]
+[node name="VBoxContainer" type="GridContainer" parent="." unique_id=484107666]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -53,78 +53,103 @@ anchor_bottom = 0.5
 offset_left = -896.0
 offset_top = -383.0
 offset_right = 896.0
-offset_bottom = 489.0
+offset_bottom = 455.0
 grow_horizontal = 2
 grow_vertical = 2
+columns = 2
 
 [node name="Label" type="Label" parent="VBoxContainer" unique_id=2029072000]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
 text = "1 - Player 1"
 label_settings = SubResource("LabelSettings_7grdj")
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="VBoxContainer" unique_id=663245082]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
 text = "2 - Player 2"
 label_settings = SubResource("LabelSettings_7grdj")
 horizontal_alignment = 1
 
 [node name="Label3" type="Label" parent="VBoxContainer" unique_id=1915804593]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
 text = "3 - Player 3"
 label_settings = SubResource("LabelSettings_7grdj")
 horizontal_alignment = 1
 
 [node name="Label4" type="Label" parent="VBoxContainer" unique_id=1489474831]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
 text = "4 - Player 4"
 label_settings = SubResource("LabelSettings_7grdj")
 horizontal_alignment = 1
 
 [node name="Label5" type="Label" parent="VBoxContainer" unique_id=1072543217]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
 text = "4 - Player 4"
 label_settings = SubResource("LabelSettings_7grdj")
 horizontal_alignment = 1
 
 [node name="Label6" type="Label" parent="VBoxContainer" unique_id=647721753]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
 text = "4 - Player 4"
 label_settings = SubResource("LabelSettings_7grdj")
 horizontal_alignment = 1
 
 [node name="Label7" type="Label" parent="VBoxContainer" unique_id=1681712570]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
 text = "4 - Player 4"
 label_settings = SubResource("LabelSettings_7grdj")
 horizontal_alignment = 1
 
 [node name="Label8" type="Label" parent="VBoxContainer" unique_id=1704789828]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
 text = "4 - Player 4"
 label_settings = SubResource("LabelSettings_7grdj")
 horizontal_alignment = 1
 
 [node name="Label9" type="Label" parent="VBoxContainer" unique_id=738457168]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
 text = "4 - Player 4"
 label_settings = SubResource("LabelSettings_7grdj")
 horizontal_alignment = 1
 
 [node name="Label10" type="Label" parent="VBoxContainer" unique_id=186788128]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
 text = "4 - Player 4"
 label_settings = SubResource("LabelSettings_7grdj")
 horizontal_alignment = 1
 
 [node name="Label11" type="Label" parent="VBoxContainer" unique_id=1419255211]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
 text = "4 - Player 4"
 label_settings = SubResource("LabelSettings_7grdj")
 horizontal_alignment = 1
 
 [node name="Label12" type="Label" parent="VBoxContainer" unique_id=1575813412]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
 text = "4 - Player 4"
 label_settings = SubResource("LabelSettings_7grdj")
 horizontal_alignment = 1
@@ -141,6 +166,7 @@ offset_top = -31.0
 offset_right = 78.5
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_font_sizes/font_size = 50
 text = "Back to Main Menu"
 
 [connection signal="pressed" from="MainMenuButton" to="." method="_on_main_menu_button_pressed"]
