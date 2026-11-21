@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bmhvhqdyqvlrf"]
+
+[ext_resource type="Script" uid="uid://dv8g5c6qsh7x3" path="res://Entities/Checkpoint/checkpoint_group.gd" id="1_xtp8a"]
+
+[node name="CheckpointGroup" type="Node3D" unique_id=1232220345]
+script = ExtResource("1_xtp8a")
