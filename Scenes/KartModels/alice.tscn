@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://v4u5dla63lud"]
+
+[ext_resource type="PackedScene" uid="uid://b212hebh5jgbr" path="res://Assets/3D/Models/Vehicles/Alice/SM_Alice.fbx" id="1_k052p"]
+[ext_resource type="Script" uid="uid://t6a574qi7en4" path="res://Scenes/KartModels/kart_model.gd" id="2_imnin"]
+[ext_resource type="Texture2D" uid="uid://djli4wilr0dxk" path="res://Assets/3D/Texture Images/Alice Queen Export.png" id="2_nfl8y"]
+[ext_resource type="PackedScene" uid="uid://bcvyk5tf1i10f" path="res://Assets/3D/Models/Vehicles/Alice/SM_Cheshire_Wheels.fbx" id="3_4mt1d"]
+[ext_resource type="PackedScene" uid="uid://dug88p5lfdwcq" path="res://Assets/3D/Models/Vehicles/Alice/sm_watch_wheels.tscn" id="4_4mt1d"]
+[ext_resource type="Script" uid="uid://bcubef2xy50jd" path="res://Components/Hitbox/hitbox.gd" id="6_g1fyn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_41k0d"]
+albedo_texture = ExtResource("2_nfl8y")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t4f5k"]
+size = Vector3(2.3, 2.3, 2.3)
+
+[node name="Alice" unique_id=2125745477 node_paths=PackedStringArray("body", "hitbox", "collision_shape_3d") instance=ExtResource("1_k052p")]
+script = ExtResource("2_imnin")
+body = NodePath("Alice")
+hitbox = NodePath("Hitbox")
+collision_shape_3d = NodePath("Hitbox/CollisionShape3D")
+model_height = 2.3
+
+[node name="Alice" parent="." index="0" unique_id=1168880669]
+transform = Transform3D(100, 0, 0, 0, -4.3711384e-06, 99.99999, 0, -99.99999, -4.3711384e-06, 0, 0.5848129, 0)
+surface_material_override/3 = SubResource("StandardMaterial3D_41k0d")
+
+[node name="SM_Cheshire_Wheels" parent="." index="1" unique_id=2047494809 instance=ExtResource("3_4mt1d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.69403887, 0.65664834)
+
+[node name="SM_Watch_Wheels" parent="." index="2" unique_id=796517392 instance=ExtResource("4_4mt1d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.8486886, -0.63482285)
+
+[node name="Hitbox" type="Area3D" parent="." index="3" unique_id=203556360]
+script = ExtResource("6_g1fyn")
+metadata/_custom_type_script = "uid://bcubef2xy50jd"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0" unique_id=359980086]
+shape = SubResource("BoxShape3D_t4f5k")
+
+[editable path="SM_Cheshire_Wheels"]

@@ -4,8 +4,8 @@ extends CharacterBody3D
 # Export Vars
 @export_group("Functionality")
 @export var model: ItemModel
-@export var speed: float = 20.0
-@export var max_velocity: float = 20.0
+@export var speed: float = 40.0
+@export var max_velocity: float = 40.0
 @export var lifetime: float = 10.0
 @export var thrower_immunity_time: float = 1.0
 @export var max_bounces: int = 5

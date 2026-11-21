@@ -78,7 +78,7 @@ height = 10.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_if3av"]
 
-[node name="DebugTrack" type="Node3D" unique_id=1648609827 node_paths=PackedStringArray("starting_line")]
+[node name="DebugTrack" type="Node3D" unique_id=1648609827 node_paths=PackedStringArray("player_spawn_positions", "starting_line")]
 script = ExtResource("1_q5xdn")
 track_music = ExtResource("2_xc45i")
 player_kart = ExtResource("1_wqmp7")
@@ -86,8 +86,7 @@ cpu_kart = ExtResource("13_5unjq")
 pause_screen_scene = ExtResource("5_wgl67")
 hud_scene = ExtResource("5_xc45i")
 results_screen_scene = "uid://d2qxks6q725n"
-player_spawn_position = Vector3(5, 1, 30)
-player_spawn_rotation = 90.0
+player_spawn_positions = NodePath("StartPositions")
 starting_line = NodePath("Checkpoint")
 race_laps = 3
 
@@ -271,3 +270,42 @@ major = true
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14.89901, 1.1519282, -31.952856)
 next_checkpoint = NodePath("../Checkpoint")
 major = true
+
+[node name="StartPositions" type="Node3D" parent="." unique_id=1260463505]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2.1026306, 0, 29.139542)
+
+[node name="Start1" type="Node3D" parent="StartPositions" unique_id=589770348]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
+
+[node name="Start2" type="Node3D" parent="StartPositions" unique_id=1334305581]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3)
+
+[node name="Start3" type="Node3D" parent="StartPositions" unique_id=1889141943]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 6)
+
+[node name="Start4" type="Node3D" parent="StartPositions" unique_id=1418110853]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 9)
+
+[node name="Start5" type="Node3D" parent="StartPositions" unique_id=1604011562]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 10)
+
+[node name="Start6" type="Node3D" parent="StartPositions" unique_id=536055089]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 13)
+
+[node name="Start7" type="Node3D" parent="StartPositions" unique_id=1835190236]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 16)
+
+[node name="Start8" type="Node3D" parent="StartPositions" unique_id=1333336545]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 19)
+
+[node name="Start9" type="Node3D" parent="StartPositions" unique_id=1964170609]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 20)
+
+[node name="Start10" type="Node3D" parent="StartPositions" unique_id=1847872924]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 23)
+
+[node name="Start11" type="Node3D" parent="StartPositions" unique_id=84851864]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 26)
+
+[node name="Start12" type="Node3D" parent="StartPositions" unique_id=1449195915]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 29)

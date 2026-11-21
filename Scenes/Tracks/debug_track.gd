@@ -8,8 +8,7 @@ extends Node3D
 @export var pause_screen_scene: PackedScene
 @export var hud_scene: PackedScene
 @export_file var results_screen_scene: String
-@export var player_spawn_position: Vector3
-@export var player_spawn_rotation: float
+@export var player_spawn_positions: Node3D
 @export var starting_line: Checkpoint
 @export var race_laps: int = 1
 
@@ -79,8 +78,8 @@ func create_player(player_num: int, kart_type: KartType, player_parent=self, ) -
 		new_player = cpu_kart.instantiate()
 	new_player.kart_stats = RaceManager.kart_characters[player_num].stats
 	player_parent.add_child(new_player)
-	new_player.global_position = player_spawn_position + Vector3(player_num*5, 1, 1)
-	new_player.global_rotation_degrees.y = player_spawn_rotation
+	new_player.global_position = player_spawn_positions.get_child(player_num).global_position
+	new_player.global_rotation.y = player_spawn_positions.rotation.y
 	new_player.race_handler.most_recent_checkpoint = starting_line
 	new_player.race_handler.next_checkpoint_plane = starting_line.next_checkpoint.boundary_plane
 	new_player.race_handler.next_major_checkpoint = starting_line.next_major_checkpoint
