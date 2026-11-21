@@ -10,7 +10,7 @@ signal race_started
 @onready var timer = $Timer
 
 # TODO: Consider making this changeable by the player
-const TOTAL_KART_COUNT = 4 ## How many karts there will be in the race
+const TOTAL_KART_COUNT = 12 ## How many karts there will be in the race
 
 var player_count: int = 1 ## How many players there are in the race
 
