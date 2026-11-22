@@ -32,7 +32,7 @@ func entered_checkpoint(new_checkpoint: Checkpoint) -> bool:
 				# kart has finished the race
 				finished.emit()
 				is_finished = true
-				# TODO: this should be visually shown in some way
+				# TODO: go into coast
 			else:
 				lap += 1
 	elif new_checkpoint.next_major_checkpoint.checkpoint_index > next_major_checkpoint.checkpoint_index:

@@ -7,13 +7,14 @@ extends Node3D
 @export var cpu_kart: PackedScene
 @export var pause_screen_scene: PackedScene
 @export var hud_scene: PackedScene
-@export_file var results_screen_scene: String
+@export var results_screen_scene: PackedScene
 @export var player_spawn_positions: Node3D
 @export var starting_line: Checkpoint
 @export var race_laps: int = 1
 
 var pause_screen: CanvasLayer
 var hud: CanvasLayer
+var results_screen: CanvasLayer
 var splitscreen_root: Control
 
 var sub_viewports: Array[SubViewport]
@@ -33,6 +34,8 @@ func _ready() -> void:
 	add_child(pause_screen)
 	hud = hud_scene.instantiate()
 	add_child(hud)
+	results_screen = results_screen_scene.instantiate()
+	add_child(results_screen)
 	splitscreen_root = hud.get_node("SplitscreenRoot")
 	
 	# Add players to scene
@@ -63,8 +66,6 @@ func _ready() -> void:
 		temp_checkpoint = temp_checkpoint.next_checkpoint
 		i += 1
 	checkpoint_count = i
-	
-	SceneManager.load_scene(results_screen_scene)
 	
 	RaceManager.start_countdown()
 
@@ -139,4 +140,4 @@ func kart_finished(kart):
 		karts_ranked.append(all_kart.race_handler.position)
 	# All players have finished
 	RaceManager.race_finished(karts_ranked)
-	SceneManager.change_scene.call_deferred(results_screen_scene)
+	results_screen.show_rankings()

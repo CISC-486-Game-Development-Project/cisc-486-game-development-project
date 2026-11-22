@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cyabyf8vue35i" path="res://Entities/Kart3D/cpu_kart_3d.tscn" id="4_dpaoj"]
 [ext_resource type="PackedScene" uid="uid://htd17y0efmde" path="res://Scenes/Menus/PauseScreen/pause_screen.tscn" id="5_bxe0n"]
 [ext_resource type="PackedScene" uid="uid://ctnwy05xjck6l" path="res://Scenes/Menus/HUD/hud.tscn" id="6_ux7v6"]
+[ext_resource type="PackedScene" uid="uid://d2qxks6q725n" path="res://Scenes/Menus/Results/results.tscn" id="7_7dw6q"]
 [ext_resource type="Material" uid="uid://mdid6csoosht" path="res://Resources/Sky/day_sky.tres" id="7_tpcv4"]
 [ext_resource type="PackedScene" uid="uid://d3e4fcn4vnvck" path="res://Assets/3D/Models/Farm/SM_Tractor.fbx" id="8_jwi42"]
 [ext_resource type="PackedScene" uid="uid://dafnpq7goykos" path="res://Assets/3D/Models/Farm/SM_Rake.fbx" id="9_4eai8"]
@@ -97,7 +98,7 @@ player_kart = ExtResource("3_7dw6q")
 cpu_kart = ExtResource("4_dpaoj")
 pause_screen_scene = ExtResource("5_bxe0n")
 hud_scene = ExtResource("6_ux7v6")
-results_screen_scene = "uid://d2qxks6q725n"
+results_screen_scene = ExtResource("7_7dw6q")
 player_spawn_positions = NodePath("StartPositions")
 starting_line = NodePath("Checkpoint Holder/Checkpoint0")
 race_laps = 3

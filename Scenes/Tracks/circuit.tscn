@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://htd17y0efmde" path="res://Scenes/Menus/PauseScreen/pause_screen.tscn" id="4_iwi7x"]
 [ext_resource type="PackedScene" uid="uid://ctnwy05xjck6l" path="res://Scenes/Menus/HUD/hud.tscn" id="5_s3opd"]
 [ext_resource type="Material" uid="uid://mdid6csoosht" path="res://Resources/Sky/day_sky.tres" id="6_s3opd"]
+[ext_resource type="PackedScene" uid="uid://d2qxks6q725n" path="res://Scenes/Menus/Results/results.tscn" id="7_0ad3f"]
 [ext_resource type="PackedScene" uid="uid://rck5rennd5k6" path="res://Scenes/TrackParts/BlockWall.tscn" id="8_b1wkx"]
 [ext_resource type="PackedScene" uid="uid://bfdd58efg72wk" path="res://Scenes/TrackParts/BoostPanel/boost_panel.tscn" id="10_6d6fr"]
 [ext_resource type="PackedScene" uid="uid://civujlmhlhoir" path="res://Entities/Checkpoint/checkpoint.tscn" id="11_1q8bo"]
@@ -116,7 +117,7 @@ player_kart = ExtResource("3_smo2k")
 cpu_kart = ExtResource("3_b1wkx")
 pause_screen_scene = ExtResource("4_iwi7x")
 hud_scene = ExtResource("5_s3opd")
-results_screen_scene = "uid://d2qxks6q725n"
+results_screen_scene = ExtResource("7_0ad3f")
 player_spawn_positions = NodePath("StartPositions")
 starting_line = NodePath("CheckpointHolder/Checkpoint")
 race_laps = 3
