@@ -13,6 +13,7 @@ const ROLL_TIME = 1.5 ## Time between hitting item block and having item
 
 # Internal Vars
 var inventory: Array[Item] ## The current held item.
+var current_inventory_size: int = 0
 var trailed_item: ItemModel ## The current trailed item.
 
 func _ready() -> void:
@@ -27,8 +28,10 @@ func _process(_delta: float) -> void:
 ## Called when an item is obtained.
 func roll_item() -> void:
 	# If existing item, don't get item
-	if inventory.size() >= inventory_slots:
+	if current_inventory_size >= inventory_slots:
 		return
+	
+	current_inventory_size += 1
 	
 	var new_item = ItemManager.get_random_item(kart.race_handler.position)
 	
@@ -47,6 +50,7 @@ func use_item() -> void:
 	
 	# Use held item then remove
 	var used_item = inventory.pop_front()
+	current_inventory_size -= 1
 	used_item.use(kart)
 	inventory_changed.emit(inventory)
 
