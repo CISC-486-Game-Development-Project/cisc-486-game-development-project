@@ -8,14 +8,10 @@ extends InputHandler
 # Internal Vars
 var current_location: Vector3
 var current_target: Vector3
-var target_update_timer: float
 var current_velocity: Vector3
 var distance_to_target: float
 var direction_to_target: Vector3
 var angle_to_target: float
-
-func _process(delta: float) -> void:
-	target_update_timer += delta
 
 ## Handles the input coming from the CPU AI based on the kart's environmental conditions.
 func handle_input() -> void:
@@ -31,9 +27,8 @@ func handle_input() -> void:
 ## Updates the required information from the kart to be used in determining this frame's actions.
 func _update_information() -> void:
 	current_location = kart.global_position
-	if kart.race_handler.most_recent_checkpoint and (kart.navigation_agent_3d.target_position != kart.race_handler.most_recent_checkpoint.next_checkpoint.global_position or target_update_timer > target_update_time):
-		kart.navigation_agent_3d.target_position = kart.race_handler.most_recent_checkpoint.next_checkpoint.global_position
-		target_update_timer = 0.0
+	if kart.race_handler.most_recent_checkpoint and (kart.navigation_agent_3d.target_position.distance_squared_to(kart.race_handler.most_recent_checkpoint.next_checkpoint.closest_point_on_path_to(current_location)) > 10.0):
+		kart.navigation_agent_3d.target_position = kart.race_handler.most_recent_checkpoint.next_checkpoint.closest_point_on_path_to(current_location)
 	if kart.offroad_factor > 0.0:
 		kart.navigation_agent_3d.target_position = NavigationServer3D.map_get_closest_point(kart.get_world_3d().get_navigation_map(), kart.global_position)
 	current_target = kart.navigation_agent_3d.get_next_path_position()

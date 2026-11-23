@@ -33,3 +33,7 @@ func _on_body_entered(body: Node3D):
 	var kart = body as Kart3D
 	if kart.race_handler: # I think this will only be false if a kart starts in a checkpoint, nothing needs to happen in that case
 		kart.race_handler.entered_checkpoint(self)
+
+func closest_point_on_path_to(pos: Vector3):
+	var path_vec = Vector3(path_width, 0, 0)
+	return Geometry3D.get_closest_point_to_segment(pos, position-path_vec, position+path_vec)
