@@ -5,7 +5,6 @@ extends Area3D
 @export var next_checkpoint: Checkpoint ## Checkpoint the player should pass after this one
 @export var major: bool ## Major checkpoints are mandatory and determine lap count
 @export var width: float = 30 ## Collider's width
-@export var dice_in_next: Array[Node3D]
 @export var path_width: float = 30
 
 var next_major_checkpoint: Checkpoint ## Next major checkpoint excluding this one
