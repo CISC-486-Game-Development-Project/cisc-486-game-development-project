@@ -339,6 +339,7 @@ points = PackedVector3Array(-8.514196, 5.9604645e-08, -143.76282, -10.487811, 5.
 metadata/_custom_type_script = "uid://ca6obtta5oopp"
 
 [node name="CheckpointHolder" type="Node3D" parent="." unique_id=631748858]
+visible = false
 
 [node name="Checkpoint" parent="CheckpointHolder" unique_id=2087625636 node_paths=PackedStringArray("next_checkpoint") instance=ExtResource("11_1q8bo")]
 transform = Transform3D(1, 0, 0, 0, 0.9999602, -0.008924804, 0, 0.008924804, 0.9999602, -101.78359, 0, -34.58272)
