@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bd2frnw8tk58m" path="res://Scenes/Menus/Results/results.gd" id="1_1ngmh"]
 [ext_resource type="FontFile" uid="uid://c2gld37y6b17m" path="res://Assets/2D/Fonts/DeltaBlock.ttf" id="1_7grdj"]
+[ext_resource type="PackedScene" uid="uid://yq6fhy13lgsb" path="res://Scenes/Menus/ControlHintBar/control_hint_bar.tscn" id="2_lo8gw"]
+[ext_resource type="PackedScene" uid="uid://dl6lm2soft078" path="res://Scenes/Menus/Results/kart_result_label.tscn" id="3_ikfly"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1ngmh"]
 font = ExtResource("1_7grdj")
@@ -12,154 +14,81 @@ shadow_size = 16
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(12, 12)
 
-[sub_resource type="LabelSettings" id="LabelSettings_7grdj"]
-font = ExtResource("1_7grdj")
-font_size = 85
-outline_size = 32
-outline_color = Color(0, 0, 0, 1)
-shadow_size = 16
-shadow_color = Color(0, 0, 0, 1)
-shadow_offset = Vector2(12, 12)
-
-[node name="Results" type="CanvasLayer" unique_id=687981303]
+[node name="Results" type="CanvasLayer" unique_id=687981303 node_paths=PackedStringArray("label_container")]
 layer = 2
-visible = false
 script = ExtResource("1_1ngmh")
 main_menu_scene = "uid://b4byg6rmq7m24"
+label_container = NodePath("MarginContainer/VBoxContainer/HBoxContainer/LabelContainer")
 
-[node name="Label" type="Label" parent="." unique_id=679963417]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -28.0
-offset_right = 28.0
-offset_bottom = 23.0
+[node name="ControlHintBar" parent="." unique_id=1676424252 instance=ExtResource("2_lo8gw")]
+control_texts = Array[String](["Return to Main Menu"])
+control_inputs_keyboard = Array[String](["W"])
+control_inputs_controller = Array[String](["A"])
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2009218033]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1591228710]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1347630712]
+layout_mode = 2
+
+[node name="ResultsLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=679963417]
+layout_mode = 2
 text = "Results"
 label_settings = SubResource("LabelSettings_1ngmh")
 
-[node name="VBoxContainer" type="GridContainer" parent="." unique_id=484107666]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -896.0
-offset_top = -383.0
-offset_right = 896.0
-offset_bottom = 455.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 2
-
-[node name="Label" type="Label" parent="VBoxContainer" unique_id=2029072000]
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1991397995]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 6
-text = "1 - Player 1"
-label_settings = SubResource("LabelSettings_7grdj")
-horizontal_alignment = 1
+size_flags_stretch_ratio = 1.5
 
-[node name="Label2" type="Label" parent="VBoxContainer" unique_id=663245082]
+[node name="LabelContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=834056448]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 6
-text = "2 - Player 2"
-label_settings = SubResource("LabelSettings_7grdj")
-horizontal_alignment = 1
 
-[node name="Label3" type="Label" parent="VBoxContainer" unique_id=1915804593]
+[node name="KartResultLabel1" parent="MarginContainer/VBoxContainer/HBoxContainer/LabelContainer" unique_id=1554584077 instance=ExtResource("3_ikfly")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 6
-text = "3 - Player 3"
-label_settings = SubResource("LabelSettings_7grdj")
-horizontal_alignment = 1
 
-[node name="Label4" type="Label" parent="VBoxContainer" unique_id=1489474831]
+[node name="KartResultLabel2" parent="MarginContainer/VBoxContainer/HBoxContainer/LabelContainer" unique_id=1510227102 instance=ExtResource("3_ikfly")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 6
-text = "4 - Player 4"
-label_settings = SubResource("LabelSettings_7grdj")
-horizontal_alignment = 1
 
-[node name="Label5" type="Label" parent="VBoxContainer" unique_id=1072543217]
+[node name="KartResultLabel3" parent="MarginContainer/VBoxContainer/HBoxContainer/LabelContainer" unique_id=1420919222 instance=ExtResource("3_ikfly")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 6
-text = "4 - Player 4"
-label_settings = SubResource("LabelSettings_7grdj")
-horizontal_alignment = 1
 
-[node name="Label6" type="Label" parent="VBoxContainer" unique_id=647721753]
+[node name="KartResultLabel4" parent="MarginContainer/VBoxContainer/HBoxContainer/LabelContainer" unique_id=596063551 instance=ExtResource("3_ikfly")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 6
-text = "4 - Player 4"
-label_settings = SubResource("LabelSettings_7grdj")
-horizontal_alignment = 1
 
-[node name="Label7" type="Label" parent="VBoxContainer" unique_id=1681712570]
+[node name="KartResultLabel5" parent="MarginContainer/VBoxContainer/HBoxContainer/LabelContainer" unique_id=442925515 instance=ExtResource("3_ikfly")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 6
-text = "4 - Player 4"
-label_settings = SubResource("LabelSettings_7grdj")
-horizontal_alignment = 1
 
-[node name="Label8" type="Label" parent="VBoxContainer" unique_id=1704789828]
+[node name="KartResultLabel6" parent="MarginContainer/VBoxContainer/HBoxContainer/LabelContainer" unique_id=1348327381 instance=ExtResource("3_ikfly")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 6
-text = "4 - Player 4"
-label_settings = SubResource("LabelSettings_7grdj")
-horizontal_alignment = 1
 
-[node name="Label9" type="Label" parent="VBoxContainer" unique_id=738457168]
+[node name="KartResultLabel7" parent="MarginContainer/VBoxContainer/HBoxContainer/LabelContainer" unique_id=798250183 instance=ExtResource("3_ikfly")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 6
-text = "4 - Player 4"
-label_settings = SubResource("LabelSettings_7grdj")
-horizontal_alignment = 1
 
-[node name="Label10" type="Label" parent="VBoxContainer" unique_id=186788128]
+[node name="KartResultLabel8" parent="MarginContainer/VBoxContainer/HBoxContainer/LabelContainer" unique_id=24657741 instance=ExtResource("3_ikfly")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 6
-text = "4 - Player 4"
-label_settings = SubResource("LabelSettings_7grdj")
-horizontal_alignment = 1
 
-[node name="Label11" type="Label" parent="VBoxContainer" unique_id=1419255211]
+[node name="KartResultLabel9" parent="MarginContainer/VBoxContainer/HBoxContainer/LabelContainer" unique_id=1007984308 instance=ExtResource("3_ikfly")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 6
-text = "4 - Player 4"
-label_settings = SubResource("LabelSettings_7grdj")
-horizontal_alignment = 1
 
-[node name="Label12" type="Label" parent="VBoxContainer" unique_id=1575813412]
+[node name="KartResultLabel10" parent="MarginContainer/VBoxContainer/HBoxContainer/LabelContainer" unique_id=1723476568 instance=ExtResource("3_ikfly")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 6
-text = "4 - Player 4"
-label_settings = SubResource("LabelSettings_7grdj")
-horizontal_alignment = 1
 
-[node name="MainMenuButton" type="Button" parent="." unique_id=1240015641]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -78.5
-offset_top = -31.0
-offset_right = 78.5
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_font_sizes/font_size = 50
-text = "Back to Main Menu"
+[node name="KartResultLabel11" parent="MarginContainer/VBoxContainer/HBoxContainer/LabelContainer" unique_id=1558666415 instance=ExtResource("3_ikfly")]
+layout_mode = 2
 
-[connection signal="pressed" from="MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[node name="KartResultLabel12" parent="MarginContainer/VBoxContainer/HBoxContainer/LabelContainer" unique_id=715349922 instance=ExtResource("3_ikfly")]
+layout_mode = 2

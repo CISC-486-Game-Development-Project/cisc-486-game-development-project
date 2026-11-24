@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://dl6lm2soft078"]
+
+[ext_resource type="FontFile" uid="uid://c2gld37y6b17m" path="res://Assets/2D/Fonts/DeltaBlock.ttf" id="1_pwndv"]
+[ext_resource type="Script" uid="uid://cpvduaqsk4jy2" path="res://Scenes/Menus/Results/kart_result_label.gd" id="1_x6b80"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4f5k"]
+bg_color = Color(1, 1, 1, 0.5058824)
+border_width_left = 16
+border_width_top = 16
+border_width_right = 16
+border_width_bottom = 16
+border_color = Color(1, 1, 1, 0.5058824)
+border_blend = true
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_7grdj"]
+font = ExtResource("1_pwndv")
+font_size = 32
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(4, 4)
+
+[node name="KartResultLabel" type="PanelContainer" unique_id=1554584077]
+theme_override_styles/panel = SubResource("StyleBoxFlat_t4f5k")
+script = ExtResource("1_x6b80")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=45031596]
+layout_mode = 2
+
+[node name="PlacementLabel" type="Label" parent="HBoxContainer" unique_id=1423767395]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "1"
+label_settings = SubResource("LabelSettings_7grdj")
+
+[node name="KartLabel" type="Label" parent="HBoxContainer" unique_id=387774582]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 100.0
+text = "Player 1"
+label_settings = SubResource("LabelSettings_7grdj")
+horizontal_alignment = 1
