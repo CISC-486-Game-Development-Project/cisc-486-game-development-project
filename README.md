@@ -1,4 +1,4 @@
-Gameplay video: <https://youtu.be/XWxKoz6zXQ0>
+Gameplay video: <https://youtu.be/BAjENeVCID8>
 
 ## Lillie
 - Item Behaviour (implementing how items work when used)
