@@ -561,7 +561,7 @@ size = Vector3(2, 0.034060545, 21.030365)
 material = SubResource("StandardMaterial3D_p6q4y")
 
 [node name="BoostRamp" parent="TrackObjects" unique_id=993424413 instance=ExtResource("11_b1wkx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58.632, 2.954, 91.898)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58.632, 2.734881, 91.898)
 
 [node name="Barrel" parent="TrackObjects" unique_id=127053263 instance=ExtResource("15_vpxoi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -101.25997, 1.038979, -79.582054)
