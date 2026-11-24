@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://jyqsbhp5inau" path="res://Entities/Checkpoint/checkpoint.gd" id="1_rhvwg"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_rhvwg"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_q8348"]
 size = Vector3(30, 30, 5)
 
 [node name="Checkpoint" type="Area3D" unique_id=2087625636]
