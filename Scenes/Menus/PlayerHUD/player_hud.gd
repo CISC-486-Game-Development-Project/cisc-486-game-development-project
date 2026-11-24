@@ -36,7 +36,7 @@ func _set_item_visual(new_item: Item, slot: int):
 	item_panels[slot].start_roll()
 	var item_timer = get_tree().create_timer(item_handler.ROLL_TIME)
 	item_timer.timeout.connect(_actually_set_item_visual.bind(new_item, slot))
-func _actually_set_item_visual(new_item, Item, slot: int):
+func _actually_set_item_visual(new_item: Item, slot: int):
 	item_panels[slot].set_item_visual(new_item)
 func _set_inventory_visuals(inventory: Array[Item]):
 	for item_slot_index in range(item_handler.inventory_slots):
