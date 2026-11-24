@@ -35,7 +35,7 @@ func roll_item() -> void:
 	
 	var new_item = ItemManager.get_random_item(kart.race_handler.position)
 	
-	item_rolled.emit(new_item, inventory.size())
+	item_rolled.emit(new_item, current_inventory_size-1)
 	
 	await get_tree().create_timer(ROLL_TIME).timeout
 	# Set new held item

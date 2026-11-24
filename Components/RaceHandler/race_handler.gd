@@ -37,6 +37,8 @@ func entered_checkpoint(new_checkpoint: Checkpoint) -> bool:
 				lap += 1
 	elif new_checkpoint.next_major_checkpoint.checkpoint_index > next_major_checkpoint.checkpoint_index:
 		return false
+	elif new_checkpoint.checkpoint_index <= most_recent_checkpoint.checkpoint_index:
+		return false
 	most_recent_checkpoint = new_checkpoint
 	next_checkpoint_plane = most_recent_checkpoint.next_checkpoint.boundary_plane
 	return true

@@ -168,6 +168,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.132, -0.739, 2.8)
 [node name="Checkpoint0" parent="CheckpointGroup" unique_id=2087625636 node_paths=PackedStringArray("next_checkpoint") instance=ExtResource("10_p1duh")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 102.64647, 0, 2.371358)
 next_checkpoint = NodePath("../Checkpoint13")
+major = true
 width = 20.0
 path_width = 4.0
 
@@ -258,7 +259,7 @@ path_width = 10.0
 
 [node name="Checkpoint8" parent="CheckpointGroup" unique_id=722774249 node_paths=PackedStringArray("next_checkpoint") instance=ExtResource("10_p1duh")]
 transform = Transform3D(0.6948223, 0, 0.71918154, 0, 1, 0, -0.71918154, 0, 0.6948223, -164.19241, 0, 34.443428)
-next_checkpoint = NodePath("../Checkpoint19")
+next_checkpoint = NodePath("../Checkpoint24")
 width = 70.0
 path_width = 10.0
 
