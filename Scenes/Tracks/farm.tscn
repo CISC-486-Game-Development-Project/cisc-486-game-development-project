@@ -118,7 +118,7 @@ agent_radius = 5.0
 agent_max_climb = 1.0
 agent_max_slope = 70.0
 
-[node name="Farm" type="Node3D" unique_id=1937614561 node_paths=PackedStringArray("player_spawn_positions")]
+[node name="Farm" type="Node3D" unique_id=1937614561 node_paths=PackedStringArray("player_spawn_positions", "starting_line")]
 script = ExtResource("1_g1tx8")
 track_music = ExtResource("2_cp1nc")
 player_kart = ExtResource("3_7dw6q")
@@ -127,6 +127,7 @@ pause_screen_scene = ExtResource("5_bxe0n")
 hud_scene = ExtResource("6_ux7v6")
 results_screen_scene = ExtResource("7_7dw6q")
 player_spawn_positions = NodePath("StartPositions")
+starting_line = NodePath("CheckpointGroup/Checkpoint0")
 race_laps = 3
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1075578772]
@@ -240,6 +241,12 @@ next_checkpoint = NodePath("../Checkpoint19")
 width = 70.0
 path_width = 10.0
 
+[node name="Checkpoint24" parent="CheckpointGroup" unique_id=399763266 node_paths=PackedStringArray("next_checkpoint") instance=ExtResource("10_p1duh")]
+transform = Transform3D(-0.034444064, 0, 0.99940675, 0, 1, 0, -0.99940675, 0, -0.034444064, -211.13467, 0, 33.88287)
+next_checkpoint = NodePath("../Checkpoint19")
+width = 70.0
+path_width = 1.0
+
 [node name="Checkpoint19" parent="CheckpointGroup" unique_id=2048932714 node_paths=PackedStringArray("next_checkpoint") instance=ExtResource("10_p1duh")]
 transform = Transform3D(0.08178775, 0, 0.99664974, 0, 1, 0, -0.99664974, 0, 0.08178775, -241.06221, 0, 28.188686)
 next_checkpoint = NodePath("../Checkpoint9")
@@ -323,11 +330,11 @@ shape = SubResource("ConcavePolygonShape3D_bxe0n")
 
 [node name="SM_Thin_Dirt" parent="Terrain/TrackParts/Track" unique_id=549813991 instance=ExtResource("12_dpaoj")]
 
-[node name="Thin Dirt" parent="Terrain/TrackParts/Track/SM_Thin_Dirt" index="0" unique_id=1696755833]
+[node name="Thin Dirt" parent="Terrain/TrackParts/Track/SM_Thin_Dirt" index="0" unique_id=1524393674]
 surface_material_override/0 = SubResource("StandardMaterial3D_tpcv4")
 
 [node name="Fences" type="StaticBody3D" parent="Terrain/TrackParts" unique_id=1771635049 groups=["Paved"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.677, -0.225, -20.138)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.677, -0.225, -21.008)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/TrackParts/Fences" unique_id=75679861]
 transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, 0.7250023, 0, 2)
@@ -336,7 +343,7 @@ shape = SubResource("ConcavePolygonShape3D_7dw6q")
 [node name="SM_Low_linked_fence" parent="Terrain/TrackParts/Fences" unique_id=373293474 instance=ExtResource("14_dpaoj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.725, 0, 2)
 
-[node name="Low linked fence" parent="Terrain/TrackParts/Fences/SM_Low_linked_fence" index="0" unique_id=1161201944]
+[node name="Low linked fence" parent="Terrain/TrackParts/Fences/SM_Low_linked_fence" index="0" unique_id=450485084]
 surface_material_override/0 = SubResource("StandardMaterial3D_jwi42")
 
 [node name="Barn" type="StaticBody3D" parent="Terrain/TrackParts" unique_id=1542695746 groups=["Paved"]]
